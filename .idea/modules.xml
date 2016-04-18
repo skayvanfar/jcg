@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jcg.iml" filepath="$PROJECT_DIR$/jcg.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcg-common/jcg-common.iml" filepath="$PROJECT_DIR$/jcg-common/jcg-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcg-engine/jcg-engine.iml" filepath="$PROJECT_DIR$/jcg-engine/jcg-engine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcg-intellijpluginapp/jcg-intellijpluginapp.iml" filepath="$PROJECT_DIR$/jcg-intellijpluginapp/jcg-intellijpluginapp.iml" />
+    </modules>
+  </component>
+</project>

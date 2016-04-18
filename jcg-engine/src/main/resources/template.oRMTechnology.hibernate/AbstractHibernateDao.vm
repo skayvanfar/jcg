@@ -1,0 +1,430 @@
+package com.packt.webstore.domain.repository.common.impl;
+
+import com.packt.webstore.domain.repository.common.Dao;
+
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
+import com.packt.webstore.exception.DAOException;
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ReflectionUtils;
+
+/**
+* Created by Saeed on 5/21/2015.
+* @author Kayvanfar
+* @param <T>
+    * AbstractHbnDao.java: a generic base class for implementing DAOs
+    * Favor composition over inheritance
+    * Skeleton Implementation
+    */
+    public class AbstractHibernateDao<T extends Object> implements Dao<T> {
+    private static Logger logger = Logger.getLogger(AbstractHibernateDao.class);
+
+    @Autowired
+    private SessionFactory sessionFactory;
+    private Class<T> domainClass;
+
+        public AbstractHibernateDao() {
+        }
+
+        /**
+        * Returns current session
+        *
+        * @return Session
+        */
+        protected Session getSession() {
+        return sessionFactory.getCurrentSession();
+        }
+
+        /**
+        * Returns domain class
+        *
+        * @return Class<T>
+            */
+            @SuppressWarnings("unchecked")
+            private Class<T> getDomainClass() {
+            if (domainClass == null) {
+            ParameterizedType thisType
+            = (ParameterizedType) getClass().getGenericSuperclass();
+            this.domainClass
+            = (Class<T>) thisType.getActualTypeArguments()[0];
+                }
+                return domainClass;
+                }
+
+                private String getDomainClassName() {
+                return getDomainClass().getName();
+                }
+
+                @Override
+                public void save(T t) throws DAOException {
+                Method method = ReflectionUtils.findMethod(
+                getDomainClass(), "setDateCreated",
+                new Class[]{Date.class});
+                if (method != null) {
+                try {
+                method.invoke(t, new Date());
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) { /* Ignore */ }
+                }
+                try {
+                getSession().save(t);
+                } catch (Exception e ) {
+                logger.debug("error on saving"+ t.toString() +" \t message: \n" + e.getMessage() + " \n \t stack trace: \n" +
+                e.getStackTrace() + " \n \t cause: \n" + e.getCause());
+                throw new DAOException(e.getCause(), e.getClass(), e.getMessage());
+                }
+                }
+
+                @SuppressWarnings("unchecked")
+                @Override
+                public T load(Serializable id) {
+                return (T) getSession().load(getDomainClass(), id);
+                }
+
+                @SuppressWarnings("unchecked")
+                @Override
+                public T findByID(Serializable id) {
+                return (T) getSession().get(getDomainClass(), id);
+                }
+
+                /**
+                *
+                * @return
+                */
+                @SuppressWarnings("unchecked")
+                @Override
+                public List<T> findAll() {
+                    //     return getSession()
+                    //              .createQuery("from " + getDomainClassName())
+                    //             .list();
+                    return getSession().createCriteria(getDomainClass())
+                    .list();
+                    }
+
+                    @Override
+                    public List<T> findByIds(String property, String[] ids) {
+                        Criteria criteria = getSession().createCriteria(getDomainClass());
+
+                        Criterion criterion = null;
+                        for (String id : ids) {
+                        if (criterion == null) {
+                        criterion = Restrictions.eq(property, Integer.valueOf(id));
+                        } else {
+                        criterion = Restrictions.or(criterion, Restrictions.eq(property, Integer.valueOf(id)));
+                        }
+                        }
+
+                        if (criterion != null) {
+                        criteria.add(criterion);
+                        }
+                        return criteria.list();
+                        }
+
+                        @Override
+                        public <V> T findObjectByPropertyEqualTo(String propertyName, V propertyValue) {
+                            return (T) getSession().createCriteria(getDomainClass())
+                            .add(Restrictions.eq(propertyName, propertyValue))
+                            .setMaxResults(1)
+                            .uniqueResult();
+                            }
+
+                            @Override
+                            public <V> List<T> findByPropertyEqualTo(String propertyName, V propertyValue) {
+                                return getSession().createCriteria(getDomainClass())
+                                .add(Restrictions.eq(propertyName, propertyValue))
+                                .list();
+                                }
+
+                                @Override
+                                public <V> List<T> findByProperties(String propertyName, V[] propertyValue) {
+                                    Criteria criteria = getSession().createCriteria(getDomainClass());
+                                    Criterion criterion = null;
+                                    for (Object aPropertyValue : propertyValue) {
+                                    if (criterion == null) {
+                                    criterion = Restrictions.eq(propertyName, aPropertyValue);
+                                    } else {
+                                    criterion = Restrictions.or(criterion, Restrictions.eq(propertyName, aPropertyValue));
+                                    }
+                                    }
+                                    return criteria.add(criterion).list();
+                                    }
+
+                                    @Override
+                                    public List<T> findByProperties(String propertyName, String[] propertyValue) {
+                                        Criteria criteria = getSession().createCriteria(getDomainClass());
+                                        Criterion criterion = null;
+                                        for (String aPropertyValue : propertyValue) {
+                                        if (criterion == null) {
+                                        criterion = Restrictions.eq(propertyName, aPropertyValue);
+                                        } else {
+                                        criterion = Restrictions.or(criterion, Restrictions.eq(propertyName, aPropertyValue));
+                                        }
+                                        }
+                                        return criteria.add(criterion).list();
+                                        }
+
+                                        @Override
+                                        public List<T> findByProperties(String[] propertyName, String[] propertyValue) {
+                                            Criteria criteria = getSession().createCriteria(getDomainClass());
+                                            for (int i = 0; i < propertyName.length; ++i) {
+                                            criteria.add(Restrictions.eq(propertyName[i], propertyValue[i]));
+                                            }
+                                            return criteria.list();
+                                            }
+                                            ////////////////////////////////////////////////// by me
+                                            @Override
+                                            public <V> List<T> findByPropertiesLikeExact(String[] propertyName, V[] propertyValue) {
+                                                Criteria criteria = getSession().createCriteria(getDomainClass());
+                                                for (int i = 0; i < propertyName.length; ++i) {
+                                                criteria.add(Restrictions.like(propertyName[i], propertyValue[i]));
+                                                }
+                                                return criteria.list();
+                                                }
+
+                                                @Override
+                                                public List<T> findByPropertiesLikeExact(String[] propertyName, String propertyValue) {
+                                                    Criteria criteria = getSession().createCriteria(getDomainClass());
+                                                    for (int i = 0; i < propertyName.length; ++i) {
+                                                    criteria.add(Restrictions.like(propertyName[i], propertyValue));
+                                                    }
+                                                    return criteria.list();
+                                                    }
+
+                                                    @Override
+                                                    public <V> boolean existByProperty(String propertyName, V propertyValue) {
+                                                        return !Objects.isNull(getSession().createCriteria(getDomainClass())
+                                                        .add(Restrictions.eq(propertyName, propertyValue))
+                                                        .setMaxResults(1)
+                                                        .uniqueResult());
+                                                        }
+                                                        ////////////////////////////////////////////////// by me
+
+                                                        @Override
+                                                        public T findObjectByProperties(String[] propertyName, String[] propertyValue) {
+                                                        Criteria criteria = getSession().createCriteria(getDomainClass());
+
+                                                        Criterion firstCriterion = Restrictions.eq(propertyName[0], propertyValue[0]);
+                                                        List<Criterion> criterions = new ArrayList<>();
+                                                            for (int i = 1; i < propertyName.length; i++) {
+                                                            Criterion criterion = Restrictions.eq(propertyName[i], propertyValue[i]);
+                                                            criterions.add(criterion);
+                                                            }
+
+                                                            for (Criterion aCriterion : criterions) {
+                                                            firstCriterion = Restrictions.or(firstCriterion, aCriterion);
+                                                            }
+
+                                                            criteria.add(firstCriterion);
+                                                            return (T) criteria.setMaxResults(1).uniqueResult();
+                                                            }
+
+                                                            @Override
+                                                            public <V> List<T> findByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value) {
+                                                                return getSession().createCriteria(getDomainClass())
+                                                                .createCriteria(property)
+                                                                .add(Restrictions.eq(propertyOfProperty, value))
+                                                                .list();
+                                                                }
+
+                                                                @Override
+                                                                public <V> T findObjectByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value) {
+                                                                    return (T) getSession().createCriteria(getDomainClass())
+                                                                    .createCriteria(property)
+                                                                    .add(Restrictions.eq(propertyOfProperty, value))
+                                                                    .setMaxResults(1)
+                                                                    .uniqueResult();
+                                                                    }
+
+                                                                    @Override
+                                                                    public <V> List<T> findByPropertyEqualToIgnoreCase(String propertyName, V propertyValue) {
+                                                                        return getSession().createCriteria(getDomainClass())
+                                                                        .add(Restrictions.eq(propertyName, propertyValue).ignoreCase())
+                                                                        .list();
+                                                                        }
+
+                                                                        @Override
+                                                                        public <V> List<T> findByPropertyLessThanOrEqualTo(String propertyName, V propertyValue) {
+                                                                            return getSession().createCriteria(getDomainClass())
+                                                                            .add(Restrictions.le(propertyName, propertyValue))
+                                                                            .list();
+                                                                            }
+
+                                                                            @Override
+                                                                            public <V> List<T> findByPropertyGreaterThanOrEqualTo(String propertyName, V propertyValue) {
+                                                                                return getSession().createCriteria(getDomainClass())
+                                                                                .add(Restrictions.ge(propertyName, propertyValue))
+                                                                                .list();
+                                                                                }
+
+                                                                                @Override
+                                                                                public <V> List<T> findByPropertyLessThan(String propertyName, V propertyValue) {
+                                                                                    return getSession().createCriteria(getDomainClass())
+                                                                                    .add(Restrictions.lt(propertyName, propertyValue))
+                                                                                    .list();
+                                                                                    }
+
+                                                                                    @Override
+                                                                                    public <V> List<T> findByPropertyGreaterThan(String propertyName, V propertyValue) {
+                                                                                        return getSession().createCriteria(getDomainClass())
+                                                                                        .add(Restrictions.gt(propertyName, propertyValue))
+                                                                                        .list();
+                                                                                        }
+
+                                                                                        @Override
+                                                                                        public List<T> findByPropertyLikeAnyWhereMode(String propertyName, String propertyValue) {
+                                                                                            return getSession().createCriteria(getDomainClass())
+                                                                                            .add(Restrictions.like(propertyName, propertyValue, MatchMode.ANYWHERE))
+                                                                                            .list();
+                                                                                            }
+
+                                                                                            @Override
+                                                                                            public List<T> findByPropertyLikeAnyWhereModeIgnoreCase(String propertyName, String propertyValue) {
+                                                                                                return getSession().createCriteria(getDomainClass())
+                                                                                                .add(Restrictions.like(propertyName, propertyValue, MatchMode.ANYWHERE).ignoreCase())
+                                                                                                .list();
+                                                                                                }
+
+                                                                                                @Override
+                                                                                                public <V> T findObjectByPropertyEqualToIgnoreCase(String propertyName, V propertyValue) {
+                                                                                                    return (T) getSession().createCriteria(getDomainClass())
+                                                                                                    .add(Restrictions.eq(propertyName, propertyValue).ignoreCase())
+                                                                                                    .setMaxResults(1)
+                                                                                                    .uniqueResult();
+                                                                                                    }
+
+                                                                                                    @Override
+                                                                                                    public <V> List<T> findByProperties(String[] propertyName, V[] propertyValue) {
+                                                                                                        Criteria criteria = getSession().createCriteria(getDomainClass());
+                                                                                                        for (int i = 0; i < propertyName.length; ++i) {
+                                                                                                        criteria.add(Restrictions.eq(propertyName[i], propertyValue[i]));
+                                                                                                        }
+                                                                                                        return criteria.list();
+                                                                                                        }
+
+                                                                                                        @Override
+                                                                                                        public <V> List<T> findByPropertiesWithDescOrder(String[] propertyName, V[] propertyValue, String propertyForOrder) {
+                                                                                                            Criteria criteria = getSession().createCriteria(getDomainClass());
+                                                                                                            for (int i = 0; i < propertyName.length; ++i) {
+                                                                                                            criteria.add(Restrictions.eq(propertyName[i], propertyValue[i]))
+                                                                                                            .addOrder(Order.desc(propertyForOrder));
+                                                                                                            }
+                                                                                                            return criteria.list();
+                                                                                                            }
+
+                                                                                                            @Override
+                                                                                                            public <V> List<T> findByPropertyNotEqualTo(String propertyName, V propertyValue) {
+                                                                                                                return getSession().createCriteria(getDomainClass())
+                                                                                                                .add(Restrictions.ne(propertyName, propertyValue))
+                                                                                                                .list();
+                                                                                                                }
+
+                                                                                                                @Override
+                                                                                                                public List<T> findByPropertyLikeExact(String propertyName, String propertyValue) {
+                                                                                                                    return getSession().createCriteria(getDomainClass())
+                                                                                                                    .add(Restrictions.ilike(propertyName, propertyValue, MatchMode.EXACT))
+                                                                                                                    .list();
+                                                                                                                    }
+
+                                                                                                                    @Override
+                                                                                                                    public T findByPropertyLikeExactModeIgnoreCase(String propertyName, String propertyValue) {
+                                                                                                                    return (T) getSession().createCriteria(getDomainClass())
+                                                                                                                    .add(Restrictions.like(propertyName, propertyValue, MatchMode.EXACT).ignoreCase())
+                                                                                                                    .setMaxResults(1)
+                                                                                                                    .uniqueResult();
+                                                                                                                    }
+
+                                                                                                                    @Override
+                                                                                                                    public T findByPropertyLikeModeIgnoreCase(String propertyName, String propertyValue) {
+                                                                                                                    return (T) getSession().createCriteria(getDomainClass())
+                                                                                                                    .add(Restrictions.like(propertyName, propertyValue).ignoreCase())
+                                                                                                                    .setMaxResults(1)
+                                                                                                                    .uniqueResult();
+                                                                                                                    }
+
+                                                                                                                    @Override
+                                                                                                                    public List<T> findByPropertyLikeAnyWhereModeIgnoreCasePartially(String propertyName, String propertyValue) {
+                                                                                                                        return getSession().createCriteria(getDomainClass())
+                                                                                                                        .add(Restrictions.like(propertyName, "%" + propertyValue + "%", MatchMode.ANYWHERE).ignoreCase())
+                                                                                                                        .list();
+                                                                                                                        }
+
+                                                                                                                        @Override
+                                                                                                                        public List<T> findByAssociatedProperty(String associatedProperty, String propertyName, Integer propertyValue) {
+                                                                                                                            return getSession().createCriteria(getDomainClass())
+                                                                                                                            .createCriteria(associatedProperty)
+                                                                                                                            .add(Restrictions.eq(propertyName, propertyValue))
+                                                                                                                            .list();
+                                                                                                                            }
+
+                                                                                                                            @Override
+                                                                                                                            public void reattachToSession(T t) {
+                                                                                                                            Session session = getSession();
+
+                                                                                                                            try {
+                                                                                                                            session.merge(t);
+                                                                                                                            session.refresh(t, LockMode.NONE);
+
+                                                                                                                            } catch (HibernateException e) {
+
+                                                                                                                            }
+
+                                                                                                                            }
+
+                                                                                                                            @Override
+                                                                                                                            public void update(T t) {
+                                                                                                                            getSession().update(t);
+                                                                                                                            }
+
+                                                                                                                            @Override
+                                                                                                                            public void saveOrUpdate(T t) {
+                                                                                                                            getSession().saveOrUpdate(t);
+                                                                                                                            }
+
+                                                                                                                            //   @Override
+                                                                                                                            //   public void saveOrUpdateAll(Collection<T> coll) {
+                                                                                                                                //     getSession().saveOrUpdateAll(coll);
+                                                                                                                                //  }
+                                                                                                                                @Override
+                                                                                                                                public void delete(T t) {
+                                                                                                                                getSession().delete(t);
+                                                                                                                                }
+
+                                                                                                                                @Override
+                                                                                                                                public void deleteById(Serializable id) {
+                                                                                                                                delete(load(id));
+                                                                                                                                }
+
+                                                                                                                                @Override
+                                                                                                                                public void deleteAll() {
+                                                                                                                                getSession().createQuery("delete " + getDomainClassName())
+                                                                                                                                .executeUpdate();
+                                                                                                                                }
+
+                                                                                                                                @Override
+                                                                                                                                public long count() {
+                                                                                                                                return (Long) getSession()
+                                                                                                                                .createQuery("select count(*) from " + getDomainClassName())
+                                                                                                                                .uniqueResult();
+                                                                                                                                }
+
+                                                                                                                                @Override
+                                                                                                                                public boolean exists(Serializable id) {
+                                                                                                                                return (findByID(id) != null);
+                                                                                                                                }
+                                                                                                                                }
