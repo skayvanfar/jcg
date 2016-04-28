@@ -1,70 +1,73 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
+import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.*;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.xml.bind.annotation.*;
+import java.io.File;
+import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public class ThreeLayerArchitecture implements Architecture {
+@XmlRootElement // TODO: 4/27/2016 must remove from this class
+public class ThreeLayerArchitecture extends Architecture {
 
-    private BuildTechnology buildTechnology;
-    private ORMTechnology ormTechnology;
-    private MVCTechnology mvcTechnology;
-    private ViewTechnology viewTechnology;
-    private ClientViewTechnology clientViewTechnology;
+    private static TechnologyType[] technologyTypes = {TechnologyType.BUILD_TECHNOLOGY, TechnologyType.ORM_TECHNOLOGY, TechnologyType.MVC_TECHNOLOGY};
 
-    public BuildTechnology getBuildTechnology() {
-        return buildTechnology;
+    @Override
+    public void setBaseDirOfTechnologies(String baseDir) {
+        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
+        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
+        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+
+        buildTechnology.setBaseDir(baseDir);
+        ormTechnology.setBaseDir(baseDir + buildTechnology.getMainJavaDir());
+        mvcTechnology.setBaseDir(baseDir + buildTechnology.getMainJavaDir());
     }
 
-    public void setBuildTechnology(BuildTechnology buildTechnology) {
-        this.buildTechnology = buildTechnology;
+    @Override
+    protected void setBasePackageNameOfTechnologies(String baseDir) {
+        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
+        ormTechnology.setBasePackageName(baseDir);
     }
 
-    public ORMTechnology getOrmTechnology() {
-        return ormTechnology;
-    }
-
-    public void setOrmTechnology(ORMTechnology ormTechnology) {
-        this.ormTechnology = ormTechnology;
-    }
-
-    public MVCTechnology getMvcTechnology() {
-        return mvcTechnology;
-    }
-
-    public void setMvcTechnology(MVCTechnology mvcTechnology) {
-        this.mvcTechnology = mvcTechnology;
-    }
-
-    public ViewTechnology getViewTechnology() {
-        return viewTechnology;
-    }
-
-    public void setViewTechnology(ViewTechnology viewTechnology) {
-        this.viewTechnology = viewTechnology;
-    }
-
-    public ClientViewTechnology getClientViewTechnology() {
-        return clientViewTechnology;
-    }
-
-    public void setClientViewTechnology(ClientViewTechnology clientViewTechnology) {
-        this.clientViewTechnology = clientViewTechnology;
+    @Override
+    public TechnologyType[] getTechnologyTypes() {
+        return technologyTypes;
     }
 
     @Override
     public void createView() {
-
     }
 
     @Override
     public void createBaseArchitecture() {
+        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
+        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
+        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+
+        buildTechnology.addDependencies(ormTechnology.getDependencies()); // todo may not be here
+        buildTechnology.addDependencies(mvcTechnology.getDependencies()); // todo may not be here
         buildTechnology.createBasePlatform();
         try {
             ormTechnology.createBasePlatform();
+            mvcTechnology.createBasePlatform();
         } catch (Exception e) { // todo
             e.printStackTrace();
         }
+    }
+
+    private Technology  getTechnologyByType(TechnologyType technologyType) { // TODO: 4/28/2016 must change
+        for (Technology technology : technologies) {
+            if (technologyType.getValue() == 0 && technology instanceof BuildTechnology)
+                return technology;
+            else if (technologyType.getValue() == 1 && technology instanceof ORMTechnology)
+                return technology;
+            else if (technologyType.getValue() == 2 && technology instanceof MVCTechnology)
+                return technology;
+        }
+        return null;
     }
 }

@@ -24,12 +24,25 @@
   <depends>com.intellij.modules.lang</depends>
   -->
 
+  <project-components>
+    <!-- Add your project components here -->
+    <component>
+      <implementation-class>ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow.JcgProjectComponent</implementation-class>
+    </component>
+  </project-components>
+
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+    <moduleBuilder builderClass="ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder"/>
+
   </extensions>
 
   <actions>
     <!-- Add your actions here -->
+    <group id="ZK.Toolbar" text="ZooKeeper ToolBar">
+      <action id="ZkTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
+              icon="/actions/refresh.png" text="Refresh" description="Refresh ZooKeeper"/>
+    </group>
   </actions>
 
 </idea-plugin>

@@ -1,9 +1,6 @@
 package ir.sk.jcg.jcgcommon.util;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 import java.io.File;
 
 /**
@@ -26,7 +23,17 @@ public class XMLParser {
         JAXBContext jaxbContext = JAXBContext.newInstance(c);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
+        jaxbUnmarshaller.setEventHandler(
+                new ValidationEventHandler() {
+                    public boolean handleEvent(ValidationEvent event ) {
+                        System.out.println("exception");
+                        throw new RuntimeException(event.getMessage(),
+                                event.getLinkedException());
+                    }
+                });
+
         T t = (T) jaxbUnmarshaller.unmarshal(file);
+
         return t;
     }
 }

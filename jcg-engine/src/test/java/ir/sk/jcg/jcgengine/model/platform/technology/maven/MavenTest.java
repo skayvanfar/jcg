@@ -1,10 +1,14 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technology.maven;
 
+import ir.sk.jcg.jcgengine.model.platform.Dependency;
+import ir.sk.jcg.jcgengine.model.platform.technology.Maven.Maven;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +31,8 @@ public class MavenTest {
 
     @Test
     public void testCreateDirectories() throws Exception {
-//   Maven maven = new Maven("maven1", "C:/",null);
-        //      maven.createDirectories();
+//   Maven template.buildTechnology.maven = new Maven("maven1", "C:/",null);
+        //      template.buildTechnology.maven.createDirectories();
     }
 
     @Test
@@ -37,7 +41,9 @@ public class MavenTest {
 //        dependencyList.add(new Dependency("grop", "artft", "version", "scope"));
 //        dependencyList.add(new Dependency("grop2", "artft2", "version2", "scope2"));
 //
-        //     Maven maven = new Maven("maven1", new File("C:/"), dependencyList);
-        //     maven.createBuildFile();
+//        Maven maven = new Maven();
+//        maven.setBaseDir(new File("C:/newee"));
+//        maven.createBasePlatform();
+
     }
 }

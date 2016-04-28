@@ -10,8 +10,7 @@ import java.util.List;
  */
 public abstract class ViewTechnology extends Technology {
 
-    public ViewTechnology(String name, File baseDir, List<Dependency> dependenciesList) {
-        super(name, baseDir, dependenciesList);
+    public ViewTechnology() {
     }
 
 }

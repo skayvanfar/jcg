@@ -1,5 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform;
 
+import javax.xml.bind.annotation.XmlAttribute;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
@@ -24,6 +26,7 @@ public class Dependency {
         return groupId;
     }
 
+    @XmlAttribute(name = "groupId", required = true)
     public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
@@ -32,6 +35,7 @@ public class Dependency {
         return artifactId;
     }
 
+    @XmlAttribute(name = "artifactId", required = true)
     public void setArtifactId(String artifactId) {
         this.artifactId = artifactId;
     }
@@ -40,6 +44,7 @@ public class Dependency {
         return version;
     }
 
+    @XmlAttribute(name = "version", required = true)
     public void setVersion(String version) {
         this.version = version;
     }
@@ -48,6 +53,7 @@ public class Dependency {
         return scope;
     }
 
+    @XmlAttribute(name = "scope", required = true)
     public void setScope(String scope) {
         this.scope = scope;
     }

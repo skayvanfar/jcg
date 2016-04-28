@@ -1,19 +1,22 @@
-package ir.sk.jcg.jcgcommon.velocity;
+package ir.sk.jcg.jcgengine.velocity;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
+import java.net.URL;
+import java.nio.file.Paths;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 4/13/2016
@@ -21,17 +24,30 @@ import java.io.FileWriter;
 public class VelocityTemplate {
 
     private static final Logger logger = LoggerFactory.getLogger(VelocityTemplate.class);
+    private static VelocityEngine velocityEngine = null;
 
     /**
      *
      * */
     static {
         try {
-            //       VelocityEngine velocityEngine = new VelocityEngine();
+            velocityEngine = new VelocityEngine();
             //    String velocityConf = ClassLoader.getSystemResource("velocity.properties").getPath();
-            Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-            Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-            Velocity.init();
+            velocityEngine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
+        //    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+       //     velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        //    velocityEngine.setProperty("resource.loader","file,class,jar");
+        //    File file = new File("/resources/template");
+        //    URL res = VelocityTemplate.class.getClassLoader().getResource("/template.oRMTechnology");
+          //  File f = new File(res.getFile());
+
+         //  URL resource = VelocityTemplate.class.getResource("../mavenBuild.vm");
+         //  File f = Paths.get(resource.toURI()).toFile();
+
+
+      //      System.out.println("absolutePath:::::::::::::          "     + "E:/template/buildTechnology/maven");
+            velocityEngine.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, "E:/template"); // TODO: 4/22/2016 must chnage to relative
+            velocityEngine.init();
             //   Velocity.init(velocityConf);
             //      logger.info("Velocity init success", velocityConf);
             logger.info("Velocity init success");
@@ -76,7 +92,7 @@ public class VelocityTemplate {
     private static Template buildTemplate(String templateFile) {
         Template template = null;
         try {
-            template = Velocity.getTemplate(templateFile);
+            template = velocityEngine.getTemplate(templateFile);
         } catch (ResourceNotFoundException rnfe) {
             rnfe.printStackTrace();
             logger.error("buildTemplate error : cannot find template " + templateFile);

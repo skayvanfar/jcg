@@ -4,26 +4,27 @@ import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
+@XmlRootElement
 public class Project {
 
-    private String Name;
+    private String name;
     private String persianName;
     private String packagePrefix;
     private String tableNamePattern;
 
-    private Architecture architecture;
-
     public String getName() {
-        return Name;
+        return name;
     }
 
     @XmlAttribute
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getPersianName() {
@@ -53,24 +54,8 @@ public class Project {
         this.tableNamePattern = tableNamePattern;
     }
 
-
-    public Architecture getArchitecture() {
-        return architecture;
-    }
-
-    @XmlElement
-    public void setArchitecture(Architecture architecture) {
-        this.architecture = architecture;
-    }
-
     @Override
     public String toString() {
-        return "Project{" +
-                "Name='" + Name + '\'' +
-                ", persianName='" + persianName + '\'' +
-                ", packagePrefix='" + packagePrefix + '\'' +
-                ", tableNamePattern='" + tableNamePattern + '\'' +
-                '}';
+        return name;
     }
-
 }
