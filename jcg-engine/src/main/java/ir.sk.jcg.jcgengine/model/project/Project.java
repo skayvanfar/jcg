@@ -20,14 +20,21 @@ public class Project {
     private String packagePrefix;
     private String tableNamePattern;
 
-    private List<Entity> entities = new ArrayList<>();
-    private List<View> views = new ArrayList<>();
+//    private List<Entity> entities = new ArrayList<>();
+//    private List<View> views = new ArrayList<>();
+    private Model<Entity> entitiesModel = new Model<>();
+    private Model<View> viewsModel = new Model<>();
+
+    public Project() {
+        entitiesModel.setName("Entity Model");
+        viewsModel.setName("View Model");
+    }
 
     public String getName() {
         return name;
     }
 
-    @XmlAttribute
+    @XmlAttribute(required = true)
     public void setName(String name) {
         this.name = name;
     }
@@ -59,23 +66,41 @@ public class Project {
         this.tableNamePattern = tableNamePattern;
     }
 
-    public List<Entity> getEntities() {
-        return entities;
+    public Model<Entity> getEntitiesModel() {
+        return entitiesModel;
     }
 
-    @XmlElement(name = "entiry")
-    public void setEntities(List<Entity> entities) {
-        this.entities = entities;
+    @XmlElement(name = "entityModel")
+    public void setEntitiesModel(Model<Entity> entitiesModel) {
+        this.entitiesModel = entitiesModel;
     }
 
-    public List<View> getViews() {
-        return views;
+    public Model<View> getViewsModel() {
+        return viewsModel;
     }
 
-    @XmlElement(name = "view")
-    public void setViews(List<View> views) {
-        this.views = views;
+    @XmlElement(name = "viewModel")
+    public void setViewsModel(Model<View> viewsModel) {
+        this.viewsModel = viewsModel;
     }
+
+//    public List<Entity> getEntities() {
+//        return entities;
+//    }
+//
+//    @XmlElement(name = "entiry")
+//    public void setEntities(List<Entity> entities) {
+//        this.entities = entities;
+//    }
+//
+//    public List<View> getViews() {
+//        return views;
+//    }
+//
+//    @XmlElement(name = "view")
+//    public void setViews(List<View> views) {
+//        this.views = views;
+//    }
 
     @Override
     public String toString() {

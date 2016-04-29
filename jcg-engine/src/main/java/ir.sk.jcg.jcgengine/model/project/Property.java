@@ -8,4 +8,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class Property {
+
+    @Override
+    public String toString() {
+        return "Property{}";
+    }
 }

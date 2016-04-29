@@ -1,9 +1,22 @@
 package ir.sk.jcg.jcgengine;
 
 
+import ir.sk.jcg.jcgcommon.util.XMLParser;
+import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
+import ir.sk.jcg.jcgengine.model.platform.architecture.ThreeLayerArchitecture;
+import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.platform.technology.Maven.Maven;
+import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.Model;
+import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgengine.model.project.Project;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -12,6 +25,28 @@ import org.junit.Test;
 public class JavaGeneratorTest {
     @Test
     public void marshallingProject() throws Exception {
+        Project project = new Project();
+        project.setName("Project");
+        project.setPackagePrefix("ir.sk");
+
+        Model<Entity> entityModel = new Model<>();
+        entityModel.setName("Entity Model");
+
+        Package<Entity> entityPackage = new Package<>();
+        entityPackage.setName("com");
+
+        List<Entity> entities = new ArrayList<>();
+        Entity entity = new Entity();
+        entity.setName("Person");
+        entities.add(entity);
+
+        entityPackage.setElements(entities);
+        List<Package<Entity>> packageList = new ArrayList<>();
+        packageList.add(entityPackage);
+        entityModel.setPackages(packageList);
+        project.setEntitiesModel(entityModel);
+
+        XMLParser.marshaling(new File("e:/h.xml"), project);
 
     }
 
@@ -59,7 +94,7 @@ public class JavaGeneratorTest {
 //        proejct.setPackagePrefix("ir.sk");
 //        proejct.setPersianName("پروژ]");
 //
-//        generator = new JavaGenerator(proejct);
+//        generator = new JavaGenerator();
 //
 //        Architecture architecture = new ThreeLayerArchitecture();
 //        BuildTechnology buildTechnology = new Maven();

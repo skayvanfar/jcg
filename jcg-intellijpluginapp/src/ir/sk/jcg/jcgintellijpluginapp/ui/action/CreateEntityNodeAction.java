@@ -21,7 +21,7 @@ public class CreateEntityNodeAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
-        builder.setTitle("Create Node");
+        builder.setTitle("Create Entity");
 
 
         builder.setOkOperation(new Runnable() {

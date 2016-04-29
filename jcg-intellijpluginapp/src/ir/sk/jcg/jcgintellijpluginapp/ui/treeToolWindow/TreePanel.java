@@ -4,23 +4,19 @@ import com.intellij.ide.ui.customization.CustomizationUtil;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.fileTypes.FileTypes;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
-import com.intellij.ui.content.Content;
-import com.intellij.ui.content.ContentManager;
 import com.intellij.ui.treeStructure.Tree;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Project;
-import ir.sk.jcg.jcgengine.model.project.View;
+import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Package;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/24/2016
@@ -39,7 +35,7 @@ public class TreePanel extends SimpleToolWindowPanel {
         ToolTipManager.sharedInstance().registerComponent(jcgTree);
         jcgTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
      //   CustomizationUtil.installPopupHandler(jcgTree, "JCG.OperationMenu", ActionPlaces.UNKNOWN);
-         jcgTree.setCellRenderer(new JcgTreeRenderer());
+         jcgTree.setCellRenderer(new JcgTreeRenderer()); // TODO: 4/29/2016
 
         jcgTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
@@ -83,22 +79,51 @@ public class TreePanel extends SimpleToolWindowPanel {
      * */
     public void initJcgTree() {
         DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(jcgProject);
-        DefaultMutableTreeNode entitiesNode = new DefaultMutableTreeNode("Entities");
-        DefaultMutableTreeNode viewsNode = new DefaultMutableTreeNode("Views");
 
-        for (Entity entity : jcgProject.getEntities()) {
-            entitiesNode.add(new DefaultMutableTreeNode(entity));
+        Model<Entity> entityModel = jcgProject.getEntitiesModel();
+        DefaultMutableTreeNode entityModelNode = new DefaultMutableTreeNode(entityModel);
+        for (ir.sk.jcg.jcgengine.model.project.Package<Entity> entityPackage : entityModel.getPackages()) {
+            DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(entityPackage);
+            entityModelNode.add(packageNode);
+            loadPackages(entityPackage, packageNode);
         }
 
-        for (View view : jcgProject.getViews()) {
-            entitiesNode.add(new DefaultMutableTreeNode(view));
-        }
 
-        projectNode.add(entitiesNode);
-        projectNode.add(viewsNode);
+
+
+        Model<View> viewModel = jcgProject.getViewsModel();
+        DefaultMutableTreeNode viewModelNode = new DefaultMutableTreeNode(viewModel);
+        for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewModel.getPackages())
+            loadPackages(viewPackage, viewModelNode);
+
+        projectNode.add(entityModelNode);
+        projectNode.add(viewModelNode);
 
         jcgTree = new Tree(projectNode);
 
     }
 
+    /**
+     * Load packages and entities recursive
+     * */
+    private <T> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode) { // TODO: 4/29/2016 must go to a util class
+        for (T t : aPackage.getElements()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(t);
+            parentNode.add(tNode);
+        }
+        for (Package<T> bPackage : aPackage.getPackages()) {
+            DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(bPackage);
+            parentNode.add(packageNode);
+            loadPackages(bPackage, packageNode);
+        }
+    }
+
+
+//    private DefaultMutableTreeNode addPackages(String path) {
+//        StringTokenizer tokenizer = new StringTokenizer(path, ".");
+//        while (tokenizer.hasMoreTokens()) {
+//            String token = tokenizer.nextToken(); // package name
+//           // isExistNode(token);
+//        }
+//    }
 }
