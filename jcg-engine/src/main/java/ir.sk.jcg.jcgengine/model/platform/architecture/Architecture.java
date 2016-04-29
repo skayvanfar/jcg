@@ -71,7 +71,7 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
         return technologies;
     }
 
-    @XmlElement
+    @XmlElement(name = "technology")
     public void setTechnologies(List<Technology> technologies) {
         this.technologies = technologies;
     }

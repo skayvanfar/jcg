@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow;
 
 import com.intellij.openapi.components.ProjectComponent;
+import com.intellij.openapi.fileTypes.FileTypes;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowAnchor;
@@ -10,6 +11,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import ir.sk.jcg.jcgengine.Generator;
 import ir.sk.jcg.jcgengine.JavaGenerator;
+import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,13 +31,15 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
     private Generator generator;
     private TreePanel treePanel;
 
-//    public ir.sk.jcg.jcgengine.model.project.Project getJcgProject() {
-//        return jcgProject;
-//    }
-//
-//    public void setJcgProject(ir.sk.jcg.jcgengine.model.project.Project jcgProject) {
-//        this.jcgProject = jcgProject;
-//    }
+    public Generator getGenerator() {
+        return generator;
+    }
+
+    public TreePanel getTreePanel() { // TODO: 4/28/2016  may not need
+        return treePanel;
+    }
+
+
 
     public JcgProjectComponent(Project intellijProject) {
         this.intellijProject = intellijProject;
@@ -52,7 +56,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        initToolWindow();
+     //   initToolWindow();
     }
 
     /**
@@ -64,8 +68,10 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
         if(generator.isProjectJcg()) { // When project is Jcg project
             boolean result = generator.unmarshalling();
-            if (result)
+            if (result) {
                 logger.info("Unmarshaling finished correctly.");// TODO: 4/28/2016
+                initToolWindow();
+            }
         }
     }
 
@@ -74,18 +80,20 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
      * */
     public void initToolWindow() {
       //  final ZkConfigPersistence config = ZkConfigPersistence.getInstance(project);
-        ir.sk.jcg.jcgengine.model.project.Project project1 = new ir.sk.jcg.jcgengine.model.project.Project();
-        project1.setName("project");
+    //    ir.sk.jcg.jcgengine.model.project.Project project1 = new ir.sk.jcg.jcgengine.model.project.Project();
+    //    project1.setName("project");
+        ir.sk.jcg.jcgengine.model.project.Project jcgProject = generator.getJcgProject();
         ToolWindow toolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", false, ToolWindowAnchor.LEFT);
         toolWindow.setTitle("JCG Tree");
-     //   toolWindow.setIcon(rootIcon);
+        toolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
+     //   toolWindow.setIcon(FileTypes.ARCHIVE.getIcon());
 
         final ContentManager contentManager = toolWindow.getContentManager();
-        treePanel = new TreePanel(project1);
+        treePanel = new TreePanel(jcgProject);
         final Content content = contentManager.getFactory().createContent(treePanel, null, false);
         contentManager.addContent(content);
 
-        treePanel.initJcgTree(); // create project tree
+        this.installOn(treePanel.getJcgTree());
     }
 
     @Override

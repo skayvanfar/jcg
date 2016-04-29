@@ -15,4 +15,6 @@ public class JcgIcons {
 
     public static final Icon JcgMedium = load("/images/jcgMedium.png");
     public static final Icon JcgLogo = load("/images/jcgSmall.png");
+    public static final Icon JcgTreeToolWindow = load("/images/jcg13x13.png");
+
 }
