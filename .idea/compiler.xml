@@ -27,9 +27,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="jcg" target="1.8" />
-      <module name="jcg-common" target="1.8" />
-      <module name="jcg-engine" target="1.8" />
+      <module name="jcg" target="1.5" />
+      <module name="jcg-common" target="1.5" />
+      <module name="jcg-engine" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

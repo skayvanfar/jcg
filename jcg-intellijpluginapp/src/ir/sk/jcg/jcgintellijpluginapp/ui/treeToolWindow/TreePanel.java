@@ -16,7 +16,6 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
-import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/24/2016
@@ -40,17 +39,17 @@ public class TreePanel extends SimpleToolWindowPanel {
         jcgTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
-                switch (e.getPath().getLastPathComponent().toString()) {
-                    case  "Entities":
-                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.EntityOperationMenu", ActionPlaces.UNKNOWN);
-                        break;
-                    case "Views":
-                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.ViewOperationMenu", ActionPlaces.UNKNOWN);
-                        break;
-                    // TODO: 4/28/2016 others
-                    default:
-                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
-
+                DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
+                if (treeNode.isRoot()) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof Model) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof Package) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof Entity) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.EntityOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof View) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ViewOperationMenu", ActionPlaces.UNKNOWN);
                 }
             }
         });
@@ -93,8 +92,11 @@ public class TreePanel extends SimpleToolWindowPanel {
 
         Model<View> viewModel = jcgProject.getViewsModel();
         DefaultMutableTreeNode viewModelNode = new DefaultMutableTreeNode(viewModel);
-        for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewModel.getPackages())
-            loadPackages(viewPackage, viewModelNode);
+        for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewModel.getPackages()) {
+            DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(viewPackage);
+            viewModelNode.add(packageNode);
+            loadPackages(viewPackage, packageNode);
+        }
 
         projectNode.add(entityModelNode);
         projectNode.add(viewModelNode);
@@ -106,7 +108,7 @@ public class TreePanel extends SimpleToolWindowPanel {
     /**
      * Load packages and entities recursive
      * */
-    private <T> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode) { // TODO: 4/29/2016 must go to a util class
+    private <T extends ModelElement> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode) { // TODO: 4/29/2016 must go to a util class
         for (T t : aPackage.getElements()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(t);
             parentNode.add(tNode);

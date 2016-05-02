@@ -1,5 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
+import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,21 +11,11 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(Entity.class)
-public class Package<T> {
+public class Package<T extends ModelElement> extends Element implements Packageable<T> {
 
-    private String name;
 
     private List<Package<T>> packages = new ArrayList<>();
     private List<T> elements = new ArrayList<>();
-
-    public String getName() {
-        return name;
-    }
-
-    @XmlAttribute(required = true)
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Package<T>> getPackages() {
         return packages;
@@ -32,6 +24,19 @@ public class Package<T> {
     @XmlElement(name = "package")
     public void setPackages(List<Package<T>> packages) {
         this.packages = packages;
+    }
+
+    @Override
+    public void addPackage(Package<T> t) { // // TODO: 5/2/2016 repeated code(in Model) 
+        if (packages.contains(t))
+            throw new ElementBeforeExistException(t);
+        packages.add(t);
+    }
+
+    @Override
+    public void removePackage(Package<T> t) {
+        if (packages.contains(t))
+            packages.remove(t);
     }
 
     public List<T> getElements() {
@@ -43,8 +48,27 @@ public class Package<T> {
         this.elements = elements;
     }
 
+    public void addElement(Package<T> tPackage) {
+        if(!packages.contains(tPackage))
+            packages.add(tPackage);
+    }
+
     @Override
-    public String toString() {
-        return name;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Package)) return false;
+
+        Package<?> aPackage = (Package<?>) o;
+
+        if (name != null ? !name.equals(aPackage.name) : aPackage.name != null) return false;
+        return elements != null ? elements.equals(aPackage.elements) : aPackage.elements == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (elements != null ? elements.hashCode() : 0);
+        return result;
     }
 }

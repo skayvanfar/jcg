@@ -30,6 +30,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
     private Project intellijProject;
     private Generator generator;
     private TreePanel treePanel;
+    private ToolWindow jcgToolWindow;
 
     public Generator getGenerator() {
         return generator;
@@ -53,10 +54,32 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
     public void projectOpened() {
         try {
             initGenerator(); // load project from xml
+            initToolWindow();
         } catch (JAXBException e) {
             e.printStackTrace();
         }
      //   initToolWindow();
+    }
+
+    public void reloadJcgTree() {
+        try {
+            initGenerator();
+            addContentToJcgToolWindow();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        treePanel.getJcgTree().updateUI();
+//        if (generator == null) {
+//            try {
+//                initGenerator();
+//            } catch (JAXBException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        if (generator != null) {
+//            treePanel.initJcgTree();
+//            treePanel.getJcgTree().updateUI();
+//        }
     }
 
     /**
@@ -70,7 +93,6 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
             boolean result = generator.unmarshalling();
             if (result) {
                 logger.info("Unmarshaling finished correctly.");// TODO: 4/28/2016
-                initToolWindow();
             }
         }
     }
@@ -83,14 +105,21 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
     //    ir.sk.jcg.jcgengine.model.project.Project project1 = new ir.sk.jcg.jcgengine.model.project.Project();
     //    project1.setName("project");
         ir.sk.jcg.jcgengine.model.project.Project jcgProject = generator.getJcgProject();
-        ToolWindow toolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", false, ToolWindowAnchor.LEFT);
-        toolWindow.setTitle("JCG Tree");
-        toolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
+        jcgToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", false, ToolWindowAnchor.LEFT);
+        jcgToolWindow.setTitle("JCG Tree");
+        jcgToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
      //   toolWindow.setIcon(FileTypes.ARCHIVE.getIcon());
 
-        final ContentManager contentManager = toolWindow.getContentManager();
-        treePanel = new TreePanel(jcgProject);
+        addContentToJcgToolWindow();
+
+
+    }
+
+    private void addContentToJcgToolWindow() {
+        final ContentManager contentManager = jcgToolWindow.getContentManager();
+        treePanel = new TreePanel(generator.getJcgProject());
         final Content content = contentManager.getFactory().createContent(treePanel, null, false);
+        contentManager.removeAllContents(true);
         contentManager.addContent(content);
 
         this.installOn(treePanel.getJcgTree());

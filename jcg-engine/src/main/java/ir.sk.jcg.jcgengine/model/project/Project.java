@@ -12,10 +12,9 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class Project {
+public class Project extends Element {
 
     // base info
-    private String name;
     private String persianName;
     private String packagePrefix;
     private String tableNamePattern;
@@ -28,15 +27,6 @@ public class Project {
     public Project() {
         entitiesModel.setName("Entity Model");
         viewsModel.setName("View Model");
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @XmlAttribute(required = true)
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPersianName() {
@@ -101,9 +91,4 @@ public class Project {
 //    public void setViews(List<View> views) {
 //        this.views = views;
 //    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
 }

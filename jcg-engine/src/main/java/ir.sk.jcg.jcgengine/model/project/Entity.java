@@ -10,20 +10,10 @@ import java.util.List;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Entity {
+public class Entity extends ModelElement {
 
-    private String name;
     private String packagePath;
     private List<Property> properties;
-
-    public String getName() {
-        return name;
-    }
-
-    @XmlAttribute(required = true)
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPackagePath() {
         return packagePath;
@@ -43,8 +33,4 @@ public class Entity {
         this.properties = properties;
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
 }

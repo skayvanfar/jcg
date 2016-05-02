@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/18/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Property {
+public class Property extends Element {
 
     @Override
     public String toString() {

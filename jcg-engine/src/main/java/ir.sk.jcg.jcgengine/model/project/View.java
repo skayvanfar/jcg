@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class View {
+public class View extends ModelElement {
 
     @Override
     public String toString() {
