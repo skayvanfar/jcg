@@ -42,6 +42,8 @@
 
     <action id="Create Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePackageNodeAction"
             icon="/actions/edit.png" text="Create Package"/>
+    <action id="Delete Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeletePackageNodeAction"
+            icon="/actions/edit.png" text="Delete Package"/>
 
     <group id="JCG.Toolbar" text="JCG ToolBar">
       <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
@@ -58,11 +60,11 @@
     </group>
 
     <group id="JCG.PackageOperationMenu" text="JCG Operations" popup="true">
-      <reference ref="Create Package" />
-      <separator/>
       <action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"
               icon="/actions/new.png" text="Create Entity"/>
       <separator/>
+      <reference ref="Create Package" />
+      <reference ref="Delete Package" />
     </group>
 
     <group id="JCG.EntityOperationMenu" text="JCG Operations" popup="true">
