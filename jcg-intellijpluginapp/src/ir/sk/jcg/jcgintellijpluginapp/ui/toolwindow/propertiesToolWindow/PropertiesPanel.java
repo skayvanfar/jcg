@@ -1,5 +1,8 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow;
 
+import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
@@ -45,7 +48,7 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
 
         this.propsPanel.add(sp);
         this.add(this.propsPanel, BorderLayout.CENTER);
-
+        setToolbar(createToolBar());
     }
 
     public void setElement(Element element) {
@@ -54,5 +57,13 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
         } catch (IntrospectionException e) {
             e.printStackTrace();
         }
+    }
+
+    private JComponent createToolBar() {
+        ActionGroup actionGroup = (ActionGroup) ActionManager.getInstance().getAction("JCG.PropertiesToolbar");
+        String place = ActionPlaces.EDITOR_TOOLBAR;
+        JPanel toolBarPanel = new JPanel(new GridLayout());
+        toolBarPanel.add(ActionManager.getInstance().createActionToolbar(place, actionGroup, true).getComponent());
+        return toolBarPanel;
     }
 }

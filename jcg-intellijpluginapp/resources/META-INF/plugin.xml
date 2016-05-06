@@ -45,7 +45,7 @@
     <action id="Delete Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeletePackageNodeAction"
             icon="/actions/edit.png" text="Delete Package"/>
 
-    <group id="JCG.Toolbar" text="JCG ToolBar">
+    <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
       <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
               icon="/actions/refresh.png" text="Refresh" description="Refresh JCG"/>
     </group>
@@ -86,6 +86,13 @@
       <action id="Create New View" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateViewNodeAction"
               icon="/actions/new.png" text="Create View"/>
       <separator/>
+    </group>
+
+
+
+    <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
+      <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JCGPropertiesSaveAction"
+              icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>
     </group>
 
   </actions>

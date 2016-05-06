@@ -89,7 +89,7 @@ public class TreePanel extends SimpleToolWindowPanel {
 //    private final Icon rootIcon = IconLoader.findIcon("/icons/zookeeper_small.png");
 
     private JComponent createToolBar() {
-        ActionGroup actionGroup = (ActionGroup) ActionManager.getInstance().getAction("JCG.Toolbar");
+        ActionGroup actionGroup = (ActionGroup) ActionManager.getInstance().getAction("JCG.TreeToolbar");
         String place = ActionPlaces.EDITOR_TOOLBAR;
         JPanel toolBarPanel = new JPanel(new GridLayout());
         toolBarPanel.add(ActionManager.getInstance().createActionToolbar(place, actionGroup, true).getComponent());
@@ -156,12 +156,4 @@ public class TreePanel extends SimpleToolWindowPanel {
         return jcgTree.getSelectionPath();
     }
 
-
-//    private DefaultMutableTreeNode addPackages(String path) {
-//        StringTokenizer tokenizer = new StringTokenizer(path, ".");
-//        while (tokenizer.hasMoreTokens()) {
-//            String token = tokenizer.nextToken(); // package name
-//           // isExistNode(token);
-//        }
-//    }
 }
