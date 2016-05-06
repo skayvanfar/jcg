@@ -109,27 +109,20 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
      * initToolWindows
      * */
     public void initToolWindows() {
-        // init jcgProperties tool window
-        jcgPropertiesToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Properties", true, ToolWindowAnchor.BOTTOM);
-        jcgPropertiesToolWindow.setTitle("JCG Properties");
-        jcgPropertiesToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
-        if (!jcgPropertiesToolWindow.isVisible()) jcgPropertiesToolWindow.show(new Runnable() { // TODO: 5/6/2016 not work
-            @Override
-            public void run() {
-            }
-        });
-        addContentToJcgPropertiesTollWindow();
-
         // init jcgTree tool window
-        jcgTreeToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", true, ToolWindowAnchor.LEFT);
+        jcgTreeToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", false, ToolWindowAnchor.LEFT);
         jcgTreeToolWindow.setTitle("JCG Tree");
         jcgTreeToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
-        if (!jcgTreeToolWindow.isVisible()) jcgTreeToolWindow.show(new Runnable() { // TODO: 5/6/2016 not work
-            @Override
-            public void run() {
-            }
-        });
+        if (!jcgTreeToolWindow.isVisible()) jcgTreeToolWindow.show(() -> {});
         addContentToJcgTreeToolWindow();
+
+        // init jcgProperties tool window
+        jcgPropertiesToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Properties", false, ToolWindowAnchor.LEFT, true);
+        jcgPropertiesToolWindow.setTitle("JCG Properties");
+        jcgPropertiesToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
+        jcgPropertiesToolWindow.setSplitMode(true, () -> {});
+        if (!jcgPropertiesToolWindow.isVisible()) jcgPropertiesToolWindow.show(() -> {});
+        addContentToJcgPropertiesTollWindow();
     }
 
     private void addContentToJcgTreeToolWindow() {
