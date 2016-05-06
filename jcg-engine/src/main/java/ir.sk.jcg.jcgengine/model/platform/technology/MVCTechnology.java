@@ -45,6 +45,14 @@ public abstract class MVCTechnology extends Technology {
             return null;
         }
 
+        public static ORMTechnology.ORMTechnologyType valueOfs(String type) {
+            for (ORMTechnology.ORMTechnologyType code : ORMTechnology.ORMTechnologyType.values()) {
+                if (type == code.getDescription()) {
+                    return code;
+                }
+            }
+            return null;
+        }
 
         @Override
         public Technology technologyBuilder() {
@@ -58,6 +66,11 @@ public abstract class MVCTechnology extends Technology {
                     break;
             }
             return mvcTechnology;
+        }
+
+        @Override
+        public String toString() {
+            return desc;
         }
     }
 

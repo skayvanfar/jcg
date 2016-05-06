@@ -48,9 +48,10 @@ public class Package<T extends ModelElement> extends Element implements Packagea
         this.elements = elements;
     }
 
-    public void addElement(Package<T> tPackage) {
-        if(!packages.contains(tPackage))
-            packages.add(tPackage);
+    public void addElement(T t) {
+        if (elements.contains(t))
+            throw new ElementBeforeExistException(t);
+        elements.add(t);
     }
 
     @Override

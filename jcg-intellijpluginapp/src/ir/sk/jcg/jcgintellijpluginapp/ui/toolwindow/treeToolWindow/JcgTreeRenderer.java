@@ -1,7 +1,5 @@
-package ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow;
+package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.openapi.fileTypes.FileTypes;
 import com.intellij.openapi.util.IconLoader;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Model;

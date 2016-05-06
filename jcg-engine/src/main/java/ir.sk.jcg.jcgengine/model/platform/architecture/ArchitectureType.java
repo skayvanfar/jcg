@@ -50,4 +50,9 @@ public enum ArchitectureType implements EnumBase {
         return null;
     }
 
+    @Override
+    public String toString() {
+        return description;
+    }
+
 }

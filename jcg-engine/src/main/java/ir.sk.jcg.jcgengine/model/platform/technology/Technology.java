@@ -20,7 +20,8 @@ import java.util.List;
 public abstract class Technology {
 
     protected String baseDir;
-//    protected String basePackageName; // TODO: 4/24/2016  may not hear
+    protected String basePackageName;
+
     protected List<Dependency> dependencies = new ArrayList<>();
   //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
  //   protected Project project; // TODO: 4/27/2016 Maye be beter just use base and basePackagePerfix
@@ -53,6 +54,14 @@ public abstract class Technology {
    // @XmlAttribute(name = "baseDir", required = true)
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
+    }
+
+    public String getBasePackageName() {
+        return basePackageName;
+    }
+
+    public void setBasePackageName(String basePackageName) {
+        this.basePackageName = basePackageName;
     }
 
     public List<Dependency> getDependencies() {

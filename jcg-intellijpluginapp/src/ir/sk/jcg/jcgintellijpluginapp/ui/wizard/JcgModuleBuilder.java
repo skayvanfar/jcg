@@ -21,8 +21,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import ir.sk.jcg.jcgengine.Generator;
 import ir.sk.jcg.jcgengine.JavaGenerator;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
-import ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow.JcgProjectComponent;
-import ir.sk.jcg.jcgintellijpluginapp.ui.util.execution.RunnableHelper;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgBaseInfoWizardStep;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgIntroWizardStep;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgTechnologyWizardStep;
@@ -40,8 +38,10 @@ public class JcgModuleBuilder extends ModuleBuilder {
     private final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("/messages/messages"); // NOI18N
 
     private Project intellijProject;
-  //  private ir.sk.jcg.jcgengine.model.project.Project jcgProject = new ir.sk.jcg.jcgengine.model.project.Project();
-    private Generator generator = new JavaGenerator(); // TODO: 4/26/2016 must go to constructor may be
+
+  //  private Generator generator = new JavaGenerator(); // TODO: 4/26/2016 must go to constructor may be
+
+    private Generator generator;
 
     public Project getIntellijProject() {
         return intellijProject;

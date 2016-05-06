@@ -42,10 +42,6 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
      * */
     @Override
     public void onWizardFinished() throws CommitStepException {
-        logger.info("================ Finish (JcgBaseInfoWizardStep) ================");
-
-      //  new Project();
-     //   updateComponentsSelectionList();
 
     }
 
@@ -94,15 +90,16 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);
 
-        Generator generator  = jcgModuleBuilder.getGenerator();
+        Generator generator  = new JavaGenerator();
         Project jcgProject= generator.getJcgProject();
         jcgProject.setName(getComponent().getProjectNameField().getText());
         jcgProject.setPersianName(getComponent().getProjectPersianNameField().getText());
-        jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText());
+        jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction 
 
         // build architecture that user selected
         ArchitectureType architectureType = (ArchitectureType) getComponent().getArchitectureComboBox().getSelectedItem();
         generator.setArchitecture(architectureType.architectureBuilder());
+        jcgModuleBuilder.setGenerator(generator);
     }
 
 }

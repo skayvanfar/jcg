@@ -1,0 +1,56 @@
+@Entity
+@Table(name = "TBL_JCG_PROJECT", schema = "", catalog = "JCG")
+public class $entityName extends EntityBase implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "PK_PROJECT_ID", unique = true, nullable = false)
+    private long id;
+
+    @Size(min = 5, max = 40)
+    @Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 40)
+    @Basic
+    @NotNull
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_TEAM_ID", nullable = false)
+    @NotNull
+    private Team team;
+
+    @OneToMany(mappedBy = "project", cascade = {CascadeType.MERGE,
+            CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+//    @Cascade(org.hibernateImpl.annotations.CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    private Set<Source> sources = new HashSet<>();
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Set<Source> getSources() {
+        if(sources == null)
+            sources = new HashSet<>();
+        return sources;
+    }
+
+    public void setSources(Set<Source> sources) {
+        this.sources = sources;
+    }
+}

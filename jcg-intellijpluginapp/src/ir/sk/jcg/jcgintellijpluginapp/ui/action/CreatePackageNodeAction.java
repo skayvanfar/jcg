@@ -1,24 +1,17 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
-import com.intellij.ide.util.treeView.smartTree.TreeElement;
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.treeStructure.Tree;
-import ir.sk.jcg.jcgengine.Generator;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
-import ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow.JcgProjectComponent;
-
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
+import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/30/2016
  */
-public class CreatePackageNodeAction extends AnAction {
+public class CreatePackageNodeAction extends NodeAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
@@ -37,13 +30,7 @@ public class CreatePackageNodeAction extends AnAction {
                     packageName = validateAndCorrection(packageName);
 
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
-                    Tree jcgTree = jcgProjectComponent.getTreePanel().getJcgTree(); // TODO: 4/30/2016 call a method on zkProjectComponent
-                    TreePath treePath = jcgTree.getSelectionPath();
-
-                    Generator generator = jcgProjectComponent.getGenerator();
-               //     Project jcgProject = generator.getJcgProject();
-                    DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
-                    Packageable<ModelElement> packageable  = (Packageable<ModelElement>) currentNode.getUserObject();
+                    Packageable<ModelElement> packageable  = (Packageable<ModelElement>) jcgProjectComponent.currentSelectedNodeUserObject();
 
                     try {
                         //create recursively support

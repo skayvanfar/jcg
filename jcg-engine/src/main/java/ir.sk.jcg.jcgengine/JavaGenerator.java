@@ -7,7 +7,11 @@ import ir.sk.jcg.jcgengine.model.project.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 /**
@@ -17,12 +21,16 @@ public class JavaGenerator implements Generator {
 
     private static final Logger logger = LoggerFactory.getLogger(JavaGenerator.class);
 
+ //   private JAXBContext jaxbContext; // TODO: 5/5/2016 add marshaler hear 
+ //   private Marshaller marshaller;
+ //   private Unmarshaller unmarshaller;
 
-    private final static String JCG_CONFIG_DIR = "jcg";
-    private final static String JCG_CONFIG_PROJECT_FILE_NAME = "project.xml";
-    private final static String JCG_CONFIG_ARCHITECTURE_FILE_NAME = "architecture.xml";
+    private Project jcgProject;
+    private Architecture architecture;
 
+    // base directory path of project
     private String baseDir;
+    // Path of model xml files
     private File baseXmlDir = null;
 
     @Override
@@ -47,9 +55,6 @@ public class JavaGenerator implements Generator {
         this.baseXmlDir = new File(baseDir + File.separator + JCG_CONFIG_DIR);
 
     }
-
-    private Project jcgProject;
-    private Architecture architecture;
 
     public JavaGenerator() {
         this.jcgProject = new Project();
@@ -87,6 +92,8 @@ public class JavaGenerator implements Generator {
     @Override
     public boolean marshallingProject() throws JAXBException {
         XMLParser.marshaling(new File(baseXmlDir + File.separator + JCG_CONFIG_PROJECT_FILE_NAME), jcgProject);
+     //   File outputFile = new File(baseXmlDir + File.separator + JCG_CONFIG_PROJECT_FILE_NAME);
+    //    this.marshaller.marshal(jcgProject, new StreamResult(outputFile));
         return true;
     }
 
@@ -106,14 +113,6 @@ public class JavaGenerator implements Generator {
     public boolean unmarshallingArchitecture() throws JAXBException {
         architecture = XMLParser.unmarshalling(new File(baseXmlDir + File.separator + JCG_CONFIG_ARCHITECTURE_FILE_NAME), Architecture.class);
         return true;
-    }
-
-    @Override
-    public boolean isProjectJcg() { // TODO: 4/28/2016  must change Evaluation
-        if (baseXmlDir.exists())
-            return true;
-        else
-            return false;
     }
 
     @Override
@@ -137,9 +136,20 @@ public class JavaGenerator implements Generator {
     }
 
     @Override
-    public boolean addEntity(Entity entity) {
-//        VirtualFile vf_projectModulefile = LocalFileSystem.getInstance().findFileByPath("C:/a.txt");
-//        System.out.println(vf_projectModulefile.isDirectory());
+    public boolean addEntity(Entity entity ,String packagePath) {
+        architecture.createEntity(entity ,packagePath);
         return false;
     }
+
+//    private void initJAXBContext() {
+//        try {
+//            this.jaxbContext = JAXBContext.newInstance(Project.class);
+//            this.marshaller = jaxbContext.createMarshaller();
+//            this.unmarshaller = jaxbContext.createUnmarshaller();
+//
+//            this.marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

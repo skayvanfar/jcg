@@ -1,7 +1,5 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgengine.model.platform.architecture.ThreeLayerArchitecture;
-
 import javax.xml.bind.annotation.*;
 
 /**
@@ -10,8 +8,9 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({Model.class, Package.class, Project.class, Property.class})
-public class Element {
+public abstract class Element {
 
+    @Prop
     protected String name;
 
     public String getName() {

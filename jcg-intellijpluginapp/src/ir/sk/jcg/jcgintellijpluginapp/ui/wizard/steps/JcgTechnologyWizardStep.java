@@ -44,36 +44,35 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
     }
 
     /**
-     * Call After wizard complete.
+     * Call After wizard complete on all type of modules.
      * */
     @Override
     public void onWizardFinished() throws CommitStepException {
-      //  File baseDir = new File(jcgModuleBuilder.getContentEntryPath());
-        Architecture architecture = jcgModuleBuilder.getGenerator().getArchitecture();
-  //      architecture.setBaseDir(baseDir);
 
         Generator generator = jcgModuleBuilder.getGenerator();
-        Project jcgProject =jcgModuleBuilder.getGenerator().getJcgProject();
-        generator.setBaseDir(jcgModuleBuilder.getContentEntryPath());
-        jcgProject.setPackagePrefix("ir.sk"); // TODO: 4/28/2016 must get from user
+        // test if project not jcgProject
+        if (generator != null) {
 
-   //     architecture.setProject(jcgProject);
+            Project jcgProject = generator.getJcgProject();
+            generator.setBaseDir(jcgModuleBuilder.getContentEntryPath());
 
-        architecture.initialize(generator.getBaseDir(), jcgProject.getPackagePrefix()); // TODO: 4/27/2016 may beter go to JcgModuleBuilderHelper.configure()
-        
-        JcgAPIManagerCallback jcgAPIManagerCallback = new JcgAPIManagerCallback();
+            generator.getArchitecture().initialize(generator.getBaseDir(), jcgProject.getPackagePrefix()); // TODO: 4/27/2016 may beter go to JcgModuleBuilderHelper.configure()
 
-        final ModalTaskImpl modalTask = new ModalTaskImpl(null, "other works after create base project.", jcgAPIManagerCallback); // todo: must set Project instead null
-        ApplicationManager.getApplication().invokeAndWait(new Runnable() {
-            @Override
-            public void run() {
-                ProgressManager.getInstance().run(modalTask);
+            JcgAPIManagerCallback jcgAPIManagerCallback = new JcgAPIManagerCallback();
+
+            final ModalTaskImpl modalTask = new ModalTaskImpl(null, "other works after create base project.", jcgAPIManagerCallback); // todo: must set Project instead null
+            ApplicationManager.getApplication().invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    ProgressManager.getInstance().run(modalTask);
+                }
+            }, ModalityState.defaultModalityState());
+
+            if (!modalTask.isDone()) {
+                throw new CommitStepException("Operation Fail");  // todo: must use Constant
             }
-        }, ModalityState.defaultModalityState());
-
-        if (!modalTask.isDone()) {
-            throw new CommitStepException("Operation Fail");  // todo: must use Constant
         }
+        
     }
 
     @Override

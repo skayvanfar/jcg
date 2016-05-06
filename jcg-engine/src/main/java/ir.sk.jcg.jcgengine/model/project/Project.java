@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
+import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
 
 import javax.xml.bind.annotation.*;
 import java.io.File;
@@ -15,12 +16,13 @@ import java.util.List;
 public class Project extends Element {
 
     // base info
+    @Prop
     private String persianName;
+    @Prop
     private String packagePrefix;
+    @Prop
     private String tableNamePattern;
 
-//    private List<Entity> entities = new ArrayList<>();
-//    private List<View> views = new ArrayList<>();
     private Model<Entity> entitiesModel = new Model<>();
     private Model<View> viewsModel = new Model<>();
 
@@ -74,21 +76,4 @@ public class Project extends Element {
         this.viewsModel = viewsModel;
     }
 
-//    public List<Entity> getEntities() {
-//        return entities;
-//    }
-//
-//    @XmlElement(name = "entiry")
-//    public void setEntities(List<Entity> entities) {
-//        this.entities = entities;
-//    }
-//
-//    public List<View> getViews() {
-//        return views;
-//    }
-//
-//    @XmlElement(name = "view")
-//    public void setViews(List<View> views) {
-//        this.views = views;
-//    }
 }

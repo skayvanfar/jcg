@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology;
 
+import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
@@ -22,6 +23,18 @@ public class Hibernate extends ORMTechnology {
     private File implDAODir;
     private File interfaceDAOCommonDir;
     private File implDAOCommonDir;
+
+    private File entityMainPackage;
+
+    @Override
+    public void createEntity(Entity entity, String packagePath) {
+
+    }
+
+    @Override
+    public void createDao(Entity entity) {
+
+    }
 
     public Hibernate() {
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
@@ -68,6 +81,9 @@ public class Hibernate extends ORMTechnology {
     @Override
     protected void createDirectories() {
         String baseHibernateDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
+
+        entityMainPackage = new File(baseHibernateDir + "model");
+
         interfaceDAODir = new File(baseHibernateDir + "/dao");
         implDAODir = new File(baseHibernateDir + "/dao/impl");
         interfaceDAOCommonDir = new File(baseHibernateDir + "/dao/common");

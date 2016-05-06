@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgengine.model.platform.technology.Technology;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyType;
+import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Project;
 import org.apache.commons.collections.map.HashedMap;
 
@@ -54,7 +55,7 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
 
 
     protected abstract void setBaseDirOfTechnologies(String baseDir);
-    protected abstract void setBasePackageNameOfTechnologies(String baseDir);
+    protected abstract void setBasePackageNameOfTechnologies(String basePackageName);
 
 //    public String getBasePackageName() {
 //        return basePackageName;
@@ -81,8 +82,13 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
 
     public abstract void createBaseArchitecture();
 
+    /**
+     * Call after unmrshalling for set temp values
+     * */
     public void initialize(String baseDir, String packagename) {
         setBaseDirOfTechnologies(baseDir);
         setBasePackageNameOfTechnologies(packagename);
     }
+
+    public abstract void createEntity(Entity entity, String packagePath);
 }

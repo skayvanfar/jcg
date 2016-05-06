@@ -25,7 +25,7 @@ public abstract class BuildTechnology extends Technology {
         private Integer value;
         private String desc;
 
-        private BuildTechnologyType(Integer value, String desc) {
+        BuildTechnologyType(Integer value, String desc) {
             this.value = value;
             this.desc = desc;
         }
@@ -49,6 +49,14 @@ public abstract class BuildTechnology extends Technology {
             return null;
         }
 
+        public static ORMTechnology.ORMTechnologyType valueOfs(String type) {
+            for (ORMTechnology.ORMTechnologyType code : ORMTechnology.ORMTechnologyType.values()) {
+                if (type == code.getDescription()) {
+                    return code;
+                }
+            }
+            return null;
+        }
 
         @Override
         public Technology technologyBuilder() {
@@ -65,6 +73,11 @@ public abstract class BuildTechnology extends Technology {
                     break;
             }
             return buildTechnology;
+        }
+
+        @Override
+        public String toString() {
+            return desc;
         }
     }
 

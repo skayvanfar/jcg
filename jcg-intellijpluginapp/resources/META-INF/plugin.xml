@@ -27,7 +27,7 @@
   <project-components>
     <!-- Add your project components here -->
     <component>
-      <implementation-class>ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow.JcgProjectComponent</implementation-class>
+      <implementation-class>ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent</implementation-class>
     </component>
   </project-components>
 

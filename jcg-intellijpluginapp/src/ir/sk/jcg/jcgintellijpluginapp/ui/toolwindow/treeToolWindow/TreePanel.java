@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow;
+package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow;
 
 import com.intellij.ide.ui.customization.CustomizationUtil;
 import com.intellij.openapi.actionSystem.ActionGroup;
@@ -9,11 +9,13 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgintellijpluginapp.ui.listener.TreeSelectionChangedListener;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 
@@ -24,6 +26,8 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     private Tree jcgTree;
     private Project jcgProject;
+
+    private TreeSelectionChangedListener treeSelectionChangedListener;
 
     public TreePanel(Project jcgProject) {
         super(true);
@@ -39,7 +43,11 @@ public class TreePanel extends SimpleToolWindowPanel {
         jcgTree.addTreeSelectionListener(new TreeSelectionListener() {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
+
                 DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
+                if (treeSelectionChangedListener != null) {
+                    treeSelectionChangedListener.selectionChanged(treeNode.getUserObject());
+                }
                 if (treeNode.isRoot()) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof Model) {
@@ -60,9 +68,24 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     }
 
-    public Tree getJcgTree() {
-        return jcgTree;
+    public void setTreeSelectionChangedListener(TreeSelectionChangedListener treeSelectionChangedListener) {
+        this.treeSelectionChangedListener = treeSelectionChangedListener;
     }
+
+    /**
+     * update UI and expand selected node
+     * */
+    public void updateAndExpandUI() {
+        jcgTree.updateUI();
+        TreePath treePath = jcgTree.getSelectionPath();
+        if (treePath != null) {
+            jcgTree.expandPath(treePath);
+        }
+    }
+
+   // public Tree getJcgTree() {
+   //     return jcgTree;
+  //  }
 //    private final Icon rootIcon = IconLoader.findIcon("/icons/zookeeper_small.png");
 
     private JComponent createToolBar() {
@@ -118,6 +141,19 @@ public class TreePanel extends SimpleToolWindowPanel {
             parentNode.add(packageNode);
             loadPackages(bPackage, packageNode);
         }
+    }
+
+    /**
+     * Return user object from current selected node
+     * */
+    public Object currentSelectedNodeUserObject() {
+        TreePath treePath = jcgTree.getSelectionPath();
+        DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
+        return currentNode.getUserObject();
+    }
+
+    public TreePath getTreePath() {
+        return jcgTree.getSelectionPath();
     }
 
 

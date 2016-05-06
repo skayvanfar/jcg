@@ -1,11 +1,9 @@
-package ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow;
+package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow;
 
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import java.beans.ConstructorProperties;
 import java.io.File;
 
 /**

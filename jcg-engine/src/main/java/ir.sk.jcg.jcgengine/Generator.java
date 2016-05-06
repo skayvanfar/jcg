@@ -12,6 +12,10 @@ import java.io.File;
  */
 public interface Generator {
 
+    String JCG_CONFIG_DIR = "jcg";
+    String JCG_CONFIG_PROJECT_FILE_NAME = "project.xml";
+    String JCG_CONFIG_ARCHITECTURE_FILE_NAME = "architecture.xml";
+
     Project getJcgProject();
 
     void setJcgProject(Project jcgProject);
@@ -39,7 +43,8 @@ public interface Generator {
     boolean marshallingArchitecture() throws JAXBException;
     boolean unmarshallingArchitecture() throws JAXBException;
 
-    boolean isProjectJcg();
-
-    boolean addEntity(Entity entity);
+    /**
+     * Add Entity to project and generate implementation
+     * */
+    boolean addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
 }

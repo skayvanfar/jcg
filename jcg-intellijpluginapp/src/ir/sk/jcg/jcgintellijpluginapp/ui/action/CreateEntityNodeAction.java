@@ -1,23 +1,21 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
-import com.intellij.ide.ui.customization.CustomizationUtil;
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
-import com.intellij.ui.treeStructure.Tree;
+import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgengine.Generator;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow.JcgProjectComponent;
-import ir.sk.jcg.jcgintellijpluginapp.ui.treeToolWindow.TreePanel;
+import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
+import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
+import javax.xml.bind.JAXBException;
+import java.util.Arrays;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/28/2016
  */
-public class CreateEntityNodeAction extends AnAction {
+public class CreateEntityNodeAction extends NodeAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
@@ -27,16 +25,27 @@ public class CreateEntityNodeAction extends AnAction {
         builder.setOkOperation(new Runnable() {
             @Override
             public void run() {
+
                 JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
-                TreePanel treePanel =jcgProjectComponent.getTreePanel(); // TODO: 4/28/2016 may beeter call a method on JcgProjectComponent
-                Tree jcgTree = treePanel.getJcgTree();
+                Package<Entity> entityPackage = (Package<Entity>) jcgProjectComponent.currentSelectedNodeUserObject();
 
                 Generator generator = jcgProjectComponent.getGenerator();
 
-                TreePath treePath = jcgTree.getSelectionPath();
-                DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
-                Object userObject = currentNode.getUserObject();
+                Entity entity = new Entity(); // TODO: 5/3/2016 create new method
 
+                // add to project
+                entityPackage.addElement(entity);
+
+                Object[] pathArray = jcgProjectComponent.getTreePath().getPath();
+                String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length );
+                generator.addEntity(entity, Utils.covertStringArrayToString(packagePathArray, '.'));
+
+                try {
+                    generator.marshalling(); // TODO: 5/3/2016
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+                jcgProjectComponent.reloadJcgTree();
             }
         });
 

@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.project.Entity;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.bind.annotation.*;
@@ -16,9 +17,13 @@ public class ThreeLayerArchitecture extends Architecture {
 
     private static TechnologyType[] technologyTypes = {TechnologyType.BUILD_TECHNOLOGY, TechnologyType.ORM_TECHNOLOGY, TechnologyType.MVC_TECHNOLOGY};
 
+    private String baseDir; // TODO: 5/3/2016 may beeter use Project
+    private String basePackageName;
+
     @Override
     public void setBaseDirOfTechnologies(String baseDir) {
-        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
+        this.baseDir = baseDir;
+        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY); // TODO: 5/3/2016 repeated code (in setBasePackageNameOfTechnologies) 
         ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
         MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
 
@@ -28,9 +33,14 @@ public class ThreeLayerArchitecture extends Architecture {
     }
 
     @Override
-    protected void setBasePackageNameOfTechnologies(String baseDir) {
+    protected void setBasePackageNameOfTechnologies(String basePackageName) {
+        this.basePackageName = basePackageName;
+        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
         ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
-        ormTechnology.setBasePackageName(baseDir);
+        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+        buildTechnology.setBasePackageName(basePackageName);
+        ormTechnology.setBasePackageName(basePackageName);
+        mvcTechnology.setBasePackageName(basePackageName);
     }
 
     @Override
@@ -57,6 +67,16 @@ public class ThreeLayerArchitecture extends Architecture {
         } catch (Exception e) { // todo
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void createEntity(Entity entity, String packagePath) {
+        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
+        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
+        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+
+        ormTechnology.createEntity(entity, packagePath);
+        ormTechnology.createDao(entity);
     }
 
     private Technology  getTechnologyByType(TechnologyType technologyType) { // TODO: 4/28/2016 must change

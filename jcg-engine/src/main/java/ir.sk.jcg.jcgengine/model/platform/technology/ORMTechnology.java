@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgengine.model.platform.technology;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
+import ir.sk.jcg.jcgengine.model.project.Entity;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -13,6 +14,10 @@ import java.util.List;
  */
 @XmlSeeAlso({Hibernate.class})
 public abstract class ORMTechnology extends Technology {
+
+    public abstract void createEntity(Entity entity, String packagePath);
+
+    public abstract void createDao(Entity entity);
 
     public enum ORMTechnologyType implements EnumBase, TechnologyEnumBase {
 
@@ -61,6 +66,15 @@ public abstract class ORMTechnology extends Technology {
             return null;
         }
 
+        public static ORMTechnologyType valueOfs(String type) {
+            for (ORMTechnologyType code : ORMTechnologyType.values()) {
+                if (type == code.getDescription()) {
+                    return code;
+                }
+            }
+            return null;
+        }
+
         @Override
         public Technology technologyBuilder() {
             ORMTechnology ormTechnology = null;
@@ -74,20 +88,14 @@ public abstract class ORMTechnology extends Technology {
             }
             return ormTechnology;
         }
-    }
 
-    private String basePackageName;
+        @Override
+        public String toString() {
+            return desc;
+        }
+    }
 
     public ORMTechnology() {
-    }
-
-
-    public String getBasePackageName() {
-        return basePackageName;
-    }
-
-    public void setBasePackageName(String basePackageName) {
-        this.basePackageName = basePackageName;
     }
 
     @Override
