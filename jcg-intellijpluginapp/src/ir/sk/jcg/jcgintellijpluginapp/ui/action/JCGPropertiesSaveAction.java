@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import ir.sk.jcg.jcgengine.JavaGenerator;
+import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ public class JCGPropertiesSaveAction extends NodeAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
         JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
+        jcgProjectComponent.setPropertiesModifiedElement();
+
         try {
             jcgProjectComponent.getGenerator().marshallingProject();
         } catch (JAXBException e1) {

@@ -5,6 +5,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
 
 import javax.xml.bind.annotation.*;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class Project extends Element {
+public class Project extends Element implements Serializable {
 
     // base info
     @Prop
@@ -27,8 +28,21 @@ public class Project extends Element {
     private Model<View> viewsModel = new Model<>();
 
     public Project() {
+        super();
         entitiesModel.setName("Entity Model");
         viewsModel.setName("View Model");
+    }
+
+    /**
+     * Copy constructor
+     * */
+    public Project(Project anotherProject) {
+        super(anotherProject);
+        this.persianName = anotherProject.getPersianName();
+        this.packagePrefix = anotherProject.getPackagePrefix();
+        this.tableNamePattern = anotherProject.getTableNamePattern();
+        this.entitiesModel = anotherProject.getEntitiesModel();
+        this.viewsModel = anotherProject.getViewsModel();
     }
 
     public String getPersianName() {

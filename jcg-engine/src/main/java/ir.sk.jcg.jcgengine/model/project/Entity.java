@@ -4,16 +4,28 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Entity extends ModelElement {
+public class Entity extends ModelElement implements Serializable {
 
     private String packagePath;
     private List<Property> properties;
+
+    public Entity() {}
+
+    /**
+     * Copy constructor
+     * */
+    public Entity(Entity anotherEntity) {
+        super(anotherEntity);
+        this.packagePath = anotherEntity.getPackagePath();
+        this.properties = anotherEntity.getProperties();
+    }
 
     public String getPackagePath() {
         return packagePath;

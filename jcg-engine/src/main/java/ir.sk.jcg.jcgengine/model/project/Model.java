@@ -1,11 +1,13 @@
 package ir.sk.jcg.jcgengine.model.project;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/29/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Model<T extends ModelElement> extends Element implements Packageable<T> {
+public class Model<T extends ModelElement> extends Element implements Packageable<T>, Serializable {
 
 
     private List<Package<T>> packages = new ArrayList<>();
@@ -21,6 +23,16 @@ public class Model<T extends ModelElement> extends Element implements Packageabl
     @Override
     public List<Package<T>> getPackages() {
         return packages;
+    }
+
+    public Model() {}
+
+    /**
+     * Copy constructor
+     * */
+    public Model(Model<T> anotherModel) {
+        super(anotherModel);
+        this.packages = anotherModel.getPackages();
     }
 
     @Override
@@ -41,4 +53,5 @@ public class Model<T extends ModelElement> extends Element implements Packageabl
         if (packages.contains(t))
             packages.remove(t);
     }
+
 }

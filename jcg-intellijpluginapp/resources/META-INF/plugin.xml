@@ -48,6 +48,8 @@
     <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
       <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
               icon="/actions/refresh.png" text="Refresh" description="Refresh JCG"/>
+      <action id="JCGGenerateAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgGenerateAction"
+              icon="/actions/execute.png" text="Generate" description="Generate JCG"/>
     </group>
 
     <group id="JCG.ProjectOperationMenu" text="JCG Operations" popup="true">

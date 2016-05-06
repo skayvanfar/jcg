@@ -41,12 +41,6 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         return generator;
     }
 
- //   public TreePanel getTreePanel() { // TODO: 4/28/2016  may not need
-  //      return treePanel;
- //   }
-
-
-
     public JcgProjectComponent(Project intellijProject) {
         this.intellijProject = intellijProject;
     }
@@ -66,7 +60,6 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
                 e.printStackTrace();
             }
         }
-     //   initToolWindow();
     }
 
     public void reloadJcgTree() {
@@ -77,17 +70,6 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
             e.printStackTrace();
         }
         treePanel.updateAndExpandUI();
-//        if (generator == null) {
-//            try {
-//                initGenerator();
-//            } catch (JAXBException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        if (generator != null) {
-//            treePanel.initJcgTree();
-//            treePanel.getJcgTree().updateUI();
-//        }
     }
 
     /**
@@ -198,4 +180,8 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         return treePanel.currentSelectedNodeUserObject();
     }
 
+    public void setPropertiesModifiedElement() {
+        propertiesPanel.setModifiedElement();
+
+    }
 }

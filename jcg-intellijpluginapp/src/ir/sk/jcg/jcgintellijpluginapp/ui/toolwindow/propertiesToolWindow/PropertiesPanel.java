@@ -5,17 +5,27 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
+import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
+import ir.sk.jcg.jcgcommon.util.SerializationUtil;
 import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
 import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Project;
+import ir.sk.jcg.jcgengine.model.project.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.editor.RowEditorModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.renderer.RowRendererModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel.PropertiesTableModel;
+import org.apache.commons.lang.SerializationUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.IntrospectionException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/24/2016
@@ -24,6 +34,7 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
 
     private JPanel propsPanel;
     private PropertyTable propertyTable;
+    private Element realElement;
 
     public PropertiesPanel() {
         super(true);
@@ -50,13 +61,17 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
         this.add(this.propsPanel, BorderLayout.CENTER);
         setToolbar(createToolBar());
     }
-
+    Element copyElement;
     public void setElement(Element element) {
+        realElement = element;
+        copyElement = (Element) SerializationUtil.deepClone(element);
+
         try {
-            propertyTable.setModel(new PropertiesTableModel(element, propertyTable));
+            propertyTable.setModel(new PropertiesTableModel(copyElement, propertyTable));
         } catch (IntrospectionException e) {
             e.printStackTrace();
         }
+        System.out.println();
     }
 
     private JComponent createToolBar() {
@@ -65,5 +80,29 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
         JPanel toolBarPanel = new JPanel(new GridLayout());
         toolBarPanel.add(ActionManager.getInstance().createActionToolbar(place, actionGroup, true).getComponent());
         return toolBarPanel;
+    }
+
+    /**
+     * Save copy Element to real element
+     * */
+    public void setModifiedElement() {
+        java.util.List<Field> fields = ReflectionUtil.findFields(realElement.getClass(), Prop.class);
+        for(Field field : fields) {
+            field.setAccessible(true);
+            try {
+                String name = field.getName();
+                Field copyField = ReflectionUtil.getFieldByName(name, copyElement);
+                copyField.setAccessible(true);
+                Object newValue = copyField.get(copyElement);
+                field.set(realElement, newValue);
+                copyField.setAccessible(false);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace(); // TODO: 5/5/2016
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } finally {
+                field.setAccessible(false);
+            }
+        }
     }
 }
