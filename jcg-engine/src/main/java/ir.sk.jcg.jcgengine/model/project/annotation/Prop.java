@@ -17,4 +17,5 @@ import java.lang.annotation.Target;
 public @interface Prop {
     CellType editor() default CellType.DEFAULT;
     String[] values() default "";
+    boolean isRequired() default false;
 }

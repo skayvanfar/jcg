@@ -6,5 +6,6 @@ package ir.sk.jcg.jcgengine.model.project;
 public enum CellType {
     NON_EDITABLE_COMBO,
     EDITABLE_COMBO,
+    BOOLEAN_CHECKBOX,
     DEFAULT;
 }

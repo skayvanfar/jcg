@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
+import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,6 +20,16 @@ import java.util.List;
 public class Entity extends ModelElement implements Serializable {
 
     private String packagePath;
+
+    @Prop
+    private String tableName;
+    @Prop
+    private String labelName;
+    @Prop(editor = CellType.BOOLEAN_CHECKBOX)
+    private boolean isLogicallyDeletable;
+    @Prop(editor = CellType.BOOLEAN_CHECKBOX)
+    private boolean isTrackable;
+
     private List<Property> properties;
 
     public Entity() {
@@ -41,6 +52,42 @@ public class Entity extends ModelElement implements Serializable {
     @XmlAttribute
     public void setPackagePath(String packagePath) {
         this.packagePath = packagePath;
+    }
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    @XmlAttribute
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    @XmlAttribute
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
+    }
+
+    public boolean isLogicallyDeletable() {
+        return isLogicallyDeletable;
+    }
+
+    @XmlAttribute
+    public void setLogicallyDeletable(boolean logicallyDeletable) {
+        isLogicallyDeletable = logicallyDeletable;
+    }
+
+    public boolean isTrackable() {
+        return isTrackable;
+    }
+
+    @XmlAttribute
+    public void setTrackable(boolean trackable) {
+        isTrackable = trackable;
     }
 
     public List<Property> getProperties() {

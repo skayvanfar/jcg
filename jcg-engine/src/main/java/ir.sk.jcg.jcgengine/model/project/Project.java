@@ -1,6 +1,8 @@
 package ir.sk.jcg.jcgengine.model.project;
 
+import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.project.enums.ModelInfoType;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -10,15 +12,18 @@ import java.io.Serializable;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
+@Editable
 public class Project extends Element implements Serializable {
 
     // base info
     @Prop
     private String persianName;
-    @Prop
+    @Prop(isRequired = true)
     private String packagePrefix;
-    @Prop
+    @Prop(isRequired = true)
     private String tableNamePattern;
+    @Prop(editor = CellType.NON_EDITABLE_COMBO, isRequired = true)
+    private ModelInfoType modelInfoType;
 
     private Model<Entity> entitiesModel = new Model<>();
     private Model<View> viewsModel = new Model<>();
@@ -66,6 +71,15 @@ public class Project extends Element implements Serializable {
     @XmlAttribute
     public void setTableNamePattern(String tableNamePattern) {
         this.tableNamePattern = tableNamePattern;
+    }
+
+    public ModelInfoType getModelInfoType() {
+        return modelInfoType;
+    }
+
+    @XmlAttribute
+    public void setModelInfoType(ModelInfoType modelInfoType) {
+        this.modelInfoType = modelInfoType;
     }
 
     public Model<Entity> getEntitiesModel() {

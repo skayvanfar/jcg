@@ -1,6 +1,8 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel;
 
 import com.intellij.openapi.ui.ComboBox;
+import com.intellij.openapi.wm.ToolWindow;
+import com.intellij.util.ui.CheckBox;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgengine.model.project.CellType;
 import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
@@ -10,6 +12,7 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.Propert
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -22,14 +25,15 @@ public class PropertiesTableModel extends AbstractTableModel {
 
     private class PropertyField {
 
-        PropertyField(String name, Object value) {
+        PropertyField(String name, Object value, boolean required) {
             this.name = name;
             this.value = value;
+            this.required = required;
         }
 
         private String name;
         private Object value;
-        private boolean editable;
+        private boolean required;
 
         public String getName() {
             return name;
@@ -45,6 +49,14 @@ public class PropertiesTableModel extends AbstractTableModel {
 
         public void setValue(Object value) {
             this.value = value;
+        }
+
+        public boolean isRequired() {
+            return required;
+        }
+
+        public void setRequired(boolean required) {
+            this.required = required;
         }
     }
 
@@ -69,8 +81,9 @@ public class PropertiesTableModel extends AbstractTableModel {
             } catch (IllegalAccessException e) {
                 e.printStackTrace(); // TODO: 5/5/2016
             }
-
-            propertyFields.add(new PropertyField(field.getName(), value));
+            Prop prop = field.getAnnotation(Prop.class);
+            boolean required= prop.isRequired();
+            propertyFields.add(new PropertyField(field.getName(), value, required));
         }
         if (element.getClass().isAnnotationPresent(Editable.class))
             editable = true;
@@ -98,6 +111,18 @@ public class PropertiesTableModel extends AbstractTableModel {
     }
 
     private void setRenderers(List<Field> fields) {
+//        for (int i = 0; i < fields.size(); i++) { // TODO: 5/7/2016 not worked: CellRenderer must be red border for required cell 
+//            Field  field = fields.get(i);
+//            Prop prop = field.getAnnotation(Prop.class);
+//            boolean required = prop.isRequired();
+//            if (required) {
+//                DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+//                cellRenderer.setBorder(new ToolWindow.Border());///////////////////////////////////////////////////////////////////////////////////
+//                this.propertyTable.getRowRendererModel().addRendererForRow(i, cellRenderer);
+//            } else {
+//                // Not set. default accepted
+//            }
+//        }
     }
 
     private void setEditors(List<Field> fields) {
@@ -108,16 +133,11 @@ public class PropertiesTableModel extends AbstractTableModel {
             /////////////////////////// TODO: 5/5/2016 must create another method
             switch (cellType) {
                 case NON_EDITABLE_COMBO:
-                    Enum anEnum = null;
-                    try {
-                        anEnum = (Enum) field.get(element);
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+                    Class<? extends Enum> classType= (Class<? extends Enum>) field.getType();
+                    Enum[] possibleValues = classType.getEnumConstants();
                     ComboBox comboBox = new ComboBox();
-                    Object[] possibleValues = anEnum.getDeclaringClass().getEnumConstants();
-                    for (Object f : possibleValues) {
-                        comboBox.addItem(f);
+                    for (Enum<?> e : possibleValues) {
+                        comboBox.addItem(e);
                     }
                     this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(comboBox));//Reducer Properties
                     break;
@@ -128,6 +148,10 @@ public class PropertiesTableModel extends AbstractTableModel {
                         comboBox2.addItem(value);
                     }
                     this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(comboBox2));//Reducer Properties
+                    break;
+                case BOOLEAN_CHECKBOX:
+                    this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(new JCheckBox()));//Reducer Properties // TODO: 5/7/2016 use Checkbox
+
                     break;
                 case DEFAULT:
                     // Not set. default accepted
