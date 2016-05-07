@@ -7,4 +7,13 @@ import com.intellij.openapi.actionSystem.AnAction;
  */
 public abstract class NodeAction extends AnAction {
 
+    protected String correctName(String nodeName) {
+        if (nodeName.startsWith("/")) {
+            nodeName = nodeName.substring(1);
+        }
+        if (nodeName.endsWith("/")) {
+            nodeName = nodeName.substring(0, nodeName.length() - 1);
+        }
+        return nodeName;
+    }
 }

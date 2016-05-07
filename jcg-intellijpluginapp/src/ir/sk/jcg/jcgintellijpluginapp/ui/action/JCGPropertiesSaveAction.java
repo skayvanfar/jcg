@@ -28,6 +28,6 @@ public class JCGPropertiesSaveAction extends NodeAction {
             e1.printStackTrace();
             logger.error("buildTemplate error in template : " + e);
         }
-        jcgProjectComponent.reloadJcgTree();
+        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
     }
 }

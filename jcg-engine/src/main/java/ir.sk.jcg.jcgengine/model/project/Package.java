@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.project;
 
+import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
 import javax.xml.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(Entity.class)
+@Editable
 public class Package<T extends ModelElement> extends Element implements Packageable<T>, Serializable {
 
 

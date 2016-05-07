@@ -62,14 +62,14 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         }
     }
 
-    public void reloadJcgTree() {
+    public void reloadJcgTree(TreePath treePath) {
         try {
             initGenerator();
             addContentToJcgTreeToolWindow();
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        treePanel.updateAndExpandUI();
+        treePanel.updateAndExpandUI(treePath);
     }
 
     /**
@@ -169,8 +169,8 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         return false;
     }
 
-    public TreePath getTreePath() {
-        return treePanel.getTreePath();
+    public TreePath getSelectionPath() {
+        return treePanel.getSelectionPath();
     }
 
     /**

@@ -41,9 +41,9 @@
     <!-- Add your actions here -->
 
     <action id="Create Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePackageNodeAction"
-            icon="/actions/edit.png" text="Create Package"/>
+            icon="/actions/newFolder.png" text="Create Package"/>
     <action id="Delete Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeletePackageNodeAction"
-            icon="/actions/edit.png" text="Delete Package"/>
+            icon="/actions/delete.png" text="Delete Package"/>
 
     <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
       <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
@@ -63,17 +63,16 @@
 
     <group id="JCG.PackageOperationMenu" text="JCG Operations" popup="true">
       <action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"
-              icon="/actions/new.png" text="Create Entity"/>
+              icon="/nodes/class.png" text="Create Entity"/>
       <separator/>
       <reference ref="Create Package" />
       <reference ref="Delete Package" />
     </group>
 
     <group id="JCG.EntityOperationMenu" text="JCG Operations" popup="true">
-      <!--<reference ref="Create Child Node" />-->
-      <!--<action id="Open in Editor" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.OpenNodeInEditorAction"-->
-              <!--icon="/actions/edit.png" text="Open in Editor"/>-->
-      <!--<separator/>-->
+      <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
+               icon="/css/property.png" text="Create Property"/>
+      <separator/>
       <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"-->
               <!--icon="/actions/new.png" text="Create Entity"/>-->
       <!--<separator/>-->

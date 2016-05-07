@@ -1,10 +1,8 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow;
 
 import com.intellij.openapi.util.IconLoader;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Model;
+import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
-import ir.sk.jcg.jcgengine.model.project.View;
 import org.jdesktop.swingx.renderer.DefaultTreeRenderer;
 import org.jdesktop.swingx.renderer.WrappingIconPanel;
 
@@ -40,6 +38,8 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 icon = IconLoader.getIcon("/nodes/class.png"); // 16x16            wrappingPanel.setIcon(icon);
             } else if (treeNode.getUserObject() instanceof View) {
                 icon = IconLoader.getIcon("/nodes/advice.png"); // 16x16            wrappingPanel.setIcon(icon);
+            } else if (treeNode.getUserObject() instanceof Property) {
+                icon = IconLoader.getIcon("/css/property.png"); // 16x16            wrappingPanel.setIcon(icon);
             }
             wrappingPanel.setIcon(icon);
         }

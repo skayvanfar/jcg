@@ -2,18 +2,14 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableM
 
 import com.intellij.openapi.ui.ComboBox;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
-import ir.sk.jcg.jcgengine.model.platform.technology.BuildTechnology;
-import ir.sk.jcg.jcgengine.model.platform.technology.MVCTechnology;
-import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
 import ir.sk.jcg.jcgengine.model.project.CellType;
+import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.project.Element;
-import ir.sk.jcg.jcgengine.model.project.Prop;
+import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertyTable;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -21,6 +17,8 @@ import java.util.*;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/5/2016
  */
 public class PropertiesTableModel extends AbstractTableModel {
+
+    private boolean editable = false;
 
     private class PropertyField {
 
@@ -31,6 +29,7 @@ public class PropertiesTableModel extends AbstractTableModel {
 
         private String name;
         private Object value;
+        private boolean editable;
 
         public String getName() {
             return name;
@@ -59,6 +58,7 @@ public class PropertiesTableModel extends AbstractTableModel {
 
     public PropertiesTableModel(Element element, PropertyTable propertyTable) throws java.beans.IntrospectionException {
         this.element = element;
+
         List<Field> fields = ReflectionUtil.findFields(element.getClass(), Prop.class);
         for(Field field : fields) {
             field.setAccessible(true);
@@ -69,8 +69,11 @@ public class PropertiesTableModel extends AbstractTableModel {
             } catch (IllegalAccessException e) {
                 e.printStackTrace(); // TODO: 5/5/2016
             }
+
             propertyFields.add(new PropertyField(field.getName(), value));
         }
+        if (element.getClass().isAnnotationPresent(Editable.class))
+            editable = true;
 
         this.propertyTable = propertyTable; // TODO: 5/5/2016
 
@@ -196,6 +199,10 @@ public class PropertiesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return  (columnIndex == 1) ? true : false;
+        if (columnIndex == 0) {
+            return false;
+        } else {
+            return editable;
+        }
     }
 }

@@ -31,7 +31,6 @@ public class CreatePackageNodeAction extends NodeAction {
 
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
                     Packageable<ModelElement> packageable  = (Packageable<ModelElement>) jcgProjectComponent.currentSelectedNodeUserObject();
-
                     try {
                         //create recursively support
 //                        String[] parts = packageName.split("."); // TODO: 5/2/2016 for many package create
@@ -63,7 +62,7 @@ public class CreatePackageNodeAction extends NodeAction {
                         }
 
                         jcgProjectComponent.getGenerator().marshalling();
-                        jcgProjectComponent.reloadJcgTree();
+                        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016  
                     }

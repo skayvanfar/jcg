@@ -11,7 +11,7 @@ public class JcgTreeRefreshAction extends NodeAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
-        jcgProjectComponent.reloadJcgTree();
+        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
     }
 
 }

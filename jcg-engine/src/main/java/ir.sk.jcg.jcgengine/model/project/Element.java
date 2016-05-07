@@ -1,5 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
+import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 

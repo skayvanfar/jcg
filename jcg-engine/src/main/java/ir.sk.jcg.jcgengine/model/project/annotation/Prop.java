@@ -1,4 +1,6 @@
-package ir.sk.jcg.jcgengine.model.project;
+package ir.sk.jcg.jcgengine.model.project.annotation;
+
+import ir.sk.jcg.jcgengine.model.project.CellType;
 
 import javax.swing.*;
 import java.lang.annotation.ElementType;

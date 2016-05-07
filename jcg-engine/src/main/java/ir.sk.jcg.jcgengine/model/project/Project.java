@@ -1,13 +1,9 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
-import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
+import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
 
 import javax.xml.bind.annotation.*;
-import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016

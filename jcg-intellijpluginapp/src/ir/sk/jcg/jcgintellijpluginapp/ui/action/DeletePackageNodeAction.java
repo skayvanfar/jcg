@@ -31,7 +31,7 @@ public class DeletePackageNodeAction extends NodeAction {
 
                 JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
 
-                TreePath treePath = jcgProjectComponent.getTreePath();
+                TreePath treePath = jcgProjectComponent.getSelectionPath();
 
                 Generator generator = jcgProjectComponent.getGenerator();
 
@@ -48,7 +48,7 @@ public class DeletePackageNodeAction extends NodeAction {
                         parentPackageable.removePackage(currentPackage);
 
                         jcgProjectComponent.getGenerator().marshalling();
-                        jcgProjectComponent.reloadJcgTree();
+                        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016
                     }

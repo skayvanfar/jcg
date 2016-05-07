@@ -7,6 +7,7 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import ir.sk.jcg.jcgcommon.util.SimpleNavigatorTreeUtil;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.listener.TreeSelectionChangedListener;
@@ -75,11 +76,21 @@ public class TreePanel extends SimpleToolWindowPanel {
     /**
      * update UI and expand selected node
      * */
-    public void updateAndExpandUI() {
+    public void updateAndExpandUI(TreePath treePath) {
+
+
         jcgTree.updateUI();
-        TreePath treePath = jcgTree.getSelectionPath();
-        if (treePath != null) {
-            jcgTree.expandPath(treePath);
+        if (treePath != null) { // TODO: 5/6/2016 expand not work correctly 
+            TreePath treePath1 = new TreePath(treePath.getPath());
+          //  jcgTree.setSelectionPath(treePath1);
+              //      jcgTree.scrollPathToVisible(treePath1);
+     //       TreePath t =jcgTree.getSelectionPath();
+       //     jcgTree.expandPath(new TreePath(treePath.getPath()));
+            jcgTree.expandRow(1);
+            jcgTree.expandRow(2);
+//            SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath, 3, true);
+     //           SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
+
         }
     }
 
@@ -107,7 +118,7 @@ public class TreePanel extends SimpleToolWindowPanel {
         for (ir.sk.jcg.jcgengine.model.project.Package<Entity> entityPackage : entityModel.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(entityPackage);
             entityModelNode.add(packageNode);
-            loadPackages(entityPackage, packageNode);
+            loadPackages(entityPackage, packageNode, true);
         }
 
 
@@ -118,7 +129,7 @@ public class TreePanel extends SimpleToolWindowPanel {
         for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewModel.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(viewPackage);
             viewModelNode.add(packageNode);
-            loadPackages(viewPackage, packageNode);
+            loadPackages(viewPackage, packageNode, false);
         }
 
         projectNode.add(entityModelNode);
@@ -131,15 +142,24 @@ public class TreePanel extends SimpleToolWindowPanel {
     /**
      * Load packages and entities recursive
      * */
-    private <T extends ModelElement> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode) { // TODO: 4/29/2016 must go to a util class
+    private <T extends ModelElement> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode, boolean hasEntity) { // TODO: 4/29/2016 must go to a util class
         for (T t : aPackage.getElements()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(t);
             parentNode.add(tNode);
+            if (hasEntity)
+                loadProperties((Entity) t, tNode);
         }
         for (Package<T> bPackage : aPackage.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(bPackage);
             parentNode.add(packageNode);
-            loadPackages(bPackage, packageNode);
+            loadPackages(bPackage, packageNode, hasEntity);
+        }
+    }
+
+    private void loadProperties(Entity entity, DefaultMutableTreeNode parentNode) {
+        for (Property property : entity.getProperties()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(property);
+            parentNode.add(tNode);
         }
     }
 
@@ -152,7 +172,7 @@ public class TreePanel extends SimpleToolWindowPanel {
         return currentNode.getUserObject();
     }
 
-    public TreePath getTreePath() {
+    public TreePath getSelectionPath() {
         return jcgTree.getSelectionPath();
     }
 

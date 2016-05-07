@@ -7,25 +7,16 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.util.SerializationUtil;
-import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
 import ir.sk.jcg.jcgengine.model.project.Element;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Project;
-import ir.sk.jcg.jcgengine.model.project.Prop;
+import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.editor.RowEditorModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.renderer.RowRendererModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel.PropertiesTableModel;
-import org.apache.commons.lang.SerializationUtils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.IntrospectionException;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
-import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/24/2016
