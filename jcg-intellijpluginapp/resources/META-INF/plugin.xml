@@ -73,7 +73,7 @@
       <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
                icon="/css/property.png" text="Create Property"/>
       <separator/>
-      <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"-->
+      <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityCreateNodeActionAction"-->
               <!--icon="/actions/new.png" text="Create Entity"/>-->
       <!--<separator/>-->
       <!--<action id="Delete Node" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeleteNodeAction"-->

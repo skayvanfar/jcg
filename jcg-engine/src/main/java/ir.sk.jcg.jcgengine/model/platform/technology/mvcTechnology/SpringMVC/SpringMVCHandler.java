@@ -1,6 +1,7 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC;
 
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.velocity.VelocityContext;
 

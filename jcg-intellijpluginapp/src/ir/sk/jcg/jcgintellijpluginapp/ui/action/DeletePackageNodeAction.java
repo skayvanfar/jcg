@@ -15,13 +15,13 @@ import javax.swing.tree.TreePath;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/3/2016
  */
-public class DeletePackageNodeAction extends NodeAction {
+public class DeletePackageNodeAction extends DeleteNodeAction {
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
         builder.setTitle("Create Package");
 
-        //   CreatePackagePanel panel = new CreatePackagePanel();
+        //   CreateNewNodePanel panel = new CreateNewNodePanel();
         //  builder.setPreferredFocusComponent(panel);
         //  builder.setCenterPanel(panel);
         builder.setOkOperation(new Runnable() {

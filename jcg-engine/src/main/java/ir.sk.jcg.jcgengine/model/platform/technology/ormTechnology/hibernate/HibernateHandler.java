@@ -1,12 +1,16 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.EntityElement;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
 import org.apache.velocity.VelocityContext;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -24,13 +28,13 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private File entityMainPackage;
 
     @Override
-    public void createEntity(Entity entity, String packagePath) {
-
+    public EntityClass createEntityClass(Entity entity, String packagePath) {
+        return null; // TODO: 5/8/2016
     }
 
     @Override
-    public void createDao(Entity entity) {
-
+    public List<EntityElement> createDao(Entity entity) {
+        return null; // TODO: 5/8/2016
     }
 
     public HibernateHandler() {

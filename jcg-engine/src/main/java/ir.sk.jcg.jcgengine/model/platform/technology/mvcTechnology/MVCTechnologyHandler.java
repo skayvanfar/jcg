@@ -1,6 +1,9 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.SpringMVCHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 

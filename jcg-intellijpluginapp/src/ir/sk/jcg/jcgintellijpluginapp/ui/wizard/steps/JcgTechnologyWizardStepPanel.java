@@ -3,8 +3,8 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandlerEnumBase;
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandlerType;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 
 import javax.swing.*;
 import java.awt.*;

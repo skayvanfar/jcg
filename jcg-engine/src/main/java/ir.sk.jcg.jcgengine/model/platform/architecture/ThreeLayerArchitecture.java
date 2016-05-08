@@ -1,9 +1,17 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.*;
+import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.DAOInterfaceElement;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.EntityElement;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -66,13 +74,20 @@ public class ThreeLayerArchitecture extends Architecture {
     }
 
     @Override
-    public void createEntity(Entity entity, String packagePath) {
-        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
-        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
-        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
+    public List<EntityElement> createEntity(Entity entity, String packagePath) {
+        List<EntityElement> entityElements = new ArrayList<>();
+        BuildTechnologyHandler buildTechnologyHandler = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+        ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
-        ormTechnology.createEntity(entity, packagePath);
-        ormTechnology.createDao(entity);
+        EntityClass entityClassElement = ormTechnologyHandler.createEntityClass(entity, packagePath);
+        if (entityClassElement != null)
+            entityElements.add(entityClassElement);
+        List<EntityElement> daoEntityElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
+        if (daoEntityElements != null)
+            entityElements.addAll(daoEntityElements);
+
+        return entityElements;
     }
 
     private TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change

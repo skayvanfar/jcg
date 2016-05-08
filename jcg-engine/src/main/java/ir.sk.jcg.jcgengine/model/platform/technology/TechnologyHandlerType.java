@@ -1,6 +1,9 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016

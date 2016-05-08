@@ -1,6 +1,6 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler.xmlAdapter;
+package ir.sk.jcg.jcgengine.model.platform.technology.xmlAdapter;
 
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

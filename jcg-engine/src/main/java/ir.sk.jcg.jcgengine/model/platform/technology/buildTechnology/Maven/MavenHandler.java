@@ -1,6 +1,6 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler.Maven;
+package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
 
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.velocity.VelocityContext;
 //import org.jetbrains.annotations.Nullable;

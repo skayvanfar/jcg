@@ -11,25 +11,25 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/30/2016
  */
-public class CreatePackageNodeAction extends NodeAction {
-    @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
-        final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
-        builder.setTitle("Create Package");
+public class CreatePackageNodeAction extends CreateNodeAction {
 
-        CreatePackagePanel panel = new CreatePackagePanel();
-        builder.setPreferredFocusComponent(panel);
-        builder.setCenterPanel(panel);
+    public CreatePackageNodeAction() {
+        super("Package");
+    }
+
+    @Override
+    public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         builder.setOkOperation(new Runnable() {
             @Override
             public void run() {
-                String packageName = panel.getPackageName();
+                String packageName = addNodePanel.getNodeName();
                 if (StringUtil.isNotEmpty(packageName)) {
 
                     // Validate and Correction
                     packageName = validateAndCorrection(packageName);
 
-                    JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
+                    JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                     Packageable<ModelElement> packageable  = (Packageable<ModelElement>) jcgProjectComponent.currentSelectedNodeUserObject();
                     try {
                         //create recursively support

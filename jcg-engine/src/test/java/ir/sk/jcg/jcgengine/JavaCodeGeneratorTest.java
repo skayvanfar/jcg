@@ -97,9 +97,9 @@ public class JavaCodeGeneratorTest {
 //        MVCTechnologyHandler mvcTechnology = new SpringMVCHandler();
 //
 //
-//        TechnologyHandler technologyHandler = new HibernateHandler();
+//        TechnologyHandler technology = new HibernateHandler();
 //        List<TechnologyHandler> technologies = new ArrayList<>();
-//        technologies.add(technologyHandler);
+//        technologies.add(technology);
 //        technologies.add(buildTechnology);
 //        technologies.add(mvcTechnology);
 //        architecture.setTechnologies(technologies);

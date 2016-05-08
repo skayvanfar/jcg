@@ -1,8 +1,9 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandler;
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandlerType;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.EntityElement;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -39,8 +40,8 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
 //
 //    public void setProject(Project project) {
 //        this.project = project;
-//        for (TechnologyHandler technologyHandler : getTechnologies())
-//            technologyHandler.setProject(project);
+//        for (TechnologyHandler technology : getTechnologies())
+//            technology.setProject(project);
 //    }
 
     List<TechnologyHandler> technologies = new ArrayList<>();
@@ -82,5 +83,5 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
         setBasePackageNameOfTechnologies(packagename);
     }
 
-    public abstract void createEntity(Entity entity, String packagePath);
+    public abstract List<EntityElement> createEntity(Entity entity, String packagePath);
 }

@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler.Maven;
+package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
 
 // import org.jetbrains.annotations.Nullable;
 

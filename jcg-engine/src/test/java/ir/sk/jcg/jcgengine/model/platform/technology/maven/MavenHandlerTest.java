@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler.maven;
+package ir.sk.jcg.jcgengine.model.platform.technology.maven;
 
 import org.junit.After;
 import org.junit.Before;

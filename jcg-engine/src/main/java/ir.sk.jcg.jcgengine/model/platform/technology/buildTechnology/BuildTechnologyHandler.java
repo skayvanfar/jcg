@@ -1,8 +1,10 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.Maven.MavenHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;

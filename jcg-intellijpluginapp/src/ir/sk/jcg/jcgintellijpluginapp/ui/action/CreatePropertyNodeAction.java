@@ -9,25 +9,25 @@ import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Property;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
-import javax.swing.*;
 import javax.xml.bind.JAXBException;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/6/2016
  */
-public class CreatePropertyNodeAction extends NodeAction {
+public class CreatePropertyNodeAction extends CreateNodeAction {
+
+
+    public CreatePropertyNodeAction() {
+        super("Property");
+    }
+
     @Override
     public void actionPerformed(AnActionEvent e) { // TODO: 5/6/2016 repeated code in actions
-        final DialogBuilder builder = new DialogBuilder(e.getProject());
-        builder.setTitle("Create Property");
-        final JTextField textField = new JTextField();
-        builder.setPreferredFocusComponent(textField);
-        builder.setCenterPanel(textField);
-
+        super.actionPerformed(e);
         builder.setOkOperation(new Runnable() {
             @Override
             public void run() {
-                String entityName = textField.getText();
+                String entityName = addNodePanel.getNodeName();
                 if (StringUtil.isNotEmpty(entityName)) {
                     entityName = correctName(entityName);
 

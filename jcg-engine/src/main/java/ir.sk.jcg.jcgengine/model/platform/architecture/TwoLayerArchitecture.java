@@ -1,8 +1,8 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.*;
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.BuildTechnologyHandler;
-import ir.sk.jcg.jcgengine.model.platform.technologyHandler.ORMTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016
@@ -48,11 +48,11 @@ public abstract class TwoLayerArchitecture extends Architecture {
 
 //    @Override
 //    public void setTechnologies(List<TechnologyHandler> technologies) {
-//        for (TechnologyHandler technologyHandler : technologies) {
-//            if (technologyHandler instanceof BuildTechnologyHandler)
-//                buildTechnology = (BuildTechnologyHandler) technologyHandler;
-//            else if (technologyHandler instanceof ORMTechnologyHandler)
-//                ormTechnology = (ORMTechnologyHandler) technologyHandler;
+//        for (TechnologyHandler technology : technologies) {
+//            if (technology instanceof BuildTechnologyHandler)
+//                buildTechnology = (BuildTechnologyHandler) technology;
+//            else if (technology instanceof ORMTechnologyHandler)
+//                ormTechnology = (ORMTechnologyHandler) technology;
 //        }
 //    }
 //

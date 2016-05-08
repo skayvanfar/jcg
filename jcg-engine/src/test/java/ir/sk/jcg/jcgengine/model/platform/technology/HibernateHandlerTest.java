@@ -1,5 +1,6 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology;
 
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.HibernateHandler;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

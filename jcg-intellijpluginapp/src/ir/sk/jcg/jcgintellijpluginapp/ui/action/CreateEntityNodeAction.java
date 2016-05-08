@@ -10,30 +10,30 @@ import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
-import javax.swing.*;
 import javax.xml.bind.JAXBException;
 import java.util.Arrays;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/28/2016
  */
-public class CreateEntityNodeAction extends NodeAction {
-    @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
-        final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
-        builder.setTitle("Create Entity");
-        final JTextField textField = new JTextField();
-        builder.setPreferredFocusComponent(textField);
-        builder.setCenterPanel(textField);
+public class CreateEntityNodeAction extends CreateNodeAction {
 
+    public CreateEntityNodeAction() {
+        super("Entity");
+    }
+
+
+    @Override
+    public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         builder.setOkOperation(new Runnable() {
             @Override
             public void run() {
-                String entityName = textField.getText();
+                String entityName = addNodePanel.getNodeName();
                 if (StringUtil.isNotEmpty(entityName)) {
                     entityName = correctName(entityName);
 
-                    JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
+                    JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                     Package<Entity> entityPackage = (Package<Entity>) jcgProjectComponent.currentSelectedNodeUserObject();
 
                     CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();

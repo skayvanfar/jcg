@@ -3,12 +3,14 @@ package ir.sk.jcg.jcgengine;
 import ir.sk.jcg.jcgcommon.util.XMLParser;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.EntityElement;
 import ir.sk.jcg.jcgengine.model.project.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -132,9 +134,8 @@ public class JavaCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public boolean addEntity(Entity entity ,String packagePath) {
-        architecture.createEntity(entity ,packagePath);
-        return false;
+    public List<EntityElement> addEntity(Entity entity , String packagePath) {
+        return architecture.createEntity(entity ,packagePath);
     }
 
 //    private void initJAXBContext() {

@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
+package ir.sk.jcg.jcgengine.model.platform.technology;
 
 import org.junit.After;
 import org.junit.Before;
