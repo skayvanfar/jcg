@@ -44,21 +44,27 @@
             icon="/actions/newFolder.png" text="Create Package"/>
     <action id="Delete Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeletePackageNodeAction"
             icon="/actions/delete.png" text="Delete Package"/>
+    <action id="Generate Code" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.GenerateCodeAction"
+            icon="/actions/execute.png" text="Generate Code" description="Generate Code"/>
 
     <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
       <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
               icon="/actions/refresh.png" text="Refresh" description="Refresh JCG"/>
-      <action id="JCGGenerateAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgGenerateAction"
-              icon="/actions/execute.png" text="Generate" description="Generate JCG"/>
+      <separator/>
+      <reference ref="Generate Code" />
     </group>
 
     <group id="JCG.ProjectOperationMenu" text="JCG Operations" popup="true">
       <action id="Show Architecture" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.ShowArchitectureAction"
             icon="/actions/properties.png" text="Show Architecture"/>
+      <separator/>
+      <reference ref="Generate Code" />
     </group>
 
     <group id="JCG.ModelOperationMenu" text="JCG Operations" popup="true">
       <reference ref="Create Package" />
+      <separator/>
+      <reference ref="Generate Code" />
     </group>
 
     <group id="JCG.PackageOperationMenu" text="JCG Operations" popup="true">
@@ -67,12 +73,15 @@
       <separator/>
       <reference ref="Create Package" />
       <reference ref="Delete Package" />
+      <separator/>
+      <reference ref="Generate Code" />
     </group>
 
     <group id="JCG.EntityOperationMenu" text="JCG Operations" popup="true">
       <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
                icon="/css/property.png" text="Create Property"/>
       <separator/>
+      <reference ref="Generate Code" />
       <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityCreateNodeActionAction"-->
               <!--icon="/actions/new.png" text="Create Entity"/>-->
       <!--<separator/>-->
@@ -83,16 +92,21 @@
               <!--icon="/actions/copy.png" text="Copy Node Path"/>-->
     </group>
 
+    <group id="JCG.PropertiesOperationMenu" text="JCG Operations" popup="true">
+
+    </group>
+
     <group id="JCG.ViewOperationMenu" text="JCG Operations" popup="true">
       <action id="Create New View" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateViewNodeAction"
               icon="/actions/new.png" text="Create View"/>
       <separator/>
+      <reference ref="Generate Code" />
     </group>
 
 
 
     <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
-      <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JCGPropertiesSaveAction"
+      <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgPropertiesSaveAction"
               icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>
     </group>
 

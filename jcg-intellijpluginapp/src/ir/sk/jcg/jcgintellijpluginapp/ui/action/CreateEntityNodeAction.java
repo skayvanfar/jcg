@@ -12,6 +12,7 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 import javax.xml.bind.JAXBException;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/28/2016
@@ -21,7 +22,6 @@ public class CreateEntityNodeAction extends CreateNodeAction {
     public CreateEntityNodeAction() {
         super("Entity");
     }
-
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -43,11 +43,6 @@ public class CreateEntityNodeAction extends CreateNodeAction {
 
                     // add to project
                     entityPackage.addElement(entity);
-
-                    Object[] pathArray = jcgProjectComponent.getSelectionPath().getPath();
-
-                    String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length );
-                    codeGenerator.addEntity(entity, Utils.covertStringArrayToString(packagePathArray, '.'));
 
                     try {
                         codeGenerator.marshalling(); // TODO: 5/3/2016

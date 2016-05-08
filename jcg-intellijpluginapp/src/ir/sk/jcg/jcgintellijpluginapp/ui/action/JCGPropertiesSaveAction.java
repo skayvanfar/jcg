@@ -10,9 +10,9 @@ import javax.xml.bind.JAXBException;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/6/2016
  */
-public class JCGPropertiesSaveAction extends NodeAction {
+public class JcgPropertiesSaveAction extends NodeAction {
 
-    private static final Logger logger = LoggerFactory.getLogger(JCGPropertiesSaveAction.class);
+    private static final Logger logger = LoggerFactory.getLogger(JcgPropertiesSaveAction.class);
 
     @Override
     public void actionPerformed(AnActionEvent e) {

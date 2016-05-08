@@ -57,6 +57,8 @@ public class TreePanel extends SimpleToolWindowPanel {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof Entity) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.EntityOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof Property) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.PropertiesOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof View) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.ViewOperationMenu", ActionPlaces.UNKNOWN);
                 }

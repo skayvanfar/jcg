@@ -20,7 +20,7 @@ public class CreateNewNodePanel extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        nodeNameLabel = new JLabel("Enter New " + nodeNameLabel + " Name:");
+        nodeNameLabel = new JLabel("Enter New " + nodeType + " Name:");
         nodeNameTextField = new JTextField();
 
         add(nodeNameLabel);
