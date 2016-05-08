@@ -10,7 +10,7 @@ import java.io.File;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public interface Generator {
+public interface CodeGenerator {
 
     String JCG_CONFIG_DIR = "jcg";
     String JCG_CONFIG_PROJECT_FILE_NAME = "project.xml";

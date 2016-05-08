@@ -1,25 +1,21 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
-import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import java.io.File;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-@XmlSeeAlso({Hibernate.class})
-public abstract class ORMTechnology extends Technology {
+@XmlSeeAlso({HibernateHandler.class})
+public abstract class ORMTechnologyHandler extends TechnologyHandler {
 
     public abstract void createEntity(Entity entity, String packagePath);
 
     public abstract void createDao(Entity entity);
 
-    public enum ORMTechnologyType implements EnumBase, TechnologyEnumBase {
+    public enum ORMTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
         HIBERNATE(0, "Hibernate"),
         IBATIS(1, "IBatis");
@@ -27,7 +23,7 @@ public abstract class ORMTechnology extends Technology {
         private Integer value;
         private String desc;
 
-        ORMTechnologyType(Integer value, String desc) {
+        ORMTechnologyHandlerType(Integer value, String desc) {
             this.value = value;
             this.desc = desc;
         }
@@ -44,11 +40,11 @@ public abstract class ORMTechnology extends Technology {
 
 
 
-//        public ORMTechnology architectureBuilder(File baseDir) {
-//            ORMTechnology oRMTechnology = null;
+//        public ORMTechnologyHandler architectureBuilder(File baseDir) {
+//            ORMTechnologyHandler oRMTechnology = null;
 //            switch (value) {
 //                case 0:
-//                    oRMTechnology = new Hibernate("", baseDir, null); // Todo: must redefine
+//                    oRMTechnology = new HibernateHandler("", baseDir, null); // Todo: must redefine
 //                    break;
 //                case 1:
 //                    //     architecture = new ThreeLayerArchitecture(); // Todo: must create
@@ -57,8 +53,8 @@ public abstract class ORMTechnology extends Technology {
 //            return oRMTechnology;
 //        }
 
-        public static ORMTechnologyType valueOf(Integer type) {
-            for (ORMTechnologyType code : ORMTechnologyType.values()) {
+        public static ORMTechnologyHandlerType valueOf(Integer type) {
+            for (ORMTechnologyHandlerType code : ORMTechnologyHandlerType.values()) {
                 if (type == code.getValue()) {
                     return code;
                 }
@@ -66,8 +62,8 @@ public abstract class ORMTechnology extends Technology {
             return null;
         }
 
-        public static ORMTechnologyType valueOfs(String type) {
-            for (ORMTechnologyType code : ORMTechnologyType.values()) {
+        public static ORMTechnologyHandlerType valueOfs(String type) {
+            for (ORMTechnologyHandlerType code : ORMTechnologyHandlerType.values()) {
                 if (type == code.getDescription()) {
                     return code;
                 }
@@ -76,14 +72,14 @@ public abstract class ORMTechnology extends Technology {
         }
 
         @Override
-        public Technology technologyBuilder() {
-            ORMTechnology ormTechnology = null;
+        public TechnologyHandler technologyHandlerBuilder() {
+            ORMTechnologyHandler ormTechnology = null;
             switch (value) {
                 case 0:
-                    ormTechnology = new Hibernate(); // Todo: must redefine
+                    ormTechnology = new HibernateHandler(); // Todo: must redefine
                     break;
                 case 1:
-              //      ormTechnology = new Maven(, null, null); // Todo: must create
+              //      ormTechnology = new MavenHandler(, null, null); // Todo: must create
                     break;
             }
             return ormTechnology;
@@ -95,7 +91,7 @@ public abstract class ORMTechnology extends Technology {
         }
     }
 
-    public ORMTechnology() {
+    public ORMTechnologyHandler() {
     }
 
     @Override

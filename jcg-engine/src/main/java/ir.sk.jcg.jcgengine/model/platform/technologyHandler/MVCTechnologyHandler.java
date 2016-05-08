@@ -1,19 +1,16 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
-import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
-import java.io.File;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-@XmlSeeAlso({SpringMVC.class})
-public abstract class MVCTechnology extends Technology {
+@XmlSeeAlso({SpringMVCHandler.class})
+public abstract class MVCTechnologyHandler extends TechnologyHandler {
 
-    public static enum MVCTechnologyType implements EnumBase, TechnologyEnumBase {
+    public static enum MVCTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
         SPRING_MVC(0, "Spring MVC"),
         STRUTS(1, "Struts");
@@ -21,7 +18,7 @@ public abstract class MVCTechnology extends Technology {
         private Integer value;
         private String desc;
 
-        private MVCTechnologyType(Integer value, String desc) {
+        private MVCTechnologyHandlerType(Integer value, String desc) {
             this.value = value;
             this.desc = desc;
         }
@@ -36,8 +33,8 @@ public abstract class MVCTechnology extends Technology {
             return desc;
         }
 
-        public static MVCTechnologyType valueOf(Integer type) {
-            for (MVCTechnologyType code : MVCTechnologyType.values()) {
+        public static MVCTechnologyHandlerType valueOf(Integer type) {
+            for (MVCTechnologyHandlerType code : MVCTechnologyHandlerType.values()) {
                 if (type == code.getValue()) {
                     return code;
                 }
@@ -45,8 +42,8 @@ public abstract class MVCTechnology extends Technology {
             return null;
         }
 
-        public static ORMTechnology.ORMTechnologyType valueOfs(String type) {
-            for (ORMTechnology.ORMTechnologyType code : ORMTechnology.ORMTechnologyType.values()) {
+        public static MVCTechnologyHandlerType valueOfs(String type) {
+            for (MVCTechnologyHandlerType code : MVCTechnologyHandlerType.values()) {
                 if (type == code.getDescription()) {
                     return code;
                 }
@@ -55,11 +52,11 @@ public abstract class MVCTechnology extends Technology {
         }
 
         @Override
-        public Technology technologyBuilder() {
-            MVCTechnology mvcTechnology = null;
+        public TechnologyHandler technologyHandlerBuilder() {
+            MVCTechnologyHandler mvcTechnology = null;
             switch (value) {
                 case 0:
-                    mvcTechnology = new SpringMVC(); // Todo: must redefine.
+                    mvcTechnology = new SpringMVCHandler(); // Todo: must redefine.
                     break;
                 case 1:
                     // todo: must complete.
@@ -74,7 +71,7 @@ public abstract class MVCTechnology extends Technology {
         }
     }
 
-    public MVCTechnology() {
+    public MVCTechnologyHandler() {
     }
 
     @Override

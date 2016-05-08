@@ -61,7 +61,7 @@ public class CreatePackageNodeAction extends NodeAction {
                             packageable.addPackage(elementPackage);
                         }
 
-                        jcgProjectComponent.getGenerator().marshalling();
+                        jcgProjectComponent.getCodeGenerator().marshalling();
                         jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016  

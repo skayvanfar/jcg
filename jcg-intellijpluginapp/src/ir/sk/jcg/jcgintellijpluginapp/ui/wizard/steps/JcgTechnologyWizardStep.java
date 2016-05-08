@@ -7,10 +7,10 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.progress.ProgressManager;
-import ir.sk.jcg.jcgengine.Generator;
+import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
-import ir.sk.jcg.jcgengine.model.platform.technology.Technology;
-import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyEnumBase;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandlerEnumBase;
 import ir.sk.jcg.jcgengine.model.project.Project;
 import ir.sk.jcg.jcgintellijpluginapp.ui.util.execution.ModalTaskImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgAPIManagerCallback;
@@ -49,14 +49,14 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
     @Override
     public void onWizardFinished() throws CommitStepException {
 
-        Generator generator = jcgModuleBuilder.getGenerator();
+        CodeGenerator codeGenerator = jcgModuleBuilder.getCodeGenerator();
         // test if project not jcgProject
-        if (generator != null) {
+        if (codeGenerator != null) {
 
-            Project jcgProject = generator.getJcgProject();
-            generator.setBaseDir(jcgModuleBuilder.getContentEntryPath());
+            Project jcgProject = codeGenerator.getJcgProject();
+            codeGenerator.setBaseDir(jcgModuleBuilder.getContentEntryPath());
 
-            generator.getArchitecture().initialize(generator.getBaseDir(), jcgProject.getPackagePrefix()); // TODO: 4/27/2016 may beter go to JcgModuleBuilderHelper.configure()
+            codeGenerator.getArchitecture().initialize(codeGenerator.getBaseDir(), jcgProject.getPackagePrefix()); // TODO: 4/27/2016 may beter go to JcgModuleBuilderHelper.configure()
 
             JcgAPIManagerCallback jcgAPIManagerCallback = new JcgAPIManagerCallback();
 
@@ -118,7 +118,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
      * */
     @Override
     public void updateStep() {
-        Architecture architecture = jcgModuleBuilder.getGenerator().getArchitecture();
+        Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
         jcgTechnologyWizardStepPanel.initComponents(architecture.getTechnologyTypes());
 
         updateComponents();
@@ -135,12 +135,12 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
     @Override
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);
-        List<Technology> technologies = new ArrayList<>();
-        Architecture architecture = jcgModuleBuilder.getGenerator().getArchitecture();
+        List<TechnologyHandler> technologies = new ArrayList<>();
+        Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
 
         for (JComboBox comboBox : getComponent().getComboBoxList()) {
-            Technology technology = ((TechnologyEnumBase) comboBox.getSelectedItem()).technologyBuilder();
-            technologies.add(technology);
+            TechnologyHandler technologyHandler = ((TechnologyHandlerEnumBase) comboBox.getSelectedItem()).technologyHandlerBuilder();
+            technologies.add(technologyHandler);
         }
 
         architecture.setTechnologies(technologies);

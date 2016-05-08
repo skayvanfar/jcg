@@ -1,13 +1,9 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
-import ir.sk.jcg.jcgengine.model.platform.Dependency;
-import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.*;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.bind.annotation.*;
-import java.io.File;
-import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -15,7 +11,7 @@ import java.util.*;
 @XmlRootElement // TODO: 4/27/2016 must remove from this class
 public class ThreeLayerArchitecture extends Architecture {
 
-    private static TechnologyType[] technologyTypes = {TechnologyType.BUILD_TECHNOLOGY, TechnologyType.ORM_TECHNOLOGY, TechnologyType.MVC_TECHNOLOGY};
+    private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
     private String baseDir; // TODO: 5/3/2016 may beeter use Project
     private String basePackageName;
@@ -23,9 +19,9 @@ public class ThreeLayerArchitecture extends Architecture {
     @Override
     public void setBaseDirOfTechnologies(String baseDir) {
         this.baseDir = baseDir;
-        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY); // TODO: 5/3/2016 repeated code (in setBasePackageNameOfTechnologies) 
-        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
-        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY); // TODO: 5/3/2016 repeated code (in setBasePackageNameOfTechnologies)
+        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         buildTechnology.setBaseDir(baseDir);
         ormTechnology.setBaseDir(baseDir + buildTechnology.getMainJavaDir());
@@ -35,17 +31,17 @@ public class ThreeLayerArchitecture extends Architecture {
     @Override
     protected void setBasePackageNameOfTechnologies(String basePackageName) {
         this.basePackageName = basePackageName;
-        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
-        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
-        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
         buildTechnology.setBasePackageName(basePackageName);
         ormTechnology.setBasePackageName(basePackageName);
         mvcTechnology.setBasePackageName(basePackageName);
     }
 
     @Override
-    public TechnologyType[] getTechnologyTypes() {
-        return technologyTypes;
+    public TechnologyHandlerType[] getTechnologyTypes() {
+        return technologyHandlerTypes;
     }
 
     @Override
@@ -54,9 +50,9 @@ public class ThreeLayerArchitecture extends Architecture {
 
     @Override
     public void createBaseArchitecture() {
-        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
-        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
-        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         buildTechnology.addDependencies(ormTechnology.getDependencies()); // todo may not be here
         buildTechnology.addDependencies(mvcTechnology.getDependencies()); // todo may not be here
@@ -71,22 +67,22 @@ public class ThreeLayerArchitecture extends Architecture {
 
     @Override
     public void createEntity(Entity entity, String packagePath) {
-        BuildTechnology buildTechnology = (BuildTechnology) getTechnologyByType(TechnologyType.BUILD_TECHNOLOGY);
-        ORMTechnology ormTechnology = (ORMTechnology) getTechnologyByType(TechnologyType.ORM_TECHNOLOGY);
-        MVCTechnology mvcTechnology = (MVCTechnology) getTechnologyByType(TechnologyType.MVC_TECHNOLOGY);
+        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         ormTechnology.createEntity(entity, packagePath);
         ormTechnology.createDao(entity);
     }
 
-    private Technology  getTechnologyByType(TechnologyType technologyType) { // TODO: 4/28/2016 must change
-        for (Technology technology : technologies) {
-            if (technologyType.getValue() == 0 && technology instanceof BuildTechnology)
-                return technology;
-            else if (technologyType.getValue() == 1 && technology instanceof ORMTechnology)
-                return technology;
-            else if (technologyType.getValue() == 2 && technology instanceof MVCTechnology)
-                return technology;
+    private TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change
+        for (TechnologyHandler technologyHandler : technologies) {
+            if (technologyHandlerType.getValue() == 0 && technologyHandler instanceof BuildTechnologyHandler)
+                return technologyHandler;
+            else if (technologyHandlerType.getValue() == 1 && technologyHandler instanceof ORMTechnologyHandler)
+                return technologyHandler;
+            else if (technologyHandlerType.getValue() == 2 && technologyHandler instanceof MVCTechnologyHandler)
+                return technologyHandler;
         }
         return null;
     }

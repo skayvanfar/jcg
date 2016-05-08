@@ -1,20 +1,12 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
-import ir.sk.jcg.jcgengine.model.platform.technology.Technology;
-import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyType;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Project;
-import org.apache.commons.collections.map.HashedMap;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -47,11 +39,11 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
 //
 //    public void setProject(Project project) {
 //        this.project = project;
-//        for (Technology technology : getTechnologies())
-//            technology.setProject(project);
+//        for (TechnologyHandler technologyHandler : getTechnologies())
+//            technologyHandler.setProject(project);
 //    }
 
-    List<Technology> technologies = new ArrayList<>();
+    List<TechnologyHandler> technologies = new ArrayList<>();
 
 
     protected abstract void setBaseDirOfTechnologies(String baseDir);
@@ -66,14 +58,14 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
 //        this.basePackageName = basePackageName;
 //    }
 
-    public abstract TechnologyType[] getTechnologyTypes();
+    public abstract TechnologyHandlerType[] getTechnologyTypes();
 
-    public List<Technology> getTechnologies() {
+    public List<TechnologyHandler> getTechnologies() {
         return technologies;
     }
 
-    @XmlElement(name = "technology")
-    public void setTechnologies(List<Technology> technologies) {
+    @XmlElement(name = "technologyHandler")
+    public void setTechnologies(List<TechnologyHandler> technologies) {
         this.technologies = technologies;
     }
 

@@ -18,8 +18,7 @@ import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import ir.sk.jcg.jcgengine.Generator;
-import ir.sk.jcg.jcgengine.JavaGenerator;
+import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgBaseInfoWizardStep;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgIntroWizardStep;
@@ -39,9 +38,9 @@ public class JcgModuleBuilder extends ModuleBuilder {
 
     private Project intellijProject;
 
-  //  private Generator generator = new JavaGenerator(); // TODO: 4/26/2016 must go to constructor may be
+  //  private CodeGenerator codeGenerator = new JavaCodeGenerator(); // TODO: 4/26/2016 must go to constructor may be
 
-    private Generator generator;
+    private CodeGenerator codeGenerator;
 
     public Project getIntellijProject() {
         return intellijProject;
@@ -51,12 +50,12 @@ public class JcgModuleBuilder extends ModuleBuilder {
         this.intellijProject = intellijProject;
     }
 
-    public Generator getGenerator() {
-        return generator;
+    public CodeGenerator getCodeGenerator() {
+        return codeGenerator;
     }
 
-    public void setGenerator(Generator generator) {
-        this.generator = generator;
+    public void setCodeGenerator(CodeGenerator codeGenerator) {
+        this.codeGenerator = codeGenerator;
     }
 
     @Override
@@ -100,13 +99,13 @@ public class JcgModuleBuilder extends ModuleBuilder {
         modifiableRootModel.inheritSdk();
 
 
-        JcgModuleBuilderHelper jcgModuleBuilderHelper = new JcgModuleBuilderHelper(generator, "Create new Jcg module", project, root);
+        JcgModuleBuilderHelper jcgModuleBuilderHelper = new JcgModuleBuilderHelper(codeGenerator, "Create new Jcg module", project, root);
         jcgModuleBuilderHelper.configure();
 
 //        RunnableHelper.runWhenInitialized(intellijProject, new Runnable() {
 //            public void run() {
 //
-//                JcgModuleBuilderHelper jcgModuleBuilderHelper = new JcgModuleBuilderHelper(generator, "Create new Jcg module", project, root);
+//                JcgModuleBuilderHelper jcgModuleBuilderHelper = new JcgModuleBuilderHelper(codeGenerator, "Create new Jcg module", project, root);
 //                jcgModuleBuilderHelper.configure();
 //
 //            }

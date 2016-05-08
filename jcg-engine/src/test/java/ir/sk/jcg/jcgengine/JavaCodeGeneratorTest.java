@@ -2,10 +2,6 @@ package ir.sk.jcg.jcgengine;
 
 
 import ir.sk.jcg.jcgcommon.util.XMLParser;
-import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
-import ir.sk.jcg.jcgengine.model.platform.architecture.ThreeLayerArchitecture;
-import ir.sk.jcg.jcgengine.model.platform.technology.*;
-import ir.sk.jcg.jcgengine.model.platform.technology.Maven.Maven;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Model;
 import ir.sk.jcg.jcgengine.model.project.Package;
@@ -22,7 +18,7 @@ import java.util.List;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/21/2016
  */
-public class JavaGeneratorTest {
+public class JavaCodeGeneratorTest {
     @Test
     public void marshallingProject() throws Exception {
         Project project = new Project();
@@ -57,7 +53,7 @@ public class JavaGeneratorTest {
 
     @Test
     public void marshallingArchitecture() throws Exception {
-      //  generator.marshallingArchitecture();
+      //  codeGenerator.marshallingArchitecture();
     }
 
     @Test
@@ -85,7 +81,7 @@ public class JavaGeneratorTest {
 
     }
 
-    private Generator generator;
+    private CodeGenerator codeGenerator;
 
     @Before
     public void setUp() throws Exception {
@@ -94,16 +90,16 @@ public class JavaGeneratorTest {
 //        proejct.setPackagePrefix("ir.sk");
 //        proejct.setPersianName("پروژ]");
 //
-//        generator = new JavaGenerator();
+//        codeGenerator = new JavaCodeGenerator();
 //
 //        Architecture architecture = new ThreeLayerArchitecture();
-//        BuildTechnology buildTechnology = new Maven();
-//        MVCTechnology mvcTechnology = new SpringMVC();
+//        BuildTechnologyHandler buildTechnology = new MavenHandler();
+//        MVCTechnologyHandler mvcTechnology = new SpringMVCHandler();
 //
 //
-//        Technology technology = new Hibernate();
-//        List<Technology> technologies = new ArrayList<>();
-//        technologies.add(technology);
+//        TechnologyHandler technologyHandler = new HibernateHandler();
+//        List<TechnologyHandler> technologies = new ArrayList<>();
+//        technologies.add(technologyHandler);
 //        technologies.add(buildTechnology);
 //        technologies.add(mvcTechnology);
 //        architecture.setTechnologies(technologies);
@@ -111,7 +107,7 @@ public class JavaGeneratorTest {
 //        architecture.setBasePackageName("ir.sk");
 //        architecture.setBaseDir(new File("E:/"));
 //
-//        generator.setArchitecture(architecture);
+//        codeGenerator.setArchitecture(architecture);
     }
 
     @After
@@ -126,7 +122,7 @@ public class JavaGeneratorTest {
 
     @Test
     public void addEntity() throws Exception {
-   //     generator.addEntity(null);
+   //     codeGenerator.addEntity(null);
     }
 
 }

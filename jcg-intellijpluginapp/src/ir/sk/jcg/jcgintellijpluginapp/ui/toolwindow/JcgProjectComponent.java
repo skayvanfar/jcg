@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.DoubleClickListener;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
-import ir.sk.jcg.jcgengine.Generator;
-import ir.sk.jcg.jcgengine.JavaGenerator;
+import ir.sk.jcg.jcgengine.CodeGenerator;
+import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
@@ -28,17 +28,17 @@ import java.io.File;
  */
 public class JcgProjectComponent extends DoubleClickListener implements ProjectComponent {
 
-    private static final Logger logger = LoggerFactory.getLogger(JavaGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(JavaCodeGenerator.class);
 
     private Project intellijProject;
-    private Generator generator;
+    private CodeGenerator codeGenerator;
     private TreePanel treePanel;
     private ToolWindow jcgTreeToolWindow;
     private PropertiesPanel propertiesPanel;
     private ToolWindow jcgPropertiesToolWindow;
 
-    public Generator getGenerator() {
-        return generator;
+    public CodeGenerator getCodeGenerator() {
+        return codeGenerator;
     }
 
     public JcgProjectComponent(Project intellijProject) {
@@ -76,11 +76,11 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
      * initGenerator
      * */
     private void initGenerator() throws JAXBException {
-        generator = new JavaGenerator();
-        generator.setBaseDir(intellijProject.getBasePath());
+        codeGenerator = new JavaCodeGenerator();
+        codeGenerator.setBaseDir(intellijProject.getBasePath());
 
      //   if(isCorrectJcgProject()) { // When project is Jcg project
-            boolean result = generator.unmarshalling();
+            boolean result = codeGenerator.unmarshalling();
             if (result) {
                 logger.info("Unmarshaling finished correctly.");// TODO: 4/28/2016
             }
@@ -109,7 +109,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     private void addContentToJcgTreeToolWindow() {
         final ContentManager contentManager = jcgTreeToolWindow.getContentManager();
-        treePanel = new TreePanel(generator.getJcgProject());
+        treePanel = new TreePanel(codeGenerator.getJcgProject());
         treePanel.setTreeSelectionChangedListener(userObject -> {
             propertiesPanel.setElement((Element) userObject);
             if (!jcgPropertiesToolWindow.isVisible())
@@ -125,7 +125,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     private void addContentToJcgPropertiesTollWindow() {
         final ContentManager contentManager = jcgPropertiesToolWindow.getContentManager();
-     //   propertiesPanel = new PropertiesPanel(generator.getJcgProject());
+     //   propertiesPanel = new PropertiesPanel(codeGenerator.getJcgProject());
         propertiesPanel = new PropertiesPanel();
         final Content content = contentManager.getFactory().createContent(propertiesPanel, null, false);
         contentManager.removeAllContents(true);
@@ -139,7 +139,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
      * check to see jcg project is exist and valid
      * */
     private boolean isCorrectJcgProject() { // TODO: 5/6/2016 must check existence and correction of project and architectur xml files
-        File baseXmlDir = new File(intellijProject.getBasePath() + File.separator + Generator.JCG_CONFIG_DIR);
+        File baseXmlDir = new File(intellijProject.getBasePath() + File.separator + CodeGenerator.JCG_CONFIG_DIR);
         return (baseXmlDir.exists()) ? true : false;
     }
 

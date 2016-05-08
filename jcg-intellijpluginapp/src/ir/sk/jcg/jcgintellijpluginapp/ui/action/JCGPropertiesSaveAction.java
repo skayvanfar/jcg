@@ -1,9 +1,6 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import ir.sk.jcg.jcgengine.JavaGenerator;
-import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +20,7 @@ public class JCGPropertiesSaveAction extends NodeAction {
         jcgProjectComponent.setPropertiesModifiedElement();
 
         try {
-            jcgProjectComponent.getGenerator().marshallingProject();
+            jcgProjectComponent.getCodeGenerator().marshallingProject();
         } catch (JAXBException e1) {
             e1.printStackTrace();
             logger.error("buildTemplate error in template : " + e);

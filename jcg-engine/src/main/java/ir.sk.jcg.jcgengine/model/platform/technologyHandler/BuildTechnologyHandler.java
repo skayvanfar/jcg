@@ -1,22 +1,21 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
-import ir.sk.jcg.jcgengine.model.platform.technology.Maven.Maven;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.Maven.MavenHandler;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import java.io.File;
 import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-@XmlSeeAlso({Maven.class})
-public abstract class BuildTechnology extends Technology {
+@XmlSeeAlso({MavenHandler.class})
+public abstract class BuildTechnologyHandler extends TechnologyHandler {
 
-    public enum BuildTechnologyType implements EnumBase, TechnologyEnumBase {
+    public enum BuildTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
         ANT(0, "ANT"),
         MAVEN(1, "Maven"),
@@ -25,7 +24,7 @@ public abstract class BuildTechnology extends Technology {
         private Integer value;
         private String desc;
 
-        BuildTechnologyType(Integer value, String desc) {
+        BuildTechnologyHandlerType(Integer value, String desc) {
             this.value = value;
             this.desc = desc;
         }
@@ -40,8 +39,8 @@ public abstract class BuildTechnology extends Technology {
             return desc;
         }
 
-        public static BuildTechnologyType valueOf(Integer type) {
-            for (BuildTechnologyType code : BuildTechnologyType.values()) {
+        public static BuildTechnologyHandlerType valueOf(Integer type) {
+            for (BuildTechnologyHandlerType code : BuildTechnologyHandlerType.values()) {
                 if (type == code.getValue()) {
                     return code;
                 }
@@ -49,8 +48,8 @@ public abstract class BuildTechnology extends Technology {
             return null;
         }
 
-        public static ORMTechnology.ORMTechnologyType valueOfs(String type) {
-            for (ORMTechnology.ORMTechnologyType code : ORMTechnology.ORMTechnologyType.values()) {
+        public static BuildTechnologyHandlerType valueOfs(String type) {
+            for (BuildTechnologyHandlerType code : BuildTechnologyHandlerType.values()) {
                 if (type == code.getDescription()) {
                     return code;
                 }
@@ -59,14 +58,14 @@ public abstract class BuildTechnology extends Technology {
         }
 
         @Override
-        public Technology technologyBuilder() {
-            BuildTechnology buildTechnology = null;
+        public TechnologyHandler technologyHandlerBuilder() {
+            BuildTechnologyHandler buildTechnology = null;
             switch (value) {
                 case 0:
                     //    buildTechnology = new Ant("", baseDir, null); // Todo: must redefine
                     break;
                 case 1:
-                    buildTechnology = new Maven(); // Todo: must create
+                    buildTechnology = new MavenHandler(); // Todo: must create
                     break;
                 case 2:
                     //     architecture = new ThreeLayerArchitecture(); // Todo: must create
@@ -87,7 +86,7 @@ public abstract class BuildTechnology extends Technology {
     protected String testJavaDir;
     protected String testResourcesDir;
 
-    public BuildTechnology() {
+    public BuildTechnologyHandler() {
     }
 
     @Override

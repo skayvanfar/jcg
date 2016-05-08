@@ -1,23 +1,20 @@
-package ir.sk.jcg.jcgengine.model.platform.technology.Maven;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler.Maven;
 
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
-import ir.sk.jcg.jcgengine.model.platform.Dependency;
-import ir.sk.jcg.jcgengine.model.platform.technology.BuildTechnology;
 import org.apache.velocity.VelocityContext;
 //import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public class Maven extends BuildTechnology {
+public class MavenHandler extends BuildTechnologyHandler {
 
     private MavenId mavenId;
 
-    public Maven() {
+    public MavenHandler() {
         mainJavaDir = "/src/main/java";
         mainResourcesDir = "/src/main/resources";
         mainWebDir = "/src/main/web";

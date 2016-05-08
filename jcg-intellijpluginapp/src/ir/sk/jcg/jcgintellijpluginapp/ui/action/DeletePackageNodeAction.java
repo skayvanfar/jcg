@@ -3,7 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.Generator;
+import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.ModelElement;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Packageable;
@@ -33,7 +33,7 @@ public class DeletePackageNodeAction extends NodeAction {
 
                 TreePath treePath = jcgProjectComponent.getSelectionPath();
 
-                Generator generator = jcgProjectComponent.getGenerator();
+                CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();
 
 
 
@@ -47,7 +47,7 @@ public class DeletePackageNodeAction extends NodeAction {
                     try {
                         parentPackageable.removePackage(currentPackage);
 
-                        jcgProjectComponent.getGenerator().marshalling();
+                        jcgProjectComponent.getCodeGenerator().marshalling();
                         jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016

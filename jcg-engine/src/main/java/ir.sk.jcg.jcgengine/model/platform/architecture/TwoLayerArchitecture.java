@@ -1,37 +1,32 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
-import ir.sk.jcg.jcgengine.model.platform.technology.BuildTechnology;
-import ir.sk.jcg.jcgengine.model.platform.technology.ORMTechnology;
-import ir.sk.jcg.jcgengine.model.platform.technology.Technology;
-import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyType;
-
-import java.io.File;
-import java.util.List;
-import java.util.Set;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.*;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technologyHandler.ORMTechnologyHandler;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016
  */
 public abstract class TwoLayerArchitecture extends Architecture {
 
-    private static TechnologyType[] technologyTypes = {TechnologyType.ORM_TECHNOLOGY, TechnologyType.BUILD_TECHNOLOGY};
+    private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.BUILD_TECHNOLOGY};
 
-    private BuildTechnology buildTechnology;
-    private ORMTechnology ormTechnology;
+    private BuildTechnologyHandler buildTechnology;
+    private ORMTechnologyHandler ormTechnology;
 
-    public BuildTechnology getBuildTechnology() {
+    public BuildTechnologyHandler getBuildTechnology() {
         return buildTechnology;
     }
 
-    public void setBuildTechnology(BuildTechnology buildTechnology) {
+    public void setBuildTechnology(BuildTechnologyHandler buildTechnology) {
         this.buildTechnology = buildTechnology;
     }
 
-    public ORMTechnology getOrmTechnology() {
+    public ORMTechnologyHandler getOrmTechnology() {
         return ormTechnology;
     }
 
-    public void setOrmTechnology(ORMTechnology ormTechnology) {
+    public void setOrmTechnology(ORMTechnologyHandler ormTechnology) {
         this.ormTechnology = ormTechnology;
     }
 
@@ -47,22 +42,22 @@ public abstract class TwoLayerArchitecture extends Architecture {
 //    }
 
     @Override
-    public TechnologyType[] getTechnologyTypes() {
-        return technologyTypes;
+    public TechnologyHandlerType[] getTechnologyTypes() {
+        return technologyHandlerTypes;
     }
 
 //    @Override
-//    public void setTechnologies(List<Technology> technologies) {
-//        for (Technology technology : technologies) {
-//            if (technology instanceof BuildTechnology)
-//                buildTechnology = (BuildTechnology) technology;
-//            else if (technology instanceof ORMTechnology)
-//                ormTechnology = (ORMTechnology) technology;
+//    public void setTechnologies(List<TechnologyHandler> technologies) {
+//        for (TechnologyHandler technologyHandler : technologies) {
+//            if (technologyHandler instanceof BuildTechnologyHandler)
+//                buildTechnology = (BuildTechnologyHandler) technologyHandler;
+//            else if (technologyHandler instanceof ORMTechnologyHandler)
+//                ormTechnology = (ORMTechnologyHandler) technologyHandler;
 //        }
 //    }
 //
 //    @Override
-//    public List<Technology> getTechnologies() {
+//    public List<TechnologyHandler> getTechnologies() {
 //        return null;
 //    }
 

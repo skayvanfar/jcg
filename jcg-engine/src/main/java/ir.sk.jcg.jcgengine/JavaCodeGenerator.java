@@ -7,19 +7,15 @@ import ir.sk.jcg.jcgengine.model.project.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public class JavaGenerator implements Generator {
+public class JavaCodeGenerator implements CodeGenerator {
 
-    private static final Logger logger = LoggerFactory.getLogger(JavaGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(JavaCodeGenerator.class);
 
  //   private JAXBContext jaxbContext; // TODO: 5/5/2016 add marshaler hear 
  //   private Marshaller marshaller;
@@ -56,7 +52,7 @@ public class JavaGenerator implements Generator {
 
     }
 
-    public JavaGenerator() {
+    public JavaCodeGenerator() {
         this.jcgProject = new Project();
     }
 

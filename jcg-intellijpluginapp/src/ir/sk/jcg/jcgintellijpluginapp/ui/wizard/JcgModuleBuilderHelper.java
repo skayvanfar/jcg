@@ -1,7 +1,7 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.wizard;
 
 import com.intellij.openapi.vfs.VirtualFile;
-import ir.sk.jcg.jcgengine.Generator;
+import ir.sk.jcg.jcgengine.CodeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +17,14 @@ public class JcgModuleBuilderHelper {
     private static final Logger logger = LoggerFactory.getLogger(JcgModuleBuilderHelper.class);
 
    // private final Project jcgProject;
-    private final Generator generator;
+    private final CodeGenerator codeGenerator;
 
     private final String commandName;
     private com.intellij.openapi.project.Project intellijProject;
     private VirtualFile root;
 
-    public JcgModuleBuilderHelper(@NotNull Generator generator, String commaneName, com.intellij.openapi.project.Project intellijProject, VirtualFile root) {
-        this.generator = generator;
+    public JcgModuleBuilderHelper(@NotNull CodeGenerator codeGenerator, String commaneName, com.intellij.openapi.project.Project intellijProject, VirtualFile root) {
+        this.codeGenerator = codeGenerator;
         this.intellijProject = intellijProject;
         this.root = root;
         this.commandName = commaneName;
@@ -34,10 +34,10 @@ public class JcgModuleBuilderHelper {
      * Call Engine to make base Architecture
      * */
     public void configure() {
-        generator.getArchitecture().createBaseArchitecture();
+        codeGenerator.getArchitecture().createBaseArchitecture();
 
         try {
-            boolean result = generator.marshalling();
+            boolean result = codeGenerator.marshalling();
             if (result)
                 logger.info("Marshaling finished correctly.");
         } catch (JAXBException e) {

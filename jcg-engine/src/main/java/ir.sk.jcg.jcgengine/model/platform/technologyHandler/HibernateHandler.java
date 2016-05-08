@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
 
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
@@ -6,15 +6,12 @@ import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
 import org.apache.velocity.VelocityContext;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public class Hibernate extends ORMTechnology {
+public class HibernateHandler extends ORMTechnologyHandler {
 
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
@@ -36,7 +33,7 @@ public class Hibernate extends ORMTechnology {
 
     }
 
-    public Hibernate() {
+    public HibernateHandler() {
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-c3p0", HIBERNATE_VERSION, "compile"));

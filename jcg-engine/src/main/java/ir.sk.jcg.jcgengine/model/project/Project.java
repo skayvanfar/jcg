@@ -30,8 +30,8 @@ public class Project extends Element implements Serializable {
 
     public Project() {
         super();
-        entitiesModel.setName("Entity Model");
-        viewsModel.setName("View Model");
+        entitiesModel.setName("Domain Model");
+        viewsModel.setName("Business Model");
     }
 
     /**

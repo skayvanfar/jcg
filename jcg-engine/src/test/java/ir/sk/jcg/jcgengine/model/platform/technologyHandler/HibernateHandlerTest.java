@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
 
 import org.junit.After;
 import org.junit.Before;
@@ -7,13 +7,13 @@ import org.junit.Test;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public class HibernateTest {
+public class HibernateHandlerTest {
 
-    Hibernate hibernate = null;
+    HibernateHandler hibernateHandler = null;
 
     @Before
     public void setUp() throws Exception {
-     //   hibernate = new Hibernate("hibernate1", new File("C:/"), null);
+     //   hibernateHandler = new HibernateHandler("hibernate1", new File("C:/"), null);
     }
 
     @After

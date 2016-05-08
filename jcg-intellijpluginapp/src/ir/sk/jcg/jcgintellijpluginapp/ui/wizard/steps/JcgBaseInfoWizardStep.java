@@ -5,9 +5,8 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.text.StringUtil;
-import ir.sk.jcg.jcgengine.Generator;
-import ir.sk.jcg.jcgengine.JavaGenerator;
-import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
+import ir.sk.jcg.jcgengine.CodeGenerator;
+import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.platform.architecture.ArchitectureType;
 import ir.sk.jcg.jcgengine.model.project.Project;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder;
@@ -90,16 +89,16 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);
 
-        Generator generator  = new JavaGenerator();
-        Project jcgProject= generator.getJcgProject();
+        CodeGenerator codeGenerator = new JavaCodeGenerator();
+        Project jcgProject= codeGenerator.getJcgProject();
         jcgProject.setName(getComponent().getProjectNameField().getText());
         jcgProject.setPersianName(getComponent().getProjectPersianNameField().getText());
         jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction 
 
         // build architecture that user selected
         ArchitectureType architectureType = (ArchitectureType) getComponent().getArchitectureComboBox().getSelectedItem();
-        generator.setArchitecture(architectureType.architectureBuilder());
-        jcgModuleBuilder.setGenerator(generator);
+        codeGenerator.setArchitecture(architectureType.architectureBuilder());
+        jcgModuleBuilder.setCodeGenerator(codeGenerator);
     }
 
 }

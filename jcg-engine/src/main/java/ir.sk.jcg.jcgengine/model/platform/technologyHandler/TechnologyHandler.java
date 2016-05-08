@@ -1,14 +1,10 @@
-package ir.sk.jcg.jcgengine.model.platform.technology;
+package ir.sk.jcg.jcgengine.model.platform.technologyHandler;
 
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
-import ir.sk.jcg.jcgengine.model.platform.pattern.Pattern;
-import ir.sk.jcg.jcgengine.model.project.Project;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +12,8 @@ import java.util.List;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlSeeAlso({BuildTechnology.class, ORMTechnology.class, MVCTechnology.class})
-public abstract class Technology {
+@XmlSeeAlso({BuildTechnologyHandler.class, ORMTechnologyHandler.class, MVCTechnologyHandler.class})
+public abstract class TechnologyHandler {
 
     protected String baseDir;
     protected String basePackageName;
@@ -26,7 +22,7 @@ public abstract class Technology {
   //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
  //   protected Project project; // TODO: 4/27/2016 Maye be beter just use base and basePackagePerfix
 
-    public Technology() {
+    public TechnologyHandler() {
     }
 //
 //    public Project getProject() {

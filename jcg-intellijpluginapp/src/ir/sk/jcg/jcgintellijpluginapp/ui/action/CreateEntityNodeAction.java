@@ -4,13 +4,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.treeStructure.Tree;
 import ir.sk.jcg.jcgcommon.util.Utils;
-import ir.sk.jcg.jcgengine.Generator;
+import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
-import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
 
 import javax.swing.*;
 import javax.xml.bind.JAXBException;
@@ -38,7 +36,7 @@ public class CreateEntityNodeAction extends NodeAction {
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
                     Package<Entity> entityPackage = (Package<Entity>) jcgProjectComponent.currentSelectedNodeUserObject();
 
-                    Generator generator = jcgProjectComponent.getGenerator();
+                    CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();
 
                     Entity entity = new Entity(); // TODO: 5/3/2016 create new method
                     entity.setName(entityName);
@@ -49,10 +47,10 @@ public class CreateEntityNodeAction extends NodeAction {
                     Object[] pathArray = jcgProjectComponent.getSelectionPath().getPath();
 
                     String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length );
-                    generator.addEntity(entity, Utils.covertStringArrayToString(packagePathArray, '.'));
+                    codeGenerator.addEntity(entity, Utils.covertStringArrayToString(packagePathArray, '.'));
 
                     try {
-                        generator.marshalling(); // TODO: 5/3/2016
+                        codeGenerator.marshalling(); // TODO: 5/3/2016
                     } catch (JAXBException e) {
                         e.printStackTrace();
                     }
