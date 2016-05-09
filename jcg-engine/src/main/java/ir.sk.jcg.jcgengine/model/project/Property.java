@@ -14,7 +14,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class Property extends Element implements Serializable {
+public class Property extends ModelElement implements Serializable {
 
     @Prop(isRequired = true)
     private String type;

@@ -104,7 +104,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         jcgPropertiesToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
         jcgPropertiesToolWindow.setSplitMode(true, () -> {});
         if (!jcgPropertiesToolWindow.isVisible()) jcgPropertiesToolWindow.show(() -> {});
-        addContentToJcgPropertiesTollWindow();
+        addContentToJcgPropertiesToolWindow();
     }
 
     private void addContentToJcgTreeToolWindow() {
@@ -123,7 +123,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         this.installOn(treePanel); // TODO: 5/4/2016 may cuase error
     }
 
-    private void addContentToJcgPropertiesTollWindow() {
+    private void addContentToJcgPropertiesToolWindow() {
         final ContentManager contentManager = jcgPropertiesToolWindow.getContentManager();
      //   propertiesPanel = new PropertiesPanel(codeGenerator.getJcgProject());
         propertiesPanel = new PropertiesPanel();

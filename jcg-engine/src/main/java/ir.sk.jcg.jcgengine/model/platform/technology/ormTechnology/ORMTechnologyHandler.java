@@ -6,7 +6,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.HibernateHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
@@ -19,7 +19,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
 
     public abstract EntityClass createEntityClass(Entity entity, String packagePath);
 
-    public abstract List<EntityElement> createDao(Entity entity); // TODO: 5/8/2016 List<EntityElement>
+    public abstract List<ModelImplElement> createDao(Entity entity); // TODO: 5/8/2016 List<EntityElement>
 
     public enum ORMTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 

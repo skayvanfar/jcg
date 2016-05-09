@@ -1,7 +1,6 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.text.StringUtil;
 import ir.sk.jcg.jcgengine.model.project.*;
@@ -30,7 +29,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                     packageName = validateAndCorrection(packageName);
 
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
-                    Packageable<ModelElement> packageable  = (Packageable<ModelElement>) jcgProjectComponent.currentSelectedNodeUserObject();
+                    Packageable<SubModelElement> packageable  = (Packageable<SubModelElement>) jcgProjectComponent.currentSelectedNodeUserObject();
                     try {
                         //create recursively support
 //                        String[] parts = packageName.split("."); // TODO: 5/2/2016 for many package create
@@ -38,7 +37,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
 //                            if (aPackage.getName().equals(parts[i]))
 //                                continue;
 //                            else {
-//                                Package<ModelElement> aPackage1 = new Package<ModelElement>();
+//                                Package<SubModelElement> aPackage1 = new Package<SubModelElement>();
 //                                aPackage1.setName(parts[i]);
 //                                
 //                            }
@@ -47,7 +46,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                         // a flag for see current packageable has a package with same name of new package
                         boolean isPackageExist = false;
                         if(packageable.getPackages().size() != 0) {
-                            for (Packageable<ModelElement> elementPackage : packageable.getPackages()) {
+                            for (Packageable<SubModelElement> elementPackage : packageable.getPackages()) {
                                 Element element = (Element) elementPackage;
                                 if (element.getName().equals(packageName)) {
                                     isPackageExist = true;
@@ -56,7 +55,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                             }
                         }
                         if (!isPackageExist) {
-                            Package<ModelElement> elementPackage = new Package<>();
+                            Package<SubModelElement> elementPackage = new Package<>();
                             elementPackage.setName(packageName);
                             packageable.addPackage(elementPackage);
                         }

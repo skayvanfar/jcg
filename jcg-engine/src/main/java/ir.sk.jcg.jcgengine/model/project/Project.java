@@ -13,7 +13,7 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class Project extends Element implements Serializable {
+public class Project extends ModelElement implements Serializable {
 
     // base info
     @Prop

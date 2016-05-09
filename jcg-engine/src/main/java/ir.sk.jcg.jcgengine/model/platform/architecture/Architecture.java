@@ -3,7 +3,7 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -83,5 +83,5 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
         setBasePackageNameOfTechnologies(packagename);
     }
 
-    public abstract List<EntityElement> createEntity(Entity entity, String packagePath);
+    public abstract List<ModelImplElement> createEntity(Entity entity, String packagePath);
 }

@@ -1,11 +1,9 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +13,7 @@ import java.util.List;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/29/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Model<T extends ModelElement> extends Element implements Packageable<T>, Serializable {
+public class Model<T extends SubModelElement> extends ModelElement implements Packageable<T>, Serializable {
 
 
     private List<Package<T>> packages = new ArrayList<>();

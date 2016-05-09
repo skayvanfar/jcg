@@ -2,7 +2,7 @@ package ir.sk.jcg.jcgengine;
 
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.model.project.Project;
 
 import javax.xml.bind.JAXBException;
@@ -48,5 +48,5 @@ public interface CodeGenerator {
     /**
      * Add Entity to project and generate implementation
      * */
-    List<EntityElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
+    List<ModelImplElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
 }

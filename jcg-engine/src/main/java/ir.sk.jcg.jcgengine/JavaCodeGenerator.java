@@ -3,7 +3,8 @@ package ir.sk.jcg.jcgengine;
 import ir.sk.jcg.jcgcommon.util.XMLParser;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
+import ir.sk.jcg.jcgengine.model.project.ImplElement;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.model.project.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -134,7 +135,7 @@ public class JavaCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public List<EntityElement> addEntity(Entity entity , String packagePath) {
+    public List<ModelImplElement> addEntity(Entity entity , String packagePath) {
         return architecture.createEntity(entity ,packagePath);
     }
 

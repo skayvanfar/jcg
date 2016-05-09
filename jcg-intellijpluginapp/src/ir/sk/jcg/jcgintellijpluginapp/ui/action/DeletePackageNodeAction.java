@@ -4,7 +4,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import ir.sk.jcg.jcgengine.CodeGenerator;
-import ir.sk.jcg.jcgengine.model.project.ModelElement;
+import ir.sk.jcg.jcgengine.model.project.SubModelElement;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Packageable;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
@@ -40,8 +40,8 @@ public class DeletePackageNodeAction extends DeleteNodeAction {
                 DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
                 DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) treePath.getParentPath().getLastPathComponent();
 
-                Package<ModelElement> currentPackage = (Package<ModelElement>) currentNode.getUserObject();
-                Packageable<ModelElement> parentPackageable = (Packageable<ModelElement>) parentNode.getUserObject();
+                Package<SubModelElement> currentPackage = (Package<SubModelElement>) currentNode.getUserObject();
+                Packageable<SubModelElement> parentPackageable = (Packageable<SubModelElement>) parentNode.getUserObject();
 
                 if (currentPackage.getPackages().size() == 0) {
                     try {

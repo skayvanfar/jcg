@@ -3,7 +3,7 @@ package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
@@ -33,7 +33,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
     }
 
     @Override
-    public List<EntityElement> createDao(Entity entity) {
+    public List<ModelImplElement> createDao(Entity entity) {
         return null; // TODO: 5/8/2016
     }
 

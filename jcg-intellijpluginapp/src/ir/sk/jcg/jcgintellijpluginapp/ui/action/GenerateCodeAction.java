@@ -5,10 +5,12 @@ import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgengine.CodeGenerator;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
+import javax.xml.bind.JAXBException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,26 +41,36 @@ public class GenerateCodeAction extends NodeAction {
 
                 JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                 codeGenerator = jcgProjectComponent.getCodeGenerator();
-                Element element = (Element) jcgProjectComponent.currentSelectedNodeUserObject();
+                ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
                 
                 Object[] pathArray = jcgProjectComponent.getSelectionPath().getPath();
 
-                String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length );
-                List<EntityElement> entityElements = generate(element, packagePathArray);
-             //   element.addAll(entityElements); // TODO: 5/8/2016 Elementmust have this method
+                String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length ); // TODO: 5/9/2016  on project throws ArrayIndexOutOfBoundException fo 2 
+                List<? extends ImplElement> implElements = generate(modelElement, packagePathArray);
+
+                modelElement.addAllImplElements((List<ImplElement>) implElements);
+
+                try {
+                    codeGenerator.marshalling();
+                } catch (JAXBException e1) {
+                    e1.printStackTrace();
+                }
+
+                jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }
             
-            private List<EntityElement> generate(Element element, String[] packagePathArray) {
-                List<EntityElement> entityElements = null;
-                if (element instanceof Entity) {
-                    entityElements = codeGenerator.addEntity((Entity) element, Utils.covertStringArrayToString(packagePathArray, '.'));
-                } else if (element instanceof View) {
+            private List<? extends ImplElement> generate(ModelElement modelElement, String[] packagePathArray) {
+                List<? extends ImplElement> implElements = null;
+                if (modelElement instanceof Entity) {
+                    implElements = codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
+                } else if (modelElement instanceof View) {
                     
                 } else {
                     
                 }
-                return entityElements;
+                return implElements;
             }
         });
         builder.showModal(true);

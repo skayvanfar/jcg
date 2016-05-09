@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class View extends ModelElement implements Serializable {
+public class View extends SubModelElement implements Serializable {
 
     public View() {}
 

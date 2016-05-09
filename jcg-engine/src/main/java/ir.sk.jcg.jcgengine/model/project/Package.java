@@ -14,7 +14,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(Entity.class)
 @Editable
-public class Package<T extends ModelElement> extends Element implements Packageable<T>, Serializable {
+public class Package<T extends SubModelElement> extends ModelElement implements Packageable<T>, Serializable {
 
 
     private List<Package<T>> packages = new ArrayList<>();

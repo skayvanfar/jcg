@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlSeeAlso({Model.class, Package.class, Project.class, Property.class})
+@XmlSeeAlso({ModelElement.class, ImplElement.class})
 public abstract class Element implements Serializable {
 
     @Prop(isRequired = true)

@@ -1,7 +1,6 @@
 package ir.sk.jcg.jcgengine.model.project.exception;
 
 import ir.sk.jcg.jcgengine.model.project.Element;
-import ir.sk.jcg.jcgengine.model.project.ModelElement;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/2/2016

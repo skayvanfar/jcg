@@ -17,7 +17,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class Entity extends ModelElement implements Serializable {
+public class Entity extends SubModelElement implements Serializable {
 
     private String packagePath;
 

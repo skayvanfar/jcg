@@ -4,10 +4,9 @@ import ir.sk.jcg.jcgengine.model.platform.technology.*;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
-import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.DAOInterfaceElement;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -74,20 +73,20 @@ public class ThreeLayerArchitecture extends Architecture {
     }
 
     @Override
-    public List<EntityElement> createEntity(Entity entity, String packagePath) {
-        List<EntityElement> entityElements = new ArrayList<>();
+    public List<ModelImplElement> createEntity(Entity entity, String packagePath) {
+        List<ModelImplElement> modelImplElements = new ArrayList<>();
         BuildTechnologyHandler buildTechnologyHandler = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
         ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         EntityClass entityClassElement = ormTechnologyHandler.createEntityClass(entity, packagePath);
         if (entityClassElement != null)
-            entityElements.add(entityClassElement);
-        List<EntityElement> daoEntityElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
-        if (daoEntityElements != null)
-            entityElements.addAll(daoEntityElements);
+            modelImplElements.add(entityClassElement);
+        List<ModelImplElement> daoModelImplElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
+        if (daoModelImplElements != null)
+            modelImplElements.addAll(daoModelImplElements);
 
-        return entityElements;
+        return modelImplElements;
     }
 
     private TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change
