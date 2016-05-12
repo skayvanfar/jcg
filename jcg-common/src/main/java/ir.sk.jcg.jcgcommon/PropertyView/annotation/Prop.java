@@ -33,5 +33,5 @@ public @interface Prop {
     /**
      * Required or not required
      * */
-    boolean isRequired() default false;
+    boolean required() default false;
 }

@@ -164,7 +164,7 @@ public class PropertyInfo {
         this.name = field.getName();
         this.label = prop.label();
         this.value = value;
-        this.required = prop.isRequired();
+        this.required = prop.required();
         this.componentType = prop.componentType();
         this.values = prop.values();
         this.object = o;

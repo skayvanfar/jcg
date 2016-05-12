@@ -72,7 +72,7 @@ public class PropertiesTableModel extends AbstractTableModel {
 //        for (int i = 0; i < fields.size(); i++) { // TODO: 5/7/2016 not worked: CellRenderer must be red border for required cell 
 //            Field  field = fields.get(i);
 //            Prop prop = field.getAnnotation(Prop.class);
-//            boolean required = prop.isRequired();
+//            boolean required = prop.required();
 //            if (required) {
 //                DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
 //                cellRenderer.setBorder(new ToolWindow.Border());///////////////////////////////////////////////////////////////////////////////////

@@ -33,7 +33,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @Prop
     private String modelDir;
 
-    @Prop(label = "Model info type", componentType = ComponentType.NON_EDITABLE_COMBO, isRequired = true)
+    @Prop(label = "Model info type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
     private ModelInfoType modelInfoType;
 
 
@@ -82,6 +82,9 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     public EntityClass createEntityClass(Entity entity, String packagePath) {
+        VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016
+        velocityContext.put("packageName", getBasePackageName() + ".dao.common");
+        VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
         return null; // TODO: 5/8/2016
     }
 
@@ -121,7 +124,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     protected void createBaseFiles() throws Exception {
-        VelocityContext velocityContext = new VelocityContext();
+        VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016  
         velocityContext.put("packageName", getBasePackageName() + ".dao.common");
         VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
         velocityContext.put("packageName", getBasePackageName() + ".dao.common.impl");

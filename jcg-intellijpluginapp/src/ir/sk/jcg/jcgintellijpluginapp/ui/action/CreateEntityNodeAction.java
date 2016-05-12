@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.text.StringUtil;
+import ir.sk.jcg.jcgcommon.util.StringUtils;
 import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.*;
@@ -40,6 +41,12 @@ public class CreateEntityNodeAction extends CreateNodeAction {
 
                     Entity entity = new Entity(); // TODO: 5/3/2016 create new method
                     entity.setName(entityName);
+
+                    // Id property that auto generated
+                    Id id = new Id();
+                    // convert String to camelcase like: "PersonInfo" --> "personInfo"
+                    id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
+                    entity.addProperty(id);
 
                     // add to project
                     entityPackage.addElement(entity);

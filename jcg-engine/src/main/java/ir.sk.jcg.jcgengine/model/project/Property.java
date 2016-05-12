@@ -6,22 +6,23 @@ import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.io.Serializable;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/18/2016
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlSeeAlso(Id.class)
 @Editable
 public class Property extends ModelElement implements Serializable {
 
-    @Prop(isRequired = true)
+    @Prop(required = true)
     private String type;
-    @Prop(isRequired = true)
+    @Prop(required = true)
     private String value;
     @Prop
     private String columnName;
-    @Prop(isRequired = true)
+    @Prop(required = true)
     private String isUnique;
 
 

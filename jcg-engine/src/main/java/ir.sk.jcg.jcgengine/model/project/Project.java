@@ -1,9 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
-import ir.sk.jcg.jcgengine.model.project.enums.ModelInfoType;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -17,13 +15,13 @@ import java.io.Serializable;
 public class Project extends ModelElement implements Serializable {
 
     // base info
-    @Prop(label = "Persian Name", isRequired = true)
+    @Prop(label = "Persian Name", required = true)
     private String persianName;
 
-    @Prop(label = "Package Prefix", isRequired = true)
+    @Prop(label = "Package Prefix", required = true)
     private String packagePrefix;
 
-    @Prop(label = "Table Name Pattern", isRequired = true)
+    @Prop(label = "Table Name Pattern", required = true)
     private String tableNamePattern;
 
     private Schema<Entity> entitiesSchema = new Schema<>();

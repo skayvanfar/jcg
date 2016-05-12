@@ -31,6 +31,8 @@ public class Entity extends SchemaItem implements Serializable {
     @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX)
     private boolean isTrackable;
 
+    private Id id;
+
     private List<Property> properties;
 
     public Entity() {
@@ -43,6 +45,7 @@ public class Entity extends SchemaItem implements Serializable {
     public Entity(Entity anotherEntity) {
         super(anotherEntity);
         this.packagePath = anotherEntity.getPackagePath();
+        this.id = anotherEntity.getId();
         this.properties = anotherEntity.getProperties();
     }
 
@@ -89,6 +92,14 @@ public class Entity extends SchemaItem implements Serializable {
     @XmlAttribute
     public void setTrackable(boolean trackable) {
         isTrackable = trackable;
+    }
+
+    public Id getId() {
+        return id;
+    }
+
+    public void setId(Id id) {
+        this.id = id;
     }
 
     public List<Property> getProperties() {

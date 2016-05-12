@@ -38,6 +38,8 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 icon = IconLoader.getIcon("/nodes/class.png"); // 16x16            wrappingPanel.setIcon(icon);
             } else if (treeNode.getUserObject() instanceof View) {
                 icon = IconLoader.getIcon("/nodes/advice.png"); // 16x16            wrappingPanel.setIcon(icon);
+            } else if (treeNode.getUserObject() instanceof Id) {
+                icon = IconLoader.getIcon("/javaee/persistenceId.png"); // 16x16            wrappingPanel.setIcon(icon);
             } else if (treeNode.getUserObject() instanceof Property) {
                 icon = IconLoader.getIcon("/css/property.png"); // 16x16            wrappingPanel.setIcon(icon);
             }
