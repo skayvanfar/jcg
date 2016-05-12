@@ -17,14 +17,14 @@ import java.io.Serializable;
 public class Project extends ModelElement implements Serializable {
 
     // base info
-    @Prop
+    @Prop(label = "Persian Name", isRequired = true)
     private String persianName;
-    @Prop(isRequired = true)
+
+    @Prop(label = "Package Prefix", isRequired = true)
     private String packagePrefix;
-    @Prop(isRequired = true)
+
+    @Prop(label = "Table Name Pattern", isRequired = true)
     private String tableNamePattern;
-    @Prop(componentType = ComponentType.NON_EDITABLE_COMBO, isRequired = true)
-    private ModelInfoType modelInfoType;
 
     private Schema<Entity> entitiesSchema = new Schema<>();
     private Schema<View> viewsSchema = new Schema<>();
@@ -72,15 +72,6 @@ public class Project extends ModelElement implements Serializable {
     @XmlAttribute
     public void setTableNamePattern(String tableNamePattern) {
         this.tableNamePattern = tableNamePattern;
-    }
-
-    public ModelInfoType getModelInfoType() {
-        return modelInfoType;
-    }
-
-    @XmlAttribute
-    public void setModelInfoType(ModelInfoType modelInfoType) {
-        this.modelInfoType = modelInfoType;
     }
 
     public Schema<Entity> getEntitiesSchema() {

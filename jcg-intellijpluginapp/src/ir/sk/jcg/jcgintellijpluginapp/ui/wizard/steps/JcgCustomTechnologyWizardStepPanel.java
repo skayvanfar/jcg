@@ -35,6 +35,10 @@ public class JcgCustomTechnologyWizardStepPanel extends JPanel {
     }
 
     public void initComponents(List<PropertyInfo> propertyInfos) {
+
+        setLayout(new GridLayoutManager(10, 3, new Insets(0, 0, 0, 0), -1, -1)); // TODO: 5/12/2016 must be dynamic: section 10, 3
+
+
         this.propertyInfos = propertyInfos;
         int x = 0;
         for (PropertyInfo propertyInfo : propertyInfos) {
@@ -55,9 +59,9 @@ public class JcgCustomTechnologyWizardStepPanel extends JPanel {
             if (component instanceof JTextField)
                 propertyInfo.setValue(((JTextField) component).getText());
             else if (component instanceof ComboBox)
-                propertyInfo.setValue(((ComboBox) component).getSelectedItem().toString()); /// TODO: 5/10/2016
+                propertyInfo.setValue(((ComboBox) component).getSelectedItem());
             else if (component instanceof JCheckBox)
-                propertyInfo.setValue(((JCheckBox) component).getText()); /// TODO: 5/10/2016
+                propertyInfo.setValue(((JCheckBox) component).isSelected());
             else
                 propertyInfo.setValue(((JTextField) component).getText());
         }

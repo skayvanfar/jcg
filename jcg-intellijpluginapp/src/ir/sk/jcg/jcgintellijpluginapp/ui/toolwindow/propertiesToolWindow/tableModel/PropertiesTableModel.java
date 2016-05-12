@@ -104,7 +104,7 @@ public class PropertiesTableModel extends AbstractTableModel {
                     for (String value : values) {
                         comboBox2.addItem(value);
                     }
-                    this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(comboBox2));//Reducer Properties
+                    this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(comboBox2));//Reducer Properties // TODO: 5/12/2016 DefaultCellEditor not worked hear and must change 
                     break;
                 case BOOLEAN_CHECKBOX:
                     this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(new JCheckBox()));//Reducer Properties // TODO: 5/7/2016 use Checkbox

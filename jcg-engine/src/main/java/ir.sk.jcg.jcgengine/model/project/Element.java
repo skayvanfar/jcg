@@ -13,7 +13,7 @@ import java.io.Serializable;
 @XmlSeeAlso({ModelElement.class, ImplElement.class})
 public abstract class Element implements Serializable {
 
-    @Prop(isRequired = true)
+    @Prop(label = "Project Name", isRequired = true)
     protected String name;
 
     protected Element() {

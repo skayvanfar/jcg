@@ -100,7 +100,7 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
      * */
     @Override
     public void updateDataModel() {
-        wizardContext.setProjectBuilder(jcgModuleBuilder);
+   //     wizardContext.setProjectBuilder(jcgModuleBuilder);
         for (PropertyInfo propertyInfo : jcgCustomTechnologyWizardStepPanel.getPropertyInfos()) {
 
             try {

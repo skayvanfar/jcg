@@ -1,10 +1,12 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
+import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.project.enums.ModelInfoType;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
@@ -30,6 +32,10 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private String implDAOCommonDir;
     @Prop
     private String modelDir;
+
+    @Prop(label = "Model info type", componentType = ComponentType.NON_EDITABLE_COMBO, isRequired = true)
+    private ModelInfoType modelInfoType;
+
 
     private File entityMainPackage;
 
@@ -63,6 +69,15 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @XmlAttribute
     public void setModelDir(String modelDir) {
         this.modelDir = modelDir;
+    }
+
+    public ModelInfoType getModelInfoType() {
+        return modelInfoType;
+    }
+
+    @XmlAttribute
+    public void setModelInfoType(ModelInfoType modelInfoType) {
+        this.modelInfoType = modelInfoType;
     }
 
     @Override
