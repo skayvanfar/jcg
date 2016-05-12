@@ -74,16 +74,4 @@ public abstract class MVCTechnologyHandler extends TechnologyHandler {
         }
     }
 
-    public MVCTechnologyHandler() {
-    }
-
-    @Override
-    public void createBasePlatform() throws Exception {
-        createDirectories();
-        createBaseFiles();
-    }
-
-    protected abstract void createDirectories();
-
-    protected abstract void createBaseFiles() throws Exception;
 }

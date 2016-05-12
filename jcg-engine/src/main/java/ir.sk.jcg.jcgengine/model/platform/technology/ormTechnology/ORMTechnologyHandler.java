@@ -97,17 +97,4 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         }
     }
 
-    public ORMTechnologyHandler() {
-    }
-
-    @Override
-    public void createBasePlatform() throws Exception {
-        createDirectories();
-        createBaseFiles();
-    }
-
-    protected abstract void createDirectories();
-
-    protected abstract void createBaseFiles() throws Exception;
-
 }

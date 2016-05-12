@@ -88,18 +88,6 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
     protected String testJavaDir;
     protected String testResourcesDir;
 
-    public BuildTechnologyHandler() {
-    }
-
-    @Override
-    public void createBasePlatform() {
-        createDirectories();
-        createBuildFile();
-    }
-
-    protected abstract void createDirectories();
-    protected abstract void createBuildFile();
-
     public String getMainJavaDir() {
         return mainJavaDir;
     }
@@ -166,4 +154,11 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
         this.dependencies = dependencies;
     }
 
+
+    @Override
+    protected void createBaseFiles() {
+        createBuildFile();
+    }
+
+    protected abstract void createBuildFile();
 }

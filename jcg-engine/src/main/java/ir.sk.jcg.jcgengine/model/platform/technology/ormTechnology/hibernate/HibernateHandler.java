@@ -123,7 +123,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
     }
 
     @Override
-    protected void createBaseFiles() throws Exception {
+    protected void createBaseFiles() {
         VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016  
         velocityContext.put("packageName", getBasePackageName() + ".dao.common");
         VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);

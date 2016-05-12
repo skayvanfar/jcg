@@ -23,34 +23,22 @@ public abstract class TechnologyHandler {
 
     protected List<Dependency> dependencies = new ArrayList<>();
   //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
- //   protected Project project; // TODO: 4/27/2016 Maye be beter just use base and basePackagePerfix
 
     public TechnologyHandler() {
     }
-//
-//    public Project getProject() {
-//        return project;
-//    }
-//
-//    public void setProject(Project project) {
-//        this.project = project;
-//    }
 
-//    public String getBasePackageName() {
-//        return basePackageName;
-//    }
-//
-//    public void setBasePackageName(String basePackageName) {
-//        this.basePackageName = basePackageName;
-//    }
+    public void createBasePlatform() throws Exception {
+        createDirectories();
+        createBaseFiles();
+    }
 
-    public abstract void createBasePlatform() throws Exception;
+    protected abstract void createDirectories() throws Exception;
+    protected abstract void createBaseFiles() throws Exception;
 
     public String getBaseDir() {
         return baseDir;
     }
 
-   // @XmlAttribute(name = "baseDir", required = true)
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
     }
