@@ -21,10 +21,12 @@ public class MavenHandler extends BuildTechnologyHandler {
     private String groupId;
     @Prop(label = "Artifact Id", required = true)
     private String artifactId;
-    @Prop(label = "Version Id", required = true)
-    private String versionId;
+    @Prop(label = "Version", required = true)
+    private String version;
 
     public MavenHandler() {
+        version = "0.0.1-SNAPSHOT";
+
         mainJavaDir = "/src/main/java";
         mainResourcesDir = "/src/main/resources";
         mainWebDir = "/src/main/web";
@@ -59,13 +61,13 @@ public class MavenHandler extends BuildTechnologyHandler {
         this.artifactId = artifactId;
     }
 
-    public String getVersionId() {
-        return versionId;
+    public String getVersion() {
+        return version;
     }
 
     @XmlAttribute
-    public void setVersionId(String versionId) {
-        this.versionId = versionId;
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     @Override
@@ -80,7 +82,24 @@ public class MavenHandler extends BuildTechnologyHandler {
     @Override
     protected void createBuildFile() {
         VelocityContext velocityContext = new VelocityContext();
+        velocityContext.put("groupId", groupId); // TODO: 5/12/2016 create another method
+        velocityContext.put("artifactId", artifactId);
+        velocityContext.put("version", version);
+        velocityContext.put("packaging", "war");
         velocityContext.put("dependencies", dependencies);
         VelocityTemplate.mergeTemplate("buildTechnology/maven/mavenBuild.vm", baseDir + "/pom.xml", velocityContext);
+    }
+
+    /**
+     * set Package prefix of project into group id and artifact id of maven
+     * */
+    public void setGroupIdAndArtifactIdWithPackagePrefix(String packagePrefix) {
+        int lastIndexOf = packagePrefix.lastIndexOf('.');
+        if (lastIndexOf != -1) { // When packagePrefix include '.' character
+            groupId = packagePrefix.substring(0, lastIndexOf);
+            artifactId = packagePrefix.substring(lastIndexOf + 1);
+        } else {
+            groupId = packagePrefix;
+        }
     }
 }

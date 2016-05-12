@@ -11,6 +11,8 @@ import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +67,12 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
     public void updateStep() {
         Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
 
+
         TechnologyHandler technologyHandler = architecture.getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+
+        // If Build Handler is Maven then set Package prefix of project into group id and artifact id of maven
+        if (technologyHandler instanceof MavenHandler)
+            ((MavenHandler) technologyHandler).setGroupIdAndArtifactIdWithPackagePrefix(jcgModuleBuilder.getCodeGenerator().getJcgProject().getPackagePrefix());
 
         List<PropertyInfo> propertyInfos = new ArrayList<>();
         List<Field> fields = ReflectionUtil.findFields(technologyHandler.getClass(), Prop.class);
