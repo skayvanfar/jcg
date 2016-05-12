@@ -47,7 +47,12 @@ public class JcgOrmTechnologyWizardStep extends ModuleWizardStep {
      * Validate input fields.
      * */
     @Override
-    public boolean validate() throws ConfigurationException {
+    public boolean validate() throws ConfigurationException { // TODO: 5/12/2016 must go to parent class 
+        jcgCustomTechnologyWizardStepPanel.setComponents();
+        for (PropertyInfo propertyInfo : jcgCustomTechnologyWizardStepPanel.getPropertyInfos()) {
+            if (propertyInfo.isRequired() && (propertyInfo.getValue() == null || propertyInfo.getValue().equals("")))
+                throw new ConfigurationException("Please, specify " + propertyInfo.getName());
+        }
         return true;
     }
 
@@ -94,7 +99,6 @@ public class JcgOrmTechnologyWizardStep extends ModuleWizardStep {
     @Override
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);
-        jcgCustomTechnologyWizardStepPanel.setComponents();
         for (PropertyInfo propertyInfo : jcgCustomTechnologyWizardStepPanel.getPropertyInfos()) {
 
             try {

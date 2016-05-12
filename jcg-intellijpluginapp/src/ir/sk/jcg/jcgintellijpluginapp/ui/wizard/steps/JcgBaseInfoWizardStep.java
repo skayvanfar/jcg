@@ -24,6 +24,7 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
 
     private final JcgModuleBuilder jcgModuleBuilder;
     private final WizardContext wizardContext;
+
     private JcgBaseInfoWizardStepPanel jcgBaseInfoWizardStepPanel;
 
     public JcgBaseInfoWizardStep(JcgModuleBuilder jcgModuleBuilder, WizardContext wizardContext) {

@@ -4,6 +4,7 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.util.text.StringUtil;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
@@ -14,6 +15,7 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
     }
 
     @Override
-    public JcgCustomTechnologyWizardStepPanel getComponent() {
+    public JComponent getComponent() {
         if (jcgCustomTechnologyWizardStepPanel == null) {
             jcgCustomTechnologyWizardStepPanel = new JcgCustomTechnologyWizardStepPanel();
         }
@@ -48,6 +50,11 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
      * */
     @Override
     public boolean validate() throws ConfigurationException {
+        jcgCustomTechnologyWizardStepPanel.setComponents();
+        for (PropertyInfo propertyInfo : jcgCustomTechnologyWizardStepPanel.getPropertyInfos()) {
+            if (propertyInfo.isRequired() && (propertyInfo.getValue() == null || propertyInfo.getValue().equals("")))
+                throw new ConfigurationException("Please, specify " + propertyInfo.getName());
+        }
         return true;
     }
 
@@ -94,7 +101,6 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
     @Override
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);
-        jcgCustomTechnologyWizardStepPanel.setComponents();
         for (PropertyInfo propertyInfo : jcgCustomTechnologyWizardStepPanel.getPropertyInfos()) {
 
             try {

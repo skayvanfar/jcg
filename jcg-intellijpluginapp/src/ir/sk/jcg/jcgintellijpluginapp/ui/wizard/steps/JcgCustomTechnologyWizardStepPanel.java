@@ -38,7 +38,8 @@ public class JcgCustomTechnologyWizardStepPanel extends JPanel {
         this.propertyInfos = propertyInfos;
         int x = 0;
         for (PropertyInfo propertyInfo : propertyInfos) {
-            final JLabel propertyFieldLabel = new JLabel(propertyInfo.getName());
+            String label = !propertyInfo.getLabel().equals("") ? propertyInfo.getLabel() : propertyInfo.getName();
+            final JLabel propertyFieldLabel = new JLabel(label);
             add(propertyFieldLabel, new GridConstraints(x, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
             JComponent propertyFieldComponent = PropertyViewHelper.getJComponentByPropertyField(propertyInfo);
 

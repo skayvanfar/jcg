@@ -14,10 +14,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Prop {
+
     /**
-     * name of property. if not specified default name of property selected
+     * label of property. if not specified default name of property selected
      * */
-    String name() default "";
+    String label() default "";
 
     /**
      * values for value of property that show in combobox

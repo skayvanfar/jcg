@@ -33,22 +33,18 @@ public class PropertiesTableModel extends AbstractTableModel {
         this.element = element;
 
         List<Field> fields = ReflectionUtil.findFields(element.getClass(), Prop.class);
-        for(Field field : fields) {
-            field.setAccessible(true);
-            Object value = null;
-            try {
-                value =  field.get(element);
 
+        PropertyInfo propertyInfo = null;
+        for(Field field : fields) {
+            try {
+                propertyInfo = new PropertyInfo(field, element);
             } catch (IllegalAccessException e) {
                 e.printStackTrace(); // TODO: 5/5/2016
             }
-            Prop prop = field.getAnnotation(Prop.class);
-            String name = !prop.name().equals("") ? prop.name() : field.getName();
-            propertyInfos.add(new PropertyInfo.Builder(name, value, prop.isRequired()).componentType(prop.componentType())
-                        .typeClass(field.getType()).build());
+            propertyInfos.add(propertyInfo);
         }
         if (element.getClass().isAnnotationPresent(Editable.class))
-            editable = true;
+            editable = true; // TODO: 5/12/2016 not useable 
 
         this.propertyTable = propertyTable; // TODO: 5/5/2016
 

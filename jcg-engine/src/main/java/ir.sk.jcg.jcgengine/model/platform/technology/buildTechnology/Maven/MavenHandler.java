@@ -17,11 +17,11 @@ public class MavenHandler extends BuildTechnologyHandler {
    // @Prop
    // private MavenId mavenId; // TODO: 5/10/2016 better use later
 
-    @Prop
+    @Prop(label = "Group Id", isRequired = true)
     private String groupId;
-    @Prop
+    @Prop(label = "Artifact Id", isRequired = true)
     private String artifactId;
-    @Prop
+    @Prop(label = "Version Id", isRequired = true)
     private String versionId;
 
     public MavenHandler() {

@@ -37,7 +37,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createBaseFiles() throws Exception {
-        VelocityTemplate.mergeTemplate("mVCTechnology/SpringMVCHandler/BaseController.vm", controllerDir.getAbsolutePath() + "/BaseController.java", velocityContext);
+        VelocityTemplate.mergeTemplate("mVCTechnology/SpringMVC/BaseController.vm", controllerDir.getAbsolutePath() + "/BaseController.java", velocityContext);
     }
 
 

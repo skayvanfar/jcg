@@ -17,6 +17,7 @@ public class PropertyInfo {
     public static class Builder {
         // Required parameters
         private String name;
+        private String label;
         private Object value;
         private boolean required;
 
@@ -56,6 +57,7 @@ public class PropertyInfo {
 
     public PropertyInfo(Builder builder) {
         this.name = builder.name;
+        this.label = builder.label;
         this.value = builder.value;
         this.required = builder.required;
         this.componentType = builder.componentType;
@@ -64,8 +66,9 @@ public class PropertyInfo {
         this.typeClass = builder.typeClass;
     }
 
-    public PropertyInfo(String name, Object value, boolean required, ComponentType componentType, String[] values, Object object, Class<?> typeClass) {
+    public PropertyInfo(String name, String label,Object value, boolean required, ComponentType componentType, String[] values, Object object, Class<?> typeClass) {
         this.name = name;
+        this.label = label;
         this.value = value;
         this.required = required;
         this.componentType = componentType;
@@ -75,6 +78,7 @@ public class PropertyInfo {
     }
 
     private String name;
+    private String label;
     private Object value;
     private boolean required;
     private ComponentType componentType;
@@ -88,6 +92,14 @@ public class PropertyInfo {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     public Object getValue() {
@@ -149,7 +161,8 @@ public class PropertyInfo {
         Object value =  field.get(o);
         Prop prop = field.getAnnotation(Prop.class);
 
-        this.name = !prop.name().equals("") ? prop.name() : field.getName();
+        this.name = field.getName();
+        this.label = prop.label();
         this.value = value;
         this.required = prop.isRequired();
         this.componentType = prop.componentType();
