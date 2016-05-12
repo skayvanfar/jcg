@@ -4,11 +4,13 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnology
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
 import org.apache.velocity.VelocityContext;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
 import java.util.List;
 
@@ -20,12 +22,48 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
 
-    private File interfaceDAODir;
-    private File implDAODir;
-    private File interfaceDAOCommonDir;
-    private File implDAOCommonDir;
+    @Prop
+    private String interfaceDAODir;
+    @Prop
+    private String implDAODir;
+    private String interfaceDAOCommonDir;
+    private String implDAOCommonDir;
+    @Prop
+    private String modelDir;
 
     private File entityMainPackage;
+
+    private File interfaceDAODirFile;
+    private File implDAODirFile;
+    private File interfaceDAOCommonDirFile;
+    private File implDAOCommonDirFile;
+
+    public String getInterfaceDAODir() {
+        return interfaceDAODir;
+    }
+
+    @XmlAttribute
+    public void setInterfaceDAODir(String interfaceDAODir) {
+        this.interfaceDAODir = interfaceDAODir;
+    }
+
+    public String getImplDAODir() {
+        return implDAODir;
+    }
+
+    @XmlAttribute
+    public void setImplDAODir(String implDAODir) {
+        this.implDAODir = implDAODir;
+    }
+
+    public String getModelDir() {
+        return modelDir;
+    }
+
+    @XmlAttribute
+    public void setModelDir(String modelDir) {
+        this.modelDir = modelDir;
+    }
 
     @Override
     public EntityClass createEntityClass(Entity entity, String packagePath) {
@@ -38,71 +76,41 @@ public class HibernateHandler extends ORMTechnologyHandler {
     }
 
     public HibernateHandler() {
+        this.interfaceDAODir = "/dao";
+        this.implDAODir = "/impl";
+        this.interfaceDAOCommonDir = "/common";
+        this.implDAOCommonDir = "/impl";
+        this.modelDir = "model";
+
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-c3p0", HIBERNATE_VERSION, "compile"));
     }
 
-//    public File getInterfaceDAODir() {
-//        return interfaceDAODir;
-//    }
-//
-//    @XmlAttribute(name = "interfaceDAODir", required = true)
-//    public void setInterfaceDAODir(File interfaceDAODir) {
-//        this.interfaceDAODir = interfaceDAODir;
-//    }
-//
-//    public File getImplDAODir() {
-//        return implDAODir;
-//    }
-//
-//    @XmlAttribute(name = "implDAODir", required = true)
-//    public void setImplDAODir(File implDAODir) {
-//        this.implDAODir = implDAODir;
-//    }
-//
-//    public File getInterfaceDAOCommonDir() {
-//        return interfaceDAOCommonDir;
-//    }
-//
-//    @XmlAttribute(name = "interfaceDAOCommonDir", required = true)
-//    public void setInterfaceDAOCommonDir(File interfaceDAOCommonDir) {
-//        this.interfaceDAOCommonDir = interfaceDAOCommonDir;
-//    }
-//
-//    public File getImplDAOCommonDir() {
-//        return implDAOCommonDir;
-//    }
-//
-//    @XmlAttribute(name = "implDAOCommonDir", required = true)
-//    public void setImplDAOCommonDir(File implDAOCommonDir) {
-//        this.implDAOCommonDir = implDAOCommonDir;
-//    }
-
     @Override
     protected void createDirectories() {
         String baseHibernateDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
 
-        entityMainPackage = new File(baseHibernateDir + "model");
+        entityMainPackage = new File(baseHibernateDir + modelDir);
 
-        interfaceDAODir = new File(baseHibernateDir + "/dao");
-        implDAODir = new File(baseHibernateDir + "/dao/impl");
-        interfaceDAOCommonDir = new File(baseHibernateDir + "/dao/common");
-        implDAOCommonDir = new File(baseHibernateDir + "/dao/common/impl");
+        interfaceDAODirFile = new File(baseHibernateDir + interfaceDAODir);
+        implDAODirFile = new File(baseHibernateDir + interfaceDAODir + implDAODir);
+        interfaceDAOCommonDirFile = new File(baseHibernateDir + interfaceDAODir + interfaceDAOCommonDir);
+        implDAOCommonDirFile = new File(baseHibernateDir + interfaceDAODir + interfaceDAOCommonDir + implDAOCommonDir);
 
-        interfaceDAODir.mkdirs();
-        implDAODir.mkdirs();
-        interfaceDAOCommonDir.mkdirs();
-        implDAOCommonDir.mkdirs();
+        interfaceDAODirFile.mkdirs();
+        implDAODirFile.mkdirs();
+        interfaceDAOCommonDirFile.mkdirs();
+        implDAOCommonDirFile.mkdirs();
     }
 
     @Override
     protected void createBaseFiles() throws Exception {
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("packageName", getBasePackageName() + ".dao.common");
-        VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDir.getAbsolutePath() + "/GenericDAO.java", velocityContext);
+        VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
         velocityContext.put("packageName", getBasePackageName() + ".dao.common.impl");
-        VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDir.getAbsolutePath() + "/HibernateGenericDAO.java", velocityContext);
+        VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java", velocityContext);
     }
 
 }

@@ -11,6 +11,7 @@ import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 import javax.xml.bind.JAXBException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class GenerateCodeAction extends NodeAction {
             }
             
             private List<? extends ImplElement> generate(ModelElement modelElement, String[] packagePathArray) {
-                List<? extends ImplElement> implElements = null;
+                List<? extends ImplElement> implElements = new ArrayList<ImplElement>();
                 if (modelElement instanceof Entity) {
                     implElements = codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
                 } else if (modelElement instanceof View) {

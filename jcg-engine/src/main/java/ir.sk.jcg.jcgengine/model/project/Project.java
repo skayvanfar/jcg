@@ -1,7 +1,8 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
-import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
+import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.enums.ModelInfoType;
 
 import javax.xml.bind.annotation.*;
@@ -22,16 +23,16 @@ public class Project extends ModelElement implements Serializable {
     private String packagePrefix;
     @Prop(isRequired = true)
     private String tableNamePattern;
-    @Prop(editor = CellType.NON_EDITABLE_COMBO, isRequired = true)
+    @Prop(componentType = ComponentType.NON_EDITABLE_COMBO, isRequired = true)
     private ModelInfoType modelInfoType;
 
-    private Model<Entity> entitiesModel = new Model<>();
-    private Model<View> viewsModel = new Model<>();
+    private Schema<Entity> entitiesSchema = new Schema<>();
+    private Schema<View> viewsSchema = new Schema<>();
 
     public Project() {
         super();
-        entitiesModel.setName("Domain Model");
-        viewsModel.setName("Business Model");
+        entitiesSchema.setName("Domain Schema");
+        viewsSchema.setName("Business Schema");
     }
 
     /**
@@ -42,8 +43,8 @@ public class Project extends ModelElement implements Serializable {
         this.persianName = anotherProject.getPersianName();
         this.packagePrefix = anotherProject.getPackagePrefix();
         this.tableNamePattern = anotherProject.getTableNamePattern();
-        this.entitiesModel = anotherProject.getEntitiesModel();
-        this.viewsModel = anotherProject.getViewsModel();
+        this.entitiesSchema = anotherProject.getEntitiesSchema();
+        this.viewsSchema = anotherProject.getViewsSchema();
     }
 
     public String getPersianName() {
@@ -82,22 +83,22 @@ public class Project extends ModelElement implements Serializable {
         this.modelInfoType = modelInfoType;
     }
 
-    public Model<Entity> getEntitiesModel() {
-        return entitiesModel;
+    public Schema<Entity> getEntitiesSchema() {
+        return entitiesSchema;
     }
 
     @XmlElement(name = "entityModel")
-    public void setEntitiesModel(Model<Entity> entitiesModel) {
-        this.entitiesModel = entitiesModel;
+    public void setEntitiesSchema(Schema<Entity> entitiesSchema) {
+        this.entitiesSchema = entitiesSchema;
     }
 
-    public Model<View> getViewsModel() {
-        return viewsModel;
+    public Schema<View> getViewsSchema() {
+        return viewsSchema;
     }
 
     @XmlElement(name = "viewModel")
-    public void setViewsModel(Model<View> viewsModel) {
-        this.viewsModel = viewsModel;
+    public void setViewsSchema(Schema<View> viewsSchema) {
+        this.viewsSchema = viewsSchema;
     }
 
 }

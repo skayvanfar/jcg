@@ -29,7 +29,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                     packageName = validateAndCorrection(packageName);
 
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
-                    Packageable<SubModelElement> packageable  = (Packageable<SubModelElement>) jcgProjectComponent.currentSelectedNodeUserObject();
+                    Packageable<SchemaItem> packageable  = (Packageable<SchemaItem>) jcgProjectComponent.currentSelectedNodeUserObject();
                     try {
                         //create recursively support
 //                        String[] parts = packageName.split("."); // TODO: 5/2/2016 for many package create
@@ -37,7 +37,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
 //                            if (aPackage.getName().equals(parts[i]))
 //                                continue;
 //                            else {
-//                                Package<SubModelElement> aPackage1 = new Package<SubModelElement>();
+//                                Package<SchemaItem> aPackage1 = new Package<SchemaItem>();
 //                                aPackage1.setName(parts[i]);
 //                                
 //                            }
@@ -46,7 +46,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                         // a flag for see current packageable has a package with same name of new package
                         boolean isPackageExist = false;
                         if(packageable.getPackages().size() != 0) {
-                            for (Packageable<SubModelElement> elementPackage : packageable.getPackages()) {
+                            for (Packageable<SchemaItem> elementPackage : packageable.getPackages()) {
                                 Element element = (Element) elementPackage;
                                 if (element.getName().equals(packageName)) {
                                     isPackageExist = true;
@@ -55,7 +55,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                             }
                         }
                         if (!isPackageExist) {
-                            Package<SubModelElement> elementPackage = new Package<>();
+                            Package<SchemaItem> elementPackage = new Package<>();
                             elementPackage.setName(packageName);
                             packageable.addPackage(elementPackage);
                         }

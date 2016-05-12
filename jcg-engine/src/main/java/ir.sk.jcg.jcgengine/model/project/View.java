@@ -1,6 +1,6 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class View extends SubModelElement implements Serializable {
+public class View extends SchemaItem implements Serializable {
 
     public View() {}
 

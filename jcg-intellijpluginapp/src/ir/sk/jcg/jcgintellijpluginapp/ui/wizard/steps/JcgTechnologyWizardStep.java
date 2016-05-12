@@ -36,6 +36,8 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
     public JcgTechnologyWizardStep(JcgModuleBuilder jcgModuleBuilder, WizardContext wizardContext) {
         this.jcgModuleBuilder = jcgModuleBuilder;
         this.wizardContext = wizardContext;
+
+    //    jcgTechnologyWizardStepPanel = new JcgTechnologyWizardStepPanel();
     }
 
     @Override
@@ -48,7 +50,6 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
      * */
     @Override
     public void onWizardFinished() throws CommitStepException {
-
         CodeGenerator codeGenerator = jcgModuleBuilder.getCodeGenerator();
         // test if project not jcgProject
         if (codeGenerator != null) {
@@ -72,7 +73,6 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
                 throw new CommitStepException("Operation Fail");  // todo: must use Constant
             }
         }
-        
     }
 
     @Override
@@ -118,6 +118,8 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
      * */
     @Override
     public void updateStep() {
+    //    jcgTechnologyWizardStepPanel = new JcgTechnologyWizardStepPanel();
+
         Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
         jcgTechnologyWizardStepPanel.initComponents(architecture.getTechnologyTypes());
 

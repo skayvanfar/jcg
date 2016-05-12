@@ -50,7 +50,7 @@ public class TreePanel extends SimpleToolWindowPanel {
                 }
                 if (treeNode.isRoot()) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof Model) {
+                } else if (treeNode.getUserObject() instanceof Schema) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof Package) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageOperationMenu", ActionPlaces.UNKNOWN);
@@ -115,20 +115,20 @@ public class TreePanel extends SimpleToolWindowPanel {
         DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(jcgProject);
         loadImplElements(jcgProject, projectNode);
 
-        Model<Entity> entityModel = jcgProject.getEntitiesModel();
-        DefaultMutableTreeNode entityModelNode = new DefaultMutableTreeNode(entityModel);
-        loadImplElements(entityModel, entityModelNode);
-        for (ir.sk.jcg.jcgengine.model.project.Package<Entity> entityPackage : entityModel.getPackages()) {
+        Schema<Entity> entitySchema = jcgProject.getEntitiesSchema();
+        DefaultMutableTreeNode entityModelNode = new DefaultMutableTreeNode(entitySchema);
+        loadImplElements(entitySchema, entityModelNode);
+        for (ir.sk.jcg.jcgengine.model.project.Package<Entity> entityPackage : entitySchema.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(entityPackage);
             entityModelNode.add(packageNode);
             loadImplElements(entityPackage, packageNode);
             loadPackages(entityPackage, packageNode, true);
         }
 
-        Model<View> viewModel = jcgProject.getViewsModel();
-        DefaultMutableTreeNode viewModelNode = new DefaultMutableTreeNode(viewModel);
-        loadImplElements(viewModel, viewModelNode);
-        for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewModel.getPackages()) {
+        Schema<View> viewSchema = jcgProject.getViewsSchema();
+        DefaultMutableTreeNode viewModelNode = new DefaultMutableTreeNode(viewSchema);
+        loadImplElements(viewSchema, viewModelNode);
+        for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewSchema.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(viewPackage);
             viewModelNode.add(packageNode);
             loadImplElements(viewPackage, entityModelNode);
@@ -145,7 +145,7 @@ public class TreePanel extends SimpleToolWindowPanel {
     /**
      * Load packages and entities recursive
      * */
-    private <T extends SubModelElement> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode, boolean hasEntity) { // TODO: 4/29/2016 must go to a util class
+    private <T extends SchemaItem> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode, boolean hasEntity) { // TODO: 4/29/2016 must go to a util class
         for (T t : aPackage.getElements()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(t);
             parentNode.add(tNode);

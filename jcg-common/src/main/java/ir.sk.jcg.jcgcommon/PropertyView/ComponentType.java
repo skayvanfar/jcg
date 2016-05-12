@@ -1,9 +1,9 @@
-package ir.sk.jcg.jcgengine.model.project;
+package ir.sk.jcg.jcgcommon.PropertyView;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/6/2016
  */
-public enum CellType {
+public enum ComponentType {
     NON_EDITABLE_COMBO,
     EDITABLE_COMBO,
     BOOLEAN_CHECKBOX,

@@ -88,7 +88,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         architectureComboBox.setModel(comboBoxModel);
         add(architectureComboBox, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
-
+        architectureComboBox.setEnabled(false); // TODO: 5/11/2016 for now but future must enabled
 //        myArchetypesPanel = new JPanel();
 //        myArchetypesPanel.setLayout(new BorderLayout(0, 0));
 //        add(myArchetypesPanel, new GridConstraints(3, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));

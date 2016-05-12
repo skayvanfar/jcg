@@ -1,10 +1,12 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
 
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.velocity.VelocityContext;
 //import org.jetbrains.annotations.Nullable;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
 
 /**
@@ -12,7 +14,15 @@ import java.io.File;
  */
 public class MavenHandler extends BuildTechnologyHandler {
 
-    private MavenId mavenId;
+   // @Prop
+   // private MavenId mavenId; // TODO: 5/10/2016 better use later
+
+    @Prop
+    private String groupId;
+    @Prop
+    private String artifactId;
+    @Prop
+    private String versionId;
 
     public MavenHandler() {
         mainJavaDir = "/src/main/java";
@@ -22,12 +32,40 @@ public class MavenHandler extends BuildTechnologyHandler {
         testResourcesDir = "/src/test/resources";
     }
 
-    public MavenId getMavenId() {
-        return mavenId;
+//    public MavenId getMavenId() {
+//        return mavenId;
+//    }
+//
+//    public void setMavenId(MavenId mavenId) {
+//        this.mavenId = mavenId;
+//    }
+
+
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setMavenId(MavenId mavenId) {
-        this.mavenId = mavenId;
+    @XmlAttribute
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getArtifactId() {
+        return artifactId;
+    }
+
+    @XmlAttribute
+    public void setArtifactId(String artifactId) {
+        this.artifactId = artifactId;
+    }
+
+    public String getVersionId() {
+        return versionId;
+    }
+
+    @XmlAttribute
+    public void setVersionId(String versionId) {
+        this.versionId = versionId;
     }
 
     @Override

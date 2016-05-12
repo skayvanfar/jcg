@@ -20,9 +20,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
-import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgBaseInfoWizardStep;
-import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgIntroWizardStep;
-import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.JcgTechnologyWizardStep;
+import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,6 +75,7 @@ public class JcgModuleBuilder extends ModuleBuilder {
     public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
         return new ModuleWizardStep[]{
                 new JcgBaseInfoWizardStep(this, wizardContext), new JcgTechnologyWizardStep(this, wizardContext),
+                new JcgBuildTechnologyWizardStep(this, wizardContext), new JcgOrmTechnologyWizardStep(this, wizardContext), new JcgMvcTechnologyWizardStep(this, wizardContext)
         };
     }
 

@@ -7,8 +7,8 @@ import ir.sk.jcg.jcgcommon.enums.EnumBase;
  */
 public enum ArchitectureType implements EnumBase {
 
-    TWO_LAYER(0, "Two Layer"), // sample
-    THREE_LAYER(1, "Three Layer"); // sample
+    THREE_LAYER(1, "Three Layer"), // sample
+    TWO_LAYER(0, "Two Layer"); // sample
 
     private Integer value;
     private String description;

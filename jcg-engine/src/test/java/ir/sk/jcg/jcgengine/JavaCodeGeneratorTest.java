@@ -3,7 +3,7 @@ package ir.sk.jcg.jcgengine;
 
 import ir.sk.jcg.jcgcommon.util.XMLParser;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Model;
+import ir.sk.jcg.jcgengine.model.project.Schema;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Project;
 import org.junit.After;
@@ -25,8 +25,8 @@ public class JavaCodeGeneratorTest {
         project.setName("Project");
         project.setPackagePrefix("ir.sk");
 
-        Model<Entity> entityModel = new Model<>();
-        entityModel.setName("Entity Model");
+        Schema<Entity> entitySchema = new Schema<>();
+        entitySchema.setName("Entity Schema");
 
         Package<Entity> entityPackage = new Package<>();
         entityPackage.setName("com");
@@ -39,8 +39,8 @@ public class JavaCodeGeneratorTest {
         entityPackage.setElements(entities);
         List<Package<Entity>> packageList = new ArrayList<>();
         packageList.add(entityPackage);
-        entityModel.setPackages(packageList);
-        project.setEntitiesModel(entityModel);
+        entitySchema.setPackages(packageList);
+        project.setEntitiesSchema(entitySchema);
 
         XMLParser.marshaling(new File("e:/h.xml"), project);
 

@@ -20,7 +20,7 @@ public class ThreeLayerArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
-    private String baseDir; // TODO: 5/3/2016 may beeter use Project
+    private String baseDir; // TODO: 5/3/2016 may better use Project
     private String basePackageName;
 
     @Override
@@ -89,7 +89,7 @@ public class ThreeLayerArchitecture extends Architecture {
         return modelImplElements;
     }
 
-    private TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change
+    public TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change
         for (TechnologyHandler technologyHandler : technologies) {
             if (technologyHandlerType.getValue() == 0 && technologyHandler instanceof BuildTechnologyHandler)
                 return technologyHandler;

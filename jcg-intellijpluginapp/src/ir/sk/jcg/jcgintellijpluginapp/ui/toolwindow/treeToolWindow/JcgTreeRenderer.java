@@ -29,7 +29,7 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
             if (treeNode.isRoot()) {
            //     icon = FileTypes.ARCHIVE.getIcon(); // TODO: 4/28/2016 must create icons
                 icon = IconLoader.getIcon("/nodes/homeFolder.png"); // 16x16
-            } else if (treeNode.getUserObject() instanceof Model) {
+            } else if (treeNode.getUserObject() instanceof Schema) {
                 icon = IconLoader.getIcon("/nodes/moduleGroup.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Package) {
                 icon = IconLoader.getIcon("/nodes/package.png"); // 16x16

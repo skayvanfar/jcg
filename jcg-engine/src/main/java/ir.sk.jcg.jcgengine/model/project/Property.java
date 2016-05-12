@@ -1,13 +1,12 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
-import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/18/2016

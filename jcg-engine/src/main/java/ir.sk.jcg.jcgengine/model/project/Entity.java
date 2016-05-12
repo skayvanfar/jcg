@@ -1,7 +1,8 @@
 package ir.sk.jcg.jcgengine.model.project;
 
-import ir.sk.jcg.jcgengine.model.project.annotation.Editable;
-import ir.sk.jcg.jcgengine.model.project.annotation.Prop;
+import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class Entity extends SubModelElement implements Serializable {
+public class Entity extends SchemaItem implements Serializable {
 
     private String packagePath;
 
@@ -25,9 +26,9 @@ public class Entity extends SubModelElement implements Serializable {
     private String tableName;
     @Prop
     private String labelName;
-    @Prop(editor = CellType.BOOLEAN_CHECKBOX)
+    @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX)
     private boolean isLogicallyDeletable;
-    @Prop(editor = CellType.BOOLEAN_CHECKBOX)
+    @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX)
     private boolean isTrackable;
 
     private List<Property> properties;
@@ -99,7 +100,7 @@ public class Entity extends SubModelElement implements Serializable {
         this.properties = properties;
     }
 
-    public void addProperty(Property property) { // // TODO: 5/2/2016 repeated code(in Model)
+    public void addProperty(Property property) { // // TODO: 5/2/2016 repeated code(in Schema)
         if (properties.contains(property))
             throw new ElementBeforeExistException(property);
         properties.add(property);

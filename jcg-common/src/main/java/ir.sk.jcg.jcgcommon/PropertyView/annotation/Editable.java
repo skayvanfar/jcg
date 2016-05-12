@@ -1,4 +1,4 @@
-package ir.sk.jcg.jcgengine.model.project.annotation;
+package ir.sk.jcg.jcgcommon.PropertyView.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

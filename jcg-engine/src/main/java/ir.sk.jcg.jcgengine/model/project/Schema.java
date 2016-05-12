@@ -13,7 +13,7 @@ import java.util.List;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/29/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class Model<T extends SubModelElement> extends ModelElement implements Packageable<T>, Serializable {
+public class Schema<T extends SchemaItem> extends ModelElement implements Packageable<T>, Serializable {
 
 
     private List<Package<T>> packages = new ArrayList<>();
@@ -23,14 +23,14 @@ public class Model<T extends SubModelElement> extends ModelElement implements Pa
         return packages;
     }
 
-    public Model() {}
+    public Schema() {}
 
     /**
      * Copy constructor
      * */
-    public Model(Model<T> anotherModel) {
-        super(anotherModel);
-        this.packages = anotherModel.getPackages();
+    public Schema(Schema<T> anotherSchema) {
+        super(anotherSchema);
+        this.packages = anotherSchema.getPackages();
     }
 
     @Override

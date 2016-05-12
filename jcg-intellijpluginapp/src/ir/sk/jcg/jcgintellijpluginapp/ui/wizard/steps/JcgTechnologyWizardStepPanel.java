@@ -21,7 +21,6 @@ public class JcgTechnologyWizardStepPanel extends JPanel {
     private java.util.List<JComboBox<TechnologyHandlerEnumBase>> comboBoxList = new ArrayList<>();
 
     public JcgTechnologyWizardStepPanel() {
-   //     initComponents(technologyTypes);
     }
 
     public List<JComboBox<TechnologyHandlerEnumBase>> getComboBoxList() {
@@ -39,8 +38,6 @@ public class JcgTechnologyWizardStepPanel extends JPanel {
             add(technologyTypeLabel, new GridConstraints(x, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
             DefaultComboBoxModel<TechnologyHandlerEnumBase> comboBoxModel = new DefaultComboBoxModel<>();
-
-         //   for ( subTechnologies : technologyHandlerType.getSubTechnologyTypes())
 
             for (TechnologyHandlerEnumBase technologyHandlerEnumBase : technologyHandlerType.getSubTechnologyTypes())
                 comboBoxModel.addElement(technologyHandlerEnumBase);

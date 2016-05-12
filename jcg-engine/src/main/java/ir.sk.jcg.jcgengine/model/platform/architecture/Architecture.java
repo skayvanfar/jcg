@@ -17,47 +17,11 @@ import java.util.List;
 @XmlSeeAlso({ThreeLayerArchitecture.class})
 public abstract class Architecture { // TODO: 4/27/2016 may be use interface and must change jaxb provider
 
-  //  private Project project;
-
-//    public File getBaseDir() {
-//        return baseDir;
-//    }
-//
-//    @XmlAttribute(name = "baseDir", required = true)
-//    public void setBaseDir(File baseDir) {
-//        this.baseDir = baseDir;
-////        setBaseDirOfTechnologies(baseDir);
-////        setBasePackageNameOfTechnologies(basePackageName);
-//    }
-
-//    public Architecture(Project project) {
-//        this.project = project;
-//    }
-
-//    public Project getProject() {
-//        return project;
-//    }
-//
-//    public void setProject(Project project) {
-//        this.project = project;
-//        for (TechnologyHandler technology : getTechnologies())
-//            technology.setProject(project);
-//    }
-
     List<TechnologyHandler> technologies = new ArrayList<>();
 
 
     protected abstract void setBaseDirOfTechnologies(String baseDir);
     protected abstract void setBasePackageNameOfTechnologies(String basePackageName);
-
-//    public String getBasePackageName() {
-//        return basePackageName;
-//    }
-//
-//    @XmlAttribute(name = "basePackageName", required = true)
-//    public void setBasePackageName(String basePackageName) {
-//        this.basePackageName = basePackageName;
-//    }
 
     public abstract TechnologyHandlerType[] getTechnologyTypes();
 
@@ -84,4 +48,6 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
     }
 
     public abstract List<ModelImplElement> createEntity(Entity entity, String packagePath);
+
+    public abstract TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType);
 }
