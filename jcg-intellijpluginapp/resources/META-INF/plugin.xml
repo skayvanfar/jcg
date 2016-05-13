@@ -109,7 +109,7 @@
 
 
     <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
-      <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgPropertiesSaveAction"
+      <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgElementPropertiesSaveAction"
               icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>
     </group>
 

@@ -42,7 +42,7 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 icon = IconLoader.getIcon("/javaee/persistenceId.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Property) {
                 icon = IconLoader.getIcon("/css/property.png"); // 16x16
-            } else if (treeNode.getUserObject() instanceof Relation) {
+            } else if (treeNode.getUserObject() instanceof Relationship) {
                 icon = IconLoader.getIcon("/javaee/persistenceRelationship.png"); // 16x16
             }
             wrappingPanel.setIcon(icon);

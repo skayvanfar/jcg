@@ -36,7 +36,6 @@ public class CreateEntityNodeAction extends CreateNodeAction {
 
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                     Package<Entity> entityPackage = (Package<Entity>) jcgProjectComponent.currentSelectedNodeUserObject();
-
                     CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();
 
                     Entity entity = new Entity(); // TODO: 5/3/2016 create new method
@@ -45,7 +44,7 @@ public class CreateEntityNodeAction extends CreateNodeAction {
                     // Id property that auto generated
                     Id id = new Id();
                     // convert String to camelcase like: "PersonInfo" --> "personInfo"
-                  //  id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
+                    id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
                     entity.setId(id);
 
                     // add to project

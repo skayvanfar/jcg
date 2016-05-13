@@ -184,9 +184,9 @@ public class TreePanel extends SimpleToolWindowPanel {
     }
 
     private void loadRelations(Entity entity, DefaultMutableTreeNode parentNode) {
-        for (Relation relation : entity.getRelations()) {
-            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(relation);
-            DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(relation.getTargetEntity());
+        for (Relationship relationship : entity.getRelationships()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(relationship);
+            DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(relationship.getTargetEntity());
             tNode.add(targetEntityNode);
             parentNode.add(tNode);
         }

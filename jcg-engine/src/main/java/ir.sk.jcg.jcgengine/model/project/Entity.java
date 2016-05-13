@@ -4,7 +4,6 @@ import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
-import org.eclipse.persistence.oxm.annotations.XmlIDExtension;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -33,11 +32,11 @@ public class Entity extends SchemaItem implements Serializable {
 
     private List<Property> properties;
 
-    private List<Relation> relations;
+    private List<Relationship> relationships;
 
     public Entity() {
         properties = new ArrayList<>();
-        relations = new ArrayList<>();
+        relationships = new ArrayList<>();
     }
 
     /**
@@ -48,7 +47,7 @@ public class Entity extends SchemaItem implements Serializable {
         this.packagePath = anotherEntity.getPackagePath();
         this.id = anotherEntity.getId();
         this.properties = anotherEntity.getProperties();
-        this.relations = anotherEntity.getRelations();
+        this.relationships = anotherEntity.getRelationships();
     }
 
     public String getPackagePath() {
@@ -126,24 +125,24 @@ public class Entity extends SchemaItem implements Serializable {
             properties.remove(property);
     }
 
-    public List<Relation> getRelations() {
-        return relations;
+    public List<Relationship> getRelationships() {
+        return relationships;
     }
 
     @XmlElement(name = "relation")
-    public void setRelations(List<Relation> relations) {
-        this.relations = relations;
+    public void setRelationships(List<Relationship> relationships) {
+        this.relationships = relationships;
     }
 
-    public void addRelation(Relation relation) {
-        if (relations.contains(relation))
-            throw new ElementBeforeExistException(relation);
-        relations.add(relation);
+    public void addRelation(Relationship relationship) {
+        if (relationships.contains(relationship))
+            throw new ElementBeforeExistException(relationship);
+        relationships.add(relationship);
     }
 
-    public void removeRelation(Relation relation) {
-        if (relations.contains(relation))
-            relations.remove(relation);
+    public void removeRelation(Relationship relationship) {
+        if (relationships.contains(relationship))
+            relationships.remove(relationship);
     }
 
 }

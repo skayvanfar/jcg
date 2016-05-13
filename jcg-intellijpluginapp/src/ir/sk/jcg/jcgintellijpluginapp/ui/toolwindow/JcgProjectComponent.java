@@ -180,6 +180,9 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         return treePanel.currentSelectedNodeUserObject();
     }
 
+    /**
+     * Set properties
+     * */
     public void setPropertiesModifiedElement() {
         propertiesPanel.setModifiedElement();
 

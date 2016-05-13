@@ -24,7 +24,7 @@ public class NewRelationPanel extends JPanel { // TODO: 5/12/2016 may better ext
     public NewRelationPanel(java.util.List<Entity> entities) {
         setLayout(new GridLayoutManager(2, 2, new Insets(0, 0, 0, 0), -1, -1));
 
-        relationNameLabel = new JLabel("Relation Name :");
+        relationNameLabel = new JLabel("Relationship Name :");
         add(relationNameLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         relationNameTextField = new JTextField();
         add(relationNameTextField, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));

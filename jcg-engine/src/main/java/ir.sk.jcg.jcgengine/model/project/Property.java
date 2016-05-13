@@ -26,14 +26,9 @@ public class Property extends ModelElement implements Serializable {
     @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
     private boolean isUnique;
 
-
-
-  //  private List<ValidationRule> validationRules; // TODO: 5/12/2016  
-
-
+  //  private List<ValidationRule> validationRules; // TODO: 5/12/2016
 
     public Property() {
-        value = "ddddd";
     }
 
     /**
