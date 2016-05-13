@@ -111,7 +111,7 @@ public class TreePanel extends SimpleToolWindowPanel {
     /**
      * Full a tree of node from jcgProject
      * */
-    public void initJcgTree() {
+    public void initJcgTree() { // TODO: 5/12/2016 auto create tree
         DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(jcgProject);
         loadImplElements(jcgProject, projectNode);
 
@@ -150,8 +150,10 @@ public class TreePanel extends SimpleToolWindowPanel {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(t);
             parentNode.add(tNode);
             loadImplElements(t, tNode);
-            if (hasEntity)
+            if (hasEntity) {
                 loadProperties((Entity) t, tNode);
+                loadRelations((Entity) t, tNode);
+            }
         }
         for (Package<T> bPackage : aPackage.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(bPackage);
@@ -171,6 +173,15 @@ public class TreePanel extends SimpleToolWindowPanel {
     private void loadProperties(Entity entity, DefaultMutableTreeNode parentNode) {
         for (Property property : entity.getProperties()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(property);
+            parentNode.add(tNode);
+        }
+    }
+
+    private void loadRelations(Entity entity, DefaultMutableTreeNode parentNode) {
+        for (Relation relation : entity.getRelations()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(relation);
+            DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(relation.getTargetEntity());
+            tNode.add(targetEntityNode);
             parentNode.add(tNode);
         }
     }

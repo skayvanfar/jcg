@@ -6,7 +6,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.ele
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
-import ir.sk.jcg.jcgengine.model.project.enums.ModelInfoType;
+import ir.sk.jcg.jcgengine.model.project.enums.MappingType;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
@@ -33,8 +33,8 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @Prop
     private String modelDir;
 
-    @Prop(label = "Model info type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
-    private ModelInfoType modelInfoType;
+    @Prop(label = "mapping type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
+    private MappingType mappingType;
 
 
     private File entityMainPackage;
@@ -71,13 +71,13 @@ public class HibernateHandler extends ORMTechnologyHandler {
         this.modelDir = modelDir;
     }
 
-    public ModelInfoType getModelInfoType() {
-        return modelInfoType;
+    public MappingType getMappingType() {
+        return mappingType;
     }
 
     @XmlAttribute
-    public void setModelInfoType(ModelInfoType modelInfoType) {
-        this.modelInfoType = modelInfoType;
+    public void setMappingType(MappingType mappingType) {
+        this.mappingType = mappingType;
     }
 
     @Override

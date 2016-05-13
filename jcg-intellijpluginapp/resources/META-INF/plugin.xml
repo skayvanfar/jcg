@@ -81,6 +81,9 @@
       <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
                icon="/css/property.png" text="Create Property"/>
       <separator/>
+      <action id="Create New Relation" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateRelationNodeAction"
+              icon="/javaee/persistenceRelationship.png" text="Create Relation"/>
+      <separator/>
       <reference ref="Generate Code" />
       <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityCreateNodeActionAction"-->
               <!--icon="/actions/new.png" text="Create Entity"/>-->

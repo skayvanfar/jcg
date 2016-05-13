@@ -35,13 +35,15 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 icon = IconLoader.getIcon("/nodes/package.png"); // 16x16
             //    public static final Icon NewFolder = IconLoader.getIcon("/nodes/newFolder.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Entity) {
-                icon = IconLoader.getIcon("/nodes/class.png"); // 16x16            wrappingPanel.setIcon(icon);
+                icon = IconLoader.getIcon("/nodes/class.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof View) {
-                icon = IconLoader.getIcon("/nodes/advice.png"); // 16x16            wrappingPanel.setIcon(icon);
+                icon = IconLoader.getIcon("/nodes/advice.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Id) {
-                icon = IconLoader.getIcon("/javaee/persistenceId.png"); // 16x16            wrappingPanel.setIcon(icon);
+                icon = IconLoader.getIcon("/javaee/persistenceId.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Property) {
-                icon = IconLoader.getIcon("/css/property.png"); // 16x16            wrappingPanel.setIcon(icon);
+                icon = IconLoader.getIcon("/css/property.png"); // 16x16
+            } else if (treeNode.getUserObject() instanceof Relation) {
+                icon = IconLoader.getIcon("/javaee/persistenceRelationship.png"); // 16x16
             }
             wrappingPanel.setIcon(icon);
         }

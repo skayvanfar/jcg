@@ -63,8 +63,8 @@ public class ThreeLayerArchitecture extends Architecture {
 
         buildTechnology.addDependencies(ormTechnology.getDependencies()); // todo may not be here
         buildTechnology.addDependencies(mvcTechnology.getDependencies()); // todo may not be here
-        buildTechnology.createBasePlatform();
         try {
+            buildTechnology.createBasePlatform();
             ormTechnology.createBasePlatform();
             mvcTechnology.createBasePlatform();
         } catch (Exception e) { // todo
@@ -75,9 +75,7 @@ public class ThreeLayerArchitecture extends Architecture {
     @Override
     public List<ModelImplElement> createEntity(Entity entity, String packagePath) {
         List<ModelImplElement> modelImplElements = new ArrayList<>();
-        BuildTechnologyHandler buildTechnologyHandler = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
         ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
-        MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         EntityClass entityClassElement = ormTechnologyHandler.createEntityClass(entity, packagePath);
         if (entityClassElement != null)

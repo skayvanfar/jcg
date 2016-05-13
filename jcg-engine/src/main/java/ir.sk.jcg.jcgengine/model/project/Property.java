@@ -27,7 +27,7 @@ public class Property extends ModelElement implements Serializable {
 
 
 
-  //  private List<ValidationRule> validationRules;
+  //  private List<ValidationRule> validationRules; // TODO: 5/12/2016  
 
 
 

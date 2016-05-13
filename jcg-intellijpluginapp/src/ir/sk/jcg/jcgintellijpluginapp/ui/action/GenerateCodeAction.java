@@ -34,19 +34,19 @@ public class GenerateCodeAction extends NodeAction {
         builder.setPreferredFocusComponent(questionPanel);
         builder.setCenterPanel(questionPanel);
         builder.setOkOperation(new Runnable() {
-            
+
             private CodeGenerator codeGenerator;
-            
+
             @Override
             public void run() {
 
                 JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                 codeGenerator = jcgProjectComponent.getCodeGenerator();
                 ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
-                
+
                 Object[] pathArray = jcgProjectComponent.getSelectionPath().getPath();
 
-                String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length ); // TODO: 5/9/2016  on project throws ArrayIndexOutOfBoundException fo 2 
+                String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length ); // TODO: 5/9/2016  on project throws ArrayIndexOutOfBoundException fo 2
                 List<? extends ImplElement> implElements = generate(modelElement, packagePathArray);
 
                 modelElement.addAllImplElements((List<ImplElement>) implElements);
@@ -61,15 +61,15 @@ public class GenerateCodeAction extends NodeAction {
 
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }
-            
+
             private List<? extends ImplElement> generate(ModelElement modelElement, String[] packagePathArray) {
                 List<? extends ImplElement> implElements = new ArrayList<ImplElement>();
                 if (modelElement instanceof Entity) {
                     implElements = codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
                 } else if (modelElement instanceof View) {
-                    
+
                 } else {
-                    
+
                 }
                 return implElements;
             }

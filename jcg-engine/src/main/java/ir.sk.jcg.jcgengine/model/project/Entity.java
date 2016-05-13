@@ -5,10 +5,7 @@ import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +32,11 @@ public class Entity extends SchemaItem implements Serializable {
 
     private List<Property> properties;
 
+    private List<Relation> relations;
+
     public Entity() {
         properties = new ArrayList<>();
+        relations = new ArrayList<>();
     }
 
     /**
@@ -47,6 +47,7 @@ public class Entity extends SchemaItem implements Serializable {
         this.packagePath = anotherEntity.getPackagePath();
         this.id = anotherEntity.getId();
         this.properties = anotherEntity.getProperties();
+        this.relations = anotherEntity.getRelations();
     }
 
     public String getPackagePath() {
@@ -63,6 +64,7 @@ public class Entity extends SchemaItem implements Serializable {
     }
 
     @XmlAttribute
+    @XmlID // TODO: 5/12/2016 Id
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
@@ -120,6 +122,26 @@ public class Entity extends SchemaItem implements Serializable {
     public void removeProperty(Property property) {
         if (properties.contains(property))
             properties.remove(property);
+    }
+
+    public List<Relation> getRelations() {
+        return relations;
+    }
+
+    @XmlElement(name = "relation")
+    public void setRelations(List<Relation> relations) {
+        this.relations = relations;
+    }
+
+    public void addRelation(Relation relation) {
+        if (relations.contains(relation))
+            throw new ElementBeforeExistException(relation);
+        relations.add(relation);
+    }
+
+    public void removeRelation(Relation relation) {
+        if (relations.contains(relation))
+            relations.remove(relation);
     }
 
 }

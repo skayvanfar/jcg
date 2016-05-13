@@ -3,17 +3,19 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
 /**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/7/2016
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
-public enum ModelInfoType implements EnumBase {
+public enum RelationType implements EnumBase {
 
-    ANNOTATION(0, "Annotation"),
-    HBM_XML_FILE(1, "hbm xml file");
+    ONE_TO_ONE(0, "1 ... 1"),
+    ONE_TO_MANY(1, "1 ... *"),
+    MANY_TO_ONE(2, "* ... 1"),
+    MANY_TO_MANY(3, "* ... *"); // TODO: 5/12/2016 add Bidirectional
 
     private Integer value;
     private String desc;
 
-    ModelInfoType(Integer value, String desc) {
+    RelationType(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -28,8 +30,8 @@ public enum ModelInfoType implements EnumBase {
         return desc;
     }
 
-    public static ModelInfoType valueOf(Integer type) {
-        for (ModelInfoType code : ModelInfoType.values()) {
+    public static RelationType valueOf(Integer type) {
+        for (RelationType code : RelationType.values()) {
             if (type == code.getValue()) {
                 return code;
             }
@@ -42,4 +44,3 @@ public enum ModelInfoType implements EnumBase {
         return desc;
     }
 }
-

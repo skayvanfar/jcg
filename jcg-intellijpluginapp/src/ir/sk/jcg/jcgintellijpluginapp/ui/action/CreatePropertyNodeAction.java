@@ -27,9 +27,9 @@ public class CreatePropertyNodeAction extends CreateNodeAction {
         builder.setOkOperation(new Runnable() {
             @Override
             public void run() {
-                String entityName = addNodePanel.getNodeName();
-                if (StringUtil.isNotEmpty(entityName)) {
-                    entityName = correctName(entityName);
+                String propertyName = addNodePanel.getNodeName();
+                if (StringUtil.isNotEmpty(propertyName)) {
+                    propertyName = correctName(propertyName);
 
                     JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                     Entity entity = (Entity) jcgProjectComponent.currentSelectedNodeUserObject();
@@ -37,7 +37,7 @@ public class CreatePropertyNodeAction extends CreateNodeAction {
                     CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();
 
                     Property property = new Property(); // TODO: 5/3/2016 create new method
-                    property.setName(entityName);
+                    property.setName(propertyName);
 
                     // add to project
                     entity.addProperty(property);

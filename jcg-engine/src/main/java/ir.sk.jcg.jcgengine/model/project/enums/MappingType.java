@@ -3,17 +3,17 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
 /**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/7/2016
  */
-public enum IdGeneratorType implements EnumBase {
-    MANUAL(0, "Manual"),
-    INCREMENTAL(1, "incremental"),
-    NATIVE(2, "Native"); // TODO: 5/12/2016 more need
+public enum MappingType implements EnumBase {
+
+    ANNOTATION(0, "Annotation"),
+    HBM_XML_FILE(1, "hbm xml file");
 
     private Integer value;
     private String desc;
 
-    IdGeneratorType(Integer value, String desc) {
+    MappingType(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -27,8 +27,9 @@ public enum IdGeneratorType implements EnumBase {
     public String getDescription() {
         return desc;
     }
-    public static IdGeneratorType valueOf(Integer type) {
-        for (IdGeneratorType code : IdGeneratorType.values()) {
+
+    public static MappingType valueOf(Integer type) {
+        for (MappingType code : MappingType.values()) {
             if (type == code.getValue()) {
                 return code;
             }
@@ -40,5 +41,5 @@ public enum IdGeneratorType implements EnumBase {
     public String toString() {
         return desc;
     }
-
 }
+
