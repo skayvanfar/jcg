@@ -27,6 +27,7 @@ public enum IdGeneratorType implements EnumBase {
     public String getDescription() {
         return desc;
     }
+
     public static IdGeneratorType valueOf(Integer type) {
         for (IdGeneratorType code : IdGeneratorType.values()) {
             if (type == code.getValue()) {

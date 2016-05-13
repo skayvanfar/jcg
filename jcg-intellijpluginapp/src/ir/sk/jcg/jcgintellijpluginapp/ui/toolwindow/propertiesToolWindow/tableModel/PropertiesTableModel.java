@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel;
 
 import com.intellij.openapi.ui.ComboBox;
+import com.siyeh.ig.ui.TextField;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
@@ -69,6 +70,7 @@ public class PropertiesTableModel extends AbstractTableModel {
     }
 
     private void setRenderers() {
+        propertyTable.clearRenderers();
 //        for (int i = 0; i < fields.size(); i++) { // TODO: 5/7/2016 not worked: CellRenderer must be red border for required cell 
 //            Field  field = fields.get(i);
 //            Prop prop = field.getAnnotation(Prop.class);
@@ -84,6 +86,7 @@ public class PropertiesTableModel extends AbstractTableModel {
     }
 
     private void setEditors() {
+        propertyTable.clearEditors();
         int i = 0;
         for (PropertyInfo propertyInfo : propertyInfos) {
             ComponentType componentType = propertyInfo.getComponentType();
@@ -92,6 +95,7 @@ public class PropertiesTableModel extends AbstractTableModel {
                 case NON_EDITABLE_COMBO:
                     Class<? extends Enum> classType= (Class<? extends Enum>) propertyInfo.getTypeClass();
                     Enum[] possibleValues = classType.getEnumConstants();
+                   // JComboBox comboBox = new JComboBox();
                     ComboBox comboBox = new ComboBox();
                     for (Enum<?> e : possibleValues) {
                         comboBox.addItem(e);
@@ -111,6 +115,7 @@ public class PropertiesTableModel extends AbstractTableModel {
 
                     break;
                 case DEFAULT:
+                    this.propertyTable.getRowEditorModel().addEditorForRow(i, new DefaultCellEditor(new JTextField()));//Reducer Properties // TODO: 5/13/2016 must not set. but because use Enum for other properties occasion Default editor not work
                     // Not set. default accepted
                     break;
                 default:

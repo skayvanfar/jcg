@@ -151,6 +151,7 @@ public class TreePanel extends SimpleToolWindowPanel {
             parentNode.add(tNode);
             loadImplElements(t, tNode);
             if (hasEntity) {
+                loadId((Entity) t, tNode);
                 loadProperties((Entity) t, tNode);
                 loadRelations((Entity) t, tNode);
             }
@@ -168,6 +169,11 @@ public class TreePanel extends SimpleToolWindowPanel {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(implElement);
             parentNode.add(tNode);
         }
+    }
+
+    private void loadId(Entity entity, DefaultMutableTreeNode parentNode) {
+        DefaultMutableTreeNode nodeId = new DefaultMutableTreeNode(entity.getId());
+        parentNode.add(nodeId);
     }
 
     private void loadProperties(Entity entity, DefaultMutableTreeNode parentNode) {

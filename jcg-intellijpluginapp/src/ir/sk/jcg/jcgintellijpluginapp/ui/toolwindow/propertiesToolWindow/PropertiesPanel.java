@@ -26,6 +26,7 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
     private JPanel propsPanel;
     private PropertyTable propertyTable;
     private Element realElement;
+    private Element copyElement;
 
     public PropertiesPanel() {
         super(true);
@@ -52,7 +53,10 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
         this.add(this.propsPanel, BorderLayout.CENTER);
         setToolbar(createToolBar());
     }
-    Element copyElement;
+
+    /**
+     * Set new PropertiesTableModel for PropertyTable with clone object of element
+     * */
     public void setElement(Element element) {
         realElement = element;
         copyElement = (Element) SerializationUtil.deepClone(element);

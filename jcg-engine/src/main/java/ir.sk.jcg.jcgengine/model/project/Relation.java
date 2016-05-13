@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.enums.RelationType;
 
@@ -12,6 +13,7 @@ import java.io.Serializable;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
+@Editable
 public class Relation extends ModelElement implements Serializable {
 
     @Prop(label = "Relation Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)

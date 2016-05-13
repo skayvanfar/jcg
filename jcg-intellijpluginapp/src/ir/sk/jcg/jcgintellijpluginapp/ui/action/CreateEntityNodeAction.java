@@ -45,8 +45,8 @@ public class CreateEntityNodeAction extends CreateNodeAction {
                     // Id property that auto generated
                     Id id = new Id();
                     // convert String to camelcase like: "PersonInfo" --> "personInfo"
-                    id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
-                    entity.addProperty(id);
+                  //  id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
+                    entity.setId(id);
 
                     // add to project
                     entityPackage.addElement(entity);

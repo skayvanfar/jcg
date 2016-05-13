@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/9/2016
  */
-@XmlSeeAlso({Schema.class, Package.class, Project.class, Property.class})
+@XmlSeeAlso({Schema.class, Package.class, Project.class, Property.class, Id.class})
 public class ModelElement extends Element {
 
     private List<ImplElement> implElements;

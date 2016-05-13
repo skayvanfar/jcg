@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.project;
 
+import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 
@@ -16,14 +17,14 @@ import java.io.Serializable;
 @Editable
 public class Property extends ModelElement implements Serializable {
 
-    @Prop(required = true)
+    @Prop(label = "Type", required = true)
     private String type;
     @Prop(required = true)
     private String value;
-    @Prop
+    @Prop(label = "Column Name")
     private String columnName;
-    @Prop(required = true)
-    private String isUnique;
+    @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
+    private boolean isUnique;
 
 
 
@@ -31,7 +32,9 @@ public class Property extends ModelElement implements Serializable {
 
 
 
-    public Property() {}
+    public Property() {
+        value = "ddddd";
+    }
 
     /**
      * Copy constructor
@@ -68,12 +71,12 @@ public class Property extends ModelElement implements Serializable {
         this.columnName = columnName;
     }
 
-    public String getIsUnique() {
+    public boolean isUnique() {
         return isUnique;
     }
 
     @XmlAttribute
-    public void setIsUnique(String isUnique) {
-        this.isUnique = isUnique;
+    public void setUnique(boolean unique) {
+        isUnique = unique;
     }
 }
