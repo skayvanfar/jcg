@@ -4,6 +4,7 @@ import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
+import org.eclipse.persistence.oxm.annotations.XmlIDExtension;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -64,7 +65,7 @@ public class Entity extends SchemaItem implements Serializable {
     }
 
     @XmlAttribute
-    @XmlID // TODO: 5/12/2016 Id
+     // TODO: 5/12/2016 Id
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
@@ -100,6 +101,7 @@ public class Entity extends SchemaItem implements Serializable {
         return id;
     }
 
+    @XmlElement(name = "id")
     public void setId(Id id) {
         this.id = id;
     }

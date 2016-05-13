@@ -32,6 +32,7 @@ public abstract class Element implements Serializable {
 
 
     @XmlAttribute(required = true)
+    @XmlID
     public void setName(String name) {
         this.name = name;
     }
