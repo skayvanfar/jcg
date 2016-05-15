@@ -15,13 +15,13 @@ import java.io.Serializable;
 public class Project extends ModelElement implements Serializable {
 
     // base info
-    @Prop(label = "Persian Name", required = true)
+    @Prop(label = "Persian Name", editable = true, required = true)
     private String persianName;
 
-    @Prop(label = "Package Prefix", required = true)
+    @Prop(label = "Package Prefix", editable = true, required = true)
     private String packagePrefix;
 
-    @Prop(label = "Table Name Pattern", required = true)
+    @Prop(label = "Table Name Pattern", editable = true, required = true)
     private String tableNamePattern;
 
     private Schema<Entity> entitiesSchema = new Schema<>();

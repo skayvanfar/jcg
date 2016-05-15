@@ -189,8 +189,9 @@ public class PropertiesTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
             return false;
-        } else {
-            return editable;
+        } else if(editable && propertyInfos.get(rowIndex).isEditable()) {
+            return true;
         }
+        return false;
     }
 }

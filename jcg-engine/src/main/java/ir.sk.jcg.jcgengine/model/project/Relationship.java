@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Editable
 public class Relationship extends ModelElement implements Serializable {
 
-    @Prop(label = "Relationship Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
+    @Prop(label = "Relationship Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
     private RelationshipType relationshipType;
 
   //  @Prop(label = "Target Entity", required = true) // TODO: 5/12/2016 may required = true not needed

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Editable
 public class Id extends Property implements Serializable {
 
-    @Prop(label = "Id Generator Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
+    @Prop(label = "Id Generator Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
     private IdGeneratorType idGeneratorType;
 
     public Id() {

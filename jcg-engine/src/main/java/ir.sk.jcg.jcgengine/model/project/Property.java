@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -17,13 +18,13 @@ import java.io.Serializable;
 @Editable
 public class Property extends ModelElement implements Serializable {
 
-    @Prop(label = "Type", required = true)
+    @Prop(label = "Type", editable = true, required = true)
     private String type;
-    @Prop(required = true)
+    @Prop(label = "Value", editable = true, required = true)
     private String value;
-    @Prop(label = "Column Name")
+    @Prop(label = "Column Name", editable = true, required = true)
     private String columnName;
-    @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
+    @Prop(label = "Is Unique", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
     private boolean isUnique;
 
   //  private List<ValidationRule> validationRules; // TODO: 5/12/2016

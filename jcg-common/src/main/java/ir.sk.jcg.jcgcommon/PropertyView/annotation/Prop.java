@@ -31,6 +31,11 @@ public @interface Prop {
     ComponentType componentType() default ComponentType.DEFAULT;
 
     /**
+     * is property editable
+     * */
+    boolean editable() default false;
+
+    /**
      * Required or not required
      * */
     boolean required() default false;

@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
@@ -82,10 +83,15 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
         }
     }
 
+    @Prop(label = "Main Java Directory")
     protected String mainJavaDir;
+    @Prop(label = "Main Resources Directory")
     protected String mainResourcesDir;
+    @Prop(label = "Main Web Directory")
     protected String mainWebDir;
+    @Prop(label = "Test Java Directory")
     protected String testJavaDir;
+    @Prop(label = "Test Resources Directory")
     protected String testResourcesDir;
 
     public BuildTechnologyHandler() {

@@ -26,16 +26,16 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
 
-    @Prop
+    @Prop(label = "Interface DAO Directory")
     private String interfaceDAODir;
-    @Prop
+    @Prop(label = "Impl DAO Directory")
     private String implDAODir;
     private String interfaceDAOCommonDir;
     private String implDAOCommonDir;
-    @Prop
+    @Prop(label = "Model Directory")
     private String modelDir;
 
-    @Prop(label = "mapping type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
+    @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true,required = true)
     private MappingType mappingType;
 
 

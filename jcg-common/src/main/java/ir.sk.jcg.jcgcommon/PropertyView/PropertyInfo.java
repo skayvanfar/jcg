@@ -19,6 +19,7 @@ public class PropertyInfo {
         private String name;
         private String label;
         private Object value;
+        private boolean editable;
         private boolean required;
 
         // Optional parameters - initialized to default values
@@ -27,12 +28,17 @@ public class PropertyInfo {
         private Object object;
         private Class<?> typeClass;
 
-        public Builder(String name, Object value, boolean required) {
+        public Builder(String name, Object value,boolean editable, boolean required) {
             this.name = name;
             this.value = value;
+            this.editable = editable;
             this.required = required;
         }
 
+        public Builder label(String val) {
+            label = val;
+            return this;
+        }
         public Builder componentType(ComponentType val) {
             componentType = val;
             return this;
@@ -55,10 +61,21 @@ public class PropertyInfo {
         }
     }
 
+    private String name;
+    private String label;
+    private Object value;
+    private boolean editable;
+    private boolean required;
+    private ComponentType componentType;
+    private String[] values;
+    private Object object;
+    private Class<?> typeClass;
+
     public PropertyInfo(Builder builder) {
         this.name = builder.name;
         this.label = builder.label;
         this.value = builder.value;
+        this.editable = builder.editable;
         this.required = builder.required;
         this.componentType = builder.componentType;
         this.values = builder.values;
@@ -66,25 +83,17 @@ public class PropertyInfo {
         this.typeClass = builder.typeClass;
     }
 
-    public PropertyInfo(String name, String label,Object value, boolean required, ComponentType componentType, String[] values, Object object, Class<?> typeClass) {
+    public PropertyInfo(String name, String label,Object value, boolean editable, boolean required, ComponentType componentType, String[] values, Object object, Class<?> typeClass) {
         this.name = name;
         this.label = label;
         this.value = value;
+        this.editable = editable;
         this.required = required;
         this.componentType = componentType;
         this.values = values;
         this.object = object;
         this.typeClass = typeClass;
     }
-
-    private String name;
-    private String label;
-    private Object value;
-    private boolean required;
-    private ComponentType componentType;
-    private String[] values;
-    private Object object;
-    private Class<?> typeClass;
 
     public String getName() {
         return name;
@@ -108,6 +117,14 @@ public class PropertyInfo {
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public boolean isEditable() {
+        return editable;
+    }
+
+    public void setEditable(boolean editable) {
+        this.editable = editable;
     }
 
     public boolean isRequired() {
@@ -164,6 +181,7 @@ public class PropertyInfo {
         this.name = field.getName();
         this.label = prop.label();
         this.value = value;
+        this.editable = prop.editable();
         this.required = prop.required();
         this.componentType = prop.componentType();
         this.values = prop.values();

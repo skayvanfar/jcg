@@ -14,7 +14,7 @@ import java.io.Serializable;
 @XmlSeeAlso({ModelElement.class, ImplElement.class})
 public abstract class Element implements Presentable, Serializable {
 
-    @Prop(label = "Project Name", required = true)
+    @Prop(label = "Project Name", editable = true, required = true)
     protected String name;
 
     protected Element() {

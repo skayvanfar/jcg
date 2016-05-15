@@ -19,13 +19,13 @@ public class Entity extends SchemaItem implements Serializable {
 
     private String packagePath;
 
-    @Prop
+    @Prop(label = "Table Name", editable = true, required = true)
     private String tableName;
-    @Prop
+    @Prop(label = "Label Name", editable = true, required = true)
     private String labelName;
-    @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX)
+    @Prop(label = "Is Logically Deletable", editable = true, componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
     private boolean isLogicallyDeletable;
-    @Prop(componentType = ComponentType.BOOLEAN_CHECKBOX)
+    @Prop(label = "Is Trackable", editable = true, componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
     private boolean isTrackable;
 
     private Id id;
