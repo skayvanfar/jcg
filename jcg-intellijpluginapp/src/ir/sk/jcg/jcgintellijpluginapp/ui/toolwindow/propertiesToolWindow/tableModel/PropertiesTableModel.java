@@ -147,7 +147,7 @@ public class PropertiesTableModel extends AbstractTableModel {
         PropertyInfo propertyInfo = propertyInfos.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return propertyInfo.getName();
+                return !propertyInfo.getLabel().equals("") ? propertyInfo.getLabel() : propertyInfo.getName();
             case 1:
                 return propertyInfo.getValue();
             default:
