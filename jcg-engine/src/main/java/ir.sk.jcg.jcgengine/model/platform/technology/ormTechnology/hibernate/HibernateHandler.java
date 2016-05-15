@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
+@Editable
 public class HibernateHandler extends ORMTechnologyHandler {
 
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
@@ -43,6 +45,19 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private File implDAODirFile;
     private File interfaceDAOCommonDirFile;
     private File implDAOCommonDirFile;
+
+    public HibernateHandler() {
+        super("Hibernate");
+        this.interfaceDAODir = "/dao";
+        this.implDAODir = "/impl";
+        this.interfaceDAOCommonDir = "/common";
+        this.implDAOCommonDir = "/impl";
+        this.modelDir = "model";
+
+        dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
+        dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
+        dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-c3p0", HIBERNATE_VERSION, "compile"));
+    }
 
     public String getInterfaceDAODir() {
         return interfaceDAODir;
@@ -91,18 +106,6 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @Override
     public List<ModelImplElement> createDao(Entity entity) {
         return null; // TODO: 5/8/2016
-    }
-
-    public HibernateHandler() {
-        this.interfaceDAODir = "/dao";
-        this.implDAODir = "/impl";
-        this.interfaceDAOCommonDir = "/common";
-        this.implDAOCommonDir = "/impl";
-        this.modelDir = "model";
-
-        dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
-        dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
-        dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-c3p0", HIBERNATE_VERSION, "compile"));
     }
 
     @Override

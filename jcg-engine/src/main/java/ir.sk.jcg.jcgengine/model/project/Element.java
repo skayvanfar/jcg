@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.Presentable;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.io.Serializable;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({ModelElement.class, ImplElement.class})
-public abstract class Element implements Serializable {
+public abstract class Element implements Presentable, Serializable {
 
     @Prop(label = "Project Name", required = true)
     protected String name;

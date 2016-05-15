@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
@@ -10,6 +11,7 @@ import java.io.File;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
+@Editable
 public class SpringMVCHandler extends MVCTechnologyHandler {
 
     private static final String SPRING_GROUP_ID = "org.springframework";
@@ -20,6 +22,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     private File controllerDir;
 
     public SpringMVCHandler() {
+        super("Spring MVC");
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-core", SPRING_VERSION, "compile"));
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-web", SPRING_VERSION, "compile"));
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-webmvc", SPRING_VERSION, "compile"));

@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import ir.sk.jcg.jcgengine.CodeGenerator;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.enums.RelationshipType;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
@@ -28,7 +29,7 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
         doBeforeSave(jcgProjectComponent);
 
         try {
-            jcgProjectComponent.getCodeGenerator().marshallingProject();
+            jcgProjectComponent.getCodeGenerator().marshalling();
         } catch (JAXBException e1) {
             e1.printStackTrace();
             logger.error("buildTemplate error in template : " + e);
@@ -40,14 +41,14 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
      * Do stuffs need tob done before save like bidirectional relationships
      * */
     private void doBeforeSave(JcgProjectComponent jcgProjectComponent) {
-        Element element = (Element) jcgProjectComponent.currentSelectedNodeUserObject();
+        Presentable presentable = (Presentable) jcgProjectComponent.currentSelectedNodeUserObject();
 
-        if (element instanceof Relationship) {
+        if (presentable instanceof Relationship) {
             TreePath treePath = jcgProjectComponent.getSelectionPath();
             DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) treePath.getParentPath().getLastPathComponent();
             Entity parentEntity = (Entity) parentNode.getUserObject();
 
-            Relationship relationship = (Relationship) element;
+            Relationship relationship = (Relationship) presentable;
             RelationshipType relationshipType = relationship.getRelationshipType();
             if (!relationship.getTargetEntity().equals(parentEntity) && (relationshipType.equals(RelationshipType.ONE_TO_ONE_BIDIRECTIONAL)
                     || relationshipType.equals(RelationshipType.ONE_TO_MANY_BIDIRECTIONAL)

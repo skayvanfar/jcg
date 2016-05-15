@@ -7,6 +7,8 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.listener.TreeSelectionChangedListener;
@@ -26,12 +28,14 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     private Tree jcgTree;
     private Project jcgProject;
+    private Architecture architecture;
 
     private TreeSelectionChangedListener treeSelectionChangedListener;
 
-    public TreePanel(Project jcgProject) {
+    public TreePanel(Project jcgProject, Architecture architecture) {
         super(true);
         this.jcgProject = jcgProject;
+        this.architecture = architecture;
 
         initJcgTree();
 
@@ -112,6 +116,8 @@ public class TreePanel extends SimpleToolWindowPanel {
      * Full a tree of node from jcgProject
      * */
     public void initJcgTree() { // TODO: 5/12/2016 auto create tree
+        DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
+
         DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(jcgProject);
         loadImplElements(jcgProject, projectNode);
 
@@ -138,8 +144,16 @@ public class TreePanel extends SimpleToolWindowPanel {
         projectNode.add(entityModelNode);
         projectNode.add(viewModelNode);
 
-        jcgTree = new Tree(projectNode);
+        /// for architecture
+        DefaultMutableTreeNode architectureNode = new DefaultMutableTreeNode(architecture);
 
+        loadTechnologyHandlers(architecture, architectureNode);
+
+        rootNode.add(projectNode);
+        rootNode.add(architectureNode);
+
+        jcgTree = new Tree(rootNode);
+        jcgTree.setRootVisible(false);
     }
 
     /**
@@ -189,6 +203,13 @@ public class TreePanel extends SimpleToolWindowPanel {
             DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(relationship.getTargetEntity());
             tNode.add(targetEntityNode);
             parentNode.add(tNode);
+        }
+    }
+
+    private void loadTechnologyHandlers(Architecture architecture, DefaultMutableTreeNode parentNode) {
+        for (TechnologyHandler technologyHandler : architecture.getTechnologies()) {
+            DefaultMutableTreeNode technologyHandlerNode = new DefaultMutableTreeNode(technologyHandler);
+            parentNode.add(technologyHandlerNode);
         }
     }
 

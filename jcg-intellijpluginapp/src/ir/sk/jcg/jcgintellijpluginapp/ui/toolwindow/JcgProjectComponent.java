@@ -10,6 +10,7 @@ import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentManager;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.JavaCodeGenerator;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
@@ -109,9 +110,9 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     private void addContentToJcgTreeToolWindow() {
         final ContentManager contentManager = jcgTreeToolWindow.getContentManager();
-        treePanel = new TreePanel(codeGenerator.getJcgProject());
+        treePanel = new TreePanel(codeGenerator.getJcgProject(), codeGenerator.getArchitecture());
         treePanel.setTreeSelectionChangedListener(userObject -> {
-            propertiesPanel.setElement((Element) userObject);
+            propertiesPanel.setPresentable((Presentable) userObject);
             if (!jcgPropertiesToolWindow.isVisible())
                 jcgPropertiesToolWindow.show(() -> {});
         });

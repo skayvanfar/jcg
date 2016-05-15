@@ -6,6 +6,10 @@ package ir.sk.jcg.jcgengine.model.platform.technology;
 public abstract class ViewTechnologyHandler extends TechnologyHandler {
 
     public ViewTechnologyHandler() {
+        super("View Technology");
     }
 
+    public ViewTechnologyHandler(String name) {
+        super(name);
+    }
 }

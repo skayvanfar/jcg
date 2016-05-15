@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.technology.*;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
@@ -7,12 +8,17 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnology
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016
  */
+@Editable
 public abstract class TwoLayerArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.BUILD_TECHNOLOGY};
 
     private BuildTechnologyHandler buildTechnology;
     private ORMTechnologyHandler ormTechnology;
+
+    public TwoLayerArchitecture() {
+        super("Two Layer");
+    }
 
     public BuildTechnologyHandler getBuildTechnology() {
         return buildTechnology;

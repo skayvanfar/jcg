@@ -7,6 +7,7 @@ import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.util.SerializationUtil;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.editor.RowEditorModel;
@@ -25,8 +26,10 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
 
     private JPanel propsPanel;
     private PropertyTable propertyTable;
-    private Element realElement;
-    private Element copyElement;
+
+    // Object that show in table model
+    private Presentable realPresentable;
+    private Presentable clonedPresentable;
 
     public PropertiesPanel() {
         super(true);
@@ -57,12 +60,21 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
     /**
      * Set new PropertiesTableModel for PropertyTable with clone object of element
      * */
-    public void setElement(Element element) {
-        realElement = element;
-        copyElement = (Element) SerializationUtil.deepClone(element);
+    public void setPresentable(Presentable presentable) {
+        realPresentable = presentable;
 
         try {
-            propertyTable.setModel(new PropertiesTableModel(copyElement, propertyTable));
+            clonedPresentable = (Presentable) SerializationUtil.shallowCloneByAnnotation(realPresentable, Prop.class);
+        } catch (IllegalAccessException e) { // TODO: 5/15/2016
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            propertyTable.setModel(new PropertiesTableModel(clonedPresentable, propertyTable));
         } catch (IntrospectionException e) {
             e.printStackTrace();
         }
@@ -81,15 +93,15 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
      * Save copy Element to real element
      * */
     public void setModifiedElement() {
-        java.util.List<Field> fields = ReflectionUtil.findFields(realElement.getClass(), Prop.class);
+        java.util.List<Field> fields = ReflectionUtil.findFields(realPresentable.getClass(), Prop.class);
         for(Field field : fields) {
             field.setAccessible(true);
             try {
                 String name = field.getName();
-                Field copyField = ReflectionUtil.getFieldByName(name, copyElement);
+                Field copyField = ReflectionUtil.getFieldByName(name, clonedPresentable);
                 copyField.setAccessible(true);
-                Object newValue = copyField.get(copyElement);
-                field.set(realElement, newValue);
+                Object newValue = copyField.get(clonedPresentable);
+                field.set(realPresentable, newValue);
                 copyField.setAccessible(false);
             } catch (IllegalAccessException e) {
                 e.printStackTrace(); // TODO: 5/5/2016

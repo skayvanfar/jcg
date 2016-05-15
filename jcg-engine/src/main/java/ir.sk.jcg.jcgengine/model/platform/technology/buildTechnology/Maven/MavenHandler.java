@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
@@ -12,6 +13,7 @@ import java.io.File;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
+@Editable
 public class MavenHandler extends BuildTechnologyHandler {
 
    // @Prop
@@ -25,6 +27,7 @@ public class MavenHandler extends BuildTechnologyHandler {
     private String version;
 
     public MavenHandler() {
+        super("Maven");
         version = "0.0.1-SNAPSHOT";
 
         mainJavaDir = "/src/main/java";

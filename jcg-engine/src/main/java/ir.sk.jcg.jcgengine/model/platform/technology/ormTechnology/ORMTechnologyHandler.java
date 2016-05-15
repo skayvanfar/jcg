@@ -97,4 +97,12 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         }
     }
 
+    public ORMTechnologyHandler() {
+        super("ORM Technology");
+    }
+
+    public ORMTechnologyHandler(String name) {
+        super(name);
+    }
+
 }

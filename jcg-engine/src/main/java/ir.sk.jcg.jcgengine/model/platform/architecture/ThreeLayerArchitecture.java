@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.technology.*;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
@@ -16,12 +17,17 @@ import java.util.List;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlRootElement // TODO: 4/27/2016 must remove from this class
+@Editable
 public class ThreeLayerArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
     private String baseDir; // TODO: 5/3/2016 may better use Project
     private String basePackageName;
+
+    public ThreeLayerArchitecture() {
+        super("Three Layer");
+    }
 
     @Override
     public void setBaseDirOfTechnologies(String baseDir) {

@@ -88,6 +88,14 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
     protected String testJavaDir;
     protected String testResourcesDir;
 
+    public BuildTechnologyHandler() {
+        super("Build Technology");
+    }
+
+    public BuildTechnologyHandler(String name) {
+        super(name);
+    }
+
     public String getMainJavaDir() {
         return mainJavaDir;
     }

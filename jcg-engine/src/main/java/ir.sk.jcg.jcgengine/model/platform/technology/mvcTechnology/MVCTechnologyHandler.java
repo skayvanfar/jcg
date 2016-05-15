@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlSeeAlso({SpringMVCHandler.class})
 public abstract class MVCTechnologyHandler extends TechnologyHandler {
 
-    public static enum MVCTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
+    public enum MVCTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
         SPRING_MVC(0, "Spring MVC"),
         STRUTS(1, "Struts");
@@ -21,7 +21,7 @@ public abstract class MVCTechnologyHandler extends TechnologyHandler {
         private Integer value;
         private String desc;
 
-        private MVCTechnologyHandlerType(Integer value, String desc) {
+        MVCTechnologyHandlerType(Integer value, String desc) {
             this.value = value;
             this.desc = desc;
         }
@@ -72,6 +72,14 @@ public abstract class MVCTechnologyHandler extends TechnologyHandler {
         public String toString() {
             return desc;
         }
+    }
+
+    public MVCTechnologyHandler() {
+        super("MVC Technology");
+    }
+
+    public MVCTechnologyHandler(String name) {
+        super(name);
     }
 
 }

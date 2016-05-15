@@ -1,5 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.project.Entity;
@@ -15,10 +17,28 @@ import java.util.List;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({ThreeLayerArchitecture.class})
-public abstract class Architecture { // TODO: 4/27/2016 may be use interface and must change jaxb provider
+public abstract class Architecture implements Presentable { // TODO: 4/27/2016 may be use interface and must change jaxb provider
+
+    @Prop(label = "Name", required = true)
+    private String name;
 
     List<TechnologyHandler> technologies = new ArrayList<>();
 
+    public Architecture() {
+        name = "Architecture";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Architecture(String name) {
+        this.name = name;
+    }
 
     protected abstract void setBaseDirOfTechnologies(String baseDir);
     protected abstract void setBasePackageNameOfTechnologies(String basePackageName);
@@ -50,4 +70,9 @@ public abstract class Architecture { // TODO: 4/27/2016 may be use interface and
     public abstract List<ModelImplElement> createEntity(Entity entity, String packagePath);
 
     public abstract TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType);
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

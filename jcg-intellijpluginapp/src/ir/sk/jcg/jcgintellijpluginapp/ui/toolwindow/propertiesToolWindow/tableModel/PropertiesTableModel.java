@@ -6,6 +6,7 @@ import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertyTable;
@@ -24,27 +25,27 @@ public class PropertiesTableModel extends AbstractTableModel {
 
     private final String[] columnNames = {"Name", "Value"};
 
-    private Element element;
+    private Presentable presentable;
 
     private List<PropertyInfo> propertyInfos = new ArrayList<>();
 
     private PropertyTable propertyTable;
 
-    public PropertiesTableModel(Element element, PropertyTable propertyTable) throws java.beans.IntrospectionException {
-        this.element = element;
+    public PropertiesTableModel(Presentable presentable, PropertyTable propertyTable) throws java.beans.IntrospectionException {
+        this.presentable = presentable;
 
-        List<Field> fields = ReflectionUtil.findFields(element.getClass(), Prop.class);
+        List<Field> fields = ReflectionUtil.findFields(presentable.getClass(), Prop.class);
 
         PropertyInfo propertyInfo = null;
         for(Field field : fields) {
             try {
-                propertyInfo = new PropertyInfo(field, element);
+                propertyInfo = new PropertyInfo(field, presentable);
             } catch (IllegalAccessException e) {
                 e.printStackTrace(); // TODO: 5/5/2016
             }
             propertyInfos.add(propertyInfo);
         }
-        if (element.getClass().isAnnotationPresent(Editable.class))
+        if (presentable.getClass().isAnnotationPresent(Editable.class))
             editable = true; // TODO: 5/12/2016 not useable 
 
         this.propertyTable = propertyTable; // TODO: 5/5/2016
@@ -59,9 +60,9 @@ public class PropertiesTableModel extends AbstractTableModel {
      * */
     private void setPropertyField(PropertyInfo propertyInfo) {
         try {
-            Field field = ReflectionUtil.getFieldByName(propertyInfo.getName(), element);
+            Field field = ReflectionUtil.getFieldByName(propertyInfo.getName(), presentable);
             field.setAccessible(true);
-            field.set(element, propertyInfo.getValue());
+            field.set(presentable, propertyInfo.getValue());
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -167,7 +168,7 @@ public class PropertiesTableModel extends AbstractTableModel {
                 break;
         }
         setPropertyField(propertyInfo);
-        ReflectionUtil.printFieldNames(element);
+        ReflectionUtil.printFieldNames(presentable);
         System.out.println();
     }
 

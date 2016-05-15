@@ -1,5 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.technology;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
@@ -16,7 +18,10 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({BuildTechnologyHandler.class, ORMTechnologyHandler.class, MVCTechnologyHandler.class})
-public abstract class TechnologyHandler {
+public abstract class TechnologyHandler implements Presentable {
+
+    @Prop(label = "Name", required = true)
+    private String name;
 
     protected String baseDir;
     protected String basePackageName;
@@ -25,6 +30,11 @@ public abstract class TechnologyHandler {
   //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
 
     public TechnologyHandler() {
+        name = "Technology";
+    }
+
+    public TechnologyHandler(String name) {
+        this.name = name;
     }
 
     public void createBasePlatform() throws Exception {
@@ -63,4 +73,8 @@ public abstract class TechnologyHandler {
 //        this.patterns = patterns;
 //    }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }
