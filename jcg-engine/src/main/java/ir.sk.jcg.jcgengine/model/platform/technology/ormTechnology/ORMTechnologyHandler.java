@@ -53,7 +53,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
 //                    oRMTechnology = new HibernateHandler("", baseDir, null); // Todo: must redefine
 //                    break;
 //                case 1:
-//                    //     architecture = new ThreeLayerArchitecture(); // Todo: must create
+//                    //     architecture = new SpringWebArchitecture(); // Todo: must create
 //                    break;
 //            }
 //            return oRMTechnology;

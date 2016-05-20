@@ -71,7 +71,7 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
                     buildTechnology = new MavenHandler(); // Todo: must create
                     break;
                 case 2:
-                    //     architecture = new ThreeLayerArchitecture(); // Todo: must create
+                    //     architecture = new SpringWebArchitecture(); // Todo: must create
                     break;
             }
             return buildTechnology;

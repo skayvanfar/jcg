@@ -16,7 +16,7 @@ import java.util.List;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlSeeAlso({ThreeLayerArchitecture.class})
+@XmlSeeAlso({SpringWebArchitecture.class})
 public abstract class Architecture implements Presentable { // TODO: 4/27/2016 may be use interface and must change jaxb provider
 
     @Prop(label = "Name", required = true)

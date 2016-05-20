@@ -92,7 +92,7 @@ public class JavaCodeGeneratorTest {
 //
 //        codeGenerator = new JavaCodeGenerator();
 //
-//        Architecture architecture = new ThreeLayerArchitecture();
+//        Architecture architecture = new SpringWebArchitecture();
 //        BuildTechnologyHandler buildTechnology = new MavenHandler();
 //        MVCTechnologyHandler mvcTechnology = new SpringMVCHandler();
 //

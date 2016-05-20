@@ -22,12 +22,8 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     private File controllerDir;
 
     public SpringMVCHandler() {
-        super("Spring MVC");
-        dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-core", SPRING_VERSION, "compile"));
-        dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-web", SPRING_VERSION, "compile"));
+        super("SpringTechnology MVC");
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-webmvc", SPRING_VERSION, "compile"));
-        dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-context", SPRING_VERSION, "compile"));
-        dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-web", SPRING_VERSION, "compile"));
     }
 
     @Override

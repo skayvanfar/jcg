@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
@@ -18,20 +19,23 @@ import java.util.List;
  */
 @XmlRootElement // TODO: 4/27/2016 must remove from this class
 @Editable
-public class ThreeLayerArchitecture extends Architecture {
+public class SpringWebArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
     private String baseDir; // TODO: 5/3/2016 may better use Project
     private String basePackageName;
 
-    public ThreeLayerArchitecture() {
-        super("Three Layer");
+    private SpringHandler springHandler;
+
+    public SpringWebArchitecture() {
+        super("Spring Web Architecture");
     }
 
     @Override
     public void setBaseDirOfTechnologies(String baseDir) {
         this.baseDir = baseDir;
+        springHandler = new SpringHandler();
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY); // TODO: 5/3/2016 repeated code (in setBasePackageNameOfTechnologies)
         ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
@@ -63,19 +67,23 @@ public class ThreeLayerArchitecture extends Architecture {
 
     @Override
     public void createBaseArchitecture() {
+
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
         ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
+        buildTechnology.addDependencies(springHandler.getDependencies()); // add dependencies of iocTechnologyHandler
         buildTechnology.addDependencies(ormTechnology.getDependencies()); // todo may not be here
         buildTechnology.addDependencies(mvcTechnology.getDependencies()); // todo may not be here
         try {
             buildTechnology.createBasePlatform();
             ormTechnology.createBasePlatform();
             mvcTechnology.createBasePlatform();
+            buildTechnology.createBasePlatform();
         } catch (Exception e) { // todo
             e.printStackTrace();
         }
+
     }
 
     @Override

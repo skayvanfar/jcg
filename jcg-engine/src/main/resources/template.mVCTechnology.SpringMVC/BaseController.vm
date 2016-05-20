@@ -1,3 +1,6 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
+ *#
 package $packageName;
 
 import com.packt.webstore.domain.Menu;

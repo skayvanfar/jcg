@@ -1,3 +1,6 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
+ *#
 @Entity
 @Table(name = "TBL_JCG_PROJECT", schema = "", catalog = "JCG")
 public class $entityName extends EntityBase implements Serializable {

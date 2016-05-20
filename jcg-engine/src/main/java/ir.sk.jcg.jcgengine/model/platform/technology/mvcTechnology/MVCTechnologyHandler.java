@@ -15,7 +15,7 @@ public abstract class MVCTechnologyHandler extends TechnologyHandler {
 
     public enum MVCTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
-        SPRING_MVC(0, "Spring MVC"),
+        SPRING_MVC(0, "SpringTechnology MVC"),
         STRUTS(1, "Struts");
 
         private Integer value;
