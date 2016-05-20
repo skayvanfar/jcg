@@ -76,6 +76,10 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
             throw new ConfigurationException("Please, specify package prefix");
         }
 
+        if (StringUtil.isEmptyOrSpaces(getComponent().getConfigPackageField().getText())) {
+            throw new ConfigurationException("Please, specify config package");
+        }
+
 //        if (getComponent().getArchitectureComboBox().getSelectedIndex() != 0) { // todo:may need change (!= 0)
 //            throw new ConfigurationException("Please, specify architecture");
 //        }
@@ -95,6 +99,7 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
         jcgProject.setName(getComponent().getProjectNameField().getText());
         jcgProject.setPersianName(getComponent().getProjectPersianNameField().getText());
         jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction 
+        jcgProject.setConfigPackage(getComponent().getConfigPackageField().getText()); // TODO: 5/3/2016 must validate and correction
 
         // build architecture that user selected
         ArchitectureType architectureType = (ArchitectureType) getComponent().getArchitectureComboBox().getSelectedItem();

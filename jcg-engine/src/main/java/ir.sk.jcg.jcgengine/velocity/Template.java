@@ -1,5 +1,7 @@
 package ir.sk.jcg.jcgengine.velocity;
 
+import org.apache.velocity.VelocityContext;
+
 import java.io.File;
 import java.io.Serializable;
 import java.util.List;
@@ -10,22 +12,25 @@ import java.util.Map;
  */
 public class Template implements Serializable, Comparable<Template> {
 
+    private VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016
+
     private String name;
 
-    private final String path;
+    private final String templateFilePath;
 
-    private Map<String, Object> referencesMap;
+    private final String outfilePath;
 
-    public Template(String name, String path) {
+    public Template(String name, String templateFilePath, String outfilePath) {
         if (name == null || name.equals("")) {
-            name = path; // TODO: 5/12/2016 use ladt sectin of path
+            this.name = name; // TODO: 5/12/2016 use ladt sectin of path
         }
         this.name = name;
-        this.path = path;
+        this.templateFilePath = templateFilePath;
+        this.outfilePath = outfilePath;
     }
 
-    public Template(String name, File pathFile) {
-        this(name, pathFile.getPath());
+    public Template(String name, File pathFile, File outfileName) {
+        this(name, pathFile.getPath(), outfileName.getPath());
     }
 
     public String getName() {
@@ -36,20 +41,24 @@ public class Template implements Serializable, Comparable<Template> {
         this.name = name;
     }
 
-    public String getPath() {
-        return path;
+    public String getTemplateFilePath() {
+        return templateFilePath;
     }
 
-    public Map<String, Object> getReferencesMap() {
-        return referencesMap;
+    public String getOutfilePath() {
+        return outfilePath;
     }
 
-    public void setReferencesMap(Map<String, Object> referencesMap) {
-        this.referencesMap = referencesMap;
+    public VelocityContext getVelocityContext() {
+        return velocityContext;
+    }
+
+    public void setVelocityContext(VelocityContext velocityContext) {
+        this.velocityContext = velocityContext;
     }
 
     public void putReference(String key, Object value) {
-        referencesMap.put(key, value);
+        velocityContext.put(key, value);
     }
 
     @Override
@@ -57,5 +66,7 @@ public class Template implements Serializable, Comparable<Template> {
         return 0;
     }
 
-
+    public void mergeTemplate() {
+        VelocityTemplate.mergeTemplate(templateFilePath, outfilePath, velocityContext);
+    }
 }

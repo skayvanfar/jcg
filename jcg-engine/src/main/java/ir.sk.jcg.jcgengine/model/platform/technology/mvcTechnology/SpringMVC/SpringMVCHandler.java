@@ -2,11 +2,13 @@ package ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
+import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.velocity.VelocityContext;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -28,10 +30,15 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createDirectories() {
-        String baseSpringMVCDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
+      //  String baseSpringMVCDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
 
-        controllerDir = new File(baseSpringMVCDir + "/controller");
+        controllerDir = new File(baseDir + "/controller");
         controllerDir.mkdirs();
+    }
+
+    @Override
+    protected List<Config> createConfigFiles() throws Exception {
+        return null;
     }
 
     @Override

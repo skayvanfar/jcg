@@ -18,8 +18,11 @@ public class Project extends ModelElement implements Serializable {
     @Prop(label = "Persian Name", editable = true, required = true)
     private String persianName;
 
-    @Prop(label = "Package Prefix", editable = true, required = true)
+    @Prop(label = "Package Prefix", editable = false, required = true)
     private String packagePrefix;
+
+    @Prop(label = "Config Package", editable = false, required = true)
+    private String configPackage;
 
     @Prop(label = "Table Name Pattern", editable = true, required = true)
     private String tableNamePattern;
@@ -31,6 +34,7 @@ public class Project extends ModelElement implements Serializable {
         super();
         entitiesSchema.setName("Domain Schema");
         viewsSchema.setName("Business Schema");
+        configPackage = "Configuration";
     }
 
     /**
@@ -40,6 +44,7 @@ public class Project extends ModelElement implements Serializable {
         super(anotherProject);
         this.persianName = anotherProject.getPersianName();
         this.packagePrefix = anotherProject.getPackagePrefix();
+        this.configPackage = anotherProject.getConfigPackage();
         this.tableNamePattern = anotherProject.getTableNamePattern();
         this.entitiesSchema = anotherProject.getEntitiesSchema();
         this.viewsSchema = anotherProject.getViewsSchema();
@@ -61,6 +66,14 @@ public class Project extends ModelElement implements Serializable {
     @XmlAttribute
     public void setPackagePrefix(String packagePrefix) {
         this.packagePrefix = packagePrefix;
+    }
+
+    public String getConfigPackage() {
+        return configPackage;
+    }
+
+    public void setConfigPackage(String configPackage) {
+        this.configPackage = configPackage;
     }
 
     public String getTableNamePattern() {

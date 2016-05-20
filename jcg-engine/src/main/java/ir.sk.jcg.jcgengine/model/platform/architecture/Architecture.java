@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
@@ -40,8 +41,9 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
         this.name = name;
     }
 
-    protected abstract void setBaseDirOfTechnologies(String baseDir);
-    protected abstract void setBasePackageNameOfTechnologies(String basePackageName);
+    protected abstract void setBaseDirOfTechnologies();
+//    protected abstract void setPackagePrefixOfTechnologies();
+//    protected abstract void setConfigPackageOfTechnologies();
 
     public abstract TechnologyHandlerType[] getTechnologyTypes();
 
@@ -57,14 +59,22 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
 
     public abstract void createView();
 
+    /**
+     * Create base config and essential files for all technologies
+     * */
     public abstract void createBaseArchitecture();
 
     /**
      * Call after unmrshalling for set temp values
      * */
-    public void initialize(String baseDir, String packagename) {
-        setBaseDirOfTechnologies(baseDir);
-        setBasePackageNameOfTechnologies(packagename);
+    public void initialize(String baseDir, String packagePrefix, String configPackage) {
+        ApplicationContext.getInstance().setBaseDir(baseDir);
+        ApplicationContext.getInstance().setPackagePrefix(packagePrefix);
+        ApplicationContext.getInstance().setConfigPackage(configPackage);
+
+        setBaseDirOfTechnologies();
+//        setPackagePrefixOfTechnologies();
+//        setConfigPackageOfTechnologies();
     }
 
     public abstract List<ModelImplElement> createEntity(Entity entity, String packagePath);

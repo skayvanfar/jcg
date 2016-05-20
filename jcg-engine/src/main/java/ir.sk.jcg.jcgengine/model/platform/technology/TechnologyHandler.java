@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgengine.model.platform.technology;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
+import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
@@ -25,7 +26,8 @@ public abstract class TechnologyHandler implements Presentable {
     private String name;
 
     protected String baseDir;
-    protected String basePackageName;
+ //   protected String basePackageName;
+ //   protected String baseConfigDir;
 
     protected List<Dependency> dependencies = new ArrayList<>();
   //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
@@ -38,12 +40,16 @@ public abstract class TechnologyHandler implements Presentable {
         this.name = name;
     }
 
-    public void createBasePlatform() throws Exception {
+    public List<Config> createBasePlatform() throws Exception {
         createDirectories();
+        List<Config> configs = createConfigFiles();
         createBaseFiles();
+
+        return configs;
     }
 
     protected abstract void createDirectories() throws Exception;
+    protected abstract List<Config> createConfigFiles() throws Exception;
     protected abstract void createBaseFiles() throws Exception;
 
     public String getBaseDir() {
@@ -54,13 +60,21 @@ public abstract class TechnologyHandler implements Presentable {
         this.baseDir = baseDir;
     }
 
-    public String getBasePackageName() {
-        return basePackageName;
-    }
-
-    public void setBasePackageName(String basePackageName) {
-        this.basePackageName = basePackageName;
-    }
+//    public String getBasePackageName() {
+//        return basePackageName;
+//    }
+//
+//    public void setPackagePrefixName(String basePackageName) {
+//        this.basePackageName = basePackageName;
+//    }
+//
+//    public String getBaseConfigDir() {
+//        return baseConfigDir;
+//    }
+//
+//    public void setConfigDir(String baseConfigDir) {
+//        this.baseConfigDir = baseConfigDir;
+//    }
 
     public List<Dependency> getDependencies() {
         return dependencies;

@@ -1,19 +1,21 @@
-package ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology;
+package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
+import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringConfigType;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/20/2016
  */
-public enum SpringConfigType implements EnumBase {
+public enum HibernateConfigType  implements EnumBase {
 
-    JAVA(1, "Java"),
-    XML_FILE(2, "xml file");
+    SPRING_CONFIG(0, "SpringConfig"),
+    CFG_XML(1, "cfg.xml file"),
+    ORM(2, "orm file");
 
     private Integer value;
     private String desc;
 
-    SpringConfigType(Integer value, String desc) {
+    HibernateConfigType(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -28,8 +30,8 @@ public enum SpringConfigType implements EnumBase {
         return desc;
     }
 
-    public static SpringConfigType valueOf(Integer type) {
-        for (SpringConfigType code : SpringConfigType.values()) {
+    public static HibernateConfigType valueOf(Integer type) {
+        for (HibernateConfigType code : HibernateConfigType.values()) {
             if (type == code.getValue()) {
                 return code;
             }

@@ -82,7 +82,7 @@ public class JavaCodeGenerator implements CodeGenerator {
         unmarshallingProject();
         unmarshallingArchitecture();
 
-        architecture.initialize(baseDir, jcgProject.getPackagePrefix());
+        architecture.initialize(baseDir, jcgProject.getPackagePrefix(), jcgProject.getConfigPackage()); // TODO: 5/20/2016 Configuration must be dynamic
         logger.info("unmarshaling finished.");
 
         return true;

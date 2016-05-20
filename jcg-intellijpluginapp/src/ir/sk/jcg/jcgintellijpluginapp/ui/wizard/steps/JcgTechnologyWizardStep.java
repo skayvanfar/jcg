@@ -57,7 +57,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
             Project jcgProject = codeGenerator.getJcgProject();
             codeGenerator.setBaseDir(jcgModuleBuilder.getContentEntryPath());
 
-            codeGenerator.getArchitecture().initialize(codeGenerator.getBaseDir(), jcgProject.getPackagePrefix()); // TODO: 4/27/2016 may beter go to JcgModuleBuilderHelper.configure()
+            codeGenerator.getArchitecture().initialize(codeGenerator.getBaseDir(), jcgProject.getPackagePrefix(), jcgProject.getConfigPackage()); // TODO: 4/27/2016 may beter go to JcgModuleBuilderHelper.configure()
 
             JcgAPIManagerCallback jcgAPIManagerCallback = new JcgAPIManagerCallback();
 

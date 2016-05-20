@@ -18,6 +18,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
     private JTextField projectNameField;
     private JTextField projectPersianNameField;
     private JTextField packagePrefixField;
+    private JTextField configPackageField;
     private JComboBox architectureComboBox;
 
     public JTextField getProjectNameField() {
@@ -44,6 +45,14 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         this.packagePrefixField = packagePrefixField;
     }
 
+    public JTextField getConfigPackageField() {
+        return configPackageField;
+    }
+
+    public void setConfigPackageField(JTextField configPackageField) {
+        this.configPackageField = configPackageField;
+    }
+
     public JComboBox getArchitectureComboBox() {
         return architectureComboBox;
     }
@@ -59,7 +68,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
     }
 
     private void initComponents() {
-        setLayout(new GridLayoutManager(4, 3, new Insets(0, 0, 0, 0), -1, -1));
+        setLayout(new GridLayoutManager(5, 3, new Insets(0, 0, 0, 0), -1, -1));
 
         final JLabel projectNameLabel = new JLabel();
         projectNameLabel.setText("Project Name");
@@ -70,9 +79,12 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         final JLabel packagePrefixLabel = new JLabel();
         packagePrefixLabel.setText("Package Prefix");
         add(packagePrefixLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel configPackageLabel = new JLabel();
+        configPackageLabel.setText("Config Package");
+        add(configPackageLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel architectureLabel = new JLabel();
         architectureLabel.setText("Architecture");
-        add(architectureLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        add(architectureLabel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
 
         projectNameField = new JTextField();
         add(projectNameField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -80,13 +92,16 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         add(projectPersianNameField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         packagePrefixField = new JTextField();
         add(packagePrefixField, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        configPackageField = new JTextField();
+        add(configPackageField, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+
 
         DefaultComboBoxModel<ArchitectureType> comboBoxModel = new DefaultComboBoxModel<>();
         for (ArchitectureType architectureType : ArchitectureType.values())
             comboBoxModel.addElement(architectureType);
         architectureComboBox = new ComboBox();
         architectureComboBox.setModel(comboBoxModel);
-        add(architectureComboBox, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        add(architectureComboBox, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
         architectureComboBox.setEnabled(false); // TODO: 5/11/2016 for now but future must enabled
 //        myArchetypesPanel = new JPanel();
