@@ -30,11 +30,8 @@ public class SpringWebArchitecture extends Architecture {
  //   private String basePackageName; // TODO: 5/20/2016 may better go to ApplicationCotext
  //   private String baseConfigDir; // TODO: 5/20/2016 may better go to ApplicationCotext
 
-    private SpringHandler springHandler;
-
     public SpringWebArchitecture() {
         super("Spring Web Architecture");
-        springHandler = new SpringHandler();
     }
 
     @Override
@@ -103,10 +100,11 @@ public class SpringWebArchitecture extends Architecture {
             buildTechnology.createBasePlatform();
             List<Config> ormTechnologyConfigs = ormTechnology.createBasePlatform();
         //    List<Config> buildTechnologyConfigs = mvcTechnology.createBasePlatform();
-            springHandler.createBasePlatform();
+
             List<Config> allConfigs = new ArrayList<>();
             allConfigs.addAll(ormTechnologyConfigs);
             springHandler.addTechnologiesConfig(allConfigs);
+            springHandler.createBasePlatform();
         } catch (Exception e) { // todo
             e.printStackTrace();
         }

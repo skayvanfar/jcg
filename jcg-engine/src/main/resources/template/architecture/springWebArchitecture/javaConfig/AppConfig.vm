@@ -23,7 +23,11 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebConfig.class, DataConfig.class,EngineConfig.class};
+        return new Class<?>[]{
+                #foreach($config in $configs)
+                    ${config}.class
+                #end
+                };
     }
 
     @Override

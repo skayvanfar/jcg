@@ -46,7 +46,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private HibernateConfigType hibernateConfigType;
 
 
-    private File entityMainPackage;
+    // private File entityMainPackage;
 
     private File interfaceDAODirFile;
     private File implDAODirFile;
@@ -127,7 +127,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
     protected void createDirectories() {
      //   String baseHibernateDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
 
-        entityMainPackage = new File(baseDir + modelDir);
+     //   entityMainPackage = new File(baseDir + modelDir);
 
         interfaceDAODirFile = new File(baseDir + interfaceDAODir);
         implDAODirFile = new File(baseDir + interfaceDAODir + implDAODir);
@@ -149,8 +149,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
         switch (hibernateConfigType) {
             case SPRING_CONFIG:
                 Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
-                SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common");
-                SpringConfigTemplate.mergeTemplate();
+                SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());                SpringConfigTemplate.mergeTemplate();
                 Config springConfig = new Config("DataConfig");
                 configs.add(springConfig);
                 break;

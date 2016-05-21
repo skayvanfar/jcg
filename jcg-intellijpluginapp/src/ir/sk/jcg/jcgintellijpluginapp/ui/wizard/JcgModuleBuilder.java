@@ -74,7 +74,7 @@ public class JcgModuleBuilder extends ModuleBuilder {
     @Override
     public ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
         return new ModuleWizardStep[]{
-                new JcgBaseInfoWizardStep(this, wizardContext), new JcgTechnologyWizardStep(this, wizardContext),
+                new JcgBaseInfoWizardStep(this, wizardContext), new JcgSpringTechnologyWizardStep(this, wizardContext), new JcgTechnologyWizardStep(this, wizardContext),
                 new JcgBuildTechnologyWizardStep(this, wizardContext), new JcgOrmTechnologyWizardStep(this, wizardContext), new JcgMvcTechnologyWizardStep(this, wizardContext)
         };
     }

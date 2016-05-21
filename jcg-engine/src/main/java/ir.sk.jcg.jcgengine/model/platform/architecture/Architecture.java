@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.Presentable;
+import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.project.Entity;
@@ -23,7 +24,9 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
     @Prop(label = "Name", required = true)
     private String name;
 
-    List<TechnologyHandler> technologies = new ArrayList<>();
+    protected SpringHandler springHandler;
+
+    protected List<TechnologyHandler> technologies = new ArrayList<>();
 
     public Architecture() {
         name = "Architecture";
@@ -39,6 +42,7 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
 
     public Architecture(String name) {
         this.name = name;
+        springHandler = new SpringHandler();
     }
 
     protected abstract void setBaseDirOfTechnologies();
@@ -46,6 +50,15 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
 //    protected abstract void setConfigPackageOfTechnologies();
 
     public abstract TechnologyHandlerType[] getTechnologyTypes();
+
+    public SpringHandler getSpringHandler() {
+        return springHandler;
+    }
+
+    @XmlElement(name = "springHandler")
+    public void setSpringHandler(SpringHandler springHandler) {
+        this.springHandler = springHandler;
+    }
 
     public List<TechnologyHandler> getTechnologies() {
         return technologies;

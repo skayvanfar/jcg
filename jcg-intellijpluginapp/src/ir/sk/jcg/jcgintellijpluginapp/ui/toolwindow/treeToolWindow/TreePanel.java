@@ -147,6 +147,8 @@ public class TreePanel extends SimpleToolWindowPanel {
         /// for architecture
         DefaultMutableTreeNode architectureNode = new DefaultMutableTreeNode(architecture);
 
+        loadSpringTechnologyHandler(architecture, architectureNode);
+
         loadTechnologyHandlers(architecture, architectureNode);
 
         rootNode.add(projectNode);
@@ -204,6 +206,11 @@ public class TreePanel extends SimpleToolWindowPanel {
             tNode.add(targetEntityNode);
             parentNode.add(tNode);
         }
+    }
+
+    private void loadSpringTechnologyHandler(Architecture architecture, DefaultMutableTreeNode parentNode) {
+        DefaultMutableTreeNode springTechnologyHandlerNode = new DefaultMutableTreeNode(architecture.getSpringHandler());
+        parentNode.add(springTechnologyHandlerNode);
     }
 
     private void loadTechnologyHandlers(Architecture architecture, DefaultMutableTreeNode parentNode) {

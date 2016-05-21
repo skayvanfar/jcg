@@ -18,4 +18,9 @@ public class Config {
     public void setConfigPath(String configPath) {
         this.configPath = configPath;
     }
+
+    @Override
+    public String toString() {
+        return configPath;
+    }
 }
