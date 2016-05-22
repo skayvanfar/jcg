@@ -1,6 +1,9 @@
 package ir.sk.jcg.jcgengine.model.platform;
 
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -11,7 +14,9 @@ public class Dependency {
     private String artifactId;
     private String version;
     private String scope;
-
+    private Set<Exclusion> exclusionSet;
+ //   private String comment; // TODO: 5/21/2016 may use later 
+    
     public Dependency() {
     }
 
@@ -20,6 +25,7 @@ public class Dependency {
         this.artifactId = artifactId;
         this.version = version;
         this.scope = scope;
+        exclusionSet = new HashSet<>();
     }
 
     public String getGroupId() {
@@ -58,4 +64,22 @@ public class Dependency {
         this.scope = scope;
     }
 
+    public Set<Exclusion> getExclusionSet() {
+        return exclusionSet;
+    }
+
+    @XmlElement(name = "exclusion")
+    public void setExclusionSet(Set<Exclusion> exclusionSet) {
+        this.exclusionSet = exclusionSet;
+    }
+
+    public void addExclusion(Exclusion exclusion) {
+        if (!exclusionSet.contains(exclusion))
+            exclusionSet.add(exclusion);
+    }
+
+    public void removeExclusion(Exclusion exclusion) {
+        if (exclusionSet.contains(exclusion))
+            exclusionSet.remove(exclusion);
+    }
 }

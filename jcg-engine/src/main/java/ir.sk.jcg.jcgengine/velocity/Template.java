@@ -69,4 +69,9 @@ public class Template implements Serializable, Comparable<Template> {
     public void mergeTemplate() {
         VelocityTemplate.mergeTemplate(templateFilePath, outfilePath, velocityContext);
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

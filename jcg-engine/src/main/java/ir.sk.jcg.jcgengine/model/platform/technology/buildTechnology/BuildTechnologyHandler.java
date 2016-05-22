@@ -83,15 +83,15 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
         }
     }
 
-    @Prop(label = "Main Java Directory")
+    @Prop(label = "Main Java Directory", required = true)
     protected String mainJavaDir;
-    @Prop(label = "Main Resources Directory")
+    @Prop(label = "Main Resources Directory", required = true)
     protected String mainResourcesDir;
-    @Prop(label = "Main Web Directory")
+    @Prop(label = "Main Web Directory", required = true)
     protected String mainWebDir;
-    @Prop(label = "Test Java Directory")
+    @Prop(label = "Test Java Directory", required = true)
     protected String testJavaDir;
-    @Prop(label = "Test Resources Directory")
+    @Prop(label = "Test Resources Directory", required = true)
     protected String testResourcesDir;
 
     public BuildTechnologyHandler() {

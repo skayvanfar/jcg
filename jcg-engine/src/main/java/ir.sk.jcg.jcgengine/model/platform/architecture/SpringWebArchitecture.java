@@ -46,6 +46,7 @@ public class SpringWebArchitecture extends Architecture {
         String baseJavaDir = ApplicationContext.getInstance().getBaseDir() + buildTechnology.getMainJavaDir();
         String baseDir = baseJavaDir + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/');
         springHandler.setBaseDir(baseDir);
+        securityTechnologyHandler.setBaseDir(baseDir);
         ormTechnology.setBaseDir(baseDir);
         mvcTechnology.setBaseDir(baseDir);
     }
@@ -94,16 +95,20 @@ public class SpringWebArchitecture extends Architecture {
         MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         buildTechnology.addDependencies(springHandler.getDependencies()); // add dependencies of iocTechnologyHandler
+        buildTechnology.addDependencies(securityTechnologyHandler.getDependencies());
         buildTechnology.addDependencies(ormTechnology.getDependencies()); // todo may not be here
         buildTechnology.addDependencies(mvcTechnology.getDependencies()); // todo may not be here
         try {
             buildTechnology.createBasePlatform();
-            List<Config> ormTechnologyConfigs = ormTechnology.createBasePlatform();
-        //    List<Config> buildTechnologyConfigs = mvcTechnology.createBasePlatform();
+            Config securityTechnologyHandlerConfig = securityTechnologyHandler.createBasePlatform();
+            Config ormTechnologyConfig = ormTechnology.createBasePlatform();
+            Config mvcTechnologyConfig = mvcTechnology.createBasePlatform();
 
             List<Config> allConfigs = new ArrayList<>();
-            allConfigs.addAll(ormTechnologyConfigs);
-            springHandler.addTechnologiesConfig(allConfigs);
+            
+            allConfigs.add(ormTechnologyConfig);
+            allConfigs.add(mvcTechnologyConfig);
+            springHandler.addTechnologiesConfig(allConfigs, securityTechnologyHandlerConfig);
             springHandler.createBasePlatform();
         } catch (Exception e) { // todo
             e.printStackTrace();

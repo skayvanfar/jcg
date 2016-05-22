@@ -43,6 +43,8 @@ public class PropertyViewHelper {
             default:
                 propertyFieldComponent = new JTextField();
         }
+        if (!propertyInfo.isEditableInWizard())
+            propertyFieldComponent.setEnabled(false);
         return propertyFieldComponent;
     }
 }

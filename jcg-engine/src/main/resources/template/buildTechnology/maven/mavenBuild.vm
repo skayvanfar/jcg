@@ -77,13 +77,23 @@
             <scope>test</scope>
         </dependency>
 
-    #if($dependencies.size() > 0)
+    #if(!$dependencies.isEmpty())
         #foreach( $dependency in $dependencies )
         <dependency>
             <groupId>$dependency.groupId</groupId>
             <artifactId>$dependency.artifactId</artifactId>
             <version>$dependency.version</version>
             <scope>$dependency.scope</scope>
+            #if(!$dependency.exclusionSet.isEmpty())
+            <exclusions>
+                #foreach( $exclusion in $dependency.exclusionSet )
+                <exclusion>
+                    <groupId>$exclusion.groupId</groupId>
+                    <artifactId>$exclusion.artifactId</artifactId>
+                </exclusion>
+                #end
+            </exclusions>
+            #end
         </dependency>
         #end
     #end

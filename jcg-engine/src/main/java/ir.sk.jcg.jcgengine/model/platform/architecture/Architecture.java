@@ -3,9 +3,12 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.Presentable;
+import ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SecurityTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SpringSecurity.SpringSecurityHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
@@ -26,6 +29,8 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
 
     protected SpringHandler springHandler;
 
+    protected SecurityTechnologyHandler securityTechnologyHandler;
+
     protected List<TechnologyHandler> technologies = new ArrayList<>();
 
     public Architecture() {
@@ -43,6 +48,7 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
     public Architecture(String name) {
         this.name = name;
         springHandler = new SpringHandler();
+        securityTechnologyHandler = new SpringSecurityHandler();
     }
 
     protected abstract void setBaseDirOfTechnologies();
@@ -58,6 +64,15 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
     @XmlElement(name = "springHandler")
     public void setSpringHandler(SpringHandler springHandler) {
         this.springHandler = springHandler;
+    }
+
+    public SecurityTechnologyHandler getSecurityTechnologyHandler() {
+        return securityTechnologyHandler;
+    }
+
+    @XmlElement(name = "SecurityHandler")
+    public void setSecurityTechnologyHandler(SecurityTechnologyHandler securityTechnologyHandler) {
+        this.securityTechnologyHandler = securityTechnologyHandler;
     }
 
     public List<TechnologyHandler> getTechnologies() {
@@ -82,8 +97,13 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
      * */
     public void initialize(String baseDir, String packagePrefix, String configPackage) {
         ApplicationContext.getInstance().setBaseDir(baseDir);
+        ApplicationContext.getInstance().setBaseResourceDir(((BuildTechnologyHandler)getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY)).getMainResourcesDir()); // TODO: 5/22/2016 may need create a filed in technology like base dir
         ApplicationContext.getInstance().setPackagePrefix(packagePrefix);
         ApplicationContext.getInstance().setConfigPackage(configPackage);
+
+
+        ApplicationContext.getInstance().setSpringConfigType(springHandler.getSpringConfigType());
+        ApplicationContext.getInstance().setSpringDIType(springHandler.getSpringDIType());
 
         setBaseDirOfTechnologies();
 //        setPackagePrefixOfTechnologies();

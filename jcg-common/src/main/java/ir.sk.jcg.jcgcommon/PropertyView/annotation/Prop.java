@@ -36,6 +36,11 @@ public @interface Prop {
     boolean editable() default false;
 
     /**
+     * is property editable in wizard
+     * */
+    boolean editableInWizard() default false;
+
+    /**
      * Required or not required
      * */
     boolean required() default false;

@@ -20,6 +20,7 @@ public class PropertyInfo {
         private String label;
         private Object value;
         private boolean editable;
+        private boolean editableInWizard;
         private boolean required;
 
         // Optional parameters - initialized to default values
@@ -28,10 +29,11 @@ public class PropertyInfo {
         private Object object;
         private Class<?> typeClass;
 
-        public Builder(String name, Object value,boolean editable, boolean required) {
+        public Builder(String name, Object value,boolean editable, boolean editableInWizard, boolean required) {
             this.name = name;
             this.value = value;
             this.editable = editable;
+            this.editableInWizard = editableInWizard;
             this.required = required;
         }
 
@@ -65,6 +67,7 @@ public class PropertyInfo {
     private String label;
     private Object value;
     private boolean editable;
+    private boolean editableInWizard;
     private boolean required;
     private ComponentType componentType;
     private String[] values;
@@ -127,6 +130,14 @@ public class PropertyInfo {
         this.editable = editable;
     }
 
+    public boolean isEditableInWizard() {
+        return editableInWizard;
+    }
+
+    public void setEditableInWizard(boolean editableInWizard) {
+        this.editableInWizard = editableInWizard;
+    }
+
     public boolean isRequired() {
         return required;
     }
@@ -182,6 +193,7 @@ public class PropertyInfo {
         this.label = prop.label();
         this.value = value;
         this.editable = prop.editable();
+        this.editableInWizard = prop.editableInWizard();
         this.required = prop.required();
         this.componentType = prop.componentType();
         this.values = prop.values();

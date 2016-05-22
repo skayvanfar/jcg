@@ -3,13 +3,6 @@
  *#
  package $packageName;
 
- import ir.sk.jcgengine.engine.model.platform.architecture.ThreeLayerArchitecture;
- import ir.sk.jcgengine.engine.model.platform.technology.Dependency;
- import ir.sk.jcgengine.engine.model.platform.technology.Hibernate;
- import ir.sk.jcgengine.engine.model.platform.technology.Maven;
- import ir.sk.jcgengine.engine.model.platform.technology.ORMTechnology;
- import ir.sk.jcgengine.engine.model.project.Project;
- import org.apache.velocity.VelocityContext;
  import org.hibernate.SessionFactory;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.context.annotation.Bean;
@@ -76,10 +69,5 @@
  //        openSessionInViewInterceptor.setSessionFactory(sessionFactory);
  //        registry.addWebRequestInterceptor(openSessionInViewInterceptor);
  //    }
-
-     @Bean
-     public SpringApplicationContext springApplicationContext() {
-         return new SpringApplicationContext();
-     }
 
  }

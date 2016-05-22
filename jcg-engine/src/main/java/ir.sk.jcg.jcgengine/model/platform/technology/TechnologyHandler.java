@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.technology;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
@@ -22,7 +23,7 @@ import java.util.List;
 @XmlSeeAlso({BuildTechnologyHandler.class, ORMTechnologyHandler.class, MVCTechnologyHandler.class, SpringHandler.class})
 public abstract class TechnologyHandler implements Presentable {
 
-    @Prop(label = "Name", required = true)
+    @Prop(label = "Name", editable = false, required = true)
     private String name;
 
     protected String baseDir;
@@ -40,17 +41,49 @@ public abstract class TechnologyHandler implements Presentable {
         this.name = name;
     }
 
-    public List<Config> createBasePlatform() throws Exception {
+    public Config createBasePlatform() throws Exception {
         createDirectories();
-        List<Config> configs = createConfigFiles();
+        Config config = createConfigFiles();
         createBaseFiles();
 
-        return configs;
+        return config;
     }
 
     protected abstract void createDirectories() throws Exception;
-    protected abstract List<Config> createConfigFiles() throws Exception;
-    protected abstract void createBaseFiles() throws Exception;
+
+    protected Config createConfigFiles() throws Exception {
+        Config config = null;
+        switch (ApplicationContext.getInstance().getSpringConfigType()) {
+            case JAVA:
+                config = createJavaConfig();
+                break;
+            case XML_FILE:
+                config = createXmlConfig();
+                break;
+        }
+        return config;
+    }
+
+    protected abstract Config createJavaConfig();
+    protected abstract Config createXmlConfig();
+
+    protected  void createBaseFiles() throws Exception {
+        switch (ApplicationContext.getInstance().getSpringDIType()) {
+            case ANNOTATION:
+                createAnnotationDIBaseFiles();
+                break;
+            case XML_FILE:
+                createXmlDIBaseFiles();
+                break;
+            case JAVA:
+                createJavaDIBaseFiles();
+                break;
+        }
+    }
+
+    protected abstract void createAnnotationDIBaseFiles();
+    protected abstract void createXmlDIBaseFiles();
+    protected abstract void createJavaDIBaseFiles();
 
     public String getBaseDir() {
         return baseDir;
@@ -59,22 +92,6 @@ public abstract class TechnologyHandler implements Presentable {
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
     }
-
-//    public String getBasePackageName() {
-//        return basePackageName;
-//    }
-//
-//    public void setPackagePrefixName(String basePackageName) {
-//        this.basePackageName = basePackageName;
-//    }
-//
-//    public String getBaseConfigDir() {
-//        return baseConfigDir;
-//    }
-//
-//    public void setConfigDir(String baseConfigDir) {
-//        this.baseConfigDir = baseConfigDir;
-//    }
 
     public List<Dependency> getDependencies() {
         return dependencies;

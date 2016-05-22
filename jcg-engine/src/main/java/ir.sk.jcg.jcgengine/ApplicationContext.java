@@ -15,6 +15,8 @@ public class ApplicationContext {
 
     private String baseDir;
 
+    private String baseResourceDir;
+
     private String packagePrefix;
 
     private String configPackage;
@@ -34,6 +36,14 @@ public class ApplicationContext {
 
     public void setBaseDir(String baseDir) {
         this.baseDir = baseDir;
+    }
+
+    public String getBaseResourceDir() {
+        return baseResourceDir;
+    }
+
+    public void setBaseResourceDir(String baseResourceDir) {
+        this.baseResourceDir = baseResourceDir;
     }
 
     public String getPackagePrefix() {
@@ -79,4 +89,5 @@ public class ApplicationContext {
     public Object getAttribute(String key) {
         return map.get(key);
     }
+
 }

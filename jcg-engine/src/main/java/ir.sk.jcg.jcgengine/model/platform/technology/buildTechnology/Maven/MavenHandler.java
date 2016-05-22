@@ -21,11 +21,11 @@ public class MavenHandler extends BuildTechnologyHandler {
    // @Prop
    // private MavenId mavenId; // TODO: 5/10/2016 better use later
 
-    @Prop(label = "Group Id", required = true)
+    @Prop(label = "Group Id", editableInWizard = true, required = true)
     private String groupId;
-    @Prop(label = "Artifact Id", required = true)
+    @Prop(label = "Artifact Id", editableInWizard = true, required = true)
     private String artifactId;
-    @Prop(label = "Version", required = true)
+    @Prop(label = "Version", editableInWizard = true, required = true)
     private String version;
 
     public MavenHandler() {
@@ -85,8 +85,28 @@ public class MavenHandler extends BuildTechnologyHandler {
     }
 
     @Override
-    protected List<Config> createConfigFiles() throws Exception {
+    protected Config createJavaConfig() {
         return null;
+    }
+
+    @Override
+    protected Config createXmlConfig() {
+        return null;
+    }
+
+    @Override
+    protected void createAnnotationDIBaseFiles() {
+
+    }
+
+    @Override
+    protected void createXmlDIBaseFiles() {
+        createBuildFile();
+    }
+
+    @Override
+    protected void createJavaDIBaseFiles() {
+        createBuildFile();
     }
 
     @Override

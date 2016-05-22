@@ -3,8 +3,6 @@
  *#
 package $packageName;
 
-import ir.sk.jcgengine.engine.EngineConfig;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -18,14 +16,14 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     @Override
     protected Class<?>[] getRootConfigClasses() {
         //return new Class<?>[]{};
-        return new Class[] { SecurityConfig.class };
+        return new Class[] { ${securityConfig}.class };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[]{
                 #foreach($config in $configs)
-                    ${config}.class
+                    ${config}.class,
                 #end
                 };
     }
@@ -40,5 +38,10 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         return new Filter[]{characterEncodingFilter};
+    }
+
+    @Bean
+    public SpringApplicationContext springApplicationContext() {
+        return new SpringApplicationContext();
     }
 }

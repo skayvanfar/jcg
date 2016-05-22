@@ -30,19 +30,19 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
 
-    @Prop(label = "Interface DAO Directory")
+    @Prop(label = "Interface DAO Directory", editableInWizard = true, required = true)
     private String interfaceDAODir;
-    @Prop(label = "Impl DAO Directory")
+    @Prop(label = "Impl DAO Directory", editableInWizard = true, required = true)
     private String implDAODir;
     private String interfaceDAOCommonDir;
     private String implDAOCommonDir;
-    @Prop(label = "Model Directory")
+    @Prop(label = "Model Directory", editableInWizard = true, required = true)
     private String modelDir;
 
-    @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
+    @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
     private MappingType mappingType;
 
-    @Prop(label = "Hibernate Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
+    @Prop(label = "Hibernate Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
     private HibernateConfigType hibernateConfigType;
 
 
@@ -64,6 +64,8 @@ public class HibernateHandler extends ORMTechnologyHandler {
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-c3p0", HIBERNATE_VERSION, "compile"));
+        dependencies.add(new Dependency("org.apache.commons", "commons-dbcp2", "2.0.1", "compile"));
+        dependencies.add(new Dependency("mysql", "mysql-connector-java", "5.1.34", "compile"));
     }
 
     public String getInterfaceDAODir() {
@@ -141,17 +143,16 @@ public class HibernateHandler extends ORMTechnologyHandler {
     }
 
     @Override
-    protected List<Config> createConfigFiles() throws Exception {
-        // common for all hibernateConfigTypes
-        List<Config> configs = new ArrayList<>();
-        Template propertiesConfigTemplate = new Template("Properties Config", "ormTechnology/hibernate/config/persistence.properties.vm", baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator + "persistence.properties");
+    protected Config createJavaConfig() {
+        Config config = null;
+
+        Template propertiesConfigTemplate = new Template("Properties Config", "ormTechnology/hibernate/config/persistence.properties.vm", ApplicationContext.getInstance().getBaseDir() + File.separator + ApplicationContext.getInstance().getBaseResourceDir() + File.separator + "persistence.properties");
         propertiesConfigTemplate.mergeTemplate();
         switch (hibernateConfigType) {
             case SPRING_CONFIG:
                 Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
                 SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());                SpringConfigTemplate.mergeTemplate();
-                Config springConfig = new Config("DataConfig");
-                configs.add(springConfig);
+                config = new Config("DataConfig");
                 break;
             case CFG_XML:
                 // TODO: 5/20/2016
@@ -161,16 +162,31 @@ public class HibernateHandler extends ORMTechnologyHandler {
                 break;
             default:
         }
-        return configs;
+        return config;
     }
 
     @Override
-    protected void createBaseFiles() {
-        VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016  
+    protected Config createXmlConfig() {
+        return null; // TODO: 5/20/2016
+    }
+
+    @Override
+    protected void createAnnotationDIBaseFiles() {
+        VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016
         velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common");
         VelocityTemplate.mergeTemplate("ormTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
         velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common.impl");
         VelocityTemplate.mergeTemplate("ormTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java", velocityContext);
+    }
+
+    @Override
+    protected void createXmlDIBaseFiles() {
+
+    }
+
+    @Override
+    protected void createJavaDIBaseFiles() {
+
     }
 
 }
