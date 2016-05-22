@@ -11,7 +11,9 @@ import org.apache.velocity.VelocityContext;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -43,6 +45,9 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
                 baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
         SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
+        Set<String> importSet = new HashSet<>();
+        importSet.add("ir.sk.test");
+        SpringWebConfigTemplate.putReference("imports", importSet);
         SpringWebConfigTemplate.mergeTemplate();
         return new Config("WebConfig");
     }

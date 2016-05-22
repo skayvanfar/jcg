@@ -1,0 +1,8 @@
+#**
+* @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/22/2106.
+*#
+#if(!$imports.isEmpty())
+    #foreach( $import in $imports )
+import ${import};
+    #end
+#end

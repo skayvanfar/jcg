@@ -1,11 +1,11 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/20/2106.
  *#
-package $packageName;
+#parse("common/packageName.vm")
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
-
+#parse("common/import.vm")
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 3/12/2016.
  */

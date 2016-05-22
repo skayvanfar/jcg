@@ -1,11 +1,13 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  *#
-package $packageName;
+#parse("common/packageName.vm")
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
+#parse("common/import.vm")
 
 /**
  * Generic DAO (Data Access Object) with common methods to CRUD POJOs.

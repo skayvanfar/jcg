@@ -1,7 +1,9 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  *#
-package $packageName;
+#parse("common/packageName.vm")
+
+#parse("common/import.vm")
 
 @Entity
 @Table(name = "TBL_JCG_PROJECT", schema = "", catalog = "JCG")

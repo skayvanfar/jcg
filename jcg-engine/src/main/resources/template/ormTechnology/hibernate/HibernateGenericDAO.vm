@@ -1,7 +1,7 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  *#
-package $packageName;
+#parse("common/packageName.vm")
 
 import ir.sk.jcgengine.common.persistence.jpa.GenericDAO;
 import org.hibernate.*;
@@ -19,6 +19,8 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
+
+#parse("common/import.vm")
 
 /**
  * This class serves as the Base class for all other DAOs - namely to hold
