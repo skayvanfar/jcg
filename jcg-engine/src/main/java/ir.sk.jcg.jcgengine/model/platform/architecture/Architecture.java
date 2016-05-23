@@ -13,6 +13,7 @@ import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import javax.xml.bind.annotation.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,10 +51,6 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
         springHandler = new SpringHandler();
         securityTechnologyHandler = new SpringSecurityHandler();
     }
-
-    protected abstract void setBaseDirOfTechnologies();
-//    protected abstract void setPackagePrefixOfTechnologies();
-//    protected abstract void setConfigPackageOfTechnologies();
 
     public abstract TechnologyHandlerType[] getTechnologyTypes();
 
@@ -96,18 +93,23 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
      * Call after unmrshalling for set temp values
      * */
     public void initialize(String baseDir, String packagePrefix, String configPackage) {
-        ApplicationContext.getInstance().setBaseDir(baseDir);
-        ApplicationContext.getInstance().setBaseResourceDir(((BuildTechnologyHandler)getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY)).getMainResourcesDir()); // TODO: 5/22/2016 may need create a filed in technology like base dir
-        ApplicationContext.getInstance().setPackagePrefix(packagePrefix);
-        ApplicationContext.getInstance().setConfigPackage(configPackage);
+        ApplicationContext applicationContext = ApplicationContext.getInstance();
 
+        applicationContext.setBaseProjectPath(baseDir);
+        applicationContext.setPackagePrefix(packagePrefix);
+        applicationContext.setConfigPackage(configPackage);
 
-        ApplicationContext.getInstance().setSpringConfigType(springHandler.getSpringConfigType());
-        ApplicationContext.getInstance().setSpringDIType(springHandler.getSpringDIType());
+        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
 
-        setBaseDirOfTechnologies();
-//        setPackagePrefixOfTechnologies();
-//        setConfigPackageOfTechnologies();
+        applicationContext.setMainJavaPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainJavaPath());
+        applicationContext.setMainResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainResourcesPath());
+        applicationContext.setMainWebPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainWebPath());
+        applicationContext.setTestJavaPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestJavaPath());
+        applicationContext.setTestResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestResourcesPath());
+        applicationContext.setJavaWithPackagePrefixPath(ApplicationContext.getInstance().getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/'));
+
+        applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
+        applicationContext.setSpringDIType(springHandler.getSpringDIType());
     }
 
     public abstract List<ModelImplElement> createEntity(Entity entity, String packagePath);

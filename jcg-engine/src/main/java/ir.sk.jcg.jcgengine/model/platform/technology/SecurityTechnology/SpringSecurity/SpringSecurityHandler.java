@@ -35,7 +35,7 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
 
     @Override
     protected void createDirectories() throws Exception {
-        securityDir = new File(baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"security");
+        securityDir = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"security");
         securityDir.mkdirs();
     }
 
@@ -43,7 +43,7 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
     @Override
     protected Config createJavaConfig() {
         Template springSecurityConfigTemplate = new Template("Spring Security Config Initializer", "securityTechnology/springSecurity/config/SecurityConfig.vm",
-                baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "SecurityConfig.java");
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "SecurityConfig.java");
         springSecurityConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
         springSecurityConfigTemplate.mergeTemplate();
         Config springSecurityConfig = new Config("SecurityConfig");

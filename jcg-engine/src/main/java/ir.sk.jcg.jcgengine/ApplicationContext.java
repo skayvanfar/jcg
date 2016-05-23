@@ -13,9 +13,40 @@ public class ApplicationContext {
 
     private static final ApplicationContext INSTANCE = new ApplicationContext();
 
-    private String baseDir;
+    /**
+     * Absolute Path of project
+     * */
+    private String baseProjectPath;
 
-    private String baseResourceDir;
+    /**
+     * Absolute Path of java source of project
+     * */
+    private String mainJavaPath;
+
+    /**
+     * Absolute Path of Resources of project
+     * */
+    private String mainResourcesPath;
+
+    /**
+     * Absolute Path of web source of project
+     * */
+    private String mainWebPath;
+
+    /**
+     * Absolute Path of test source of project
+     * */
+    private String testJavaPath;
+
+    /**
+     * Path of java test resources of project
+     * */
+    private String testResourcesPath;
+
+    /**
+     * Absolute Java source with package prefix of project
+     * */
+    private String JavaWithPackagePrefixPath;
 
     private String packagePrefix;
 
@@ -30,20 +61,60 @@ public class ApplicationContext {
     public static ApplicationContext getInstance() { return INSTANCE; }
 
 
-    public String getBaseDir() {
-        return baseDir;
+    public String getBaseProjectPath() {
+        return baseProjectPath;
     }
 
-    public void setBaseDir(String baseDir) {
-        this.baseDir = baseDir;
+    public void setBaseProjectPath(String baseProjectPath) {
+        this.baseProjectPath = baseProjectPath;
     }
 
-    public String getBaseResourceDir() {
-        return baseResourceDir;
+    public String getMainJavaPath() {
+        return mainJavaPath;
     }
 
-    public void setBaseResourceDir(String baseResourceDir) {
-        this.baseResourceDir = baseResourceDir;
+    public void setMainJavaPath(String mainJavaPath) {
+        this.mainJavaPath = mainJavaPath;
+    }
+
+    public String getMainResourcesPath() {
+        return mainResourcesPath;
+    }
+
+    public void setMainResourcesPath(String mainResourcesPath) {
+        this.mainResourcesPath = mainResourcesPath;
+    }
+
+    public String getMainWebPath() {
+        return mainWebPath;
+    }
+
+    public void setMainWebPath(String mainWebPath) {
+        this.mainWebPath = mainWebPath;
+    }
+
+    public String getTestJavaPath() {
+        return testJavaPath;
+    }
+
+    public void setTestJavaPath(String testJavaPath) {
+        this.testJavaPath = testJavaPath;
+    }
+
+    public String getTestResourcesPath() {
+        return testResourcesPath;
+    }
+
+    public void setTestResourcesPath(String testResourcesPath) {
+        this.testResourcesPath = testResourcesPath;
+    }
+
+    public String getJavaWithPackagePrefixPath() {
+        return JavaWithPackagePrefixPath;
+    }
+
+    public void setJavaWithPackagePrefixPath(String javaWithPackagePrefixPath) {
+        JavaWithPackagePrefixPath = javaWithPackagePrefixPath;
     }
 
     public String getPackagePrefix() {

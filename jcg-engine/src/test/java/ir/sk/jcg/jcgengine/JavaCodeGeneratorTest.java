@@ -105,7 +105,7 @@ public class JavaCodeGeneratorTest {
 //        architecture.setTechnologies(technologies);
 //
 //        architecture.setPackagePrefixName("ir.sk");
-//        architecture.setBaseDir(new File("E:/"));
+//        architecture.setBaseProjectPath(new File("E:/"));
 //
 //        codeGenerator.setArchitecture(architecture);
     }

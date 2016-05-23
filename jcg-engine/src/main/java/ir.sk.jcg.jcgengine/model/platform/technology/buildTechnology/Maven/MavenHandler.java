@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
@@ -10,7 +11,6 @@ import org.apache.velocity.VelocityContext;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -32,11 +32,11 @@ public class MavenHandler extends BuildTechnologyHandler {
         super("Maven");
         version = "0.0.1-SNAPSHOT";
 
-        mainJavaDir = "/src/main/java";
-        mainResourcesDir = "/src/main/resources";
-        mainWebDir = "/src/main/web";
-        testJavaDir = "/src/test/java";
-        testResourcesDir = "/src/test/resources";
+        mainJavaPath = "/src/main/java";
+        mainResourcesPath = "/src/main/resources";
+        mainWebPath = "/src/main/web";
+        testJavaPath = "/src/test/java";
+        testResourcesPath = "/src/test/resources";
     }
 
 //    public MavenId getMavenId() {
@@ -77,11 +77,12 @@ public class MavenHandler extends BuildTechnologyHandler {
 
     @Override
     protected void createDirectories() {
-        (new File(baseDir + mainJavaDir)).mkdirs();
-        (new File(baseDir + mainResourcesDir)).mkdirs();
-        (new File(baseDir + mainWebDir)).mkdirs();
-        (new File(baseDir + testJavaDir)).mkdirs();
-        (new File(baseDir + testResourcesDir)).mkdirs();
+        ApplicationContext applicationContext = ApplicationContext.getInstance();
+        (new File(applicationContext.getBaseProjectPath() + mainJavaPath)).mkdirs();
+        (new File(applicationContext.getBaseProjectPath() + mainResourcesPath)).mkdirs();
+        (new File(applicationContext.getBaseProjectPath() + mainWebPath)).mkdirs();
+        (new File(applicationContext.getBaseProjectPath() + testJavaPath)).mkdirs();
+        (new File(applicationContext.getBaseProjectPath() + testResourcesPath)).mkdirs();
     }
 
     @Override
@@ -117,7 +118,7 @@ public class MavenHandler extends BuildTechnologyHandler {
         velocityContext.put("version", version);
         velocityContext.put("packaging", "war");
         velocityContext.put("dependencies", dependencies);
-        VelocityTemplate.mergeTemplate("buildTechnology/maven/mavenBuild.vm", baseDir + "/pom.xml", velocityContext);
+        VelocityTemplate.mergeTemplate("buildTechnology/maven/mavenBuild.vm", ApplicationContext.getInstance().getBaseProjectPath() + "/pom.xml", velocityContext);
     }
 
     /**

@@ -86,7 +86,7 @@ public class SpringHandler extends TechnologyHandler {
     @Override
     protected Config createJavaConfig() {
         Template SpringAppConfigTemplate = new Template("AppConfig", "architecture/springWebArchitecture/javaConfig/AppConfig.vm",
-                baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/AppConfig.java");
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/AppConfig.java");
         SpringAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
         SpringAppConfigTemplate.putReference("securityConfig", securityConfig.toString());
         SpringAppConfigTemplate.putReference("configs", configs);
@@ -102,7 +102,7 @@ public class SpringHandler extends TechnologyHandler {
     @Override
     protected void createBaseFiles() throws Exception {
         Template SpringAppConfigTemplate = new Template("SpringApplicationContext", "architecture/springWebArchitecture/SpringApplicationContext.vm",
-                baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/SpringApplicationContext.java");
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/SpringApplicationContext.java");
         SpringAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
         SpringAppConfigTemplate.mergeTemplate();
     }

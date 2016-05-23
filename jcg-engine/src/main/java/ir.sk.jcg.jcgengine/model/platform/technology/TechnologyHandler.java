@@ -26,7 +26,7 @@ public abstract class TechnologyHandler implements Presentable {
     @Prop(label = "Name", editable = false, required = true)
     private String name;
 
-    protected String baseDir;
+   // protected String baseDir;
  //   protected String basePackageName;
  //   protected String baseConfigDir;
 
@@ -84,14 +84,6 @@ public abstract class TechnologyHandler implements Presentable {
     protected abstract void createAnnotationDIBaseFiles();
     protected abstract void createXmlDIBaseFiles();
     protected abstract void createJavaDIBaseFiles();
-
-    public String getBaseDir() {
-        return baseDir;
-    }
-
-    public void setBaseDir(String baseDir) {
-        this.baseDir = baseDir;
-    }
 
     public List<Dependency> getDependencies() {
         return dependencies;

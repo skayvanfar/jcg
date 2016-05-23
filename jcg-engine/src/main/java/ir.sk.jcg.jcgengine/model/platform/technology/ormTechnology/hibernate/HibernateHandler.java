@@ -18,7 +18,6 @@ import org.apache.velocity.VelocityContext;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -127,14 +126,14 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     protected void createDirectories() {
-     //   String baseHibernateDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
+     //   String baseHibernateDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
 
      //   entityMainPackage = new File(baseDir + modelDir);
 
-        interfaceDAODirFile = new File(baseDir + interfaceDAODir);
-        implDAODirFile = new File(baseDir + interfaceDAODir + implDAODir);
-        interfaceDAOCommonDirFile = new File(baseDir + interfaceDAODir + interfaceDAOCommonDir);
-        implDAOCommonDirFile = new File(baseDir + interfaceDAODir + interfaceDAOCommonDir + implDAOCommonDir);
+        interfaceDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir);
+        implDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + implDAODir);
+        interfaceDAOCommonDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + interfaceDAOCommonDir);
+        implDAOCommonDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + interfaceDAOCommonDir + implDAOCommonDir);
 
         interfaceDAODirFile.mkdirs();
         implDAODirFile.mkdirs();
@@ -146,11 +145,13 @@ public class HibernateHandler extends ORMTechnologyHandler {
     protected Config createJavaConfig() {
         Config config = null;
 
-        Template propertiesConfigTemplate = new Template("Properties Config", "ormTechnology/hibernate/config/persistence.properties.vm", ApplicationContext.getInstance().getBaseDir() + File.separator + ApplicationContext.getInstance().getBaseResourceDir() + File.separator + "persistence.properties");
+        Template propertiesConfigTemplate = new Template("Properties Config", "ormTechnology/hibernate/config/persistence.properties.vm",
+                ApplicationContext.getInstance().getMainResourcesPath() + File.separator + "persistence.properties");
         propertiesConfigTemplate.mergeTemplate();
         switch (hibernateConfigType) {
             case SPRING_CONFIG:
-                Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
+                Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                        + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
                 SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());                SpringConfigTemplate.mergeTemplate();
                 config = new Config("DataConfig");
                 break;

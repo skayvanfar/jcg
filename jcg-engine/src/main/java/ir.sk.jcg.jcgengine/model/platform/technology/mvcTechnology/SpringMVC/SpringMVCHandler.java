@@ -34,16 +34,16 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createDirectories() {
-      //  String baseSpringMVCDir = getBaseDir() + File.separator + getBasePackageName().replace('.', '/');
+      //  String baseSpringMVCDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
 
-        controllerDir = new File(baseDir + File.separator + "controller");
+        controllerDir = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "controller");
         controllerDir.mkdirs();
     }
 
     @Override
     protected Config createJavaConfig() {
         Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
-                baseDir + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
         SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
         Set<String> importSet = new HashSet<>();
         importSet.add("ir.sk.test");

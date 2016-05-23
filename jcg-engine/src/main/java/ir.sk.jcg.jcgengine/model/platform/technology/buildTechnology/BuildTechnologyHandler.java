@@ -83,16 +83,16 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
         }
     }
 
-    @Prop(label = "Main Java Directory", required = true)
-    protected String mainJavaDir;
-    @Prop(label = "Main Resources Directory", required = true)
-    protected String mainResourcesDir;
-    @Prop(label = "Main Web Directory", required = true)
-    protected String mainWebDir;
-    @Prop(label = "Test Java Directory", required = true)
-    protected String testJavaDir;
-    @Prop(label = "Test Resources Directory", required = true)
-    protected String testResourcesDir;
+    @Prop(label = "Main Java Path", required = true)
+    protected String mainJavaPath;
+    @Prop(label = "Main Resources Path", required = true)
+    protected String mainResourcesPath;
+    @Prop(label = "Main Web Path", required = true)
+    protected String mainWebPath;
+    @Prop(label = "Test Java Path", required = true)
+    protected String testJavaPath;
+    @Prop(label = "Test Resources Path", required = true)
+    protected String testResourcesPath;
 
     public BuildTechnologyHandler() {
         super("Build Technology");
@@ -102,49 +102,49 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
         super(name);
     }
 
-    public String getMainJavaDir() {
-        return mainJavaDir;
+    public String getMainJavaPath() {
+        return mainJavaPath;
     }
 
-    @XmlAttribute(name = "mainJavaDir", required = true)
-    public void setMainJavaDir(String mainJavaDir) {
-        this.mainJavaDir = mainJavaDir;
+    @XmlAttribute(name = "mainJavaPath", required = true)
+    public void setMainJavaPath(String mainJavaPath) {
+        this.mainJavaPath = mainJavaPath;
     }
 
-    public String getMainResourcesDir() {
-        return mainResourcesDir;
+    public String getMainResourcesPath() {
+        return mainResourcesPath;
     }
 
-    @XmlAttribute(name = "mainResourcesDir", required = true)
-    public void setMainResourcesDir(String mainResourcesDir) {
-        this.mainResourcesDir = mainResourcesDir;
+    @XmlAttribute(name = "mainResourcesPath", required = true)
+    public void setMainResourcesPath(String mainResourcesPath) {
+        this.mainResourcesPath = mainResourcesPath;
     }
 
-    public String getMainWebDir() {
-        return mainWebDir;
+    public String getMainWebPath() {
+        return mainWebPath;
     }
 
-    @XmlAttribute(name = "mainWebDir", required = true)
-    public void setMainWebDir(String mainWebDir) {
-        this.mainWebDir = mainWebDir;
+    @XmlAttribute(name = "mainWebPath", required = true)
+    public void setMainWebPath(String mainWebPath) {
+        this.mainWebPath = mainWebPath;
     }
 
-    public String getTestJavaDir() {
-        return testJavaDir;
+    public String getTestJavaPath() {
+        return testJavaPath;
     }
 
-    @XmlAttribute(name = "testJavaDir", required = true)
-    public void setTestJavaDir(String testJavaDir) {
-        this.testJavaDir = testJavaDir;
+    @XmlAttribute(name = "testJavaPath", required = true)
+    public void setTestJavaPath(String testJavaPath) {
+        this.testJavaPath = testJavaPath;
     }
 
-    public String getTestResourcesDir() {
-        return testResourcesDir;
+    public String getTestResourcesPath() {
+        return testResourcesPath;
     }
 
-    @XmlAttribute(name = "testResourcesDir", required = true)
-    public void setTestResourcesDir(String testResourcesDir) {
-        this.testResourcesDir = testResourcesDir;
+    @XmlAttribute(name = "testResourcesPath", required = true)
+    public void setTestResourcesPath(String testResourcesPath) {
+        this.testResourcesPath = testResourcesPath;
     }
     
     public void addDependency(Dependency dependency) {

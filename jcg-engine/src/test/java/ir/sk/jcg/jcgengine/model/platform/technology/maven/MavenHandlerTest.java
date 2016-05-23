@@ -32,7 +32,7 @@ public class MavenHandlerTest {
 //        dependencyList.add(new Dependency("grop2", "artft2", "version2", "scope2"));
 //
 //        MavenHandler maven = new MavenHandler();
-//        maven.setBaseDir(new File("C:/newee"));
+//        maven.setBaseProjectPath(new File("C:/newee"));
 //        maven.createBasePlatform();
 
     }
