@@ -1,0 +1,14 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/24/2106.
+ *#
+package ${packagePrefix}.commons.localization;
+
+/**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 1/8/2016
+ */
+
+public interface LocalizedEnum {
+    public String getString();
+    public int getOrdinal();
+    public String getCode();
+}

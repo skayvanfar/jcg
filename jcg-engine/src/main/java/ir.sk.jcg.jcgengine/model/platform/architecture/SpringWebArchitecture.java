@@ -25,10 +25,6 @@ public class SpringWebArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
-  //  private String baseDir; // TODO: 5/3/2016 may better use Project
- //   private String basePackageName; // TODO: 5/20/2016 may better go to ApplicationCotext
- //   private String baseConfigDir; // TODO: 5/20/2016 may better go to ApplicationCotext
-
     public SpringWebArchitecture() {
         super("Spring Web Architecture");
     }
@@ -71,13 +67,22 @@ public class SpringWebArchitecture extends Architecture {
         }
     }
 
+    /**
+     * Create base dirs
+     * */
     private void createBasePackage() {
 
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
 
+        // Create config package
         File configDirFile = new File(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/')
                 + File.separator + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
         configDirFile.mkdirs();
+
+        // Create commons package
+        File commonDirFile = new File(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/')
+                + File.separator + "commons");
+        commonDirFile.mkdirs();
     }
 
     @Override

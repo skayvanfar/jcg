@@ -80,18 +80,72 @@ public class SpringHandler extends TechnologyHandler {
 
     @Override
     protected void createDirectories() throws Exception {
+        // Create commons package
+        File localizationDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + "commons" + File.separator + "localization");
+        localizationDirFile.mkdirs();
 
+        File persistenceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + "commons" + File.separator + "persistence");
+        persistenceDirFile.mkdirs();
+
+        File utilDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + "commons" + File.separator + "util");
+        utilDirFile.mkdirs();
     }
 
     @Override
     protected Config createJavaConfig() {
-        Template SpringAppConfigTemplate = new Template("AppConfig", "architecture/springWebArchitecture/javaConfig/AppConfig.vm",
+        Template springAppConfigTemplate = new Template("AppConfig", "architecture/springWebArchitecture/javaConfig/AppConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/AppConfig.java");
-        SpringAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
-        SpringAppConfigTemplate.putReference("securityConfig", securityConfig.toString());
-        SpringAppConfigTemplate.putReference("configs", configs);
-        SpringAppConfigTemplate.mergeTemplate();
+        springAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
+        springAppConfigTemplate.putReference("securityConfig", securityConfig.toString());
+        springAppConfigTemplate.putReference("configs", configs);
+        springAppConfigTemplate.mergeTemplate();
+
+        createCommonFiles();
         return null;
+    }
+
+    /**
+     * Create commons files
+     * */
+    private void createCommonFiles() {
+        /////////////////////////////////////
+        Template localizedEnumTemplate = new Template("LocalizedEnum", "commons/localization/LocalizedEnum.vm",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/localization/LocalizedEnum.java");
+        localizedEnumTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
+        localizedEnumTemplate.mergeTemplate();
+
+        /////////////////////////////////////
+        Template pagingDataListTemplate = new Template("PagingDataList", "commons/persistence/PagingDataList.vm",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/PagingDataList.java");
+        pagingDataListTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
+        pagingDataListTemplate.mergeTemplate();
+
+        ///////////////////////////////////////
+        Template persistenceExceptionTemplate = new Template("PersistenceException", "commons/persistence/PersistenceException.vm",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/PersistenceException.java");
+        persistenceExceptionTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
+        persistenceExceptionTemplate.mergeTemplate();
+
+        ///////////////////////////////////////
+        Template persistenceExceptionTypeTemplate = new Template("persistenceExceptionType", "commons/persistence/PersistenceExceptionType.vm",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/PersistenceExceptionType.java");
+        persistenceExceptionTypeTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
+        persistenceExceptionTypeTemplate.mergeTemplate();
+
+        ///////////////////////////////////////
+        Template sortableDataListTemplate = new Template("SortableDataList", "commons/persistence/SortableDataList.vm",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/SortableDataList.java");
+        sortableDataListTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
+        sortableDataListTemplate.mergeTemplate();
+
+        ///////////////////////////////////////
+        Template sortOrderTemplate = new Template("SortOrder", "commons/persistence/SortOrder.vm",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/SortOrder.java");
+        sortOrderTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
+        sortOrderTemplate.mergeTemplate();
     }
 
     @Override

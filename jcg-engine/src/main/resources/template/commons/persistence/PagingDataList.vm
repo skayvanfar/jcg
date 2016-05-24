@@ -1,0 +1,80 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/24/2106.
+ *#
+package ${packagePrefix}.commons.persistence;
+
+import java.util.List;
+
+/**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 1/8/2016
+ *
+ * A dto class that hold data with specified size
+ */
+
+public class PagingDataList<T> extends SortableDataList<T> {
+    private int page;
+    private int pageCount;
+    private int pageSize;
+    private int rowCount;
+
+    protected PagingDataList() {
+    }
+
+    public PagingDataList(List<T> data, int rowCount, int page, int pageSize) {
+        super(data);
+        this.page = page;
+        this.rowCount = rowCount;
+        if (pageSize > 0) {
+            this.pageCount = rowCount / pageSize;
+            if (rowCount % pageSize != 0)
+                this.pageCount++;
+        } else
+            this.pageCount = 0;
+        this.pageSize = pageSize;
+    }
+
+    protected void update(List<T> data, int rowCount, int page, int pageSize) {
+        update(data);
+        this.page = page;
+        this.rowCount = rowCount;
+        if (pageSize > 0) {
+            this.pageCount = rowCount / pageSize;
+            if (rowCount % pageSize != 0)
+                this.pageCount++;
+        } else
+            this.pageCount = 0;
+        this.pageSize = pageSize;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    @Override
+    public List<T> load(String sortField, SortOrder sortOrder) {
+        return load(0, pageSize, sortField, sortOrder);
+    }
+
+    public List<T> load(int page, String sortField, SortOrder sortOrder) {
+        return load(page, pageSize, sortField, sortOrder);
+    }
+
+    public List<T> load(int page, int pageSize, String sortField,
+                        SortOrder sortOrder) {
+        throw new UnsupportedOperationException(
+                "Lazy loading is not implemented.");
+    }
+
+}

@@ -18,7 +18,9 @@ import org.apache.velocity.VelocityContext;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -56,7 +58,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
         super("Hibernate");
         this.interfaceDAODir = "/dao";
         this.implDAODir = "/impl";
-        this.interfaceDAOCommonDir = "/common";
+        this.interfaceDAOCommonDir = "/vmComponents";
         this.implDAOCommonDir = "/impl";
         this.modelDir = "/model";
 
@@ -114,7 +116,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @Override
     public EntityClass createEntityClass(Entity entity, String packagePath) {
         VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016
-        velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common");
+        velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents");
         VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
         return null; // TODO: 5/8/2016
     }
@@ -152,7 +154,8 @@ public class HibernateHandler extends ORMTechnologyHandler {
             case SPRING_CONFIG:
                 Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                         + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
-                SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());                SpringConfigTemplate.mergeTemplate();
+                SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
+                SpringConfigTemplate.mergeTemplate();
                 config = new Config("DataConfig");
                 break;
             case CFG_XML:
@@ -173,11 +176,17 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     protected void createAnnotationDIBaseFiles() {
-        VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016
-        velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common");
-        VelocityTemplate.mergeTemplate("ormTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
-        velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common.impl");
-        VelocityTemplate.mergeTemplate("ormTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java", velocityContext);
+
+        Template genericDAOTemplate = new Template("Generic DAO", "ormTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java");
+        genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents");
+        genericDAOTemplate.mergeTemplate();
+
+        Template hibernateGenericDAOTemplate = new Template("Hibernate Generic DAO", "ormTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java");
+        Set<String> importSet = new HashSet<>();
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents" + ".GenericDAO");
+        hibernateGenericDAOTemplate.putReference("imports", importSet);
+        hibernateGenericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents.impl");
+        hibernateGenericDAOTemplate.mergeTemplate();
     }
 
     @Override

@@ -1,0 +1,41 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/24/2106.
+ *#
+package ${packagePrefix}.commons.persistence;
+
+import java.util.Arrays;
+
+/**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 1/8/2016
+ */
+
+public class PersistenceException extends Exception {
+
+    private static final long serialVersionUID = 7722485951055398760L;
+    private final String[] messages;
+    private PersistenceExceptionType type;
+
+    public PersistenceException(PersistenceExceptionType type) {
+        this(type, null, (String[]) null);
+    }
+
+    public PersistenceException(PersistenceExceptionType type,
+                                String... messages) {
+        this(type, null, messages);
+    }
+
+    public PersistenceException(PersistenceExceptionType type,
+                                Throwable detail, String... messages) {
+        super(Arrays.toString(messages), detail);
+        this.type = type;
+        this.messages = messages;
+    }
+
+    public String[] getMessages() {
+        return messages;
+    }
+
+    public PersistenceExceptionType getType() {
+        return type;
+    }
+}

@@ -45,9 +45,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
         SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
-        Set<String> importSet = new HashSet<>();
-        importSet.add("ir.sk.test");
-        SpringWebConfigTemplate.putReference("imports", importSet);
+
         SpringWebConfigTemplate.mergeTemplate();
         return new Config("WebConfig");
     }

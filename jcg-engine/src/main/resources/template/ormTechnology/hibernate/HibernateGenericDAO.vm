@@ -1,9 +1,8 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  *#
-#parse("common/packageName.vm")
+#parse("vmComponents/packageName.vm")
 
-import ir.sk.jcgengine.common.persistence.jpa.GenericDAO;
 import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -20,7 +19,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
 
-#parse("common/import.vm")
+#parse("vmComponents/import.vm")
 
 /**
  * This class serves as the Base class for all other DAOs - namely to hold

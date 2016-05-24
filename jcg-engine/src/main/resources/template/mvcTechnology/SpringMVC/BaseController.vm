@@ -1,7 +1,7 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  *#
-#parse("common/packageName.vm")
+#parse("vmComponents/packageName.vm")
 
 import com.packt.webstore.domain.Menu;
 import com.packt.webstore.service.MenuService;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.util.ArrayList;
 import java.util.List;
 
-#parse("common/import.vm")
+#parse("vmComponents/import.vm")
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 12/13/2015

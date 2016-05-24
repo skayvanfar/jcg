@@ -1,14 +1,14 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/20/2106.
  *#
-#parse("common/packageName.vm")
+#parse("vmComponents/packageName.vm")
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
-#parse("common/import.vm")
+#parse("vmComponents/import.vm")
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on $date.
