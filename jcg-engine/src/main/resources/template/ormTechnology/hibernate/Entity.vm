@@ -6,8 +6,29 @@
 #parse("vmComponents/import.vm")
 
 @Entity
-@Table(name = "TBL_JCG_PROJECT", schema = "", catalog = "JCG")
-public class $entityName extends EntityBase implements Serializable {
+@Table(name = "${entity.tableName}", schema = "", catalog = "JCG")
+public class $entity.name extends EntityBase implements Serializable {
+
+
+    private ${idType} ${idName};
+
+    #if(!${properties.isEmpty()})
+        #foreach(${property} in ${properties})
+    private ${property.type} ${property.name};
+        #end
+    #end
+
+    #if(!${properties.isEmpty()})
+        #foreach(${property} in ${properties})
+    public void set${property.name} {
+        this.${property.name} = ${property.name};
+    }
+
+    public ${property.name} get${property.name} {
+        return ${property.name};
+    }
+        #end
+    #end
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

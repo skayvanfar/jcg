@@ -115,9 +115,17 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     public EntityClass createEntityClass(Entity entity, String packagePath) {
-        VelocityContext velocityContext = new VelocityContext(); // TODO: 5/12/2016
-        velocityContext.put("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents");
-        VelocityTemplate.mergeTemplate("oRMTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java", velocityContext);
+        if (mappingType == MappingType.ANNOTATION) {
+            Template SpringConfigTemplate = new Template("Entity Class", "ormTechnology/hibernate/EntityWithAnnotation.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                    + File.separator + modelDir + File.separator  + entity.getName());
+            SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir);
+            SpringConfigTemplate.putReference("entity", entity);
+
+            SpringConfigTemplate.mergeTemplate();
+        } else if (mappingType == MappingType.HBM_XML_FILE) {
+
+        }
+
         return null; // TODO: 5/8/2016
     }
 
@@ -131,6 +139,9 @@ public class HibernateHandler extends ORMTechnologyHandler {
      //   String baseHibernateDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
 
      //   entityMainPackage = new File(baseDir + modelDir);
+
+        File modelDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + modelDir);
+        modelDirFile.mkdirs();
 
         interfaceDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir);
         implDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + implDAODir);

@@ -6,9 +6,10 @@ import ir.sk.jcg.jcgcommon.enums.EnumBase;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
 public enum IdGeneratorType implements EnumBase {
-    MANUAL(0, "Manual"),
-    INCREMENTAL(1, "incremental"),
-    NATIVE(2, "Native"); // TODO: 5/12/2016 more need
+    AUTO(0, "Auto"),
+    MANUAL(1, "Manual"),
+    INCREMENTAL(2, "incremental"),
+    NATIVE(3, "Native"); // TODO: 5/12/2016 more need
 
     private Integer value;
     private String desc;

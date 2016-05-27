@@ -4,11 +4,8 @@ import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -25,7 +22,9 @@ public class Property extends ModelElement implements Serializable {
     @Prop(label = "Column Name", editable = true, required = true)
     private String columnName;
     @Prop(label = "Is Unique", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
-    private boolean isUnique;
+    private boolean unique;
+    @Prop(label = "Is Nullable", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
+    private boolean nullable;
 
   //  private List<ValidationRule> validationRules; // TODO: 5/12/2016
 
@@ -68,11 +67,20 @@ public class Property extends ModelElement implements Serializable {
     }
 
     public boolean isUnique() {
-        return isUnique;
+        return unique;
     }
 
     @XmlAttribute
     public void setUnique(boolean unique) {
-        isUnique = unique;
+        this.unique = unique;
+    }
+
+    public boolean isNullable() {
+        return nullable;
+    }
+
+    @XmlAttribute
+    public void setNullable(boolean nullable) {
+        this.nullable = nullable;
     }
 }

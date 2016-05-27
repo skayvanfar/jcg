@@ -1,0 +1,73 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/27/2106.
+ *#
+#parse("vmComponents/packageName.vm")
+
+#parse("vmComponents/import.vm")
+
+@Entity
+@Table(name = "${entity.tableName}", schema = "", catalog = "JCG")
+public class $entity.name implements Serializable {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.${entity.id.idGeneratorType})
+    @Column(name = "${entity.id.columnName}", unique = ${entity.id.unique}, nullable = ${entity.id.nullable})
+    private ${entity.id.type} ${entity.id.name};
+
+    #foreach(${property} in ${entity.properties})
+    @Basic
+    @Column(name = "${property.columnName}", unique = ${property.unique}, nullable = ${property.nullable})
+    private ${property.type} ${property.name};
+    #end
+
+
+    #foreach(${relationship} in ${entity.relationships}) ## todo can be mor compact
+        #if(${relationship.relationshipType} eq '1 ... 1 Unidirectional')
+    @OneToOne
+    private ${relationship.targetEntity.name} ${relationship.name};
+        #elseif(${relationship.relationshipType} eq '1 ... * Unidirectional')
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<${relationship.targetEntity.name}> ${relationship.name};
+        #elseif(${relationship.relationshipType} eq '* ... 1 Unidirectional')
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ${relationship.targetEntity.name} ${relationship.name};
+        #elseif(${relationship.relationshipType} eq '* ... * Unidirectional')
+    @ManyToMany
+        #elseif(${relationship.relationshipType} eq '1 ... * Bidirectional')
+    @ManyToOne(fetch = FetchType.LAZY)
+        #elseif(${relationship.relationshipType} eq '* ... 1 Bidirectional')
+    @OneToMany(fetch = FetchType.LAZY)
+        #elseif(${relationship.relationshipType} eq '* ... * Bidirectional')
+    @ManyToMany
+        #else
+    ## never happened
+        #end
+    #end
+
+
+
+    #foreach(${property} in ${entity.properties})
+    #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
+    public void set${capitalizeName}(${property.type} ${property.name}) {
+        this.${property.name} = ${property.name};
+    }
+
+    public ${property.type} get${capitalizeName}() {
+        return ${property.name};
+    }
+    #end
+
+
+    #foreach(${relationship} in ${entity.relationships})
+    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
+    public void set${capitalizeName}(${relationship.targetEntity.name} ${relationship.name}) {
+        this.${relationship.name} = ${relationship.name};
+    }
+
+    public ${relationship.targetEntity.name} get${capitalizeName}() {
+        return ${relationship.name};
+    }
+    #end
+
+}

@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.velocity;
 
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,14 +10,9 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
-import java.net.URL;
-import java.nio.file.Paths;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 4/13/2016
@@ -32,7 +28,8 @@ public class VelocityTemplate {
     static {
         try {
             velocityEngine = new VelocityEngine();
-            //    String velocityConf = ClassLoader.getSystemResource("velocity.properties").getPath();
+         //   String velocityConf = ClassLoader.getSystemResource("/media/saeed/win/E/template/velocity.properties").getPath();
+         //   System.out.printf("ve  " + velocityConf);
             velocityEngine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
         //    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
        //     velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
@@ -47,8 +44,11 @@ public class VelocityTemplate {
 
       //      System.out.println("absolutePath:::::::::::::          "     + "E:/template/buildTechnology/maven");
             velocityEngine.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, "/media/saeed/win/E/template"); // TODO: 4/22/2016 must chnage to relative
+            velocityEngine.setProperty(RuntimeConstants.VM_LIBRARY_AUTORELOAD, true);
+
+
             velocityEngine.init();
-            //   Velocity.init(velocityConf);
+        //       Velocity.init(velocityConf);
             //      logger.info("Velocity init success", velocityConf);
             logger.info("Velocity init success");
         } catch (Exception e) {
