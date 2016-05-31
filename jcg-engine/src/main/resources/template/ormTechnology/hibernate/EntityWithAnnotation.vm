@@ -23,22 +23,22 @@ public class $entity.name implements Serializable {
 
 
     #foreach(${relationship} in ${entity.relationships}) ## todo can be mor compact
-        #if(${relationship.relationshipType} eq '1 ... 1 Unidirectional')
+        #if(${relationship.cardinalityType} eq '1 ... 1 Unidirectional')
     @OneToOne
     private ${relationship.targetEntity.name} ${relationship.name};
-        #elseif(${relationship.relationshipType} eq '1 ... * Unidirectional')
+        #elseif(${relationship.cardinalityType} eq '1 ... * Unidirectional')
     @OneToMany(fetch = FetchType.LAZY)
     private List<${relationship.targetEntity.name}> ${relationship.name};
-        #elseif(${relationship.relationshipType} eq '* ... 1 Unidirectional')
+        #elseif(${relationship.cardinalityType} eq '* ... 1 Unidirectional')
     @ManyToOne(fetch = FetchType.LAZY)
     private ${relationship.targetEntity.name} ${relationship.name};
-        #elseif(${relationship.relationshipType} eq '* ... * Unidirectional')
+        #elseif(${relationship.cardinalityType} eq '* ... * Unidirectional')
     @ManyToMany
-        #elseif(${relationship.relationshipType} eq '1 ... * Bidirectional')
+        #elseif(${relationship.cardinalityType} eq '1 ... * Bidirectional')
     @ManyToOne(fetch = FetchType.LAZY)
-        #elseif(${relationship.relationshipType} eq '* ... 1 Bidirectional')
+        #elseif(${relationship.cardinalityType} eq '* ... 1 Bidirectional')
     @OneToMany(fetch = FetchType.LAZY)
-        #elseif(${relationship.relationshipType} eq '* ... * Bidirectional')
+        #elseif(${relationship.cardinalityType} eq '* ... * Bidirectional')
     @ManyToMany
         #else
     ## never happened

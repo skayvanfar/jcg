@@ -1,10 +1,10 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.*;
-import ir.sk.jcg.jcgengine.model.project.enums.RelationshipType;
+import ir.sk.jcg.jcgengine.model.project.enums.CardinalityType;
+import ir.sk.jcg.jcgengine.model.project.enums.DirectionalityType;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,27 +49,27 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
             Entity parentEntity = (Entity) parentNode.getUserObject();
 
             Relationship relationship = (Relationship) presentable;
-            RelationshipType relationshipType = relationship.getRelationshipType();
-            if (!relationship.getTargetEntity().equals(parentEntity) && (relationshipType.equals(RelationshipType.ONE_TO_ONE_BIDIRECTIONAL)
-                    || relationshipType.equals(RelationshipType.ONE_TO_MANY_BIDIRECTIONAL)
-                    || relationshipType.equals(RelationshipType.MANY_TO_ONE_BIDIRECTIONAL)
-                    || relationshipType.equals(RelationshipType.MANY_TO_MANY_BIDIRECTIONAL))) {
+            CardinalityType cardinalityType = relationship.getCardinalityType();
+            DirectionalityType directionalityType = relationship.getDirectionalityType();
+
+            if (!relationship.getTargetEntity().equals(parentEntity) && (directionalityType.equals(DirectionalityType.BIDIRECTIONAL))) {
                 Entity targetEntity = relationship.getTargetEntity();
                 Relationship targetRelationship = new Relationship();
                 targetRelationship.setName(relationship.getName());
+                targetRelationship.setDirectionalityType(directionalityType);
                 targetRelationship.setTargetEntity(parentEntity);
-                switch (relationshipType) {
-                    case ONE_TO_ONE_BIDIRECTIONAL:
-                        targetRelationship.setRelationshipType(RelationshipType.ONE_TO_ONE_BIDIRECTIONAL);
+                switch (cardinalityType) {
+                    case ONE_TO_ONE:
+                        targetRelationship.setCardinalityType(CardinalityType.ONE_TO_ONE);
                         break;
-                    case ONE_TO_MANY_BIDIRECTIONAL:
-                        targetRelationship.setRelationshipType(RelationshipType.MANY_TO_ONE_BIDIRECTIONAL);
+                    case ONE_TO_MANY:
+                        targetRelationship.setCardinalityType(CardinalityType.Many_TO_ONE);
                         break;
-                    case MANY_TO_ONE_BIDIRECTIONAL:
-                        targetRelationship.setRelationshipType(RelationshipType.ONE_TO_MANY_BIDIRECTIONAL);
+                    case Many_TO_ONE:
+                        targetRelationship.setCardinalityType(CardinalityType.ONE_TO_MANY);
                         break;
-                    case MANY_TO_MANY_BIDIRECTIONAL:
-                        targetRelationship.setRelationshipType(RelationshipType.MANY_TO_MANY_BIDIRECTIONAL);
+                    case MANY_TO_MANY:
+                        targetRelationship.setCardinalityType(CardinalityType.MANY_TO_MANY);
                         break;
                 }
                 targetEntity.addRelation(targetRelationship);
