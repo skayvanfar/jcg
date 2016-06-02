@@ -50,12 +50,7 @@ public class CreateEntityNodeAction extends CreateNodeAction {
                     // add to project
                     entityPackage.addElement(entity);
 
-                    try {
-                        codeGenerator.marshalling(); // TODO: 5/3/2016
-                    } catch (JAXBException e) {
-                        e.printStackTrace();
-                    }
-                    jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+                    marshalingAndReloadTree();
                 }
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }

@@ -22,19 +22,14 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
 
         jcgProjectComponent.setPropertiesModifiedElement();
 
         doBeforeSave(jcgProjectComponent);
 
-        try {
-            jcgProjectComponent.getCodeGenerator().marshalling();
-        } catch (JAXBException e1) {
-            e1.printStackTrace();
-            logger.error("buildTemplate error in template : " + e);
-        }
-        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+        marshalingAndReloadTree();
     }
 
     /**

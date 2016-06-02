@@ -17,8 +17,9 @@ import javax.swing.tree.TreePath;
  */
 public class DeletePackageNodeAction extends DeleteNodeAction {
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
-        final DialogBuilder builder = new DialogBuilder(anActionEvent.getProject());
+    public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
+        final DialogBuilder builder = new DialogBuilder(e.getProject());
         builder.setTitle("Create Package");
 
         //   CreateNewNodePanel panel = new CreateNewNodePanel();
@@ -29,7 +30,7 @@ public class DeletePackageNodeAction extends DeleteNodeAction {
             public void run() {
 
 
-                JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
+                JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
 
                 TreePath treePath = jcgProjectComponent.getSelectionPath();
 
@@ -47,8 +48,7 @@ public class DeletePackageNodeAction extends DeleteNodeAction {
                     try {
                         parentPackageable.removePackage(currentPackage);
 
-                        jcgProjectComponent.getCodeGenerator().marshalling();
-                        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+                        marshalingAndReloadTree();
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016
                     }

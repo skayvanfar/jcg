@@ -44,6 +44,10 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 icon = IconLoader.getIcon("/css/property.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Relationship) {
                 icon = IconLoader.getIcon("/javaee/persistenceRelationship.png"); // 16x16
+                Relationship relationship = (Relationship) treeNode.getUserObject();
+                if (relationship .isHead()) {
+                    setForeground(Color.BLUE); // TODO: 6/2/2016 not work
+                }
             }
             wrappingPanel.setIcon(icon);
         }

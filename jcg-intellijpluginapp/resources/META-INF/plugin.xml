@@ -81,8 +81,8 @@
       <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
                icon="/css/property.png" text="Create Property"/>
       <separator/>
-      <action id="Create New Relation" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateRelationNodeAction"
-              icon="/javaee/persistenceRelationship.png" text="Create Relation"/>
+      <action id="Create New Relation" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateRelationshipNodeAction"
+              icon="/javaee/persistenceRelationship.png" text="Create Relationship"/>
       <separator/>
       <reference ref="Generate Code" />
       <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityCreateNodeActionAction"-->
@@ -93,6 +93,12 @@
       <!--<separator/>-->
       <!--<action id="Copy Node Path" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CopyNodePathAction"-->
               <!--icon="/actions/copy.png" text="Copy Node Path"/>-->
+    </group>
+
+    <group id="JCG.RelationshipOperationMenu" text="JCG Operations" popup="true">
+      <action id="Edit Relationship" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.EditRelationshipNodeAction"
+              icon="/javaee/persistenceRelationship.png" text="Edit Relationship"/>
+      <separator/>
     </group>
 
     <group id="JCG.PropertiesOperationMenu" text="JCG Operations" popup="true">

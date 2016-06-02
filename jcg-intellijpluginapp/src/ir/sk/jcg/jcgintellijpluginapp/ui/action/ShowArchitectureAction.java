@@ -8,6 +8,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 public class ShowArchitectureAction extends NodeAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         // TODO: 4/28/2016
     }
 }

@@ -7,6 +7,7 @@ import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.enums.CardinalityType;
 import ir.sk.jcg.jcgengine.model.project.enums.CollectionType;
 import ir.sk.jcg.jcgengine.model.project.enums.DirectionalityType;
+import ir.sk.jcg.jcgintellijpluginapp.ui.dto.RelationShipDto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,14 +17,16 @@ import java.awt.event.ItemListener;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
-public class NewRelationPanel extends JPanel { // TODO: 5/12/2016 may better extends CreateNewNodePanel
+public class RelationshipPanel extends JPanel { // TODO: 5/12/2016 may better extends CreateNewNodePanel
 
     private String operationName;
 
+    private RelationShipDto relationShipDto;
+
     private final JLabel relationNameLabel;
     private JTextField  relationNameTextField;
-    private final JLabel relationshipLabel;
-    private ComboBox relationshipComboBox;
+    private final JLabel CardinalityLabel;
+    private ComboBox cardinalityComboBox;
     private final JLabel directionalityLabel;
     private ComboBox directionalityComboBox;
     private final JLabel targetEntityLabel;
@@ -31,22 +34,23 @@ public class NewRelationPanel extends JPanel { // TODO: 5/12/2016 may better ext
     private final JLabel collectionLabel;
     private ComboBox collectionComboBox;
 
-    public NewRelationPanel(java.util.List<Entity> entities) {
+    public RelationshipPanel(java.util.List<Entity> entities) {
+        relationShipDto = new RelationShipDto();
         setLayout(new GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), -1, -1));
 
-        relationNameLabel = new JLabel("Relationship Name :");
+        relationNameLabel = new JLabel("Name :");
         add(relationNameLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         relationNameTextField = new JTextField();
         relationNameTextField.setEnabled(false); // TODO: 5/27/16
         add(relationNameTextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
-        relationshipLabel = new JLabel("Relationship Type :");
-        add(relationshipLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        relationshipComboBox = new ComboBox();
+        CardinalityLabel = new JLabel("Cardinality Type :");
+        add(CardinalityLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cardinalityComboBox = new ComboBox();
         for (CardinalityType type : CardinalityType.values())
-            relationshipComboBox.addItem(type);
-        add(relationshipComboBox, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        relationshipComboBox.addItemListener(new ItemListener() {
+            cardinalityComboBox.addItem(type);
+        add(cardinalityComboBox, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        cardinalityComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 CardinalityType cardinalityType = (CardinalityType) e.getItem();
@@ -60,7 +64,7 @@ public class NewRelationPanel extends JPanel { // TODO: 5/12/2016 may better ext
             }
         });
 
-        directionalityLabel = new JLabel("Direction :");
+        directionalityLabel = new JLabel("Directionality :");
         add(directionalityLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         directionalityComboBox = new ComboBox();
         for (DirectionalityType directionalityType : DirectionalityType.values())
@@ -81,15 +85,6 @@ public class NewRelationPanel extends JPanel { // TODO: 5/12/2016 may better ext
 //        for (CollectionType collectionType : CollectionType.values())
 //            collectionTypeComboBox.addItem(collectionType);
         add(collectionComboBox, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-
-
-//        targetEntityComboBox.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                Entity entity = (Entity) e.getItem();
-//                if (entity)
-//            }
-//        });
     }
 
     private void setStateOfCollectionComboBox(boolean state) {
@@ -105,23 +100,60 @@ public class NewRelationPanel extends JPanel { // TODO: 5/12/2016 may better ext
         }
     }
 
-    public String getNodeName() {
-        return relationNameTextField.getText();
+//    public String getRelationshipName() {
+//        return relationNameTextField.getText();
+//    }
+//
+//    public void setRelationshipName(String relationshipName) {
+//        relationNameTextField.setText(relationshipName);
+//    }
+
+//    public CardinalityType getCardinalityType() {
+//        return (CardinalityType) cardinalityComboBox.getSelectedItem();
+//    }
+//
+//    public void setCardinalityType(CardinalityType cardinalityType) {
+//        cardinalityComboBox.setSelectedItem(cardinalityType);
+//    }
+//
+//    public DirectionalityType getDirectionalityType() {
+//        return (DirectionalityType) directionalityComboBox.getSelectedItem();
+//    }
+//
+//    public void setDirectionalityType(DirectionalityType directionalityType) {
+//        directionalityComboBox.setSelectedItem(directionalityType);
+//    }
+//
+//    public Entity getTargetEntity() {
+//        return (Entity) targetEntityComboBox.getSelectedItem();
+//    }
+//
+//    public void setTargetEntity(Entity targetEntity) {
+//        targetEntityComboBox.setSelectedItem(targetEntity);
+//    }
+//
+//    public CollectionType getCollectionType() {
+//        return (CollectionType) collectionComboBox.getSelectedItem();
+//    }
+//
+//    public void setCollectionType(CollectionType collectionType) {
+//        collectionComboBox.setSelectedItem(collectionType);
+//    }
+
+    public RelationShipDto getRelationShipDto() {
+        relationShipDto.setCardinalityType((CardinalityType) cardinalityComboBox.getSelectedItem());
+        relationShipDto.setDirectionalityType((DirectionalityType) directionalityComboBox.getSelectedItem());
+        relationShipDto.setTargetEntity((Entity) targetEntityComboBox.getSelectedItem());
+        relationShipDto.setCollectionType((CollectionType) collectionComboBox.getSelectedItem());
+        return relationShipDto;
     }
 
-    public CardinalityType getCardinalitySelected() {
-        return (CardinalityType) relationshipComboBox.getSelectedItem();
-    }
+    public void setRelationShipDto(RelationShipDto relationShipDto) {
+        cardinalityComboBox.setSelectedItem(relationShipDto.getCardinalityType());
+        directionalityComboBox.setSelectedItem(relationShipDto.getDirectionalityType());
+        targetEntityComboBox.setSelectedItem(relationShipDto.getTargetEntity());
+        collectionComboBox.setSelectedItem(relationShipDto.getCollectionType());
 
-    public DirectionalityType getDirectionalitySelected() {
-        return (DirectionalityType) directionalityComboBox.getSelectedItem();
-    }
-
-    public Entity getTargetEntitySelected() {
-        return (Entity) targetEntityComboBox.getSelectedItem();
-    }
-
-    public CollectionType getCollectionSelected() {
-        return (CollectionType) collectionComboBox.getSelectedItem();
+        this.relationShipDto = relationShipDto;
     }
 }

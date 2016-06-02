@@ -29,6 +29,7 @@ public class GenerateCodeAction extends NodeAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         builder = new DialogBuilder(e.getProject());
         builder.setTitle("Code Generate");
         builder.setPreferredFocusComponent(questionPanel);
@@ -51,13 +52,7 @@ public class GenerateCodeAction extends NodeAction {
 
                 modelElement.addAllImplElements((List<ImplElement>) implElements);
 
-                try {
-                    codeGenerator.marshalling();
-                } catch (JAXBException e1) {
-                    e1.printStackTrace();
-                }
-
-                jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+                marshalingAndReloadTree();
 
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }

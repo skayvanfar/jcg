@@ -15,16 +15,21 @@ import java.io.Serializable;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
-@Editable
+// @Editable
 public class Relationship extends ModelElement implements Serializable {
+
+    // Unique id
+    @Prop(label = "Id")
+    private String id;
 
     @Prop(label = "Cardinality Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
     private CardinalityType cardinalityType;
 
-    @Prop(label = "directionality", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
+    @Prop(label = "Directionality", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
     private DirectionalityType directionalityType;
 
     // if direction head is hear
+    @Prop(label = "Is Head")
     private boolean head;
 
   //  @Prop(label = "Target Entity", required = true) // TODO: 5/12/2016 may required = true not needed
@@ -32,6 +37,17 @@ public class Relationship extends ModelElement implements Serializable {
 
     @Prop(label = "Collection Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)
     private CollectionType collectionType;
+
+    private Relationship otherSideRelationship;
+
+    public String getId() {
+        return id;
+    }
+
+    @XmlAttribute
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public CardinalityType getCardinalityType() {
         return cardinalityType;
@@ -78,5 +94,30 @@ public class Relationship extends ModelElement implements Serializable {
     @XmlAttribute
     public void setCollectionType(CollectionType collectionType) {
         this.collectionType = collectionType;
+    }
+
+    public Relationship getOtherSideRelationship() {
+        return otherSideRelationship;
+    }
+
+    @XmlElement(name = "otherSideRelationship")
+    @XmlIDREF
+    public void setOtherSideRelationship(Relationship otherSideRelationship) {
+        this.otherSideRelationship = otherSideRelationship;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Relationship)) return false;
+
+        Relationship that = (Relationship) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

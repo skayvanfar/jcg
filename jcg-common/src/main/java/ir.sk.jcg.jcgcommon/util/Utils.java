@@ -5,6 +5,7 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.net.URL;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 9/11/2015
@@ -72,6 +73,27 @@ public class Utils {
         for (int i = 0; i < objects.length; i++)
             stringArray[i] = objects[i].toString();
         return stringArray;
+    }
+
+    /**
+     * Return a non repeated name
+     * @param name
+     * @param allNames
+     * @return
+     */
+    public static String outputName(String name, Set<String> allNames) {
+        if (!allNames.contains(name)) {
+            return name;
+        } else {
+            if (name.lastIndexOf('-') != -1) {
+                String firstPartName = name.substring(0, name.lastIndexOf('-'));
+                int lastPartName = Integer.parseInt(name.substring(name.lastIndexOf('-') + 1)) + 1;
+                return firstPartName + "-" + lastPartName;
+            } else {
+                return name + "-1";
+            }
+
+        }
     }
 
 }

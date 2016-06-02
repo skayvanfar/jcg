@@ -134,15 +134,31 @@ public class Entity extends SchemaItem implements Serializable {
         this.relationships = relationships;
     }
 
+    /**
+     * Add Relation to Entity. If Relation exist, override that.
+     * @param relationship
+     */
     public void addRelation(Relationship relationship) {
         if (relationships.contains(relationship))
-            throw new ElementBeforeExistException(relationship);
+            relationships.remove(relationship);
         relationships.add(relationship);
     }
 
     public void removeRelation(Relationship relationship) {
         if (relationships.contains(relationship))
             relationships.remove(relationship);
+    }
+
+    /**
+     * Specify exist a Relation with specifeid relationship name
+     * @param relationshipName
+     * @return
+     */
+    public boolean hasRelationshipWithName(String relationshipName) {
+        for (Relationship relationship : relationships)
+            if (relationship.getName().equals(relationshipName))
+                return true;
+        return false;
     }
 
 }

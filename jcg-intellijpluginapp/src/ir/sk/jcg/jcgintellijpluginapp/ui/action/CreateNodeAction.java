@@ -8,7 +8,7 @@ import com.intellij.openapi.ui.DialogBuilder;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/4/2016
  */
-public abstract class CreateNodeAction extends AnAction {
+public abstract class CreateNodeAction extends NodeAction {
 
     private String nodeType;
     protected DialogBuilder builder;
@@ -24,6 +24,7 @@ public abstract class CreateNodeAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         addNodePanel.clearNodeName();
         addNodePanel.clearNodeName();
         builder = new DialogBuilder(e.getProject());

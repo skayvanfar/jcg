@@ -60,8 +60,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                             packageable.addPackage(elementPackage);
                         }
 
-                        jcgProjectComponent.getCodeGenerator().marshalling();
-                        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+                        marshalingAndReloadTree();
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016  
                     }

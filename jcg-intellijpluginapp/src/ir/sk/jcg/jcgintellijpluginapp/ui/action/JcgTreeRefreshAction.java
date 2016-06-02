@@ -9,8 +9,8 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 public class JcgTreeRefreshAction extends NodeAction {
 
     @Override
-    public void actionPerformed(AnActionEvent anActionEvent) {
-        JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
+    public void actionPerformed(AnActionEvent e) {
+        super.actionPerformed(e);
         jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
     }
 
