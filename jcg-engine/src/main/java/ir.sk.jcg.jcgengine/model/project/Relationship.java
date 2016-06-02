@@ -120,4 +120,13 @@ public class Relationship extends ModelElement implements Serializable {
     public int hashCode() {
         return id.hashCode();
     }
+
+    @Override
+    public String toString() {
+        String name = this.name;
+        if (!collectionType.equals(CollectionType.NOTHING))
+            name += " " + collectionType;
+
+        return name;
+    }
 }

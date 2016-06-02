@@ -52,4 +52,8 @@ public class Schema<T extends SchemaItem> extends ModelElement implements Packag
             packages.remove(t);
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

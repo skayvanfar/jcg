@@ -43,16 +43,15 @@ public class RelationshipControllerImpl implements RelationshipController {
 
         Relationship tailRelationship = createTailRelationShipIfNeed(relationShipDto, entity);
 
+        setNameAndCollectionType(relationShipDto.getCardinalityType(), relationShipDto.getCollectionType(), headRelationship, entity);
+        entity.addRelation(headRelationship);
+
         if (tailRelationship != null) {
             headRelationship.setOtherSideRelationship(tailRelationship);
             tailRelationship.setOtherSideRelationship(headRelationship);
-        }
-
-        setNameAndCollectionTypes(relationShipDto.getCardinalityType(), relationShipDto.getCollectionType(), headRelationship, tailRelationship, entity);
-
-        entity.addRelation(headRelationship);
-        if (tailRelationship != null)
+            setNameAndCollectionType(relationShipDto.getCardinalityType(), relationShipDto.getCollectionType(), tailRelationship, headRelationship.getTargetEntity());
             headRelationship.getTargetEntity().addRelation(tailRelationship);
+        }
     }
 
     /**
@@ -68,7 +67,7 @@ public class RelationshipControllerImpl implements RelationshipController {
         CardinalityType cardinalityType = relationShipDto.getCardinalityType();
         DirectionalityType directionalityType = relationShipDto.getDirectionalityType();
 
-        if (!relationShipDto.getTargetEntity().equals(parentEntity) && (directionalityType.equals(DirectionalityType.BIDIRECTIONAL))) {
+        if ((directionalityType.equals(DirectionalityType.BIDIRECTIONAL))) {
             targetRelationship = new Relationship();
             String uuid = UUID.randomUUID().toString();
             targetRelationship.setId(uuid);
@@ -96,57 +95,33 @@ public class RelationshipControllerImpl implements RelationshipController {
 
 
     /**
-     * Set Name Collection Types of both side of a relationship
      * @param cardinalityType
      * @param collectionType
      * @param relationship
-     * @param targetRelationship
+     * @param entity
      */
-    private void setNameAndCollectionTypes(CardinalityType cardinalityType, CollectionType collectionType, Relationship relationship, Relationship targetRelationship, Entity entity) {
+    private void setNameAndCollectionType(CardinalityType cardinalityType, CollectionType collectionType, Relationship relationship, Entity entity) {
         // when cardinality is one
-        String headRelationshipName = getUnRepeatedNameByAddIndexToEnd(entity, StringUtils.toCamelCase(relationship.getTargetEntity().getName()));
+        String relationshipName = getUnRepeatedNameByAddIndexToEnd(entity, StringUtils.toCamelCase(relationship.getTargetEntity().getName()));
         // when cardinality is many
-        String headRelationshipsName = getUnRepeatedNameByAddIndexToEnd(entity, StringUtils.toCamelCase(relationship.getTargetEntity().getName()) + "s");
-        // when cardinality is one
-        String tailRelationshipName = null;
-        // when cardinality is many
-        String tailRelationshipsName = null;
-        if (targetRelationship != null) {
-            tailRelationshipName = getUnRepeatedNameByAddIndexToEnd(relationship.getTargetEntity(), StringUtils.toCamelCase(entity.getName()));
-            tailRelationshipsName = getUnRepeatedNameByAddIndexToEnd(relationship.getTargetEntity(), StringUtils.toCamelCase(entity.getName()) + "s");
-        }
+        String relationshipsName = getUnRepeatedNameByAddIndexToEnd(entity, StringUtils.toCamelCase(relationship.getTargetEntity().getName()) + "s");
+
         switch (cardinalityType) {
             case ONE_TO_ONE:
-                relationship.setName(headRelationshipName);
+                relationship.setName(relationshipName);
                 relationship.setCollectionType(CollectionType.NOTHING);
-                if (targetRelationship != null) {
-                    targetRelationship.setName(tailRelationshipName);
-                    targetRelationship.setCollectionType(CollectionType.NOTHING);
-                }
                 break;
             case ONE_TO_MANY:
-                relationship.setName(headRelationshipsName);
+                relationship.setName(relationshipsName);
                 relationship.setCollectionType(collectionType);
-                if (targetRelationship != null) {
-                    targetRelationship.setName(tailRelationshipName);
-                    targetRelationship.setCollectionType(CollectionType.NOTHING);
-                }
                 break;
             case Many_TO_ONE:
-                relationship.setName(headRelationshipName);
+                relationship.setName(relationshipName);
                 relationship.setCollectionType(CollectionType.NOTHING);
-                if (targetRelationship != null) {
-                    targetRelationship.setName(tailRelationshipsName);
-                    targetRelationship.setCollectionType(collectionType);
-                }
                 break;
             case MANY_TO_MANY:
-                relationship.setName(headRelationshipsName);
+                relationship.setName(relationshipsName);
                 relationship.setCollectionType(collectionType);
-                if (targetRelationship != null) {
-                    targetRelationship.setName(tailRelationshipsName);
-                    targetRelationship.setCollectionType(collectionType);
-                }
                 break;
         }
     }

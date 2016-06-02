@@ -41,7 +41,7 @@ public abstract class Element implements Presentable, Serializable {
 
     @Override
     public String toString() {
-        return name;
+        return name + " " + getClass().getSimpleName();
     }
 
 }
