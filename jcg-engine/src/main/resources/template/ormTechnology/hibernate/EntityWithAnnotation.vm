@@ -3,71 +3,30 @@
  *#
 #parse("vmComponents/packageName.vm")
 
+import java.io.Serializable;
+
+import java.util.*;
+
+import javax.persistence.*;
+
 #parse("vmComponents/import.vm")
 
 @Entity
-@Table(name = "${entity.tableName}", schema = "", catalog = "JCG")
-public class $entity.name implements Serializable {
+@Table(name = "${entity.tableName}", schema = "", catalog = "${databaseSchemaName}")
+public class ${entity.name} implements Serializable {
 
+    #idName($entity.id)
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.${entity.id.idGeneratorType})
-    @Column(name = "${entity.id.columnName}", unique = ${entity.id.unique}, nullable = ${entity.id.nullable})
-    private ${entity.id.type} ${entity.id.name};
+    #set($properties = ${entity.properties})
+    #propertiesName($properties)
 
-    #foreach(${property} in ${entity.properties})
-    @Basic
-    @Column(name = "${property.columnName}", unique = ${property.unique}, nullable = ${property.nullable})
-    private ${property.type} ${property.name};
-    #end
+    #set($relationships = ${entity.relationships})
+    #relationshipsName($relationships)
 
+    #idGetterAndSetter($entity.id);
 
-    #foreach(${relationship} in ${entity.relationships}) ## todo can be mor compact
-        #if(${relationship.cardinalityType} eq '1 ... 1 Unidirectional')
-    @OneToOne
-    private ${relationship.targetEntity.name} ${relationship.name};
-        #elseif(${relationship.cardinalityType} eq '1 ... * Unidirectional')
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<${relationship.targetEntity.name}> ${relationship.name};
-        #elseif(${relationship.cardinalityType} eq '* ... 1 Unidirectional')
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ${relationship.targetEntity.name} ${relationship.name};
-        #elseif(${relationship.cardinalityType} eq '* ... * Unidirectional')
-    @ManyToMany
-        #elseif(${relationship.cardinalityType} eq '1 ... * Bidirectional')
-    @ManyToOne(fetch = FetchType.LAZY)
-        #elseif(${relationship.cardinalityType} eq '* ... 1 Bidirectional')
-    @OneToMany(fetch = FetchType.LAZY)
-        #elseif(${relationship.cardinalityType} eq '* ... * Bidirectional')
-    @ManyToMany
-        #else
-    ## never happened
-        #end
-    #end
+    #propertiesGetterAndSetter($properties)
 
-
-
-    #foreach(${property} in ${entity.properties})
-    #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
-    public void set${capitalizeName}(${property.type} ${property.name}) {
-        this.${property.name} = ${property.name};
-    }
-
-    public ${property.type} get${capitalizeName}() {
-        return ${property.name};
-    }
-    #end
-
-
-    #foreach(${relationship} in ${entity.relationships})
-    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
-    public void set${capitalizeName}(${relationship.targetEntity.name} ${relationship.name}) {
-        this.${relationship.name} = ${relationship.name};
-    }
-
-    public ${relationship.targetEntity.name} get${capitalizeName}() {
-        return ${relationship.name};
-    }
-    #end
+    #relationshipsGetterAndSetter($relationships)
 
 }

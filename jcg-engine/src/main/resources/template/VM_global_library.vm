@@ -1,3 +1,102 @@
 #**
 * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/27/2106.
 *#
+## todo must move to other macro library
+## ############################################################################ Hibernate Handler START
+
+## Define id name
+#macro(idName $id)
+    @Id
+    @GeneratedValue(strategy = GenerationType.#idGeneratorTypeHibernate($id.idGeneratorType))
+    @Column(name = "${id.columnName}", unique = ${id.unique}, nullable = ${id.nullable})
+    private ${id.type} ${id.name};
+#end
+
+## Define id setters and getters
+#macro(idGetterAndSetter $id)
+    #set($capitalizeName = ${id.name.substring(0, 1).toUpperCase()}+${id.name.substring(1)})   ## capitalize of property.name
+
+    public ${id.type} get${capitalizeName}() {
+        return ${id.name};
+    }
+
+    public void set${capitalizeName}(${id.type} ${id.name}) {
+        this.${id.name} = ${id.name};
+    }
+#end
+
+## Define properties name
+#macro(propertiesName $properties)
+    #foreach(${property} in ${properties})
+    @Basic
+    @Column(name = "${property.columnName}", unique = ${property.unique}, nullable = ${property.nullable})
+    private ${property.type} ${property.name};
+    #end
+#end
+
+## Define properties setters and getters
+#macro(propertiesGetterAndSetter $properties)
+    #foreach(${property} in ${properties})
+    #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
+
+    public ${property.type} get${capitalizeName}() {
+        return ${property.name};
+    }
+
+    public void set${capitalizeName}(${property.type} ${property.name}) {
+        this.${property.name} = ${property.name};
+    }
+    #end
+#end
+
+## Define relationships name
+#macro(relationshipsName $relationships)
+    #foreach(${relationship} in ${relationships})
+#relationshipCardinalityTypeHibernate($relationship.cardinalityType)#if((!${relationship.head} && ${relationship.cardinalityType} != "* ... 1") || (${relationship.directionalityType} == "Bidirectional") && ${relationship.cardinalityType} == "1 ... *")(mappedBy = "${relationship.otherSideRelationship.name}")#end
+
+private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name};
+    #end
+#end
+
+## Define relationships setters and getters
+#macro(relationshipsGetterAndSetter $relationships)
+    #foreach(${relationship} in ${entity.relationships})
+    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
+
+    public #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end get${capitalizeName}() {
+        return ${relationship.name};
+    }
+
+    public void set${capitalizeName}(#if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name}) {
+        this.${relationship.name} = ${relationship.name};
+    }
+    #end
+#end
+
+## Define relationship cardinalityType for hibernate
+#macro(relationshipCardinalityTypeHibernate $cardinalityType)
+    #if(${cardinalityType} == "1 ... 1")
+        @OneToOne
+    #elseif(${cardinalityType} == "1 ... *")
+        @OneToMany
+    #elseif(${cardinalityType} == "* ... 1")
+        @ManyToOne
+    #elseif(${cardinalityType} == "* ... *")
+        @ManyToMany
+    #end
+#end
+
+## Define id generator type for hibernate todo must change
+#macro(idGeneratorTypeHibernate $cardinalityType)
+    #if(${cardinalityType} == "Auto")
+        AUTO
+    #elseif(${cardinalityType} == "Manual")
+
+    #elseif(${cardinalityType} == "Incremental")
+        SEQUENCE
+    #elseif(${cardinalityType} == "Native")
+        TABLE
+    #end
+#end
+
+## ############################################################################ Hibernate Handler END

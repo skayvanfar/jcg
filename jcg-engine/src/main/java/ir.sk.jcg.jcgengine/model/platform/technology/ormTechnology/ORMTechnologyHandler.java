@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology;
 
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
@@ -95,6 +96,17 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         public String toString() {
             return desc;
         }
+    }
+
+    @Prop(label = "Database schema Name", editableInWizard = true, required = true)
+    protected String databaseSchemaName;
+
+    public String getDatabaseSchemaName() {
+        return databaseSchemaName;
+    }
+
+    public void setDatabaseSchemaName(String databaseSchemaName) {
+        this.databaseSchemaName = databaseSchemaName;
     }
 
     public ORMTechnologyHandler() {

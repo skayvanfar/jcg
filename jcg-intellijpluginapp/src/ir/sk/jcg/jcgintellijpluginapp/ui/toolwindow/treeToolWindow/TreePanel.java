@@ -93,8 +93,8 @@ public class TreePanel extends SimpleToolWindowPanel {
               //      jcgTree.scrollPathToVisible(treePath1);
      //       TreePath t =jcgTree.getSelectionPath();
        //     jcgTree.expandPath(new TreePath(treePath.getPath()));
-            jcgTree.expandRow(1);
-            jcgTree.expandRow(2);
+       //     jcgTree.expandRow(1);
+       //     jcgTree.expandRow(2);
 //            SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath, 3, true);
      //           SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
 

@@ -58,7 +58,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
         super("Hibernate");
         this.interfaceDAODir = "/dao";
         this.implDAODir = "/impl";
-        this.interfaceDAOCommonDir = "/vmComponents";
+        this.interfaceDAOCommonDir = "/common";
         this.implDAOCommonDir = "/impl";
         this.modelDir = "/model";
 
@@ -117,8 +117,9 @@ public class HibernateHandler extends ORMTechnologyHandler {
     public EntityClass createEntityClass(Entity entity, String packagePath) {
         if (mappingType == MappingType.ANNOTATION) {
             Template SpringConfigTemplate = new Template("Entity Class", "ormTechnology/hibernate/EntityWithAnnotation.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                    + File.separator + modelDir + File.separator  + entity.getName());
-            SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir);
+                    + File.separator + modelDir + File.separator  + entity.getName() + ".java");
+            SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".model");
+            SpringConfigTemplate.putReference("schema", databaseSchemaName);
             SpringConfigTemplate.putReference("entity", entity);
 
             SpringConfigTemplate.mergeTemplate();

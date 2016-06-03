@@ -31,7 +31,9 @@ public class VelocityTemplate {
          //   String velocityConf = ClassLoader.getSystemResource("/media/saeed/win/E/template/velocity.properties").getPath();
          //   System.out.printf("ve  " + velocityConf);
             velocityEngine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
-        //    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+            velocityEngine.setProperty("directive.set.null.allowed", "true");
+
+            //    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
        //     velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         //    velocityEngine.setProperty("resource.loader","file,class,jar");
         //    File file = new File("/resources/template");

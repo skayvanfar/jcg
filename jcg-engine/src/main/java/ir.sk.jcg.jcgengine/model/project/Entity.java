@@ -64,7 +64,6 @@ public class Entity extends SchemaItem implements Serializable {
     }
 
     @XmlAttribute
-     // TODO: 5/12/2016 Id
     public void setTableName(String tableName) {
         this.tableName = tableName;
     }
