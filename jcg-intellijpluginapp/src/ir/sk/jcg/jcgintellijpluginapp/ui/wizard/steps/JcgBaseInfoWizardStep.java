@@ -98,7 +98,8 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
         Project jcgProject= codeGenerator.getJcgProject();
         jcgProject.setName(getComponent().getProjectNameField().getText());
         jcgProject.setPersianName(getComponent().getProjectPersianNameField().getText());
-        jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction 
+        jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction
+        jcgProject.setTableNamePattern(getComponent().getTableNamePatternField().getText());
         jcgProject.setConfigPackage(getComponent().getConfigPackageField().getText()); // TODO: 5/3/2016 must validate and correction
 
         // build architecture that user selected

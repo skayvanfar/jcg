@@ -15,10 +15,10 @@ import java.io.Serializable;
 @Editable
 public class Property extends ModelElement implements Serializable {
 
-    @Prop(label = "Type", editable = true, required = true)
+    @Prop(label = "Type", componentType = ComponentType.EDITABLE_COMBO, values = {"int", "Integer", "short", "Short", "long", "Long", "String", "java.sql.Timestamp"}, editable = true, required = true)
     private String type;
-    @Prop(label = "Value", editable = true, required = true)
-    private String value;
+//    @Prop(label = "Value", editable = true, required = true)
+//    private String value;
     @Prop(label = "Column Name", editable = true, required = true)
     private String columnName;
     @Prop(label = "Is Unique", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
@@ -36,7 +36,7 @@ public class Property extends ModelElement implements Serializable {
      * */
     public Property(Property anotherProperty) {
         super(anotherProperty);
-        this.value = anotherProperty.getValue();
+     //   this.value = anotherProperty.getValue();
     }
 
     public String getType() {
@@ -48,14 +48,14 @@ public class Property extends ModelElement implements Serializable {
         this.type = type;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    @XmlAttribute
-    public void setValue(String value) {
-        this.value = value;
-    }
+//    public String getValue() {
+//        return value;
+//    }
+//
+//    @XmlAttribute
+//    public void setValue(String value) {
+//        this.value = value;
+//    }
 
     public String getColumnName() {
         return columnName;

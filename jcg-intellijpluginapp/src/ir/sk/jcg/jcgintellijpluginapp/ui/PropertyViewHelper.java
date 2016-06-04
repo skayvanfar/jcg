@@ -25,6 +25,7 @@ public class PropertyViewHelper {
             case EDITABLE_COMBO:
                 String[] values = propertyInfo.getValues();
                 ComboBox editableComboBox = new ComboBox();
+                editableComboBox.setEditable(true);
                 for (String value : values) {
                     editableComboBox.addItem(value);
                 }

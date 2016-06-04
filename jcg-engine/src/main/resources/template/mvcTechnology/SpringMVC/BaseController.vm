@@ -3,8 +3,9 @@
  *#
 #parse("vmComponents/packageName.vm")
 
+/*
 import com.packt.webstore.domain.Menu;
-import com.packt.webstore.service.MenuService;
+import com.packt.webstore.service.MenuService; */
 import ir.sk.commons.persistence.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,7 +22,7 @@ import java.util.List;
 
 
 public class BaseController {
-
+/*
     @Autowired
     MenuService menuService;
 
@@ -44,4 +45,5 @@ public class BaseController {
 //        }
         return mainMenus;
     }
+*/
 }

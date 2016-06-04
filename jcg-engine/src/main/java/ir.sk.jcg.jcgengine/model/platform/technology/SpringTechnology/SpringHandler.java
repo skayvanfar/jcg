@@ -99,7 +99,7 @@ public class SpringHandler extends TechnologyHandler {
         Template springAppConfigTemplate = new Template("AppConfig", "architecture/springWebArchitecture/javaConfig/AppConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/AppConfig.java");
         springAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
-        springAppConfigTemplate.putReference("securityConfig", securityConfig.toString());
+     //   springAppConfigTemplate.putReference("securityConfig", securityConfig.toString()); // TODO: 6/4/16 for now
         springAppConfigTemplate.putReference("configs", configs);
         springAppConfigTemplate.mergeTemplate();
 

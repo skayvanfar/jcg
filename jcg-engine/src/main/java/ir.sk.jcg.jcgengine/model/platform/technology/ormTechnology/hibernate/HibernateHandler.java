@@ -190,14 +190,14 @@ public class HibernateHandler extends ORMTechnologyHandler {
     protected void createAnnotationDIBaseFiles() {
 
         Template genericDAOTemplate = new Template("Generic DAO", "ormTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java");
-        genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents");
+        genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common");
         genericDAOTemplate.mergeTemplate();
 
         Template hibernateGenericDAOTemplate = new Template("Hibernate Generic DAO", "ormTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java");
         Set<String> importSet = new HashSet<>();
-        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents" + ".GenericDAO");
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao.common" + ".GenericDAO");
         hibernateGenericDAOTemplate.putReference("imports", importSet);
-        hibernateGenericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.vmComponents.impl");
+        hibernateGenericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common.impl");
         hibernateGenericDAOTemplate.mergeTemplate();
     }
 

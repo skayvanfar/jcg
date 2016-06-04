@@ -41,13 +41,14 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
 
 
     @Override
-    protected Config createJavaConfig() {
-        Template springSecurityConfigTemplate = new Template("Spring Security Config Initializer", "securityTechnology/springSecurity/config/SecurityConfig.vm",
+    protected Config createJavaConfig() { // TODO: 6/4/16 must created later
+        /*Template springSecurityConfigTemplate = new Template("Spring Security Config Initializer", "securityTechnology/springSecurity/config/SecurityConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "SecurityConfig.java");
         springSecurityConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
         springSecurityConfigTemplate.mergeTemplate();
         Config springSecurityConfig = new Config("SecurityConfig");
-        return springSecurityConfig;
+        return springSecurityConfig;*/
+        return null;
     }
 
     @Override
@@ -56,8 +57,8 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
     }
 
     @Override
-    protected void createAnnotationDIBaseFiles() {
-        //////////////////////
+    protected void createAnnotationDIBaseFiles() { // TODO: 6/4/16 must created later
+/*        //////////////////////
         Template springSecurityInitializerTemplate = new Template("Spring Security Initializer", "securityTechnology/springSecurity/SpringSecurityInitializer.vm",
                 securityDir.getAbsolutePath() + File.separator  + "SpringSecurityInitializer.java");
         springSecurityInitializerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage() + "." + "security");
@@ -73,7 +74,7 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
         Template projectUserDetailsServiceTemplate = new Template("ProjectUserDetailsService", "securityTechnology/springSecurity/ProjectUserDetailsService.vm",
                 securityDir.getAbsolutePath() + File.separator  + "ProjectUserDetailsService.java");
         projectUserDetailsServiceTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage() + "." + "security");
-        projectUserDetailsServiceTemplate.mergeTemplate();
+        projectUserDetailsServiceTemplate.mergeTemplate();*/
     }
 
     @Override

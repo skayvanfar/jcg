@@ -9,6 +9,7 @@ import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgengine.model.project.enums.IdGeneratorType;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 import javax.xml.bind.JAXBException;
@@ -40,11 +41,16 @@ public class CreateEntityNodeAction extends CreateNodeAction {
 
                     Entity entity = new Entity(); // TODO: 5/3/2016 create new method
                     entity.setName(entityName);
-
+                    String tableNamePattern = jcgProjectComponent.getCodeGenerator().getJcgProject().getTableNamePattern();
+                    entity.setTableName(tableNamePattern + entityName);
+                    entity.setLabelName(entityName);
                     // Id property that auto generated
                     Id id = new Id();
                     // convert String to camelcase like: "PersonInfo" --> "personInfo"
                     id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
+                    id.setIdGeneratorType(IdGeneratorType.AUTO);
+                    id.setType("Long");
+                    id.setColumnName(id.getName());
                     entity.setId(id);
 
                     // add to project

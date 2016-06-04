@@ -59,7 +59,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     protected void createAnnotationDIBaseFiles() {
         Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/BaseController.vm",
                 controllerDir.getAbsolutePath() + File.separator + "BaseController.java");
-        baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller" + "." + "controller");
+        baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
         baseControllerTemplate.mergeTemplate();
     }
 

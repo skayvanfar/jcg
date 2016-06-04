@@ -106,6 +106,7 @@ public class PropertiesTableModel extends AbstractTableModel {
                 case EDITABLE_COMBO:
                     String[] values = propertyInfo.getValues();
                     ComboBox comboBox2 = new ComboBox();
+                    comboBox2.setEditable(true);
                     for (String value : values) {
                         comboBox2.addItem(value);
                     }
