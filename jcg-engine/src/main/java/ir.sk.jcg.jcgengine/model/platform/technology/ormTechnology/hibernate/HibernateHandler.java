@@ -57,9 +57,9 @@ public class HibernateHandler extends ORMTechnologyHandler {
     public HibernateHandler() {
         super("Hibernate");
         this.interfaceDAODir = "/dao";
-        this.implDAODir = "/impl";
-        this.interfaceDAOCommonDir = "/common";
-        this.implDAOCommonDir = "/impl";
+        this.implDAODir = "/dao/impl";
+        this.interfaceDAOCommonDir = "/dao/common";
+        this.implDAOCommonDir = "/dao/common/impl";
         this.modelDir = "/model";
 
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
@@ -115,6 +115,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     public EntityClass createEntityClass(Entity entity, String packagePath) {
+        EntityClass entityClass = new EntityClass();
         if (mappingType == MappingType.ANNOTATION) {
             Template SpringConfigTemplate = new Template("Entity Class", "ormTechnology/hibernate/EntityWithAnnotation.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                     + File.separator + modelDir + File.separator  + entity.getName() + ".java");
@@ -123,15 +124,52 @@ public class HibernateHandler extends ORMTechnologyHandler {
             SpringConfigTemplate.putReference("entity", entity);
 
             SpringConfigTemplate.mergeTemplate();
+            entityClass.setName(entity.getName());
         } else if (mappingType == MappingType.HBM_XML_FILE) {
 
         }
 
-        return null; // TODO: 5/8/2016
+        return entityClass; // TODO: 5/8/2016
     }
 
     @Override
     public List<ModelImplElement> createDao(Entity entity) {
+        Set<ModelImplElement> modelImplElements = new HashSet<>();
+        if (mappingType == MappingType.ANNOTATION) {
+            /////////////////////////////////////////////
+            Template daoTemplate = new Template("Dao", "ormTechnology/hibernate/dao/DAO.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                    + File.separator + interfaceDAODir + File.separator  + entity.getName() + "DAO.java");
+            daoTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao");
+            daoTemplate.putReference("entity", entity);
+            // imports
+            Set<String> daoImportSet = new HashSet<>();
+            daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao.common.GenericDAO");
+            daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".model." + entity.getName());
+            daoTemplate.putReference("imports", daoImportSet);
+            daoTemplate.mergeTemplate();
+
+            EntityClass daoClass = new EntityClass();
+            daoClass.setName(entity.getName() + "DAO.java");
+            modelImplElements.add(daoClass);
+            /////////////////////////////////////////////
+            Template hibernateDaoTemplate = new Template("Hibernate Dao", "ormTechnology/hibernate/dao/HibernateDAO.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                    + File.separator + implDAODir + File.separator + "Hibernate" + entity.getName() + "DAO.java");
+            hibernateDaoTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.impl");
+            hibernateDaoTemplate.putReference("entity", entity);
+            // imports
+            Set<String> hibernateDaoImportSet = new HashSet<>();
+            hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao.common.impl.HibernateGenericDAO");
+            hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".model." + entity.getName());
+            hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao." +  entity.getName() + "DAO");
+            hibernateDaoTemplate.putReference("imports", hibernateDaoImportSet);
+            hibernateDaoTemplate.mergeTemplate();
+
+            EntityClass hibernateDaoClass = new EntityClass();
+            hibernateDaoClass.setName("Hibernate" + entity.getName() + "DAO.java");
+            modelImplElements.add(hibernateDaoClass);
+        } else if (mappingType == MappingType.HBM_XML_FILE) {
+
+        }
         return null; // TODO: 5/8/2016
     }
 
@@ -145,9 +183,9 @@ public class HibernateHandler extends ORMTechnologyHandler {
         modelDirFile.mkdirs();
 
         interfaceDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir);
-        implDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + implDAODir);
-        interfaceDAOCommonDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + interfaceDAOCommonDir);
-        implDAOCommonDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAODir + interfaceDAOCommonDir + implDAOCommonDir);
+        implDAODirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + implDAODir);
+        interfaceDAOCommonDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + interfaceDAOCommonDir);
+        implDAOCommonDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + implDAOCommonDir);
 
         interfaceDAODirFile.mkdirs();
         implDAODirFile.mkdirs();
@@ -167,6 +205,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
                 Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                         + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
                 SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
+                SpringConfigTemplate.putReference("modelPackage", ApplicationContext.getInstance().getPackagePrefix() + ".model"); // TODO: 6/4/2016 model
                 SpringConfigTemplate.mergeTemplate();
                 config = new Config("DataConfig");
                 break;
@@ -189,11 +228,11 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @Override
     protected void createAnnotationDIBaseFiles() {
 
-        Template genericDAOTemplate = new Template("Generic DAO", "ormTechnology/hibernate/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java");
+        Template genericDAOTemplate = new Template("Generic DAO", "ormTechnology/hibernate/dao/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java");
         genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dao.common");
         genericDAOTemplate.mergeTemplate();
 
-        Template hibernateGenericDAOTemplate = new Template("Hibernate Generic DAO", "ormTechnology/hibernate/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java");
+        Template hibernateGenericDAOTemplate = new Template("Hibernate Generic DAO", "ormTechnology/hibernate/dao/HibernateGenericDAO.vm", implDAOCommonDirFile.getAbsolutePath() + "/HibernateGenericDAO.java");
         Set<String> importSet = new HashSet<>();
         importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dao.common" + ".GenericDAO");
         hibernateGenericDAOTemplate.putReference("imports", importSet);

@@ -34,7 +34,7 @@ public class MavenHandler extends BuildTechnologyHandler {
 
         mainJavaPath = "/src/main/java";
         mainResourcesPath = "/src/main/resources";
-        mainWebPath = "/src/main/web";
+        mainWebPath = "/src/main/webapp";
         testJavaPath = "/src/test/java";
         testResourcesPath = "/src/test/resources";
     }

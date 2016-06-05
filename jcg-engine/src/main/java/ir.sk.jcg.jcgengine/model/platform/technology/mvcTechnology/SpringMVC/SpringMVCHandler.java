@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
@@ -26,8 +27,20 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     private File controllerDir;
 
+    @Prop(label = "Interface Service Directory", editableInWizard = true, required = true)
+    private String serviceDir;
+    @Prop(label = "Impl Service Directory", editableInWizard = true, required = true)
+    private String implServiceDir;
+
+    private File serviceDirFile;
+    private File implServiceDirFile;
+
     public SpringMVCHandler() {
-        super("SpringTechnology MVC");
+        super("Spring Technology MVC");
+
+        this.serviceDir = "/service";
+        this.implServiceDir = "/service/impl";
+
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-webmvc", SPRING_VERSION, "compile"));
         dependencies.add(new Dependency("org.apache.tiles", "tiles-extras", "3.0.3", "compile"));
     }
@@ -37,7 +50,12 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
       //  String baseSpringMVCDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
 
         controllerDir = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "controller");
+        serviceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + serviceDir);
+        implServiceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + implServiceDir);
+
         controllerDir.mkdirs();
+        serviceDirFile.mkdirs();
+        implServiceDirFile.mkdirs();
     }
 
     @Override
@@ -45,6 +63,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
         SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
+        SpringWebConfigTemplate.putReference("basePackage", ApplicationContext.getInstance().getPackagePrefix()); // TODO: 5/20/2016
 
         SpringWebConfigTemplate.mergeTemplate();
         return new Config("WebConfig");
@@ -57,10 +76,27 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createAnnotationDIBaseFiles() {
+        ///////////////////////////////////////////
         Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/BaseController.vm",
                 controllerDir.getAbsolutePath() + File.separator + "BaseController.java");
         baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
         baseControllerTemplate.mergeTemplate();
+
+        ///////////////////////////////////////////
+        Template genericDAOTemplate = new Template("Generic Manager", "mvcTechnology/SpringMVC/service/GenericManager.vm", serviceDirFile.getAbsolutePath() + "/GenericManager.java");
+        Set<String> genericDAOImportSet = new HashSet<>();
+        genericDAOImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
+        genericDAOTemplate.putReference("imports", genericDAOImportSet);
+        genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".service");
+        genericDAOTemplate.mergeTemplate();
+
+        //////////////////////////////////////////
+        Template hibernateGenericDAOTemplate = new Template("Generic Manager Impl", "mvcTechnology/SpringMVC/service/GenericManagerImpl.vm", implServiceDirFile.getAbsolutePath() + "/GenericManagerImpl.java");
+        Set<String> importSet = new HashSet<>();
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".service.GenericManager");
+        hibernateGenericDAOTemplate.putReference("imports", importSet);
+        hibernateGenericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".service.impl");
+        hibernateGenericDAOTemplate.mergeTemplate();
     }
 
     @Override

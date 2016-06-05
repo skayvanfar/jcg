@@ -22,7 +22,7 @@
   */
  @Configuration
  @EnableTransactionManagement
- @PropertySource({"classpath:persistence-mysql.properties"})
+ @PropertySource({"classpath:persistence.properties"})
  public class DataConfig {
 
      @Autowired
@@ -32,7 +32,7 @@
      public LocalSessionFactoryBean sessionFactory() {
          LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
          sessionFactory.setDataSource(restDataSource());
-         sessionFactory.setPackagesToScan(new String[]{"ir.sk.jcgengine.webapp.model"});
+         sessionFactory.setPackagesToScan(new String[]{"${modelPackage}"});
          sessionFactory.setHibernateProperties(hibernateProperties());
          return sessionFactory;
      }
