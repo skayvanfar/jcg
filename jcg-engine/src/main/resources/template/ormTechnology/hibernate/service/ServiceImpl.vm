@@ -1,0 +1,29 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 6/6/2106.
+ *#
+#parse("vmComponents/packageName.vm")
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+#parse("vmComponents/import.vm")
+
+#set($capitalizeType = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## capitalize entity.id.type
+#set($lowercaseName = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## lowercase entity.id.type
+/**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
+ */
+@Service
+@Transactional
+public class ${entity.name}ServiceImpl extends GenericManagerImpl<${entity.name}, ${capitalizeType}> implements ${entity.name}Service {
+
+    private ${entity.name}DAO ${lowercaseName}DAO;
+
+    @Autowired
+    public ${entity.name}ServiceImpl(${entity.name}DAO ${lowercaseName}DAO) {
+        super(${lowercaseName}DAO);
+        this.${lowercaseName}DAO = ${lowercaseName}DAO;
+    }
+
+}

@@ -3,8 +3,6 @@
  *#
 #parse("vmComponents/packageName.vm")
 
-import ir.sk.jcgengine.common.persistence.jpa.GenericDAO;
-import ir.sk.jcgengine.common.service.GenericManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;

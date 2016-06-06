@@ -48,6 +48,8 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 if (relationship .isHead()) {
                     setForeground(Color.BLUE); // TODO: 6/2/2016 not work
                 }
+            } else if (treeNode.getUserObject() instanceof ImplElement) {
+            icon = IconLoader.getIcon("/nodes/artifact.png"); // 16x16
             }
             wrappingPanel.setIcon(icon);
         }

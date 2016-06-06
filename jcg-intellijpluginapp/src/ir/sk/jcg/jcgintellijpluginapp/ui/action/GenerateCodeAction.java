@@ -58,7 +58,7 @@ public class GenerateCodeAction extends NodeAction {
             }
 
             private List<? extends ImplElement> generate(ModelElement modelElement, String[] packagePathArray) {
-                List<? extends ImplElement> implElements = new ArrayList<ImplElement>();
+                List<? extends ImplElement> implElements = new ArrayList<>();
                 if (modelElement instanceof Entity) {
                     implElements = codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
                 } else if (modelElement instanceof View) {

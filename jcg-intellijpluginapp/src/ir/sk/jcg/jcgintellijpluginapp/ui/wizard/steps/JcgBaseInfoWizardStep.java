@@ -5,6 +5,7 @@ import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.text.StringUtil;
+import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.platform.architecture.ArchitectureType;
@@ -101,6 +102,8 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
         jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction
         jcgProject.setTableNamePattern(getComponent().getTableNamePatternField().getText());
         jcgProject.setConfigPackage(getComponent().getConfigPackageField().getText()); // TODO: 5/3/2016 must validate and correction
+
+        ApplicationContext.getInstance().setProjectName(jcgProject.getName());
 
         // build architecture that user selected
         ArchitectureType architectureType = (ArchitectureType) getComponent().getArchitectureComboBox().getSelectedItem();

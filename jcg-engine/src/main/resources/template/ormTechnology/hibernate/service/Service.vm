@@ -1,0 +1,14 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 6/6/2106.
+ *#
+#parse("vmComponents/packageName.vm")
+
+#parse("vmComponents/import.vm")
+
+#set($capitalizeType = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## capitalize entity.id.type
+/**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
+ */
+public interface ${entity.name}Service extends GenericManager<${entity.name}, ${capitalizeType}> {
+
+}

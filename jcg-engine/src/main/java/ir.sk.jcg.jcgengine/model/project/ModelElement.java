@@ -35,10 +35,16 @@ public class ModelElement extends Element {
     }
 
     public void addAllImplElements(List<ImplElement> implElements) {
-        implElements.addAll(implElements); // TODO: 5/9/2016 must check implElement exist
+        for (ImplElement implElement : implElements) {
+            if (this.implElements.contains(implElement))
+                this.implElements.remove(implElement);
+        }
+        this.implElements.addAll(implElements);
     }
 
     public void addImplElement(ImplElement implElement) {
-        implElements.add(implElement); // TODO: 5/9/2016 must check implElement exist
+        if (implElements.contains(implElement))
+            implElements.remove(implElement);
+        implElements.add(implElement);
     }
 }

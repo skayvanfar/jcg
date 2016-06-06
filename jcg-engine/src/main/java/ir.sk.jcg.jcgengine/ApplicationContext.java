@@ -13,6 +13,8 @@ public class ApplicationContext {
 
     private static final ApplicationContext INSTANCE = new ApplicationContext();
 
+    private String projectName;
+
     /**
      * Absolute Path of project
      * */
@@ -60,6 +62,13 @@ public class ApplicationContext {
 
     public static ApplicationContext getInstance() { return INSTANCE; }
 
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
     public String getBaseProjectPath() {
         return baseProjectPath;

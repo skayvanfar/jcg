@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
+import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.HibernateHandler;
@@ -115,6 +116,8 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
 
     public ORMTechnologyHandler(String name) {
         super(name);
+        databaseSchemaName = ApplicationContext.getInstance().getProjectName();
+
     }
 
 }

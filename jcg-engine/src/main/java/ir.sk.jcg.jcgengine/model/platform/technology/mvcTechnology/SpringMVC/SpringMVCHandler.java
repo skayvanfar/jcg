@@ -25,21 +25,20 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     private static final String SPRING_GROUP_ID = "org.springframework";
     private static final String SPRING_VERSION = "4.0.3.RELEASE";
 
-    private File controllerDir;
+    @Prop(label = "Controller Directory", editableInWizard = true, required = true)
+    private String controllerDir;
 
-    @Prop(label = "Interface Service Directory", editableInWizard = true, required = true)
-    private String serviceDir;
-    @Prop(label = "Impl Service Directory", editableInWizard = true, required = true)
-    private String implServiceDir;
+    @Prop(label = "Resources Directory", editableInWizard = true, required = true)
+    private String resourcesDir;
 
-    private File serviceDirFile;
-    private File implServiceDirFile;
+    private File controllerDirFile;
+    private File resourcesDirFile;
 
     public SpringMVCHandler() {
         super("Spring Technology MVC");
 
-        this.serviceDir = "/service";
-        this.implServiceDir = "/service/impl";
+        this.controllerDir = "controller";
+        this.resourcesDir = "resources";
 
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-webmvc", SPRING_VERSION, "compile"));
         dependencies.add(new Dependency("org.apache.tiles", "tiles-extras", "3.0.3", "compile"));
@@ -48,14 +47,29 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     @Override
     protected void createDirectories() {
       //  String baseSpringMVCDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
+        controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
+        controllerDirFile.mkdirs();
 
-        controllerDir = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "controller");
-        serviceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + serviceDir);
-        implServiceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + implServiceDir);
+        resourcesDirFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
+        resourcesDirFile.mkdirs();
 
-        controllerDir.mkdirs();
-        serviceDirFile.mkdirs();
-        implServiceDirFile.mkdirs();
+        File webInfFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF");
+        webInfFile.mkdirs();
+
+        File flowsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "flows");
+        flowsFile.mkdirs();
+        File springFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "spring" + File.separator + "webcontext");
+        springFile.mkdirs();
+        File tagsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tags");
+        tagsFile.mkdirs();
+
+        File tilesDefinitionsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "definitions");
+        tilesDefinitionsFile.mkdirs();
+        File tilesTemplateFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "template");
+        tilesTemplateFile.mkdirs();
+
+        File viewsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views");
+        tagsFile.mkdirs();
     }
 
     @Override
@@ -78,25 +92,9 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     protected void createAnnotationDIBaseFiles() {
         ///////////////////////////////////////////
         Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/BaseController.vm",
-                controllerDir.getAbsolutePath() + File.separator + "BaseController.java");
+                controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java");
         baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
         baseControllerTemplate.mergeTemplate();
-
-        ///////////////////////////////////////////
-        Template genericDAOTemplate = new Template("Generic Manager", "mvcTechnology/SpringMVC/service/GenericManager.vm", serviceDirFile.getAbsolutePath() + "/GenericManager.java");
-        Set<String> genericDAOImportSet = new HashSet<>();
-        genericDAOImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
-        genericDAOTemplate.putReference("imports", genericDAOImportSet);
-        genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".service");
-        genericDAOTemplate.mergeTemplate();
-
-        //////////////////////////////////////////
-        Template hibernateGenericDAOTemplate = new Template("Generic Manager Impl", "mvcTechnology/SpringMVC/service/GenericManagerImpl.vm", implServiceDirFile.getAbsolutePath() + "/GenericManagerImpl.java");
-        Set<String> importSet = new HashSet<>();
-        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".service.GenericManager");
-        hibernateGenericDAOTemplate.putReference("imports", importSet);
-        hibernateGenericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".service.impl");
-        hibernateGenericDAOTemplate.mergeTemplate();
     }
 
     @Override
