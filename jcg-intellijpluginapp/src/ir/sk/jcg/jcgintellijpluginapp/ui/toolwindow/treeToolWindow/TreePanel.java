@@ -57,7 +57,12 @@ public class TreePanel extends SimpleToolWindowPanel {
                 } else if (treeNode.getUserObject() instanceof Schema) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof Package) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageOperationMenu", ActionPlaces.UNKNOWN);
+                    DefaultMutableTreeNode schemaNode = (DefaultMutableTreeNode) e.getPath().getPathComponent(2);
+                    if (schemaNode.getUserObject().toString().equals("Domain Schema")) {
+                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageEntityOperationMenu", ActionPlaces.UNKNOWN);
+                    } else if (schemaNode.getUserObject().toString().equals("Business Schema")) {
+                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageViewOperationMenu", ActionPlaces.UNKNOWN);
+                    }
                 } else if (treeNode.getUserObject() instanceof Entity) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.EntityOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof Relationship) {

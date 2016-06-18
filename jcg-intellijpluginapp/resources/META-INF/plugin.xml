@@ -67,9 +67,18 @@
       <reference ref="Generate Code" />
     </group>
 
-    <group id="JCG.PackageOperationMenu" text="JCG Operations" popup="true">
+    <group id="JCG.PackageEntityOperationMenu" text="JCG Operations" popup="true">
       <action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"
               icon="/nodes/class.png" text="Create Entity"/>
+      <separator/>
+      <reference ref="Create Package" />
+      <reference ref="Delete Package" />
+      <separator/>
+      <reference ref="Generate Code" />
+    </group>
+    <group id="JCG.PackageViewOperationMenu" text="JCG Operations" popup="true">
+      <action id="Create New View" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateViewNodeAction"
+              icon="/nodes/advice.png" text="Create View"/>
       <separator/>
       <reference ref="Create Package" />
       <reference ref="Delete Package" />
@@ -104,15 +113,6 @@
     <group id="JCG.PropertiesOperationMenu" text="JCG Operations" popup="true">
 
     </group>
-
-    <group id="JCG.ViewOperationMenu" text="JCG Operations" popup="true">
-      <action id="Create New View" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateViewNodeAction"
-              icon="/actions/new.png" text="Create View"/>
-      <separator/>
-      <reference ref="Generate Code" />
-    </group>
-
-
 
     <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
       <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgElementPropertiesSaveAction"
