@@ -9,6 +9,8 @@ import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHand
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
@@ -100,6 +102,8 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
         applicationContext.setConfigPackage(configPackage);
 
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         applicationContext.setMainJavaPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainJavaPath());
         applicationContext.setMainResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainResourcesPath());
@@ -110,6 +114,12 @@ public abstract class Architecture implements Presentable { // TODO: 4/27/2016 m
 
         applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
         applicationContext.setSpringDIType(springHandler.getSpringDIType());
+
+        applicationContext.setBuildTechnologyHandler(buildTechnology); // TODO: 6/20/2016
+        applicationContext.setOrmTechnologyHandler(ormTechnology);
+        applicationContext.setMvcTechnologyHandler(mvcTechnology);
+        applicationContext.setSpringHandler(springHandler);
+        applicationContext.setSecurityTechnologyHandler(securityTechnologyHandler);
     }
 
     public abstract List<ModelImplElement> createEntity(Entity entity, String packagePath);

@@ -4,8 +4,11 @@ import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.SpringMVCHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
+import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import javax.xml.bind.annotation.XmlSeeAlso;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -82,4 +85,5 @@ public abstract class MVCTechnologyHandler extends TechnologyHandler {
         super(name);
     }
 
+    public abstract List<ModelImplElement> createController(Entity entity);
 }

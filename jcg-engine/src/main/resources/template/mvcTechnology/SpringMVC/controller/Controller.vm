@@ -1,0 +1,32 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 6/20/2106.
+ *#
+#parse("vmComponents/packageName.vm")
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.servlet.ModelAndView;
+#parse("vmComponents/import.vm")
+
+#set($lowerCaseName = ${entity.name.substring(0, 1).toLowerCase()}+${entity.name.substring(1)})   ## capitalize entity.name
+/**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
+ */
+@Controller
+@RequestMapping("/${lowerCaseName}s")
+public class ${entity.name}Controller extends BaseController {
+
+}

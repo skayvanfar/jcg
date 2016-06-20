@@ -32,25 +32,11 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
 
-    @Prop(label = "Interface DAO Directory", editableInWizard = true, required = true)
-    private String interfaceDAODir;
-    @Prop(label = "Impl DAO Directory", editableInWizard = true, required = true)
-    private String implDAODir;
-    private String interfaceDAOCommonDir;
-    private String implDAOCommonDir;
-    @Prop(label = "Model Directory", editableInWizard = true, required = true)
-    private String modelDir;
-
     @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
     private MappingType mappingType;
 
     @Prop(label = "Hibernate Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
     private HibernateConfigType hibernateConfigType;
-
-    @Prop(label = "Interface Service Directory", editableInWizard = true, required = true)
-    private String serviceDir;
-    @Prop(label = "Impl Service Directory", editableInWizard = true, required = true)
-    private String implServiceDir;
 
     private File serviceDirFile;
     private File implServiceDirFile;
@@ -80,33 +66,6 @@ public class HibernateHandler extends ORMTechnologyHandler {
         dependencies.add(new Dependency("mysql", "mysql-connector-java", "5.1.34", "compile"));
     }
 
-    public String getInterfaceDAODir() {
-        return interfaceDAODir;
-    }
-
-    @XmlAttribute
-    public void setInterfaceDAODir(String interfaceDAODir) {
-        this.interfaceDAODir = interfaceDAODir;
-    }
-
-    public String getImplDAODir() {
-        return implDAODir;
-    }
-
-    @XmlAttribute
-    public void setImplDAODir(String implDAODir) {
-        this.implDAODir = implDAODir;
-    }
-
-    public String getModelDir() {
-        return modelDir;
-    }
-
-    @XmlAttribute
-    public void setModelDir(String modelDir) {
-        this.modelDir = modelDir;
-    }
-
     public MappingType getMappingType() {
         return mappingType;
     }
@@ -123,24 +82,6 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @XmlAttribute
     public void setHibernateConfigType(HibernateConfigType hibernateConfigType) {
         this.hibernateConfigType = hibernateConfigType;
-    }
-
-    public String getServiceDir() {
-        return serviceDir;
-    }
-
-    @XmlAttribute
-    public void setServiceDir(String serviceDir) {
-        this.serviceDir = serviceDir;
-    }
-
-    public String getImplServiceDir() {
-        return implServiceDir;
-    }
-
-    @XmlAttribute
-    public void setImplServiceDir(String implServiceDir) {
-        this.implServiceDir = implServiceDir;
     }
 
     @Override

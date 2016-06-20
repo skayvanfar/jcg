@@ -89,6 +89,7 @@ public class SpringWebArchitecture extends Architecture {
     public List<ModelImplElement> createEntity(Entity entity, String packagePath) {
         List<ModelImplElement> modelImplElements = new ArrayList<>();
         ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         EntityClass entityClassElement = ormTechnologyHandler.createEntityClass(entity, packagePath);
         if (entityClassElement != null)
@@ -96,6 +97,9 @@ public class SpringWebArchitecture extends Architecture {
         List<ModelImplElement> daoModelImplElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
         if (daoModelImplElements != null)
             modelImplElements.addAll(daoModelImplElements);
+        List<ModelImplElement> controllerModelImplElements = mvcTechnologyHandler.createController(entity); // TODO: 6/20/2016 may better not use Controller hear
+        if (controllerModelImplElements != null)
+            modelImplElements.addAll(controllerModelImplElements);
 
         return modelImplElements;
     }

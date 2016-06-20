@@ -10,6 +10,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.ele
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
 
@@ -99,9 +100,65 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         }
     }
 
+    @Prop(label = "Interface DAO Directory", editableInWizard = true, required = true)
+    protected String interfaceDAODir;
+    @Prop(label = "Impl DAO Directory", editableInWizard = true, required = true)
+    protected String implDAODir;
+    protected String interfaceDAOCommonDir;
+    protected String implDAOCommonDir;
+    @Prop(label = "Model Directory", editableInWizard = true, required = true)
+    protected String modelDir;
+    @Prop(label = "Interface Service Directory", editableInWizard = true, required = true)
+    protected String serviceDir;
+    @Prop(label = "Impl Service Directory", editableInWizard = true, required = true)
+    protected String implServiceDir;
     @Prop(label = "Database schema Name", editableInWizard = true, required = true)
     protected String databaseSchemaName;
 
+    public String getInterfaceDAODir() {
+        return interfaceDAODir;
+    }
+
+    @XmlAttribute
+    public void setInterfaceDAODir(String interfaceDAODir) {
+        this.interfaceDAODir = interfaceDAODir;
+    }
+
+    public String getImplDAODir() {
+        return implDAODir;
+    }
+
+    @XmlAttribute
+    public void setImplDAODir(String implDAODir) {
+        this.implDAODir = implDAODir;
+    }
+
+    public String getModelDir() {
+        return modelDir;
+    }
+
+    @XmlAttribute
+    public void setModelDir(String modelDir) {
+        this.modelDir = modelDir;
+    }
+
+    public String getServiceDir() {
+        return serviceDir;
+    }
+
+    @XmlAttribute
+    public void setServiceDir(String serviceDir) {
+        this.serviceDir = serviceDir;
+    }
+
+    public String getImplServiceDir() {
+        return implServiceDir;
+    }
+
+    @XmlAttribute
+    public void setImplServiceDir(String implServiceDir) {
+        this.implServiceDir = implServiceDir;
+    }
     public String getDatabaseSchemaName() {
         return databaseSchemaName;
     }

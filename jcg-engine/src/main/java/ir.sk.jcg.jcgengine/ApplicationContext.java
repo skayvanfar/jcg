@@ -1,7 +1,12 @@
 package ir.sk.jcg.jcgengine;
 
+import ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SecurityTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringConfigType;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringDIType;
+import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +64,16 @@ public class ApplicationContext {
     private SpringDIType springDIType;
 
     private Map<String, Object> map = new HashMap<>();
+
+    private BuildTechnologyHandler buildTechnologyHandler;
+
+    private ORMTechnologyHandler ormTechnologyHandler;
+
+    private MVCTechnologyHandler mvcTechnologyHandler;
+
+    private SpringHandler springHandler;
+
+    private SecurityTechnologyHandler securityTechnologyHandler;
 
     public static ApplicationContext getInstance() { return INSTANCE; }
 
@@ -170,4 +185,43 @@ public class ApplicationContext {
         return map.get(key);
     }
 
+    public BuildTechnologyHandler getBuildTechnologyHandler() {
+        return buildTechnologyHandler;
+    }
+
+    public void setBuildTechnologyHandler(BuildTechnologyHandler buildTechnologyHandler) {
+        this.buildTechnologyHandler = buildTechnologyHandler;
+    }
+
+    public ORMTechnologyHandler getOrmTechnologyHandler() {
+        return ormTechnologyHandler;
+    }
+
+    public void setOrmTechnologyHandler(ORMTechnologyHandler ormTechnologyHandler) {
+        this.ormTechnologyHandler = ormTechnologyHandler;
+    }
+
+    public MVCTechnologyHandler getMvcTechnologyHandler() {
+        return mvcTechnologyHandler;
+    }
+
+    public void setMvcTechnologyHandler(MVCTechnologyHandler mvcTechnologyHandler) {
+        this.mvcTechnologyHandler = mvcTechnologyHandler;
+    }
+
+    public SpringHandler getSpringHandler() {
+        return springHandler;
+    }
+
+    public void setSpringHandler(SpringHandler springHandler) {
+        this.springHandler = springHandler;
+    }
+
+    public SecurityTechnologyHandler getSecurityTechnologyHandler() {
+        return securityTechnologyHandler;
+    }
+
+    public void setSecurityTechnologyHandler(SecurityTechnologyHandler securityTechnologyHandler) {
+        this.securityTechnologyHandler = securityTechnologyHandler;
+    }
 }

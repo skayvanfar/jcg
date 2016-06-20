@@ -6,6 +6,9 @@ import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.velocity.Template;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.velocity.VelocityContext;
@@ -91,7 +94,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     @Override
     protected void createAnnotationDIBaseFiles() {
         ///////////////////////////////////////////
-        Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/BaseController.vm",
+        Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/controller/BaseController.vm",
                 controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java");
         baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
         baseControllerTemplate.mergeTemplate();
@@ -107,5 +110,27 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         // TODO: 5/22/2016
     }
 
+    @Override
+    public List<ModelImplElement> createController(Entity entity) {
+        List<ModelImplElement> modelImplElements = new ArrayList<>();
 
+        /////////////////////////////////////////////
+        Template controllerTemplate = new Template("Controller", "mvcTechnology/SpringMVC/controller/Controller.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + controllerDir + File.separator  + entity.getName() + "Controller.java");
+        controllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + controllerDir);
+        controllerTemplate.putReference("entity", entity);
+        // imports
+        Set<String> controllerImportSet = new HashSet<>();
+        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServiceDir() + "." + entity.getName() + "Service");
+        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelDir() + "." + entity.getName());
+        controllerTemplate.putReference("imports", controllerImportSet);
+        controllerTemplate.mergeTemplate();
+
+        EntityClass controllerClass = new EntityClass();
+        controllerClass.setName(entity.getName() + "Controller.java");
+        modelImplElements.add(controllerClass);
+
+
+        return modelImplElements; // TODO: 5/8/2016
+    }
 }
