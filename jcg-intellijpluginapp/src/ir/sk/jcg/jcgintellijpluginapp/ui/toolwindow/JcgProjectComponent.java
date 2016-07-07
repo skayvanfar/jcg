@@ -12,6 +12,7 @@ import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.Element;
+import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertiesPanel;
@@ -23,6 +24,7 @@ import javax.swing.tree.TreePath;
 import javax.xml.bind.JAXBException;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/25/2016
@@ -186,6 +188,19 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
      * */
     public void setPropertiesModifiedElement() {
         propertiesPanel.setModifiedElement();
+    }
 
+    /**
+     * Facade
+     * */
+    public TreePath getLeadTreePath() {
+        return treePanel.getLeadTreePath();
+    }
+
+    /**
+     * Facade
+     * */
+    public List<Entity> findEntitiesByUserObject() {
+        return treePanel.findEntitiesByUserObject();
     }
 }

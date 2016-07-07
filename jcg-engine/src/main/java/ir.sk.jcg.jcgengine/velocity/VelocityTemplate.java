@@ -45,7 +45,7 @@ public class VelocityTemplate {
 
 
       //      System.out.println("absolutePath:::::::::::::          "     + "E:/template/buildTechnology/maven");
-            velocityEngine.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, "/run/media/saeed/win/E/template/"); // TODO: 4/22/2016 must chnage to relative
+            velocityEngine.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, "E:\\template"); // TODO: 4/22/2016 must chnage to relative
             velocityEngine.setProperty(RuntimeConstants.VM_LIBRARY_AUTORELOAD, true);
 
 

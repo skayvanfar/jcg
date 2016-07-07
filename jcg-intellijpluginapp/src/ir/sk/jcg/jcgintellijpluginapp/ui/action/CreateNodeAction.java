@@ -16,7 +16,7 @@ public abstract class CreateNodeAction extends NodeAction {
     protected CreateNewNodePanel addNodePanel;
 
     public CreateNodeAction(String nodeType) {
-
+        super("Create " + nodeType);
         this.nodeType = nodeType;
 
         addNodePanel = new CreateNewNodePanel(nodeType);

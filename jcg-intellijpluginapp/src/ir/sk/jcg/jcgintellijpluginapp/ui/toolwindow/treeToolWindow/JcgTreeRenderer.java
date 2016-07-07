@@ -9,6 +9,7 @@ import org.jdesktop.swingx.renderer.WrappingIconPanel;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
+import java.awt.Component;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/25/2016
@@ -36,8 +37,12 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
             //    public static final Icon NewFolder = IconLoader.getIcon("/nodes/newFolder.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Entity) {
                 icon = IconLoader.getIcon("/nodes/class.png"); // 16x16
-            } else if (treeNode.getUserObject() instanceof View) {
+            } else if (treeNode.getUserObject() instanceof DisplayView) {
                 icon = IconLoader.getIcon("/nodes/advice.png"); // 16x16
+            } else if (treeNode.getUserObject() instanceof SearchView) {
+                icon = IconLoader.getIcon("/icons/ide/speedSearchPrompt.png"); // 16x16
+            } else if (treeNode.getUserObject() instanceof CreateEditView) {
+                icon = IconLoader.getIcon("/welcome/createNewProject.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Id) {
                 icon = IconLoader.getIcon("/javaee/persistenceId.png"); // 16x16
             } else if (treeNode.getUserObject() instanceof Property) {

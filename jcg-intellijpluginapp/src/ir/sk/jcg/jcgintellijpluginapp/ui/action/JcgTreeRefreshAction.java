@@ -8,6 +8,10 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
  */
 public class JcgTreeRefreshAction extends NodeAction {
 
+    public JcgTreeRefreshAction() {
+        super("Refresh JcgTree");
+    }
+
     @Override
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);

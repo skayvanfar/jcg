@@ -20,6 +20,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/24/2016
@@ -144,8 +146,8 @@ public class TreePanel extends SimpleToolWindowPanel {
         for (ir.sk.jcg.jcgengine.model.project.Package<View> viewPackage : viewSchema.getPackages()) {
             DefaultMutableTreeNode packageNode = new DefaultMutableTreeNode(viewPackage);
             viewModelNode.add(packageNode);
-            loadImplElements(viewPackage, entityModelNode);
-            loadPackages(viewPackage, entityModelNode, false);
+            loadImplElements(viewPackage, packageNode);
+            loadPackages(viewPackage, packageNode, false);
         }
 
         projectNode.add(entityModelNode);
@@ -240,4 +242,20 @@ public class TreePanel extends SimpleToolWindowPanel {
         return jcgTree.getSelectionPath();
     }
 
+    public TreePath getLeadTreePath() {
+        return jcgTree.getLeadSelectionPath();
+    }
+
+    public java.util.List<Entity> findEntitiesByUserObject() {
+        java.util.List<Entity> entityList = new ArrayList<>();
+        @SuppressWarnings("unchecked")
+        Enumeration<DefaultMutableTreeNode> e = ((DefaultMutableTreeNode) jcgTree.getModel().getRoot()).depthFirstEnumeration();
+        while (e.hasMoreElements()) {
+            DefaultMutableTreeNode node = e.nextElement();
+            if (node.getUserObject() instanceof Entity) {
+                entityList.add((Entity) node.getUserObject());
+            }
+        }
+        return entityList;
+    }
 }

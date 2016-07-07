@@ -20,6 +20,10 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
 
     private static final Logger logger = LoggerFactory.getLogger(JcgElementPropertiesSaveAction.class);
 
+    public JcgElementPropertiesSaveAction() {
+        super("Save Properties");
+    }
+
     @Override
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);

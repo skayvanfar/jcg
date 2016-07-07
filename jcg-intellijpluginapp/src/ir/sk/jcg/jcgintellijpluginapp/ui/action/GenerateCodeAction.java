@@ -24,6 +24,7 @@ public class GenerateCodeAction extends NodeAction {
     protected QuestionPanel questionPanel;
 
     public GenerateCodeAction() {
+        super("Generate Code");
         questionPanel = new QuestionPanel("Generate Code");
     }
 

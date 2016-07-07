@@ -24,6 +24,10 @@ public class EditRelationshipNodeAction extends NodeAction  {
     private DialogBuilder builder;
     protected RelationshipPanel relationshipPanel;
 
+    public EditRelationshipNodeAction() {
+        super("Edit Relationship");
+    }
+
     @Override
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);

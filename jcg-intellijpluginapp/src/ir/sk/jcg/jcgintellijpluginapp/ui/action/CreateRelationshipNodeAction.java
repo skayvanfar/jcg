@@ -27,6 +27,7 @@ public class CreateRelationshipNodeAction extends NodeAction {
     protected RelationshipPanel relationshipPanel;
 
     public CreateRelationshipNodeAction() {
+        super("Create Relationship");
     }
 
     @Override

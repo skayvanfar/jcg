@@ -1,19 +1,30 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlSeeAlso({DisplayView.class, SearchView.class, CreateEditView.class})
 @Editable
-public class View extends SchemaItem implements Serializable {
+public abstract class View extends SchemaItem implements Serializable {
 
-    public View() {}
+    //  @Prop(label = "Id")
+    private Entity targetEntity;
+
+
+    private List<Component> components;
+
+    public View() {
+        components = new ArrayList<>();
+    }
 
     /**
      * Copy constructor
@@ -22,9 +33,35 @@ public class View extends SchemaItem implements Serializable {
         super(anotherView);
     }
 
-    @Override
-    public String toString() {
-        return "View";
+
+    public Entity getTargetEntity() {
+        return targetEntity;
+    }
+
+    @XmlAttribute
+    @XmlIDREF
+    public void setTargetEntity(Entity targetEntity) {
+        this.targetEntity = targetEntity;
+    }
+
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    @XmlElement(name = "component")
+    public void setComponents(List<Component> components) {
+        this.components = components;
+    }
+
+    public void addComponent(Component component) { // // TODO: 5/2/2016 repeated code(in Schema)
+        if (components.contains(component))
+            throw new ElementBeforeExistException(component);
+        components.add(component);
+    }
+
+    public void removeComponent(Component component) {
+        if (components.contains(component))
+            components.remove(component);
     }
 
 }

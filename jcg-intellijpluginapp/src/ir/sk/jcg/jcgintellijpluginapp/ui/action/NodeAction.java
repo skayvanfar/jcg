@@ -19,6 +19,10 @@ public abstract class NodeAction extends AnAction {
 
     JcgProjectComponent jcgProjectComponent;
 
+    public NodeAction(String name) {
+        super(name);
+    }
+
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
         jcgProjectComponent = JcgProjectComponent.getInstance(anActionEvent.getProject());
