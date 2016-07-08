@@ -10,6 +10,7 @@ import com.intellij.ui.treeStructure.Tree;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Component;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.listener.TreeSelectionChangedListener;
 
@@ -71,8 +72,14 @@ public class TreePanel extends SimpleToolWindowPanel {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.RelationshipOperationMenu", ActionPlaces.UNKNOWN);
                 } else if (treeNode.getUserObject() instanceof Property) {
                     CustomizationUtil.installPopupHandler(jcgTree, "JCG.PropertiesOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof View) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ViewOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof DisplayView) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.DisplayViewOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof SearchView) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.SearchViewOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof CreateEditView) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.CreateEditViewOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (treeNode.getUserObject() instanceof DataGrid) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.DataGridOperationMenu", ActionPlaces.UNKNOWN);
                 }
             }
         });
@@ -179,6 +186,10 @@ public class TreePanel extends SimpleToolWindowPanel {
                 loadId((Entity) t, tNode);
                 loadProperties((Entity) t, tNode);
                 loadRelations((Entity) t, tNode);
+            } else {
+                loadComponents((View) t, tNode);
+                if (t instanceof SearchView)
+                loadDataGrid((SearchView) t, tNode);
             }
         }
         for (Package<T> bPackage : aPackage.getPackages()) {
@@ -227,6 +238,18 @@ public class TreePanel extends SimpleToolWindowPanel {
             DefaultMutableTreeNode technologyHandlerNode = new DefaultMutableTreeNode(technologyHandler);
             parentNode.add(technologyHandlerNode);
         }
+    }
+
+    private void loadComponents(View view, DefaultMutableTreeNode parentNode) {
+        for (Component component : view.getComponents()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
+            parentNode.add(tNode);
+        }
+    }
+
+    private void loadDataGrid(SearchView view, DefaultMutableTreeNode parentNode) {
+        DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(view.getDataGrid());
+        parentNode.add(tNode);
     }
 
     /**

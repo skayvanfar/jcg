@@ -22,7 +22,7 @@ import java.util.List;
 public class CreateEntityNodeAction extends CreateNodeAction {
 
     public CreateEntityNodeAction() {
-        super("Entity");
+        super("Create Entity");
     }
 
     @Override

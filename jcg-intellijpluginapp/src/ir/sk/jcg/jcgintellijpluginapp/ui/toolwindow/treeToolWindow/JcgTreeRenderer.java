@@ -55,6 +55,10 @@ public class JcgTreeRenderer extends DefaultTreeRenderer {
                 }
             } else if (treeNode.getUserObject() instanceof ImplElement) {
             icon = IconLoader.getIcon("/nodes/artifact.png"); // 16x16
+            } else if (treeNode.getUserObject() instanceof ir.sk.jcg.jcgengine.model.project.Component) {
+                icon = IconLoader.getIcon("/nodes/jsf/component.png"); // 16x16
+            } else if (treeNode.getUserObject() instanceof DataGrid) {
+                icon = IconLoader.getIcon("/graph/grid.png"); // 16x16
             }
             wrappingPanel.setIcon(icon);
         }

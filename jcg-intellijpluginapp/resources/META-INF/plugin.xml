@@ -46,6 +46,8 @@
             icon="/actions/delete.png" text="Delete Package"/>
     <action id="Generate Code" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.GenerateCodeAction"
             icon="/actions/execute.png" text="Generate Code" description="Generate Code"/>
+    <action id="Create New Component" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateComponentNodeAction"
+            icon="/nodes/jsf/component.png" text="Create Component"/>
 
     <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
       <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
@@ -104,10 +106,28 @@
               <!--icon="/actions/copy.png" text="Copy Node Path"/>-->
     </group>
 
+    <group id="JCG.DisplayViewOperationMenu" text="JCG Operations" popup="true">
+      <reference ref="Create New Component" />
+      <reference ref="Generate Code" />
+    </group>
+    <group id="JCG.SearchViewOperationMenu" text="JCG Operations" popup="true">
+      <reference ref="Create New Component" />
+      <reference ref="Generate Code" />
+    </group>
+    <group id="JCG.CreateEditViewOperationMenu" text="JCG Operations" popup="true">
+      <reference ref="Create New Component" />
+      <reference ref="Generate Code" />
+    </group>
+
+
     <group id="JCG.RelationshipOperationMenu" text="JCG Operations" popup="true">
       <action id="Edit Relationship" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.EditRelationshipNodeAction"
               icon="/javaee/persistenceRelationship.png" text="Edit Relationship"/>
       <separator/>
+    </group>
+
+    <group id="JCG.DataGridOperationMenu" text="JCG Operations" popup="true">
+      <reference ref="Create New Component" />
     </group>
 
     <group id="JCG.PropertiesOperationMenu" text="JCG Operations" popup="true">

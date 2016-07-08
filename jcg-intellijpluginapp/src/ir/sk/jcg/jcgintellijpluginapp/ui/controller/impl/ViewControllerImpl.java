@@ -21,6 +21,7 @@ public class ViewControllerImpl implements ViewController {
 
         view.setName(viewDto.getViewName());
         view.setTargetEntity(viewDto.getTargetEntity());
+
         viewPackage.addElement(view);
     }
 }
