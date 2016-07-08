@@ -10,25 +10,25 @@ import java.io.Serializable;
  */
 public class ViewDto implements Serializable {
 
-    private String viewName;
+    private String name;
     private Entity targetEntity;
     private ViewType viewType;
 
     public ViewDto() {
     }
 
-    public ViewDto(String viewName, Entity targetEntity, ViewType viewType) {
-        this.viewName = viewName;
+    public ViewDto(String name, Entity targetEntity, ViewType viewType) {
+        this.name = name;
         this.targetEntity = targetEntity;
         this.viewType = viewType;
     }
 
-    public String getViewName() {
-        return viewName;
+    public String getName() {
+        return name;
     }
 
-    public void setViewName(String viewName) {
-        this.viewName = viewName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Entity getTargetEntity() {

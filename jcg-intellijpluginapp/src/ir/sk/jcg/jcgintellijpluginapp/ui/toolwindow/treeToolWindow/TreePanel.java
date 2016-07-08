@@ -243,6 +243,8 @@ public class TreePanel extends SimpleToolWindowPanel {
     private void loadComponents(View view, DefaultMutableTreeNode parentNode) {
         for (Component component : view.getComponents()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
+            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetProperty());
+            tNode.add(targetPropertyNode);
             parentNode.add(tNode);
         }
     }

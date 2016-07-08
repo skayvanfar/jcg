@@ -50,14 +50,14 @@ public class ViewPanel extends JPanel {
     }
 
     public ViewDto getViewDto() {
-        viewDto.setViewName(viewNameTextField.getText());
+        viewDto.setName(viewNameTextField.getText());
         viewDto.setTargetEntity((Entity) targetEntityComboBox.getSelectedItem());
         viewDto.setViewType((ViewType) viewTypeComboBox.getSelectedItem());
         return viewDto;
     }
 
     public void setViewDto(ViewDto viewDto) {
-        viewNameTextField.setText(viewDto.getViewName());
+        viewNameTextField.setText(viewDto.getName());
         targetEntityComboBox.setSelectedItem(viewDto.getTargetEntity());
         viewTypeComboBox.setSelectedItem(viewDto.getViewType());
 

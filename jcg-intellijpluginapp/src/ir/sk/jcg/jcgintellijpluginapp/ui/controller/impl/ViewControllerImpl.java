@@ -19,7 +19,7 @@ public class ViewControllerImpl implements ViewController {
     public void createView(ViewDto viewDto, Package<View> viewPackage) {
         View view = viewDto.getViewType().createView();
 
-        view.setName(viewDto.getViewName());
+        view.setName(viewDto.getName());
         view.setTargetEntity(viewDto.getTargetEntity());
 
         viewPackage.addElement(view);

@@ -15,6 +15,8 @@ import java.io.Serializable;
 @Editable
 public class Property extends ModelElement implements Serializable {
 
+    @Prop(label = "Label Name", editable = true, required = true)
+    private String labelName;
     @Prop(label = "Type", componentType = ComponentType.EDITABLE_COMBO, values = {"int", "Integer", "short", "Short", "long", "Long", "String", "java.sql.Timestamp"}, editable = true, required = true)
     private String type;
 //    @Prop(label = "Value", editable = true, required = true)
@@ -37,6 +39,15 @@ public class Property extends ModelElement implements Serializable {
     public Property(Property anotherProperty) {
         super(anotherProperty);
      //   this.value = anotherProperty.getValue();
+    }
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    @XmlAttribute
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
     }
 
     public String getType() {
