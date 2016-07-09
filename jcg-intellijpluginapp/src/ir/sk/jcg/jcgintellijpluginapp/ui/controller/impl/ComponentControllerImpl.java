@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl;
 
 import ir.sk.jcg.jcgengine.model.project.Component;
+import ir.sk.jcg.jcgengine.model.project.DataGrid;
 import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ComponentController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ComponentDto;
@@ -13,9 +14,10 @@ public class ComponentControllerImpl implements ComponentController {
     private static final ComponentController INSTANCE = new ComponentControllerImpl();
 
     public static ComponentController getInstance() { return INSTANCE; }
+
     @Override
-    public void createComponent(ComponentDto componentDto, View view) {
-        Component component = componentDto.getComponentType().createComponent();
+    public void createInputComponent(ComponentDto componentDto, View view) {
+        Component component = componentDto.getInputComponentType().createComponent();
 
         component.setName(componentDto.getTargetProperty().getLabelName());
         component.setTargetProperty(componentDto.getTargetProperty());
@@ -23,4 +25,13 @@ public class ComponentControllerImpl implements ComponentController {
         view.addComponent(component);
     }
 
+    @Override
+    public void createOutputComponent(ComponentDto componentDto, DataGrid dataGrid) {
+        Component component = componentDto.getOutputComponentType().createComponent();
+
+        component.setName(componentDto.getTargetProperty().getLabelName());
+        component.setTargetProperty(componentDto.getTargetProperty());
+
+        dataGrid.addComponent(component);
+    }
 }

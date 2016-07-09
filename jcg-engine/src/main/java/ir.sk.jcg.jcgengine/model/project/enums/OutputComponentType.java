@@ -1,22 +1,21 @@
 package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
-import ir.sk.jcg.jcgengine.model.project.*;
-import ir.sk.jcg.jcgengine.model.project.component.TextAreaComponent;
-import ir.sk.jcg.jcgengine.model.project.component.TextBoxComponent;
+import ir.sk.jcg.jcgengine.model.project.Component;
+import ir.sk.jcg.jcgengine.model.project.component.LabelComponent;
+import ir.sk.jcg.jcgengine.model.project.component.TextFieldComponent;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
  */
-public enum ComponentType implements EnumBase {
+public enum OutputComponentType implements EnumBase {
 
-    TEXT_BOX_COMPONENT(0, "Text Box"),
-    TEXT_AREA_COMPONENT(1, "Text Area");
+    LABEL_COMPONENT(0, "Label");
 
     private Integer value;
     private String desc;
 
-    ComponentType(Integer value, String desc) {
+    OutputComponentType(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -31,8 +30,8 @@ public enum ComponentType implements EnumBase {
         return desc;
     }
 
-    public static ComponentType valueOf(Integer type) {
-        for (ComponentType code : ComponentType.values()) {
+    public static OutputComponentType valueOf(Integer type) {
+        for (OutputComponentType code : OutputComponentType.values()) {
             if (type == code.getValue()) {
                 return code;
             }
@@ -43,11 +42,8 @@ public enum ComponentType implements EnumBase {
     public Component createComponent() {
         Component component = null;
         switch (this) {
-            case TEXT_BOX_COMPONENT:
-                component = new TextBoxComponent();
-                break;
-            case TEXT_AREA_COMPONENT:
-                component = new TextAreaComponent();
+            case LABEL_COMPONENT:
+                component = new LabelComponent();
                 break;
         }
         return component;
@@ -57,5 +53,4 @@ public enum ComponentType implements EnumBase {
     public String toString() {
         return desc;
     }
-
 }

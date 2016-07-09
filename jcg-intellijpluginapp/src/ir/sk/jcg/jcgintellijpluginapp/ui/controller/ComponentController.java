@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.controller;
 
+import ir.sk.jcg.jcgengine.model.project.DataGrid;
 import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ComponentDto;
 
@@ -13,5 +14,7 @@ public interface ComponentController {
      * @param componentDto
      * @param view that is parent
      */
-    void createComponent(ComponentDto componentDto, View view);
+    void createInputComponent(ComponentDto componentDto, View view);
+
+    void createOutputComponent(ComponentDto componentDto, DataGrid dataGrid);
 }

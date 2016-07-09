@@ -187,7 +187,7 @@ public class TreePanel extends SimpleToolWindowPanel {
                 loadProperties((Entity) t, tNode);
                 loadRelations((Entity) t, tNode);
             } else {
-                loadComponents((View) t, tNode);
+                loadInputComponents((View) t, tNode);
                 if (t instanceof SearchView)
                 loadDataGrid((SearchView) t, tNode);
             }
@@ -240,7 +240,7 @@ public class TreePanel extends SimpleToolWindowPanel {
         }
     }
 
-    private void loadComponents(View view, DefaultMutableTreeNode parentNode) {
+    private void loadInputComponents(View view, DefaultMutableTreeNode parentNode) {
         for (Component component : view.getComponents()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
             DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetProperty());
@@ -252,6 +252,16 @@ public class TreePanel extends SimpleToolWindowPanel {
     private void loadDataGrid(SearchView view, DefaultMutableTreeNode parentNode) {
         DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(view.getDataGrid());
         parentNode.add(tNode);
+        loadOutputComponents(view.getDataGrid(), tNode);
+    }
+
+    private void loadOutputComponents(DataGrid dataGrid, DefaultMutableTreeNode parentNode) {
+        for (Component component : dataGrid.getComponents()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
+            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetProperty());
+            tNode.add(targetPropertyNode);
+            parentNode.add(tNode);
+        }
     }
 
     /**
@@ -259,6 +269,15 @@ public class TreePanel extends SimpleToolWindowPanel {
      * */
     public Object currentSelectedNodeUserObject() {
         TreePath treePath = jcgTree.getSelectionPath();
+        DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
+        return currentNode.getUserObject();
+    }
+
+    /**
+     * Return user object from parent of selected node
+     * */
+    public Object parentSelectedNodeUserObject() {
+        TreePath treePath = jcgTree.getSelectionPath().getParentPath();
         DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
         return currentNode.getUserObject();
     }

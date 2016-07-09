@@ -6,6 +6,7 @@ import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,11 +16,12 @@ import java.util.List;
 @Editable
 public class DataGrid extends ModelElement {
 
+    private List<Component> components;
+
     public DataGrid() {
         super.name = "Grid";
+        components = new ArrayList<>();
     }
-
-    private List<Component> components;
 
     public List<Component> getComponents() {
         return components;

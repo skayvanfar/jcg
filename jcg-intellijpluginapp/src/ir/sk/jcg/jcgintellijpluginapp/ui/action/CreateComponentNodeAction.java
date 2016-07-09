@@ -4,9 +4,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
-import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ComponentController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ViewController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.ComponentControllerImpl;
@@ -32,24 +31,37 @@ public class CreateComponentNodeAction extends CreateNodeAction {
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);
         JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
+        ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
+        boolean viewOrDataGrid = true; // Default is View
+        View view = null;
+        if (modelElement instanceof View) {
+            view = (View) modelElement;
+            componentPanel = new ComponentPanel(view.getTargetEntity().getProperties(), true);
+        } else if (modelElement instanceof DataGrid) {
+            viewOrDataGrid = false;
+            view = (View) jcgProjectComponent.parentSelectedNodeUserObject();
+            componentPanel = new ComponentPanel(view.getTargetEntity().getProperties(), false);
+        }
 
-        View view = (View) jcgProjectComponent.currentSelectedNodeUserObject();
-
-        componentPanel = new ComponentPanel(view.getTargetEntity().getProperties());
         builder = new DialogBuilder(e.getProject());
         builder.setTitle("New Component");
         builder.setPreferredFocusComponent(componentPanel);
         builder.setCenterPanel(componentPanel);
-        builder.setOkOperation(new Runnable() {
-            @Override
-            public void run() {
-                ComponentController componentController = ComponentControllerImpl.getInstance();
+        boolean finalViewOrDataGrid = viewOrDataGrid;
+        View finalView = view;
+        builder.setOkOperation(() -> {
+            ComponentController componentController = ComponentControllerImpl.getInstance();
 
-                componentController.createComponent(componentPanel.getComponentDto(), view);
-
-                marshalingAndReloadTree();
-                builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
+            if (finalViewOrDataGrid)
+                componentController.createInputComponent(componentPanel.getComponentDto(), finalView);
+            else {
+                DataGrid dataGrid = (DataGrid) modelElement;
+                componentController.createOutputComponent(componentPanel.getComponentDto(), dataGrid);
             }
+
+
+            marshalingAndReloadTree();
+            builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });
         builder.showModal(true);
     }

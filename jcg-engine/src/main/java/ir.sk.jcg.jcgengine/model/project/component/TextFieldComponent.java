@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({TextAreaComponent.class})
 @Editable
-public class TextBoxComponent extends Component {
+public class TextFieldComponent extends Component {
 
-    public TextBoxComponent() {
-        super.name = "Text Box";
+    public TextFieldComponent() {
+        super.name = "Text Field";
     }
 
     @Prop(label = "Max Length", editable = true, required = true)

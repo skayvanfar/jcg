@@ -34,8 +34,7 @@ public class CreateRelationshipNodeAction extends NodeAction {
     public void actionPerformed(AnActionEvent e) {
         super.actionPerformed(e);
         JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
-        Package<Entity> entityPackage = (Package<Entity>) ((DefaultMutableTreeNode) jcgProjectComponent.getSelectionPath().getParentPath().getLastPathComponent()).getUserObject();
-
+        Package<Entity> entityPackage = (Package<Entity>) jcgProjectComponent.parentSelectedNodeUserObject();
         relationshipPanel = new RelationshipPanel(entityPackage.getElements());
         builder = new DialogBuilder(e.getProject());
         builder.setTitle("New Relationship");

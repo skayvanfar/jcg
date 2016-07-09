@@ -23,29 +23,24 @@ public class RelationshipPanel extends JPanel { // TODO: 5/12/2016 may better ex
 
     private RelationShipDto relationShipDto;
 
-    private final JLabel relationNameLabel;
     private JTextField  relationNameTextField;
-    private final JLabel CardinalityLabel;
     private ComboBox cardinalityComboBox;
-    private final JLabel directionalityLabel;
     private ComboBox directionalityComboBox;
-    private final JLabel targetEntityLabel;
     private ComboBox targetEntityComboBox;
-    private final JLabel collectionLabel;
     private ComboBox collectionComboBox;
 
     public RelationshipPanel(java.util.List<Entity> entities) {
         relationShipDto = new RelationShipDto();
         setLayout(new GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), -1, -1));
 
-        relationNameLabel = new JLabel("Name :");
+        JLabel relationNameLabel = new JLabel("Name :");
         add(relationNameLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         relationNameTextField = new JTextField();
         relationNameTextField.setEnabled(false); // TODO: 5/27/16
         add(relationNameTextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
-        CardinalityLabel = new JLabel("Cardinality Type :");
-        add(CardinalityLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        JLabel cardinalityLabel = new JLabel("Cardinality Type :");
+        add(cardinalityLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         cardinalityComboBox = new ComboBox();
         for (CardinalityType type : CardinalityType.values())
             cardinalityComboBox.addItem(type);
@@ -64,21 +59,21 @@ public class RelationshipPanel extends JPanel { // TODO: 5/12/2016 may better ex
             }
         });
 
-        directionalityLabel = new JLabel("Directionality :");
+        JLabel directionalityLabel = new JLabel("Directionality :");
         add(directionalityLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         directionalityComboBox = new ComboBox();
         for (DirectionalityType directionalityType : DirectionalityType.values())
             directionalityComboBox.addItem(directionalityType);
         add(directionalityComboBox, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
-        targetEntityLabel = new JLabel("Target Entity :");
+        JLabel targetEntityLabel = new JLabel("Target Entity :");
         add(targetEntityLabel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         targetEntityComboBox = new ComboBox();
         for (Entity entity : entities)
             targetEntityComboBox.addItem(entity);
         add(targetEntityComboBox, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
-        collectionLabel = new JLabel("Collection Type :");
+        JLabel collectionLabel = new JLabel("Collection Type :");
         add(collectionLabel, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         collectionComboBox = new ComboBox();
         setStateOfCollectionComboBox(false);

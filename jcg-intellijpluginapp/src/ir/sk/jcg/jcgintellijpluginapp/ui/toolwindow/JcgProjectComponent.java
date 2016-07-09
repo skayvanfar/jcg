@@ -184,6 +184,13 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
     }
 
     /**
+     * Facade
+     * */
+    public Object parentSelectedNodeUserObject() {
+        return treePanel.parentSelectedNodeUserObject();
+    }
+
+    /**
      * Set properties
      * */
     public void setPropertiesModifiedElement() {

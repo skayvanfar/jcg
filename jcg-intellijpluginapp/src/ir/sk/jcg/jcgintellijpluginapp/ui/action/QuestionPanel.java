@@ -10,15 +10,13 @@ public class QuestionPanel extends JPanel {
 
     private String operationName;
 
-    private JLabel nodeNameLabel;
-
     public QuestionPanel(String operationName) {
 
         this.operationName = operationName;
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        nodeNameLabel = new JLabel("Are You sure to " + operationName);
+        JLabel nodeNameLabel = new JLabel("Are You sure to " + operationName);
 
         add(nodeNameLabel);
     }

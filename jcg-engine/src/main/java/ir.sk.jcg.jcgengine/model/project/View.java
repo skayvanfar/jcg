@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
 import javax.xml.bind.annotation.*;
@@ -16,7 +17,7 @@ import java.util.List;
 @Editable
 public abstract class View extends SchemaItem implements Serializable {
 
-    //  @Prop(label = "Id")
+    @Prop(label = "Target Entity", editable = false, required = true)
     private Entity targetEntity;
 
 

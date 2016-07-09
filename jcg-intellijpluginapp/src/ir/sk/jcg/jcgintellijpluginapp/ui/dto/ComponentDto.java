@@ -1,7 +1,8 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.dto;
 
 import ir.sk.jcg.jcgengine.model.project.Property;
-import ir.sk.jcg.jcgengine.model.project.enums.ComponentType;
+import ir.sk.jcg.jcgengine.model.project.enums.InputComponentType;
+import ir.sk.jcg.jcgengine.model.project.enums.OutputComponentType;
 
 import java.io.Serializable;
 
@@ -12,7 +13,8 @@ public class ComponentDto implements Serializable {
 
     private String name;
     private Property targetProperty;
-    private ComponentType componentType;
+    private InputComponentType inputComponentType;
+    private OutputComponentType outputComponentType;
 
     public String getName() {
         return name;
@@ -30,11 +32,19 @@ public class ComponentDto implements Serializable {
         this.targetProperty = targetProperty;
     }
 
-    public ComponentType getComponentType() {
-        return componentType;
+    public InputComponentType getInputComponentType() {
+        return inputComponentType;
     }
 
-    public void setComponentType(ComponentType componentType) {
-        this.componentType = componentType;
+    public void setInputComponentType(InputComponentType inputComponentType) {
+        this.inputComponentType = inputComponentType;
+    }
+
+    public OutputComponentType getOutputComponentType() {
+        return outputComponentType;
+    }
+
+    public void setOutputComponentType(OutputComponentType outputComponentType) {
+        this.outputComponentType = outputComponentType;
     }
 }
