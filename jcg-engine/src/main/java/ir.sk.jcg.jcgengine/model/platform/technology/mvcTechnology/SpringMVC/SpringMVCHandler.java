@@ -11,9 +11,11 @@ import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.velocity.Template;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
+import org.apache.commons.io.FileUtils;
 import org.apache.velocity.VelocityContext;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -53,9 +55,19 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
         controllerDirFile.mkdirs();
 
+        // resources
         resourcesDirFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
         resourcesDirFile.mkdirs();
 
+        File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\resources"); // TODO: 7/10/2016 must not be hard code
+        File dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // WEB-INF
         File webInfFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF");
         webInfFile.mkdirs();
 

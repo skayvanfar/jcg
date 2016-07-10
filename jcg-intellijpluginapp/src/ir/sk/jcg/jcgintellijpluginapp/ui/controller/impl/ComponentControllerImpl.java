@@ -19,7 +19,7 @@ public class ComponentControllerImpl implements ComponentController {
     public void createInputComponent(ComponentDto componentDto, View view) {
         Component component = componentDto.getInputComponentType().createComponent();
 
-        component.setName(componentDto.getTargetProperty().getLabelName());
+        component.setName(componentDto.getName());
         component.setTargetProperty(componentDto.getTargetProperty());
 
         view.addComponent(component);
@@ -29,7 +29,7 @@ public class ComponentControllerImpl implements ComponentController {
     public void createOutputComponent(ComponentDto componentDto, DataGrid dataGrid) {
         Component component = componentDto.getOutputComponentType().createComponent();
 
-        component.setName(componentDto.getTargetProperty().getLabelName());
+        component.setName(componentDto.getName());
         component.setTargetProperty(componentDto.getTargetProperty());
 
         dataGrid.addComponent(component);

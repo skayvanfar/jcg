@@ -60,14 +60,14 @@ class ComponentPanel extends JPanel {
 
     private void setStateOfCollectionComboBox() {
         Property property = (Property) targetPropertyComboBox.getSelectedItem();
-        if (property.getLabelName() != null || !property.getLabelName().equals(""))
+        if (property.getLabelName() != null && !property.getLabelName().equals(""))
             componentNameTextField.setText(property.getLabelName());
-        else if (property.getName() != null || !property.getName().equals(""))
+        else if (property.getName() != null && !property.getName().equals(""))
             componentNameTextField.setText(property.getName());
     }
 
     ComponentDto getComponentDto() {
-        componentDto.setName(componentNameTextField.getName());
+        componentDto.setName(componentNameTextField.getText());
         componentDto.setTargetProperty((Property) targetPropertyComboBox.getSelectedItem());
         if (isInput)
             componentDto.setInputComponentType((InputComponentType) componentTypeComboBox.getSelectedItem());

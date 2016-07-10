@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlSeeAlso({TextAreaComponent.class})
+@XmlSeeAlso({PasswordTextField.class, TextAreaComponent.class})
 @Editable
 public class TextFieldComponent extends Component {
 

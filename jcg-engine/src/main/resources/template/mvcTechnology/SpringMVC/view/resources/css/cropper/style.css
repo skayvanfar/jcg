@@ -1,0 +1,107 @@
+/* 
+    Author     : Tomaz Dragar
+    Mail       : <tomaz@dragar.net>
+    Homepage   : http://www.dragar.net
+*/
+
+#fileInput {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    display: none;
+}
+
+#modal {
+    z-index: 10;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #5F5F5F;
+    opacity: 0.95;
+    display: none;
+}
+
+#preview {
+    z-index: 11;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: none;
+    border: 4px solid #A5A2A2;
+    border-radius: 4px;
+    float: left;
+    font-size: 0px;
+    line-height: 0px;
+}
+
+#preview .buttons {
+    width: 36px;
+    position: absolute;
+    bottom: 0px;
+    right: -44px;
+}
+
+#preview .buttons .ok {
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    line-height: 0px;
+    font-size: 0px;
+    background-image: url('../../../images/foundation/cropper/Ok.png');
+    background-repeat: no-repeat;
+}
+
+#preview .buttons .ok:hover {
+    background-image: url('../../../images/foundation/cropper/OkGreen.png');
+}
+
+#preview .buttons .cancel {
+    margin-bottom: 4px;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    line-height: 0px;
+    font-size: 0px;
+    background-image: url('../../../images/foundation/cropper/Cancel.png');
+    background-repeat: no-repeat;
+}
+
+#preview .buttons .cancel:hover {
+    background-image: url('../../../images/foundation/cropper/CancelRed.png');
+}
+
+.progress-container {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+}
+
+.progress-value {
+    width: 0%;
+    background: #dddddd;
+    height: 2px;
+}
+
+.progress-file-name {
+    background: #aaaaaa;
+    color: #ffffff;
+    /*display: inline;*/
+    display: none;
+}
+
+.cropme {
+    /*float: left;*/
+    background-color: #f1f1f1;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    background-image: url('../../../images/foundation/cropper/UploadLight.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.cropme:hover {
+    background-image: url('../../../images/foundation/cropper/UploadDark.png');
+}

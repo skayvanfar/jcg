@@ -1,0 +1,202 @@
+.input {
+    display: block;
+    position: relative;
+    background-color: #f8f9f8;
+    border: solid #e5e5e5 1px;
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    margin: 0 0 15px 0;
+    -webkit-transition: background-color 300ms ease-out;
+    -moz-transition: background-color 300ms ease-out;
+    -ms-transition: background-color 300ms ease-out;
+    -o-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out;
+}
+
+.input.has-error {
+    border: solid #c60f13 1px;
+}
+
+.input:hover {
+    background-color: #f2fafc;
+}
+
+.input.focus {
+    background-color: #ffffff;
+}
+
+.input .control, .input .control:focus {
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+    font-family: inherit;
+    margin: 0.3em;
+    padding: 0.5em;
+    height: 2.3125em;
+}
+
+.input input[type="checkbox"] {
+    height: auto !important;
+}
+
+.input .progress {
+    height: auto;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.input .progress.loading {
+    background-color: rgba(0, 0, 256, 0.3);
+    width: 0;
+}
+
+.input .progress.done {
+    background-color: rgba(0, 256, 0, 0.3);
+    width: 100%;
+}
+
+.input.addon-right .control {
+    padding-right: 3.1em;
+}
+
+.input.addon-left .control {
+    padding-left: 3.1em;
+}
+
+.input .addon {
+    color: #999999;
+    margin: 0.35em 0;
+    padding: 0.5em 0.8em 0 0.8em;
+    line-height: 1.7125em;
+    height: 2.2125em;
+}
+
+.input.focus .addon {
+    color: #12a79b;
+}
+
+.input .addon-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-left: solid #cfcfcf 1px;
+}
+
+.input .addon-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-right: solid #cfcfcf 1px;
+}
+
+.input.labeled {
+    margin-top: 1em;
+}
+
+.input.labeled input[type="checkbox"] {
+    margin-top: 15px;
+}
+
+.input.labeled select {
+    padding: 0.4em;
+}
+
+.input .label {
+    position: absolute;
+    margin-top: -1em;
+    margin-right: 0.3em;
+}
+
+.input .errors {
+    border: none !important;
+}
+
+.button {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin: 0 0 15px 0;
+    font-size: 1em;
+    font-family: inherit;
+    padding: 0;
+    line-height: 3.1125em;
+    height: 3.1125em;
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -webkit-transition: background-color 300ms ease-out;
+    -moz-transition: background-color 300ms ease-out;
+    -ms-transition: background-color 300ms ease-out;
+    -o-transition: background-color 300ms ease-out;
+    transition: background-color 300ms ease-out;
+}
+
+.button.gray {
+    color: #898989;
+    background-color: #dadada;
+}
+
+.button.gray:hover {
+    color: #fff;
+    background-color: #12a79b;
+}
+
+.tags {
+    height: auto !important
+}
+
+.input ul.tags {
+    list-style: none;
+    padding: 0;
+}
+
+.input ul.tags li {
+    display: inline-block;
+    position: relative;
+    margin: 0 2px 0 5px;
+    padding: 0.5em;
+    height: 2.3125em;
+}
+
+.input ul.tags li.tag {
+    background-color: #c8a3c2;
+}
+
+.input ul.tags li.new input {
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    height: auto;
+    padding: 0;
+}
+
+.input ul.suggestion {
+    width: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 2.6125rem;
+    margin: 0;
+    left: 0;
+    right: 0;
+    list-style: none;
+    display: none;
+    z-index: 1000;
+}
+
+.input ul.suggestion li {
+    display: block;
+    position: relative;
+    margin: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    background-color: transparent;
+}
+
+.input ul.suggestion li.hover {
+    background-color: #c8a3c2;
+}

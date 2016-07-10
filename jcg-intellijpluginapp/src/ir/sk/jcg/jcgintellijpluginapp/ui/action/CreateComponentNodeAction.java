@@ -13,6 +13,7 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.ViewControllerImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,13 +35,18 @@ public class CreateComponentNodeAction extends CreateNodeAction {
         ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
         boolean viewOrDataGrid = true; // Default is View
         View view = null;
+        List<Property> properties = new ArrayList<>();
         if (modelElement instanceof View) {
             view = (View) modelElement;
-            componentPanel = new ComponentPanel(view.getTargetEntity().getProperties(), true);
+            properties.add(view.getTargetEntity().getId());
+            properties.addAll(view.getTargetEntity().getProperties());
+            componentPanel = new ComponentPanel(properties, true);
         } else if (modelElement instanceof DataGrid) {
             viewOrDataGrid = false;
             view = (View) jcgProjectComponent.parentSelectedNodeUserObject();
-            componentPanel = new ComponentPanel(view.getTargetEntity().getProperties(), false);
+            properties.add(view.getTargetEntity().getId());
+            properties.addAll(view.getTargetEntity().getProperties());
+            componentPanel = new ComponentPanel(properties, false);
         }
 
         builder = new DialogBuilder(e.getProject());

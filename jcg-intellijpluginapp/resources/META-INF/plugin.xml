@@ -134,6 +134,10 @@
 
     </group>
 
+    <group id="JCG.ComponentOperationMenu" text="JCG Operations" popup="true">
+
+    </group>
+
     <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
       <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgElementPropertiesSaveAction"
               icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>

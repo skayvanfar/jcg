@@ -94,6 +94,7 @@ public class SpringWebArchitecture extends Architecture {
         EntityClass entityClassElement = ormTechnologyHandler.createEntityClass(entity, packagePath);
         if (entityClassElement != null)
             modelImplElements.add(entityClassElement);
+        // TODO: 7/9/2016 must create Dao ,Service and Controller for specefic Entities as Regards Relationship between Daoes
         List<ModelImplElement> daoModelImplElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
         if (daoModelImplElements != null)
             modelImplElements.addAll(daoModelImplElements);
