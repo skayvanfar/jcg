@@ -1,0 +1,51 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/10/2106.
+ *#
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title><tiles:insertAttribute name="title" /></title>
+
+<link href="<c:url value="/${resourcesDir}/css/bootstrap.min.css" />"	rel="stylesheet">
+<link href="<c:url value="/${resourcesDir}/css/main.css" />" rel="stylesheet">
+
+<script src="<c:url value="/${resourcesDir}/js/jquery-1.11.3.min.js" />"></script>
+<script src="<c:url value="/${resourcesDir}/js/bootstrap.min.js" />"></script>
+
+<script src="<c:url value="/${resourcesDir}/js/core.js" />"></script>
+
+</head>
+
+<body>
+
+<div>
+    <div class="header">
+        <ul>
+            <tiles:insertAttribute name="navigation" />
+        </ul>
+        <h3></h3>
+    </div>
+
+    <div>
+
+    </div>
+
+    <div class="row">
+        <tiles:insertAttribute name="content" />
+    </div>
+
+    <div class="footer">
+        <tiles:insertAttribute name="footer" />
+    </div>
+
+</div>
+</body>
+</html>

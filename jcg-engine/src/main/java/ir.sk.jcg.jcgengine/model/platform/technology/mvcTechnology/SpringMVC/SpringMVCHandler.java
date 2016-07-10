@@ -38,6 +38,8 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     private File controllerDirFile;
     private File resourcesDirFile;
+    private File tilesDefinitionsFile;
+    private File tilesTemplateFile;
 
     public SpringMVCHandler() {
         super("Spring Technology MVC");
@@ -78,13 +80,13 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         File tagsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tags");
         tagsFile.mkdirs();
 
-        File tilesDefinitionsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "definitions");
+        tilesDefinitionsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "definitions");
         tilesDefinitionsFile.mkdirs();
-        File tilesTemplateFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "template");
+        tilesTemplateFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "template");
         tilesTemplateFile.mkdirs();
 
         File viewsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views");
-        tagsFile.mkdirs();
+        viewsFile.mkdirs();
     }
 
     @Override
@@ -110,6 +112,44 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
                 controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java");
         baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
         baseControllerTemplate.mergeTemplate();
+
+        // Definitions
+        ///////////////////////////////////////////
+        Template layoutTileDefinitionTemplate = new Template("LayoutTileDefinition", "mvcTechnology/SpringMVC/view/tiles/definitions/layout-tile-definition.vm",
+                tilesDefinitionsFile.getAbsolutePath() + File.separator + "layout-tile-definition.xml");
+        layoutTileDefinitionTemplate.mergeTemplate();
+
+        ///////////////////////////////////////////
+        Template pagesTileDefinitionTemplate = new Template("PagesTileDefinition", "mvcTechnology/SpringMVC/view/tiles/definitions/pages-tile-definition.vm",
+                tilesDefinitionsFile.getAbsolutePath() + File.separator + "pages-tile-definition.xml");
+        pagesTileDefinitionTemplate.mergeTemplate();
+
+        // Templates
+        ///////////////////////////////////////////
+        Template baseLayoutTemplate = new Template("BaseLayout", "mvcTechnology/SpringMVC/view/tiles/templates/baseLayout.vm",
+                tilesTemplateFile.getAbsolutePath() + File.separator + "baseLayout.jsp");
+        baseLayoutTemplate.putReference("resourcesDir", resourcesDir);
+        baseLayoutTemplate.mergeTemplate();
+
+        ///////////////////////////////////////////
+        Template headerTemplate = new Template("Header", "mvcTechnology/SpringMVC/view/tiles/templates/header.vm",
+                tilesTemplateFile.getAbsolutePath() + File.separator + "header.jsp");
+        headerTemplate.mergeTemplate();
+
+        ///////////////////////////////////////////
+        Template navigationTemplate = new Template("Navigation", "mvcTechnology/SpringMVC/view/tiles/templates/navigation.vm",
+                tilesTemplateFile.getAbsolutePath() + File.separator + "navigation.jsp");
+        navigationTemplate.mergeTemplate();
+
+        ///////////////////////////////////////////
+        Template footerTemplate = new Template("Footer", "mvcTechnology/SpringMVC/view/tiles/templates/footer.vm",
+                tilesTemplateFile.getAbsolutePath() + File.separator + "footer.jsp");
+        footerTemplate.mergeTemplate();
+
+        ///////////////////////////////////////////
+        Template logoutTemplate = new Template("Logout", "mvcTechnology/SpringMVC/view/tiles/templates/logout.vm",
+                tilesTemplateFile.getAbsolutePath() + File.separator + "logout.jsp");
+        logoutTemplate.mergeTemplate();
     }
 
     @Override

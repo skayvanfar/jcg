@@ -10,26 +10,12 @@
 
 	<definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
 		<put-attribute name="title" value="Sample Title" />
-		<put-attribute name="angular" value="" />
 		<put-attribute name="heading" value="" />
 		<put-attribute name="tagline" value="" />
 		<put-attribute name="logout" value="/WEB-INF/tiles/template/logout.jsp" />
 		<put-attribute name="navigation" value="/WEB-INF/tiles/template/navigation.jsp" />
 		<put-attribute name="content" value="" />
 		<put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
-	</definition>
-
-	<definition name="checkoutLayout" template="/WEB-INF/tiles/template/checkoutLayout.jsp">
-		<put-attribute name="title" value="Sample Title" />
-		<put-attribute name="heading" value="" />
-		<put-attribute name="tagline" value="" />
-		<put-attribute name="logout" value="" />
-		<put-attribute name="content" value="" />
-	</definition>
-
-	<definition name="foundationLayout" template="/WEB-INF/tiles/template/foundationLayput.jsp">
-		<put-attribute name="title" value="Sample Title" />
-		<put-attribute name="content" value="" />
 	</definition>
 
 </tiles-definitions>
