@@ -299,7 +299,8 @@ public class TreePanel extends SimpleToolWindowPanel {
         while (e.hasMoreElements()) {
             DefaultMutableTreeNode node = e.nextElement();
             if (node.getUserObject() instanceof Entity) {
-                entityList.add((Entity) node.getUserObject());
+                if (!entityList.contains(node.getUserObject()))
+                    entityList.add((Entity) node.getUserObject());
             }
         }
         return entityList;
