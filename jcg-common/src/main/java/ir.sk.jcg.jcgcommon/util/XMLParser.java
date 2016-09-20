@@ -10,6 +10,13 @@ public class XMLParser {
 
     public static <T> void marshaling(File file, T t) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(t.getClass());
+
+        // for use EclipseLink MOXy
+        /*Map<String, Object> props = new HashMap<>();
+        JAXBContext jaxbContext = JAXBContextFactory.createContext(new Class[] {t.getClass()}, props);
+        System.out.println("jaxbContext is=" +jaxbContext.toString());*/
+
+
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
         // output pretty printed
@@ -21,6 +28,12 @@ public class XMLParser {
 
     public static <T> T unmarshalling(File file, Class c) throws JAXBException {
         JAXBContext jaxbContext = JAXBContext.newInstance(c);
+
+        // for use EclipseLink MOXy
+        /*Map<String, Object> props = new HashMap<>();
+        JAXBContext jaxbContext = JAXBContextFactory.createContext(new Class[] {c}, props);
+        System.out.println("jaxbContext is=" +jaxbContext.toString());*/
+
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
         jaxbUnmarshaller.setEventHandler(

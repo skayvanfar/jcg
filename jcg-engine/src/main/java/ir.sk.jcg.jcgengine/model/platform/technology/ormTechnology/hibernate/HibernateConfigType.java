@@ -6,6 +6,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringConf
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/20/2016
  */
+//@XmlJavaTypeAdapter(HibernateConfigType.Adapter.class)
 public enum HibernateConfigType implements EnumBase {
 
     SPRING_CONFIG(0, "SpringConfig"),
@@ -43,4 +44,12 @@ public enum HibernateConfigType implements EnumBase {
     public String toString() {
         return desc;
     }
+
+    // for use custom mapping
+    /*public static class Adapter extends EnumAdapter<HibernateConfigType> {
+
+        public Adapter() {
+            super(MappingType.class, ANNOTATION);
+        }
+    }*/
 }

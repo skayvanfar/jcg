@@ -5,6 +5,7 @@ import ir.sk.jcg.jcgcommon.enums.EnumBase;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/7/2016
  */
+//@XmlJavaTypeAdapter(MappingType.Adapter.class)
 public enum MappingType implements EnumBase {
 
     ANNOTATION(0, "Annotation"),
@@ -41,5 +42,13 @@ public enum MappingType implements EnumBase {
     public String toString() {
         return desc;
     }
+
+    // for use custom mapping
+    /*public static class Adapter extends EnumAdapter<MappingType> {
+
+        public Adapter() {
+            super(MappingType.class, ANNOTATION);
+        }
+    }*/
 }
 
