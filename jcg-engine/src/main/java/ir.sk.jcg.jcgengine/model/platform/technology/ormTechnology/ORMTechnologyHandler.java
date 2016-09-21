@@ -133,6 +133,22 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         this.implDAODir = implDAODir;
     }
 
+    public String getInterfaceDAOCommonDir() {
+        return interfaceDAOCommonDir;
+    }
+
+    public void setInterfaceDAOCommonDir(String interfaceDAOCommonDir) {
+        this.interfaceDAOCommonDir = interfaceDAOCommonDir;
+    }
+
+    public String getImplDAOCommonDir() {
+        return implDAOCommonDir;
+    }
+
+    public void setImplDAOCommonDir(String implDAOCommonDir) {
+        this.implDAOCommonDir = implDAOCommonDir;
+    }
+
     public String getModelDir() {
         return modelDir;
     }

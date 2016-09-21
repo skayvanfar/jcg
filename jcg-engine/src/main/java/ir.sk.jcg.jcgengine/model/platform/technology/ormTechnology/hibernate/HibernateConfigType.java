@@ -49,7 +49,7 @@ public enum HibernateConfigType implements EnumBase {
     /*public static class Adapter extends EnumAdapter<HibernateConfigType> {
 
         public Adapter() {
-            super(MappingType.class, ANNOTATION);
+            super(MappingTypeEnum.class, ANNOTATION);
         }
     }*/
 }

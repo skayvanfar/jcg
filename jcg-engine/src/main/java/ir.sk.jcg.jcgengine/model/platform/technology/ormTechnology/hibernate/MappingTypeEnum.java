@@ -1,12 +1,12 @@
-package ir.sk.jcg.jcgengine.model.project.enums;
+package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/7/2016
  */
-//@XmlJavaTypeAdapter(MappingType.Adapter.class)
-public enum MappingType implements EnumBase {
+//@XmlJavaTypeAdapter(MappingTypeEnum.Adapter.class)
+public enum MappingTypeEnum implements EnumBase {
 
     ANNOTATION(0, "Annotation"),
     HBM_XML_FILE(1, "hbm xml file");
@@ -14,7 +14,7 @@ public enum MappingType implements EnumBase {
     private Integer value;
     private String desc;
 
-    MappingType(Integer value, String desc) {
+    MappingTypeEnum(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
@@ -29,8 +29,8 @@ public enum MappingType implements EnumBase {
         return desc;
     }
 
-    public static MappingType valueOf(Integer type) {
-        for (MappingType code : MappingType.values()) {
+    public static MappingTypeEnum valueOf(Integer type) {
+        for (MappingTypeEnum code : MappingTypeEnum.values()) {
             if (type == code.getValue()) {
                 return code;
             }
@@ -44,10 +44,10 @@ public enum MappingType implements EnumBase {
     }
 
     // for use custom mapping
-    /*public static class Adapter extends EnumAdapter<MappingType> {
+    /*public static class Adapter extends EnumAdapter<MappingTypeEnum> {
 
         public Adapter() {
-            super(MappingType.class, ANNOTATION);
+            super(MappingTypeEnum.class, ANNOTATION);
         }
     }*/
 }

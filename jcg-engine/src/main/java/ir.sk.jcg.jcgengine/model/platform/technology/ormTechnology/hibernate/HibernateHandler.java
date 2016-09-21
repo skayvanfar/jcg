@@ -9,16 +9,11 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.ele
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
-import ir.sk.jcg.jcgengine.model.project.enums.MappingType;
 import ir.sk.jcg.jcgengine.velocity.Template;
-import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
-
-import org.apache.velocity.VelocityContext;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +28,9 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
 
     @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
+    private MappingTypeEnum mappingTypeEnum;
+
+    // Replace type code with state/strategy
     private MappingType mappingType;
 
     @Prop(label = "Hibernate Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
@@ -66,13 +64,14 @@ public class HibernateHandler extends ORMTechnologyHandler {
         dependencies.add(new Dependency("mysql", "mysql-connector-java", "5.1.34", "compile"));
     }
 
-    public MappingType getMappingType() {
-        return mappingType;
+    public MappingTypeEnum getMappingTypeEnum() {
+        return mappingTypeEnum;
     }
 
     @XmlAttribute
-    public void setMappingType(MappingType mappingType) {
-        this.mappingType = mappingType;
+    public void setMappingTypeEnum(MappingTypeEnum mappingTypeEnum) {
+        this.mappingTypeEnum = mappingTypeEnum;
+        mappingType = MappingType.newInstance(mappingTypeEnum); // TODO: 9/21/2016 may be mappingTypeEnum not needed
     }
 
     public HibernateConfigType getHibernateConfigType() {
@@ -86,97 +85,12 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     public EntityClass createEntityClass(Entity entity, String packagePath) {
-        EntityClass entityClass = new EntityClass();
-        if (mappingType == MappingType.ANNOTATION) {
-            Template SpringConfigTemplate = new Template("Entity Class", "ormTechnology/hibernate/EntityWithAnnotation.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                    + File.separator + modelDir + File.separator  + entity.getName() + ".java");
-            SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".model");
-            SpringConfigTemplate.putReference("schema", databaseSchemaName);
-            SpringConfigTemplate.putReference("entity", entity);
-
-            SpringConfigTemplate.mergeTemplate();
-            entityClass.setName(entity.getName() + ".java");
-        } else if (mappingType == MappingType.HBM_XML_FILE) {
-
-        }
-
-        return entityClass; // TODO: 5/8/2016
+        return mappingType.createEntityClass(this, entity, packagePath);
     }
 
     @Override
     public List<ModelImplElement> createDao(Entity entity) {
-        List<ModelImplElement> modelImplElements = new ArrayList<>();
-        if (mappingType == MappingType.ANNOTATION) {
-            /////////////////////////////////////////////
-            Template daoTemplate = new Template("Dao", "ormTechnology/hibernate/dao/DAO.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                    + File.separator + interfaceDAODir + File.separator  + entity.getName() + "DAO.java");
-            daoTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAODir);
-            daoTemplate.putReference("entity", entity);
-            // imports
-            Set<String> daoImportSet = new HashSet<>();
-            daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAOCommonDir + ".GenericDAO");
-            daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir + "." + entity.getName());
-            daoTemplate.putReference("imports", daoImportSet);
-            daoTemplate.mergeTemplate();
-
-            EntityClass daoClass = new EntityClass();
-            daoClass.setName(entity.getName() + "DAO.java");
-            modelImplElements.add(daoClass);
-            /////////////////////////////////////////////
-            Template hibernateDaoTemplate = new Template("Hibernate Dao", "ormTechnology/hibernate/dao/HibernateDAO.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                    + File.separator + implDAODir.replace('.', '/') + File.separator + "Hibernate" + entity.getName() + "DAO.java");
-            hibernateDaoTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + implDAODir);
-            hibernateDaoTemplate.putReference("entity", entity);
-            // imports
-            Set<String> hibernateDaoImportSet = new HashSet<>();
-            hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + implDAOCommonDir + ".HibernateGenericDAO");
-            hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir + "." + entity.getName());
-            hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAODir + "." +  entity.getName() + "DAO");
-            hibernateDaoTemplate.putReference("imports", hibernateDaoImportSet);
-            hibernateDaoTemplate.mergeTemplate();
-
-            EntityClass hibernateDaoClass = new EntityClass();
-            hibernateDaoClass.setName("Hibernate" + entity.getName() + "DAO.java");
-            modelImplElements.add(hibernateDaoClass);
-
-            ///////////////////////////////////////////////////////////////////////////////// Service
-            /////////////////////////////////////////////
-            Template serviceTemplate = new Template("Service", "ormTechnology/hibernate/service/Service.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                    + File.separator + serviceDir + File.separator  + entity.getName() + "Service.java");
-            serviceTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".service");
-            serviceTemplate.putReference("entity", entity);
-            // imports
-            Set<String> serviceImportSet = new HashSet<>();
-            //   serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".service.GenericManager");
-            serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir + "." + entity.getName());
-            serviceTemplate.putReference("imports", serviceImportSet);
-            serviceTemplate.mergeTemplate();
-
-            EntityClass serviceClass = new EntityClass();
-            serviceClass.setName(entity.getName() + "Service.java");
-            modelImplElements.add(serviceClass);
-            /////////////////////////////////////////////
-            Template serviceImplTemplate = new Template("Hibernate Dao", "ormTechnology/hibernate/service/ServiceImpl.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                    + File.separator + implServiceDir.replace('.', '/') + File.separator + entity.getName() + "ServiceImpl.java");
-            serviceImplTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + implServiceDir);
-            serviceImplTemplate.putReference("entity", entity);
-            // imports
-            Set<String> serviceImplImportSet = new HashSet<>();
-            //    serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".service.impl.GenericManagerImpl");
-            serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir + "." + entity.getName());
-            serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".service." +  entity.getName() + "Service");
-            serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAODir + "." + entity.getName() + "DAO");
-
-            serviceImplTemplate.putReference("imports", serviceImplImportSet);
-            serviceImplTemplate.mergeTemplate();
-
-            EntityClass serviceImplClass = new EntityClass();
-            serviceImplClass.setName(entity.getName() + "ServiceImpl.java");
-            modelImplElements.add(serviceImplClass);
-        } else if (mappingType == MappingType.HBM_XML_FILE) {
-
-        }
-        return modelImplElements; // TODO: 5/8/2016
+        return mappingType.createDao(this, entity);
     }
 
     @Override
