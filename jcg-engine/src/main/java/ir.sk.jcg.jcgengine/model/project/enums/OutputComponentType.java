@@ -5,6 +5,8 @@ import ir.sk.jcg.jcgengine.model.project.Component;
 import ir.sk.jcg.jcgengine.model.project.component.LabelComponent;
 import ir.sk.jcg.jcgengine.model.project.component.TextFieldComponent;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
  */
@@ -32,7 +34,7 @@ public enum OutputComponentType implements EnumBase {
 
     public static OutputComponentType valueOf(Integer type) {
         for (OutputComponentType code : OutputComponentType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

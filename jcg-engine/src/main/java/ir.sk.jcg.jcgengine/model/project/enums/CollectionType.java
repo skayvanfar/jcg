@@ -2,6 +2,8 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/31/16.
  */
@@ -32,7 +34,7 @@ public enum CollectionType implements EnumBase {
 
     public static CollectionType valueOf(Integer type) {
         for (CollectionType code : CollectionType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

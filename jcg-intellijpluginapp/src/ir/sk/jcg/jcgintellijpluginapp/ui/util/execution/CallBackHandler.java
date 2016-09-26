@@ -7,5 +7,5 @@ import org.jetbrains.annotations.NotNull;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016
  */
 public interface CallBackHandler {
-    public boolean executeTask(@NotNull ProgressIndicator progressIndicator);
+    boolean executeTask(@NotNull ProgressIndicator progressIndicator);
 }

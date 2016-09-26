@@ -2,6 +2,8 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
@@ -31,7 +33,7 @@ public enum IdGeneratorType implements EnumBase {
 
     public static IdGeneratorType valueOf(Integer type) {
         for (IdGeneratorType code : IdGeneratorType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

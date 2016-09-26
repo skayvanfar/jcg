@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -44,7 +45,7 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
 
         public static BuildTechnologyHandlerType valueOf(Integer type) {
             for (BuildTechnologyHandlerType code : BuildTechnologyHandlerType.values()) {
-                if (type == code.getValue()) {
+                if (Objects.equals(type, code.getValue())) {
                     return code;
                 }
             }

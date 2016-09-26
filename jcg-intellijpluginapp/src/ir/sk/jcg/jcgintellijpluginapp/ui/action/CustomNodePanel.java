@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.util.ui.JBUI;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgintellijpluginapp.ui.PropertyViewHelper;
 
@@ -24,7 +25,7 @@ public class CustomNodePanel extends JPanel {
     private List<PropertyInfo> propertyInfos;
 
     public CustomNodePanel(List<PropertyInfo> propertyInfos) {
-        setLayout(new GridLayoutManager(propertyInfos.size(), 3, new Insets(0, 0, 0, 0), -1, -1));
+        setLayout(new GridLayoutManager(propertyInfos.size(), 3, JBUI.emptyInsets(), -1, -1));
         initComponents(propertyInfos);
     }
 

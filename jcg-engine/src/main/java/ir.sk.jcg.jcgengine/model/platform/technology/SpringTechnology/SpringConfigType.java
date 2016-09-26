@@ -2,6 +2,8 @@ package ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/20/2016
  */
@@ -30,7 +32,7 @@ public enum SpringConfigType implements EnumBase {
 
     public static SpringConfigType valueOf(Integer type) {
         for (SpringConfigType code : SpringConfigType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

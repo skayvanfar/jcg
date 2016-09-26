@@ -3,15 +3,12 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Relationship;
-import ir.sk.jcg.jcgengine.model.project.enums.CollectionType;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.RelationshipController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.RelationshipControllerImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.RelationShipDto;
-import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,7 +19,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class EditRelationshipNodeAction extends NodeAction  {
 
     private DialogBuilder builder;
-    protected RelationshipPanel relationshipPanel;
+    private RelationshipPanel relationshipPanel;
 
     public EditRelationshipNodeAction() {
         super("Edit Relationship");
@@ -55,20 +52,17 @@ public class EditRelationshipNodeAction extends NodeAction  {
             relationshipPanel.setRelationShipDto(relationShipDto);
 
             builder.setCenterPanel(relationshipPanel);
-            builder.setOkOperation(new Runnable() {
-                @Override
-                public void run() {
-                    RelationShipDto editedRelationShipDto = relationshipPanel.getRelationShipDto();
+            builder.setOkOperation(() -> {
+                RelationShipDto editedRelationShipDto = relationshipPanel.getRelationShipDto();
 
-                    Entity entity = (Entity) ((DefaultMutableTreeNode) jcgProjectComponent.getSelectionPath().getParentPath().getLastPathComponent()).getUserObject();
-                    Relationship headRelationship = (Relationship) jcgProjectComponent.currentSelectedNodeUserObject();
+                Entity entity = (Entity) ((DefaultMutableTreeNode) jcgProjectComponent.getSelectionPath().getParentPath().getLastPathComponent()).getUserObject();
+                Relationship headRelationship = (Relationship) jcgProjectComponent.currentSelectedNodeUserObject();
 
-                    relationshipController.editRelationship(editedRelationShipDto, headRelationship, entity);
+                relationshipController.editRelationship(editedRelationShipDto, headRelationship, entity);
 
-                    marshalingAndReloadTree();
+                marshalingAndReloadTree();
 
-                    builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
-                }
+                builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             });
         }
         builder.showModal(true);

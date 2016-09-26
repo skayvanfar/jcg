@@ -6,6 +6,8 @@ import ir.sk.jcg.jcgengine.model.project.component.LabelComponent;
 import ir.sk.jcg.jcgengine.model.project.component.TextAreaComponent;
 import ir.sk.jcg.jcgengine.model.project.component.TextFieldComponent;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
  */
@@ -35,7 +37,7 @@ public enum InputComponentType implements EnumBase {
 
     public static InputComponentType valueOf(Integer type) {
         for (InputComponentType code : InputComponentType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

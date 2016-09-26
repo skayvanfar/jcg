@@ -5,12 +5,9 @@ import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgengine.CodeGenerator;
-import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.*;
-import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
-import javax.xml.bind.JAXBException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +18,7 @@ import java.util.List;
 public class GenerateCodeAction extends NodeAction {
 
     private DialogBuilder builder;
-    protected QuestionPanel questionPanel;
+    private QuestionPanel questionPanel;
 
     public GenerateCodeAction() {
         super("Generate Code");

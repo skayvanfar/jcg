@@ -2,6 +2,8 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
@@ -32,7 +34,7 @@ public enum CardinalityType implements EnumBase {
 
     public static CardinalityType valueOf(Integer type) {
         for (CardinalityType code : CardinalityType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

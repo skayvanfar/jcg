@@ -1,13 +1,11 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel;
 
 import com.intellij.openapi.ui.ComboBox;
-import com.siyeh.ig.ui.TextField;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.Presentable;
-import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertyTable;
 
@@ -61,11 +59,10 @@ public class PropertiesTableModel extends AbstractTableModel {
     private void setPropertyField(PropertyInfo propertyInfo) {
         try {
             Field field = ReflectionUtil.getFieldByName(propertyInfo.getName(), presentable);
+            assert field != null;
             field.setAccessible(true);
             field.set(presentable, propertyInfo.getValue());
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
@@ -97,7 +94,7 @@ public class PropertiesTableModel extends AbstractTableModel {
                     Class<? extends Enum> classType= (Class<? extends Enum>) propertyInfo.getTypeClass();
                     Enum[] possibleValues = classType.getEnumConstants();
                    // JComboBox comboBox = new JComboBox();
-                    ComboBox comboBox = new ComboBox();
+                    ComboBox<Enum<?>> comboBox = new ComboBox<>();
                     for (Enum<?> e : possibleValues) {
                         comboBox.addItem(e);
                     }
@@ -105,7 +102,7 @@ public class PropertiesTableModel extends AbstractTableModel {
                     break;
                 case EDITABLE_COMBO:
                     String[] values = propertyInfo.getValues();
-                    ComboBox comboBox2 = new ComboBox();
+                    ComboBox<String> comboBox2 = new ComboBox<>();
                     comboBox2.setEditable(true);
                     for (String value : values) {
                         comboBox2.addItem(value);

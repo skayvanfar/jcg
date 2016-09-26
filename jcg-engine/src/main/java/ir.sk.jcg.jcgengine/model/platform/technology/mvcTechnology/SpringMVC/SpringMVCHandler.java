@@ -10,9 +10,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.ele
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.velocity.Template;
-import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.commons.io.FileUtils;
-import org.apache.velocity.VelocityContext;
 
 import java.io.File;
 import java.io.IOException;

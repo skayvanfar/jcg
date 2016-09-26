@@ -21,11 +21,11 @@ import java.util.List;
  */
 @XmlRootElement // TODO: 4/27/2016 must remove from this class
 @Editable
-public class SpringWebArchitecture extends Architecture {
+class SpringWebArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
-    public SpringWebArchitecture() {
+    SpringWebArchitecture() {
         super("Spring Web Architecture");
     }
 
@@ -49,7 +49,7 @@ public class SpringWebArchitecture extends Architecture {
         buildTechnology.addDependencies(springHandler.getDependencies()); // add dependencies of iocTechnologyHandler
         buildTechnology.addDependencies(securityTechnologyHandler.getDependencies());
         buildTechnology.addDependencies(ormTechnology.getDependencies()); // todo may not be here
-        buildTechnology.addDependencies(mvcTechnology.getDependencies()); // todo may not be here
+        buildTechnology.addDependencies(mvcTechnology.getDependencies());
         try {
             buildTechnology.createBasePlatform();
             Config securityTechnologyHandlerConfig = securityTechnologyHandler.createBasePlatform();
@@ -65,6 +65,35 @@ public class SpringWebArchitecture extends Architecture {
         } catch (Exception e) { // todo
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(String baseDir, String packagePrefix, String configPackage) {
+        ApplicationContext applicationContext = ApplicationContext.getInstance();
+
+        applicationContext.setBaseProjectPath(baseDir);
+        applicationContext.setPackagePrefix(packagePrefix);
+        applicationContext.setConfigPackage(configPackage);
+
+        BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
+        ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
+        MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
+
+        applicationContext.setMainJavaPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainJavaPath());
+        applicationContext.setMainResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainResourcesPath());
+        applicationContext.setMainWebPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getMainWebPath());
+        applicationContext.setTestJavaPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestJavaPath());
+        applicationContext.setTestResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestResourcesPath());
+        applicationContext.setJavaWithPackagePrefixPath(ApplicationContext.getInstance().getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/'));
+
+        applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
+        applicationContext.setSpringDIType(springHandler.getSpringDIType());
+
+        applicationContext.setBuildTechnologyHandler(buildTechnology); // TODO: 6/20/2016
+        applicationContext.setOrmTechnologyHandler(ormTechnology);
+        applicationContext.setMvcTechnologyHandler(mvcTechnology);
+        applicationContext.setSpringHandler(springHandler);
+        applicationContext.setSecurityTechnologyHandler(securityTechnologyHandler);
     }
 
     /**

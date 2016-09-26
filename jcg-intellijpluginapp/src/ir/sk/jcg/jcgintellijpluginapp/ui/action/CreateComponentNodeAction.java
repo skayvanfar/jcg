@@ -1,18 +1,13 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import ir.sk.jcg.jcgengine.model.project.*;
-import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ComponentController;
-import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ViewController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.ComponentControllerImpl;
-import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.ViewControllerImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +17,7 @@ import java.util.List;
 public class CreateComponentNodeAction extends CreateNodeAction {
 
     private DialogBuilder builder;
-    protected ComponentPanel componentPanel;
+    private ComponentPanel componentPanel;
 
     public CreateComponentNodeAction() {
         super("Create Component");

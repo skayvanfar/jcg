@@ -7,7 +7,7 @@ import ir.sk.jcg.jcgengine.model.project.Element;
  */
 public class ElementBeforeExistException extends RuntimeException { //// TODO: 5/2/2016  may better extend from Exception
 
-    Element element;
+    private Element element;
 
     public ElementBeforeExistException(Element element) {
         this.element = element;

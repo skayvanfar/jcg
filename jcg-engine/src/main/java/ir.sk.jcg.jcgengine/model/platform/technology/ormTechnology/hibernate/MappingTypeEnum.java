@@ -2,11 +2,13 @@ package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/7/2016
  */
 //@XmlJavaTypeAdapter(MappingTypeEnum.Adapter.class)
-public enum MappingTypeEnum implements EnumBase {
+enum MappingTypeEnum implements EnumBase {
 
     ANNOTATION(0, "Annotation"),
     HBM_XML_FILE(1, "hbm xml file");
@@ -31,7 +33,7 @@ public enum MappingTypeEnum implements EnumBase {
 
     public static MappingTypeEnum valueOf(Integer type) {
         for (MappingTypeEnum code : MappingTypeEnum.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

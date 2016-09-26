@@ -1,16 +1,18 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
+import com.intellij.util.ui.JBUI;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/8/2016
  */
-public class QuestionPanel extends JPanel {
+class QuestionPanel extends JPanel {
 
     private String operationName;
 
-    public QuestionPanel(String operationName) {
+    QuestionPanel(String operationName) {
 
         this.operationName = operationName;
 
@@ -23,6 +25,6 @@ public class QuestionPanel extends JPanel {
 
     @Override
     public Insets getInsets() {
-        return new Insets(20,20,20,20);
+        return JBUI.insets(20);
     }
 }

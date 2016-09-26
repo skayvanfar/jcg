@@ -1,18 +1,12 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SpringSecurity;
 
-import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.Exclusion;
 import ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SecurityTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
-import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringConfigType;
-import ir.sk.jcg.jcgengine.velocity.Template;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/21/2016

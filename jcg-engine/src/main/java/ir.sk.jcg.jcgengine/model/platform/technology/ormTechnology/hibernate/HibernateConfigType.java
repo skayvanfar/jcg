@@ -3,6 +3,8 @@ package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringConfigType;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/20/2016
  */
@@ -33,7 +35,7 @@ public enum HibernateConfigType implements EnumBase {
 
     public static HibernateConfigType valueOf(Integer type) {
         for (HibernateConfigType code : HibernateConfigType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

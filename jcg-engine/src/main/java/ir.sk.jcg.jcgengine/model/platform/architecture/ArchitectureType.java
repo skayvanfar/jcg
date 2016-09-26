@@ -2,6 +2,8 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016
  */
@@ -13,7 +15,7 @@ public enum ArchitectureType implements EnumBase {
     private Integer value;
     private String description;
 
-    private ArchitectureType(Integer value, String description) {
+    ArchitectureType(Integer value, String description) {
         this.value = value;
         this.description = description;
     }
@@ -43,7 +45,7 @@ public enum ArchitectureType implements EnumBase {
 
     public static ArchitectureType valueOf(Integer type) {
         for (ArchitectureType code : ArchitectureType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }

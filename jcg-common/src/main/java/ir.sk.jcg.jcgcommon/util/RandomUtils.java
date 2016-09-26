@@ -69,7 +69,7 @@ public class RandomUtils {
         for (int aChecksum : checksum) checksumStr2 += chars[aChecksum % chars.length];
         if (!checksumStr.equals(checksumStr2))
             return null;
-        ;
+
         str = negative ? str.substring(1, str.length() - ChecksumLength) : str
                 .substring(0, str.length() - ChecksumLength);
         long key = 0;

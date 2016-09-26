@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.util.ui.JBUI;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgintellijpluginapp.ui.PropertyViewHelper;
 
@@ -15,18 +16,18 @@ import java.util.Map;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/10/2016
  */
-public class JcgCustomTechnologyWizardStepPanel extends JPanel {
+class JcgCustomTechnologyWizardStepPanel extends JPanel {
 
     private final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("/messages/messages"); // NOI18N
 
     private Map<PropertyInfo, JComponent> componentsMap = new HashMap<>();
     private List<PropertyInfo> propertyInfos;
 
-    public JcgCustomTechnologyWizardStepPanel() {
-        setLayout(new GridLayoutManager(4, 3, new Insets(0, 0, 0, 0), -1, -1));
+    JcgCustomTechnologyWizardStepPanel() {
+        setLayout(new GridLayoutManager(4, 3, JBUI.emptyInsets(), -1, -1));
     }
 
-    public List<PropertyInfo> getPropertyInfos() {
+    List<PropertyInfo> getPropertyInfos() {
         return propertyInfos;
     }
 
@@ -34,9 +35,9 @@ public class JcgCustomTechnologyWizardStepPanel extends JPanel {
         this.propertyInfos = propertyInfos;
     }
 
-    public void initComponents(List<PropertyInfo> propertyInfos) {
+    void initComponents(List<PropertyInfo> propertyInfos) {
 
-        setLayout(new GridLayoutManager(10, 3, new Insets(0, 0, 0, 0), -1, -1)); // TODO: 5/12/2016 must be dynamic: section 10, 3
+        setLayout(new GridLayoutManager(10, 3, JBUI.emptyInsets(), -1, -1)); // TODO: 5/12/2016 must be dynamic: section 10, 3
 
 
         this.propertyInfos = propertyInfos;
@@ -53,7 +54,7 @@ public class JcgCustomTechnologyWizardStepPanel extends JPanel {
         }
     }
 
-    public void setComponents() {
+    void setComponents() {
         for (PropertyInfo propertyInfo : componentsMap.keySet()) {
             JComponent component =componentsMap.get(propertyInfo);
             if (component instanceof JTextField)

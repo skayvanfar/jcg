@@ -47,42 +47,39 @@ public class TreePanel extends SimpleToolWindowPanel {
      //   CustomizationUtil.installPopupHandler(jcgTree, "JCG.OperationMenu", ActionPlaces.UNKNOWN);
          jcgTree.setCellRenderer(new JcgTreeRenderer()); // TODO: 4/29/2016
 
-        jcgTree.addTreeSelectionListener(new TreeSelectionListener() {
-            @Override
-            public void valueChanged(TreeSelectionEvent e) {
+        jcgTree.addTreeSelectionListener(e -> {
 
-                DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
-                if (treeSelectionChangedListener != null) {
-                    treeSelectionChangedListener.selectionChanged(treeNode.getUserObject());
+            DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
+            if (treeSelectionChangedListener != null) {
+                treeSelectionChangedListener.selectionChanged(treeNode.getUserObject());
+            }
+            if (treeNode.isRoot()) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof Schema) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof Package) {
+                DefaultMutableTreeNode schemaNode = (DefaultMutableTreeNode) e.getPath().getPathComponent(2);
+                if (schemaNode.getUserObject().toString().equals("Domain Schema")) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageEntityOperationMenu", ActionPlaces.UNKNOWN);
+                } else if (schemaNode.getUserObject().toString().equals("Business Schema")) {
+                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageViewOperationMenu", ActionPlaces.UNKNOWN);
                 }
-                if (treeNode.isRoot()) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof Schema) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof Package) {
-                    DefaultMutableTreeNode schemaNode = (DefaultMutableTreeNode) e.getPath().getPathComponent(2);
-                    if (schemaNode.getUserObject().toString().equals("Domain Schema")) {
-                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageEntityOperationMenu", ActionPlaces.UNKNOWN);
-                    } else if (schemaNode.getUserObject().toString().equals("Business Schema")) {
-                        CustomizationUtil.installPopupHandler(jcgTree, "JCG.PackageViewOperationMenu", ActionPlaces.UNKNOWN);
-                    }
-                } else if (treeNode.getUserObject() instanceof Entity) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.EntityOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof Relationship) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.RelationshipOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof Property) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.PropertiesOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof DisplayView) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.DisplayViewOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof SearchView) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.SearchViewOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof CreateEditView) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.CreateEditViewOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof DataGrid) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.DataGridOperationMenu", ActionPlaces.UNKNOWN);
-                } else if (treeNode.getUserObject() instanceof Component) {
-                    CustomizationUtil.installPopupHandler(jcgTree, "JCG.ComponentOperationMenu", ActionPlaces.UNKNOWN);
-                }
+            } else if (treeNode.getUserObject() instanceof Entity) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.EntityOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof Relationship) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.RelationshipOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof Property) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.PropertiesOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof DisplayView) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.DisplayViewOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof SearchView) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.SearchViewOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof CreateEditView) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.CreateEditViewOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof DataGrid) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.DataGridOperationMenu", ActionPlaces.UNKNOWN);
+            } else if (treeNode.getUserObject() instanceof Component) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.ComponentOperationMenu", ActionPlaces.UNKNOWN);
             }
         });
 
@@ -104,7 +101,7 @@ public class TreePanel extends SimpleToolWindowPanel {
 
         jcgTree.updateUI();
         if (treePath != null) { // TODO: 5/6/2016 expand not work correctly 
-            TreePath treePath1 = new TreePath(treePath.getPath());
+        //    TreePath treePath1 = new TreePath(treePath.getPath());
           //  jcgTree.setSelectionPath(treePath1);
               //      jcgTree.scrollPathToVisible(treePath1);
      //       TreePath t =jcgTree.getSelectionPath();
@@ -133,7 +130,7 @@ public class TreePanel extends SimpleToolWindowPanel {
     /**
      * Full a tree of node from jcgProject
      * */
-    public void initJcgTree() { // TODO: 5/12/2016 auto create tree
+    private void initJcgTree() { // TODO: 5/12/2016 auto create tree
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
 
         DefaultMutableTreeNode projectNode = new DefaultMutableTreeNode(jcgProject);

@@ -3,7 +3,6 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.SchemaItem;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Packageable;
@@ -28,15 +27,9 @@ public class DeletePackageNodeAction extends DeleteNodeAction {
         builder.setOkOperation(new Runnable() {
             @Override
             public void run() {
-
-
                 JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
 
                 TreePath treePath = jcgProjectComponent.getSelectionPath();
-
-                CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();
-
-
 
                 DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
                 DefaultMutableTreeNode parentNode = (DefaultMutableTreeNode) treePath.getParentPath().getLastPathComponent();

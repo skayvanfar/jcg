@@ -8,14 +8,14 @@ import com.intellij.openapi.ui.DialogBuilder;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/4/2016
  */
-public abstract class CreateNodeAction extends NodeAction {
+abstract class CreateNodeAction extends NodeAction {
 
     private String nodeType;
     protected DialogBuilder builder;
 
-    protected CreateNewNodePanel addNodePanel;
+    CreateNewNodePanel addNodePanel;
 
-    public CreateNodeAction(String nodeType) {
+    CreateNodeAction(String nodeType) {
         super("Create " + nodeType);
         this.nodeType = nodeType;
 
@@ -33,7 +33,7 @@ public abstract class CreateNodeAction extends NodeAction {
         builder.setCenterPanel(addNodePanel);
     }
 
-    protected String correctName(String nodeName) {
+    String correctName(String nodeName) {
         if (nodeName.startsWith("/")) {
             nodeName = nodeName.substring(1);
         }

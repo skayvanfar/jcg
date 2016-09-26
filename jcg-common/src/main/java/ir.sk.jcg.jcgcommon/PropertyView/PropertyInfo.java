@@ -14,7 +14,7 @@ public class PropertyInfo {
     }
 
     // Builder Pattern
-    public static class Builder {
+    private static class Builder {
         // Required parameters
         private String name;
         private String label;

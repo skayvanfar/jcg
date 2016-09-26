@@ -75,8 +75,7 @@ public class Package<T extends SchemaItem> extends ModelElement implements Packa
 
         Package<?> aPackage = (Package<?>) o;
 
-        if (name != null ? !name.equals(aPackage.name) : aPackage.name != null) return false;
-        return elements != null ? elements.equals(aPackage.elements) : aPackage.elements == null;
+        return name != null ? name.equals(aPackage.name) : aPackage.name == null && (elements != null ? elements.equals(aPackage.elements) : aPackage.elements == null);
 
     }
 

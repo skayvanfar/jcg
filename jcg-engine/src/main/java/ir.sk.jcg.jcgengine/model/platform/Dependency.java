@@ -8,15 +8,15 @@ import java.util.Set;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
-public class Dependency {
+public class Dependency { // TODO: 9/26/2016 Value Object
 
     private String groupId;
     private String artifactId;
     private String version;
     private String scope;
     private Set<Exclusion> exclusionSet;
- //   private String comment; // TODO: 5/21/2016 may use later 
-    
+ //   private String comment; // TODO: 5/21/2016 may use later
+
     public Dependency() {
     }
 

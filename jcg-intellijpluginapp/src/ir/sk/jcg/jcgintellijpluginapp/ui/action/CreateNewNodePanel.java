@@ -1,19 +1,21 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
+import com.intellij.util.ui.JBUI;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/30/2016
  */
-public class CreateNewNodePanel extends JPanel {
+class CreateNewNodePanel extends JPanel {
 
     private String nodeType;
 
     private JTextField  nodeNameTextField;
 
 
-    public CreateNewNodePanel(String nodeType) {
+    CreateNewNodePanel(String nodeType) {
 
         this.nodeType = nodeType;
 
@@ -28,14 +30,14 @@ public class CreateNewNodePanel extends JPanel {
 
     @Override
     public Insets getInsets() {
-        return new Insets(20,20,20,20);
+        return JBUI.insets(20);
     }
 
-    public String getNodeName() {
+    String getNodeName() {
         return nodeNameTextField.getText();
     }
 
-    public void clearNodeName() {
+    void clearNodeName() {
         nodeNameTextField.setText("");
     }
 }

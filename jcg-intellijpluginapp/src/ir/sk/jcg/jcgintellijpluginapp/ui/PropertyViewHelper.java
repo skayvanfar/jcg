@@ -11,12 +11,12 @@ import javax.swing.*;
 public class PropertyViewHelper {
 
     public static JComponent getJComponentByPropertyField(PropertyInfo propertyInfo) {
-        JComponent propertyFieldComponent = null;
+        JComponent propertyFieldComponent;
         switch (propertyInfo.getComponentType()) {
             case NON_EDITABLE_COMBO:
                     Class<? extends Enum> classType= (Class<? extends Enum>) propertyInfo.getTypeClass();
                     Enum[] possibleValues = classType.getEnumConstants();
-                    ComboBox comboBox = new ComboBox();
+                    ComboBox<Enum<?>> comboBox = new ComboBox<>();
                     for (Enum<?> e : possibleValues) {
                         comboBox.addItem(e);
                     }
@@ -24,7 +24,7 @@ public class PropertyViewHelper {
                 break;
             case EDITABLE_COMBO:
                 String[] values = propertyInfo.getValues();
-                ComboBox editableComboBox = new ComboBox();
+                ComboBox<String> editableComboBox = new ComboBox<>();
                 editableComboBox.setEditable(true);
                 for (String value : values) {
                     editableComboBox.addItem(value);

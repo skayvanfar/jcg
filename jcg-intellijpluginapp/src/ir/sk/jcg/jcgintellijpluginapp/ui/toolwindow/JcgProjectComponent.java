@@ -11,7 +11,6 @@ import com.intellij.ui.content.ContentManager;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.Presentable;
-import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
@@ -93,7 +92,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
     /**
      * initToolWindows
      * */
-    public void initToolWindows() {
+    private void initToolWindows() {
         // init jcgTree tool window
         jcgTreeToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", false, ToolWindowAnchor.LEFT);
         jcgTreeToolWindow.setTitle("JCG Tree");
@@ -143,7 +142,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
      * */
     private boolean isCorrectJcgProject() { // TODO: 5/6/2016 must check existence and correction of project and architectur xml files
         File baseXmlDir = new File(intellijProject.getBasePath() + File.separator + CodeGenerator.JCG_CONFIG_DIR);
-        return (baseXmlDir.exists()) ? true : false;
+        return (baseXmlDir.exists());
     }
 
     @Override

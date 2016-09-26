@@ -8,7 +8,6 @@ import com.intellij.ui.components.JBScrollPane;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.util.SerializationUtil;
 import ir.sk.jcg.jcgengine.model.Presentable;
-import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.editor.RowEditorModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.renderer.RowRendererModel;
@@ -65,11 +64,7 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
 
         try {
             clonedPresentable = (Presentable) SerializationUtil.shallowCloneByAnnotation(realPresentable, Prop.class);
-        } catch (IllegalAccessException e) { // TODO: 5/15/2016
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
+        } catch (IllegalAccessException | InstantiationException | NoSuchFieldException e) { // TODO: 5/15/2016
             e.printStackTrace();
         }
 
@@ -103,10 +98,8 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
                 Object newValue = copyField.get(clonedPresentable);
                 field.set(realPresentable, newValue);
                 copyField.setAccessible(false);
-            } catch (IllegalAccessException e) {
+            } catch (IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace(); // TODO: 5/5/2016
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
             } finally {
                 field.setAccessible(false);
             }

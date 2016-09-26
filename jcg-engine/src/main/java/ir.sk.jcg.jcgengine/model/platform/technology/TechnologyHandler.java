@@ -23,7 +23,7 @@ import java.util.List;
 @XmlSeeAlso({BuildTechnologyHandler.class, ORMTechnologyHandler.class, MVCTechnologyHandler.class, SpringHandler.class})
 public abstract class TechnologyHandler implements Presentable {
 
-    @Prop(label = "Name", editable = false, required = true)
+    @Prop(label = "Name", required = true)
     private String name;
 
    // protected String baseDir;
@@ -51,7 +51,7 @@ public abstract class TechnologyHandler implements Presentable {
 
     protected abstract void createDirectories() throws Exception;
 
-    protected Config createConfigFiles() throws Exception {
+    private Config createConfigFiles() throws Exception {
         Config config = null;
         switch (ApplicationContext.getInstance().getSpringConfigType()) {
             case JAVA:

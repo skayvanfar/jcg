@@ -62,12 +62,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
             JcgAPIManagerCallback jcgAPIManagerCallback = new JcgAPIManagerCallback();
 
             final ModalTaskImpl modalTask = new ModalTaskImpl(null, "other works after create base project.", jcgAPIManagerCallback); // todo: must set Project instead null
-            ApplicationManager.getApplication().invokeAndWait(new Runnable() {
-                @Override
-                public void run() {
-                    ProgressManager.getInstance().run(modalTask);
-                }
-            }, ModalityState.defaultModalityState());
+            ApplicationManager.getApplication().invokeAndWait(() -> ProgressManager.getInstance().run(modalTask), ModalityState.defaultModalityState());
 
             if (!modalTask.isDone()) {
                 throw new CommitStepException("Operation Fail");  // todo: must use Constant

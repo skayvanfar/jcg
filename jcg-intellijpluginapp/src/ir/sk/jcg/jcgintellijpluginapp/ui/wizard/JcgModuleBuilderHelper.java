@@ -12,7 +12,7 @@ import javax.xml.bind.JAXBException;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/20/2016
  */
-public class JcgModuleBuilderHelper {
+class JcgModuleBuilderHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(JcgModuleBuilderHelper.class);
 
@@ -23,7 +23,7 @@ public class JcgModuleBuilderHelper {
     private com.intellij.openapi.project.Project intellijProject;
     private VirtualFile root;
 
-    public JcgModuleBuilderHelper(@NotNull CodeGenerator codeGenerator, String commaneName, com.intellij.openapi.project.Project intellijProject, VirtualFile root) {
+    JcgModuleBuilderHelper(@NotNull CodeGenerator codeGenerator, String commaneName, com.intellij.openapi.project.Project intellijProject, VirtualFile root) {
         this.codeGenerator = codeGenerator;
         this.intellijProject = intellijProject;
         this.root = root;
@@ -33,7 +33,7 @@ public class JcgModuleBuilderHelper {
     /**
      * Call Engine to make base Architecture
      * */
-    public void configure() {
+    void configure() {
         codeGenerator.getArchitecture().createBaseArchitecture();
 
         try {

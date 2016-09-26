@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.wizard.steps;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.util.ui.JBUI;
 import ir.sk.jcg.jcgengine.model.platform.architecture.ArchitectureType;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ import java.awt.*;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/18/2016
  */
-public class JcgBaseInfoWizardStepPanel extends JPanel {
+class JcgBaseInfoWizardStepPanel extends JPanel {
 
     private final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("/messages/messages"); // NOI18N
 
@@ -20,7 +21,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
     private JTextField packagePrefixField;
     private JTextField tableNamePatternField;
     private JTextField configPackageField;
-    private JComboBox architectureComboBox;
+    private JComboBox<ArchitectureType> architectureComboBox;
 
     public JTextField getProjectNameField() {
         return projectNameField;
@@ -38,7 +39,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         this.projectPersianNameField = projectPersianNameField;
     }
 
-    public JTextField getPackagePrefixField() {
+    JTextField getPackagePrefixField() {
         return packagePrefixField;
     }
 
@@ -54,7 +55,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         this.tableNamePatternField = tableNamePatternField;
     }
 
-    public JTextField getConfigPackageField() {
+    JTextField getConfigPackageField() {
         return configPackageField;
     }
 
@@ -62,22 +63,22 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         this.configPackageField = configPackageField;
     }
 
-    public JComboBox getArchitectureComboBox() {
+    JComboBox<ArchitectureType> getArchitectureComboBox() {
         return architectureComboBox;
     }
 
-    public void setArchitectureComboBox(JComboBox architectureComboBox) {
+    public void setArchitectureComboBox(JComboBox<ArchitectureType> architectureComboBox) {
         this.architectureComboBox = architectureComboBox;
     }
 
     //  private JPanel myArchetypesPanel;
 
-    public JcgBaseInfoWizardStepPanel() {
+    JcgBaseInfoWizardStepPanel() {
         initComponents();
     }
 
     private void initComponents() {
-        setLayout(new GridLayoutManager(6, 3, new Insets(0, 0, 0, 0), -1, -1));
+        setLayout(new GridLayoutManager(6, 3, JBUI.emptyInsets(), -1, -1));
 
         final JLabel projectNameLabel = new JLabel();
         projectNameLabel.setText("Project Name");
@@ -118,7 +119,7 @@ public class JcgBaseInfoWizardStepPanel extends JPanel {
         DefaultComboBoxModel<ArchitectureType> comboBoxModel = new DefaultComboBoxModel<>();
         for (ArchitectureType architectureType : ArchitectureType.values())
             comboBoxModel.addElement(architectureType);
-        architectureComboBox = new ComboBox();
+        architectureComboBox = new ComboBox<>();
         architectureComboBox.setModel(comboBoxModel);
         add(architectureComboBox, new GridConstraints(5, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 

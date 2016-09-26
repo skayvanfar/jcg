@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.util.ui.JBUI;
 import ir.sk.jcg.jcgengine.model.project.Property;
 import ir.sk.jcg.jcgengine.model.project.enums.InputComponentType;
 import ir.sk.jcg.jcgengine.model.project.enums.OutputComponentType;
@@ -21,14 +22,14 @@ class ComponentPanel extends JPanel {
     private ComponentDto componentDto;
 
     private JTextField  componentNameTextField;
-    private ComboBox targetPropertyComboBox;
-    private ComboBox componentTypeComboBox;
+    private ComboBox<Property> targetPropertyComboBox;
+    private ComboBox<Enum> componentTypeComboBox;
 
     private boolean isInput;
 
-    public ComponentPanel(java.util.List<Property> properties, boolean isInput) {
+    ComponentPanel(java.util.List<Property> properties, boolean isInput) {
         componentDto = new ComponentDto();
-        setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
+        setLayout(new GridLayoutManager(3, 2, JBUI.emptyInsets(), -1, -1));
 
         JLabel componentNameLabel = new JLabel("Name :");
         add(componentNameLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -37,7 +38,7 @@ class ComponentPanel extends JPanel {
 
         JLabel targetPropertyLabel = new JLabel("Target Property :");
         add(targetPropertyLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        targetPropertyComboBox = new ComboBox();
+        targetPropertyComboBox = new ComboBox<>();
         for (Property property : properties)
             targetPropertyComboBox.addItem(property);
         add(targetPropertyComboBox, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
@@ -47,7 +48,7 @@ class ComponentPanel extends JPanel {
 
         JLabel componentTypeLabel = new JLabel("Component Type :");
         add(componentTypeLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        componentTypeComboBox = new ComboBox();
+        componentTypeComboBox = new ComboBox<>();
         this.isInput = isInput;
         if (isInput)
             for (InputComponentType inputComponentType : InputComponentType.values())

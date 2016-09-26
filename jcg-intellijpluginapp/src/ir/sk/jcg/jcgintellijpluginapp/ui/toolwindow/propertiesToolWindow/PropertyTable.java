@@ -8,6 +8,7 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
+import java.util.Objects;
 import java.util.Vector;
 
 /**
@@ -112,7 +113,7 @@ public class PropertyTable extends JTable {
         }
         if (wantedRenderer != null) return wantedRenderer;
 
-        if (getColumnName(column) == "Value") {
+        if (Objects.equals(getColumnName(column), "Value")) {
             Class cellClass = null;
             if (getValueAt(row, column) != null)
                 cellClass = getValueAt(row, column).getClass();
@@ -120,8 +121,6 @@ public class PropertyTable extends JTable {
                 return getDefaultRenderer(cellClass);
             //wantedRenderer = this.rowRendererModel.getRenderer(row);
         }
-        if (wantedRenderer != null)
-            return wantedRenderer;
         return super.getCellRenderer(row, column);
     }
 }

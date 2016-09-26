@@ -4,14 +4,12 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.util.text.StringUtil;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
-import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder;
 import org.slf4j.Logger;
@@ -112,11 +110,10 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
 
             try {
                 Field field = ReflectionUtil.getFieldByName(propertyInfo.getName(), propertyInfo.getObject());
+                assert field != null;
                 field.setAccessible(true);
                 field.set(propertyInfo.getObject(), propertyInfo.getValue());
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }

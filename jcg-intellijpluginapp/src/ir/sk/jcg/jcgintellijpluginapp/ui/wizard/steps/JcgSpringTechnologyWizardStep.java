@@ -100,11 +100,10 @@ public class JcgSpringTechnologyWizardStep extends ModuleWizardStep {
 
             try {
                 Field field = ReflectionUtil.getFieldByName(propertyInfo.getName(), propertyInfo.getObject());
+                assert field != null;
                 field.setAccessible(true);
                 field.set(propertyInfo.getObject(), propertyInfo.getValue());
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (NoSuchFieldException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }

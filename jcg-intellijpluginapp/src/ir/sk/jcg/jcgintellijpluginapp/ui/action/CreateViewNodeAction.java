@@ -18,7 +18,7 @@ import java.util.List;
 public class CreateViewNodeAction extends CreateNodeAction {
 
     private DialogBuilder builder;
-    protected ViewPanel viewPanel;
+    private ViewPanel viewPanel;
 
     public CreateViewNodeAction() {
         super("Create View");
@@ -37,17 +37,14 @@ public class CreateViewNodeAction extends CreateNodeAction {
         builder.setTitle("New View");
         builder.setPreferredFocusComponent(viewPanel);
         builder.setCenterPanel(viewPanel);
-        builder.setOkOperation(new Runnable() {
-            @Override
-            public void run() {
-                ViewController viewController = ViewControllerImpl.getInstance();
-                Package<View> viewPackage = (Package<View>) jcgProjectComponent.currentSelectedNodeUserObject();
+        builder.setOkOperation(() -> {
+            ViewController viewController = ViewControllerImpl.getInstance();
+            Package<View> viewPackage = (Package<View>) jcgProjectComponent.currentSelectedNodeUserObject();
 
-                viewController.createView(viewPanel.getViewDto(), viewPackage);
+            viewController.createView(viewPanel.getViewDto(), viewPackage);
 
-                marshalingAndReloadTree();
-                builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
-            }
+            marshalingAndReloadTree();
+            builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });
         builder.showModal(true);
     }

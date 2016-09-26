@@ -13,6 +13,7 @@ import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -73,7 +74,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
 
         public static ORMTechnologyHandlerType valueOfs(String type) {
             for (ORMTechnologyHandlerType code : ORMTechnologyHandlerType.values()) {
-                if (type == code.getDescription()) {
+                if (Objects.equals(type, code.getDescription())) {
                     return code;
                 }
             }

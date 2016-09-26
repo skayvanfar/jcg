@@ -3,6 +3,8 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.project.*;
 
+import java.util.Objects;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/7/2016
  */
@@ -32,7 +34,7 @@ public enum ViewType implements EnumBase {
 
     public static ViewType valueOf(Integer type) {
         for (ViewType code : ViewType.values()) {
-            if (type == code.getValue()) {
+            if (Objects.equals(type, code.getValue())) {
                 return code;
             }
         }
