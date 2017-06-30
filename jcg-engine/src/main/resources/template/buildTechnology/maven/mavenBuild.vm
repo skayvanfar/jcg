@@ -9,6 +9,12 @@
     <version>$version</version>
     <packaging>$packaging</packaging>
 
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <!-- Servlet + JSP + JSTL -->
         <dependency>
@@ -125,12 +131,6 @@
         #end
     #end
     </dependencies>
-
-
-    <properties>
-
-    </properties>
-
 
     <build>
         <plugins>
