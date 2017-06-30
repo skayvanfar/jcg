@@ -33,9 +33,8 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
         securityDir.mkdirs();
     }
 
-
     @Override
-    protected Config createJavaConfig() { // TODO: 6/4/16 must created later
+    protected Config createConfigFiles() throws Exception {
         /*Template springSecurityConfigTemplate = new Template("Spring Security Config Initializer", "securityTechnology/springSecurity/config/SecurityConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "SecurityConfig.java");
         springSecurityConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
@@ -46,13 +45,8 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
     }
 
     @Override
-    protected Config createXmlConfig() {
-        return null; // TODO: 5/22/2016
-    }
-
-    @Override
-    protected void createAnnotationDIBaseFiles() { // TODO: 6/4/16 must created later
-/*        //////////////////////
+    protected void createBaseFiles() throws Exception {
+        /*        //////////////////////
         Template springSecurityInitializerTemplate = new Template("Spring Security Initializer", "securityTechnology/springSecurity/SpringSecurityInitializer.vm",
                 securityDir.getAbsolutePath() + File.separator  + "SpringSecurityInitializer.java");
         springSecurityInitializerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage() + "." + "security");
@@ -71,13 +65,5 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
         projectUserDetailsServiceTemplate.mergeTemplate();*/
     }
 
-    @Override
-    protected void createXmlDIBaseFiles() {
-        // TODO: 5/22/2016
-    }
 
-    @Override
-    protected void createJavaDIBaseFiles() {
-        // TODO: 5/22/2016
-    }
 }

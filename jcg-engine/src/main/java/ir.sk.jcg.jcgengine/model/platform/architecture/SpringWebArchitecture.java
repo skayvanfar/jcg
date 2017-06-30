@@ -86,8 +86,8 @@ class SpringWebArchitecture extends Architecture {
         applicationContext.setTestResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestResourcesPath());
         applicationContext.setJavaWithPackagePrefixPath(ApplicationContext.getInstance().getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/'));
 
-        applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
-        applicationContext.setSpringDIType(springHandler.getSpringDIType());
+     //   applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
+      //  applicationContext.setSpringDIType(springHandler.getSpringDIType());
 
         applicationContext.setBuildTechnologyHandler(buildTechnology); // TODO: 6/20/2016
         applicationContext.setOrmTechnologyHandler(ormTechnology);

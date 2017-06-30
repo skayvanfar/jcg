@@ -27,13 +27,13 @@ public class HibernateHandler extends ORMTechnologyHandler {
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
 
-    @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
+    @Prop(label = "Mapping Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
     private MappingTypeEnum mappingTypeEnum;
 
     // Replace type code with state/strategy
     private MappingType mappingType;
 
-    @Prop(label = "Hibernate Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, editable = true, required = true)
+    @Prop(label = "Hibernate Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
     private HibernateConfigType hibernateConfigType;
 
     private File serviceDirFile;
@@ -120,41 +120,26 @@ public class HibernateHandler extends ORMTechnologyHandler {
     }
 
     @Override
-    protected Config createJavaConfig() {
+    protected Config createConfigFiles() throws Exception {
         Config config = null;
 
         Template propertiesConfigTemplate = new Template("Properties Config", "ormTechnology/hibernate/config/persistence.properties.vm",
                 ApplicationContext.getInstance().getMainResourcesPath() + File.separator + "persistence.properties");
         propertiesConfigTemplate.putReference("schemaName", ApplicationContext.getInstance().getProjectName());
         propertiesConfigTemplate.mergeTemplate();
-        switch (hibernateConfigType) {
-            case SPRING_CONFIG:
-                Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                        + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
-                SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
-                SpringConfigTemplate.putReference("modelPackage", ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir); // TODO: 6/4/2016 model
-                SpringConfigTemplate.mergeTemplate();
-                config = new Config("DataConfig");
-                break;
-            case CFG_XML:
-                // TODO: 5/20/2016
-                break;
-            case ORM:
-                // TODO: 5/20/2016
-                break;
-            default:
-        }
+
+        Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
+        SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
+        SpringConfigTemplate.putReference("modelPackage", ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir); // TODO: 6/4/2016 model
+        SpringConfigTemplate.mergeTemplate();
+        config = new Config("DataConfig");
+
         return config;
     }
 
     @Override
-    protected Config createXmlConfig() {
-        return null; // TODO: 5/20/2016
-    }
-
-    @Override
-    protected void createAnnotationDIBaseFiles() {
-
+    protected void createBaseFiles() throws Exception {
         Template genericDAOTemplate = new Template("Generic DAO", "ormTechnology/hibernate/dao/GenericDAO.vm", interfaceDAOCommonDirFile.getAbsolutePath() + "/GenericDAO.java");
         genericDAOTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAOCommonDir);
         genericDAOTemplate.mergeTemplate();
@@ -183,16 +168,6 @@ public class HibernateHandler extends ORMTechnologyHandler {
         genericManagerImplTemplate.putReference("imports", genericManagerImplTemplateImportSet);
         genericManagerImplTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + implServiceDir);
         genericManagerImplTemplate.mergeTemplate();
-    }
-
-    @Override
-    protected void createXmlDIBaseFiles() {
-
-    }
-
-    @Override
-    protected void createJavaDIBaseFiles() {
-
     }
 
 }

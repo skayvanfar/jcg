@@ -51,39 +51,9 @@ public abstract class TechnologyHandler implements Presentable {
 
     protected abstract void createDirectories() throws Exception;
 
-    private Config createConfigFiles() throws Exception {
-        Config config = null;
-        switch (ApplicationContext.getInstance().getSpringConfigType()) {
-            case JAVA:
-                config = createJavaConfig();
-                break;
-            case XML_FILE:
-                config = createXmlConfig();
-                break;
-        }
-        return config;
-    }
+    protected abstract Config createConfigFiles() throws Exception;
 
-    protected abstract Config createJavaConfig();
-    protected abstract Config createXmlConfig();
-
-    protected  void createBaseFiles() throws Exception {
-        switch (ApplicationContext.getInstance().getSpringDIType()) {
-            case ANNOTATION:
-                createAnnotationDIBaseFiles();
-                break;
-            case XML_FILE:
-                createXmlDIBaseFiles();
-                break;
-            case JAVA:
-                createJavaDIBaseFiles();
-                break;
-        }
-    }
-
-    protected abstract void createAnnotationDIBaseFiles();
-    protected abstract void createXmlDIBaseFiles();
-    protected abstract void createJavaDIBaseFiles();
+    protected abstract void createBaseFiles() throws Exception;
 
     public List<Dependency> getDependencies() {
         return dependencies;

@@ -88,7 +88,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     }
 
     @Override
-    protected Config createJavaConfig() {
+    protected Config createConfigFiles() throws Exception {
         Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
         SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
@@ -99,12 +99,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     }
 
     @Override
-    protected Config createXmlConfig() {
-        return null; // TODO: 5/22/2016
-    }
-
-    @Override
-    protected void createAnnotationDIBaseFiles() {
+    protected void createBaseFiles() throws Exception {
         ///////////////////////////////////////////
         Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/controller/BaseController.vm",
                 controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java");
@@ -148,16 +143,6 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         Template logoutTemplate = new Template("Logout", "mvcTechnology/SpringMVC/view/tiles/templates/logout.vm",
                 tilesTemplateFile.getAbsolutePath() + File.separator + "logout.jsp");
         logoutTemplate.mergeTemplate();
-    }
-
-    @Override
-    protected void createXmlDIBaseFiles() {
-        // TODO: 5/22/2016
-    }
-
-    @Override
-    protected void createJavaDIBaseFiles() {
-        // TODO: 5/22/2016
     }
 
     @Override

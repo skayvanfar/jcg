@@ -86,29 +86,10 @@ public class MavenHandler extends BuildTechnologyHandler {
     }
 
     @Override
-    protected Config createJavaConfig() {
-        return null;
+    protected Config createConfigFiles() throws Exception {
+        return null; // TODO: 6/30/2017 must return null object
     }
 
-    @Override
-    protected Config createXmlConfig() {
-        return null;
-    }
-
-    @Override
-    protected void createAnnotationDIBaseFiles() {
-
-    }
-
-    @Override
-    protected void createXmlDIBaseFiles() {
-        createBuildFile();
-    }
-
-    @Override
-    protected void createJavaDIBaseFiles() {
-        createBuildFile();
-    }
 
     @Override
     protected void createBuildFile() {

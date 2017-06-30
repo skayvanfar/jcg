@@ -26,10 +26,10 @@ public class SpringHandler extends TechnologyHandler {
     private static final String ASPECTJ_GROUP_ID = "org.aspectj";
     private static final String ASPECTJ_VERSION = "1.8.1";
 
-    @Prop(label = "Spring Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, required = true)
+    @Prop(label = "Spring Config Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
     private SpringConfigType springConfigType;
 
-    @Prop(label = "Spring DI Type", componentType = ComponentType.NON_EDITABLE_COMBO, editableInWizard = true, required = true)
+    @Prop(label = "Spring DI Type", componentType = ComponentType.NON_EDITABLE_COMBO, required = true)
     private SpringDIType springDIType;
 
     private List<Config> configs = new ArrayList<>(); // TODO: 5/21/2016 may not need
@@ -75,7 +75,6 @@ public class SpringHandler extends TechnologyHandler {
     @XmlAttribute
     public void setSpringDIType(SpringDIType springDIType) {
         this.springDIType = springDIType;
-    //    ApplicationContext.getInstance().setSpringDIType(springDIType);
     }
 
     @Override
@@ -95,11 +94,11 @@ public class SpringHandler extends TechnologyHandler {
     }
 
     @Override
-    protected Config createJavaConfig() {
+    protected Config createConfigFiles() throws Exception {
         Template springAppConfigTemplate = new Template("AppConfig", "architecture/springWebArchitecture/javaConfig/AppConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/AppConfig.java");
         springAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
-     //   springAppConfigTemplate.putReference("securityConfig", securityConfig.toString()); // TODO: 6/4/16 for now
+        //   springAppConfigTemplate.putReference("securityConfig", securityConfig.toString()); // TODO: 6/4/16 for now
         springAppConfigTemplate.putReference("configs", configs);
         springAppConfigTemplate.mergeTemplate();
 
@@ -149,31 +148,11 @@ public class SpringHandler extends TechnologyHandler {
     }
 
     @Override
-    protected Config createXmlConfig() {
-        return null; // TODO: 5/22/2016
-    }
-
-    @Override
     protected void createBaseFiles() throws Exception {
         Template SpringAppConfigTemplate = new Template("SpringApplicationContext", "architecture/springWebArchitecture/SpringApplicationContext.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + "/SpringApplicationContext.java");
         SpringAppConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
         SpringAppConfigTemplate.mergeTemplate();
-    }
-
-    @Override
-    protected void createAnnotationDIBaseFiles() {
-
-    }
-
-    @Override
-    protected void createXmlDIBaseFiles() {
-
-    }
-
-    @Override
-    protected void createJavaDIBaseFiles() {
-
     }
 
     /**
