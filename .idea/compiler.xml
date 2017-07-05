@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="jcg-common" />
         <module name="jcg-engine" />
+        <module name="jcg-language-parser-toolkit" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="jcg" target="1.8" />
       <module name="jcg-common" target="1.8" />
       <module name="jcg-engine" target="1.8" />
+      <module name="jcg-language-parser-toolkit" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
