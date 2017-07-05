@@ -60,7 +60,7 @@ public class GenerateCodeAction extends NodeAction {
                 if (modelElement instanceof Entity) {
                     implElements = codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
                 } else if (modelElement instanceof View) {
-
+                    implElements = codeGenerator.addView((View) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
                 } else {
 
                 }

@@ -412,7 +412,7 @@ public static class FileTypes {
     public static final Icon XsdFile = IconLoader.getIcon("/fileTypes/xsdFile.png"); // 16x16
 
 }
-    public static final Icon Frame_background = IconLoader.getIcon("/frame_background.png"); // 256x256
+  //  public static final Icon Frame_background = IconLoader.getIcon("/frame_background.png"); // 256x256
 
 public static class General {
     public static final Icon Add = IconLoader.getIcon("/general/add.png"); // 16x16

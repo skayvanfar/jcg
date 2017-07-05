@@ -1,9 +1,7 @@
 package ir.sk.jcg.jcgengine;
 
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
-import ir.sk.jcg.jcgengine.model.project.Project;
+import ir.sk.jcg.jcgengine.model.project.*;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
@@ -48,5 +46,7 @@ public interface CodeGenerator {
     /**
      * Add Entity to project and generate implementation
      * */
-    List<ModelImplElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
+    List<? extends ImplElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
+
+    List<? extends ImplElement> addView(View view, String packagePath); // TODO: 6/30/2017 better change to addBusiness // TODO: 6/30/2017 maybe packagePath not needed.
 }

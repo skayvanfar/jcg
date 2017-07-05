@@ -10,9 +10,12 @@ import java.util.Objects;
  */
 public enum ViewType implements EnumBase {
 
+    // type 1 view: Separated views
     Display(0, "Display"),
     SEARCH(1, "Search"),
-    CREATE_EDIT(2, "Create / Edit");
+    CREATE_EDIT(2, "Create-Edit"),
+    // type 2 view: All in one
+    Editable_Display(3, "Display-Search-Edit");
 
     private Integer value;
     private String desc;
@@ -56,6 +59,8 @@ public enum ViewType implements EnumBase {
             case CREATE_EDIT:
                 view = new CreateEditView();
                 break;
+            case Editable_Display:
+                view = new CreateEditView(); // TODO: 6/30/2017 must replaced
         }
         return view;
     }

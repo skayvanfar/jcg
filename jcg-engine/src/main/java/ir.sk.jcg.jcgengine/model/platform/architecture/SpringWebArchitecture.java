@@ -10,6 +10,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnology
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
+import ir.sk.jcg.jcgengine.model.project.View;
 
 import javax.xml.bind.annotation.*;
 import java.io.File;
@@ -32,10 +33,6 @@ class SpringWebArchitecture extends Architecture {
     @Override
     public TechnologyHandlerType[] getTechnologyTypes() {
         return technologyHandlerTypes;
-    }
-
-    @Override
-    public void createView() {
     }
 
     @Override
@@ -115,7 +112,7 @@ class SpringWebArchitecture extends Architecture {
     }
 
     @Override
-    public List<ModelImplElement> createEntity(Entity entity, String packagePath) {
+    public List<? extends ModelImplElement> createEntity(Entity entity, String packagePath) {
         List<ModelImplElement> modelImplElements = new ArrayList<>();
         ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
@@ -132,6 +129,13 @@ class SpringWebArchitecture extends Architecture {
             modelImplElements.addAll(controllerModelImplElements);
 
         return modelImplElements;
+    }
+
+    @Override
+    public List<? extends ModelImplElement> createView(View view, String packagePath) {
+        List<ModelImplElement> modelImplElements = new ArrayList<>();
+        MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
+        return null; // TODO: 6/30/2017
     }
 
     public TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change

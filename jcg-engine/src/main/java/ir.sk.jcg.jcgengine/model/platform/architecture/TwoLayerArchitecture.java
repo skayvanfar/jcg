@@ -67,10 +67,10 @@ public abstract class TwoLayerArchitecture extends Architecture {
 //        return null;
 //    }
 
-    @Override
+    /*@Override
     public void createView() {
 
-    }
+    }*/
 
     @Override
     public void createBaseArchitecture() {
