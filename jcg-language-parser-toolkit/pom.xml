@@ -11,5 +11,12 @@
 
     <artifactId>jcg-language-parser-toolkit</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>ir.sk.jcg</groupId>
+            <artifactId>jcg-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
