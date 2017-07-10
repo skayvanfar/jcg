@@ -40,7 +40,7 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
 
     /**
      * Call After wizard complete.
-     * */
+     */
     @Override
     public void onWizardFinished() throws CommitStepException {
 
@@ -62,7 +62,7 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
 
     /**
      * Validate input fields.
-     * */
+     */
     @Override
     public boolean validate() throws ConfigurationException {
         if (StringUtil.isEmptyOrSpaces(getComponent().getProjectNameField().getText())) {
@@ -89,14 +89,14 @@ public class JcgBaseInfoWizardStep extends ModuleWizardStep {
     }
 
     /**
-    * Call After step complete.
-    * */
+     * Call After step complete.
+     */
     @Override
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);
 
         CodeGenerator codeGenerator = new JavaCodeGenerator();
-        Project jcgProject= codeGenerator.getJcgProject();
+        Project jcgProject = codeGenerator.getJcgProject();
         jcgProject.setName(getComponent().getProjectNameField().getText());
         jcgProject.setPersianName(getComponent().getProjectPersianNameField().getText());
         jcgProject.setPackagePrefix(getComponent().getPackagePrefixField().getText()); // TODO: 5/3/2016 must validate and correction

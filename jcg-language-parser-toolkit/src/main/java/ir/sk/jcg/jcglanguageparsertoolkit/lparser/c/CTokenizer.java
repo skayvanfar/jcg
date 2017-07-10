@@ -26,7 +26,7 @@ public class CTokenizer extends Tokenizer {
 
         // Iterate through the text
         int index = 0;
-        while ( index < text.length()) {
+        while (index < text.length()) {
             // Dispatch the character to the current state
             if (state.next(text.charAt(index)))
                 index++;
@@ -46,7 +46,8 @@ public class CTokenizer extends Tokenizer {
     }*/
 
     /**
-     # This adds a token to the token list.
+     * # This adds a token to the token list.
+     *
      * @param token - The new token
      */
     public void addToken(Token token) {

@@ -29,7 +29,7 @@ public class RowEditorModel {
     }
 
     public TableCellEditor getEditor(int row) {
-        return  dataMap.get(row);
+        return dataMap.get(row);
     }
 
     public void clearEditors() {

@@ -5,12 +5,17 @@ import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
+ * Present an Entity in domain
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -30,24 +35,13 @@ public class Entity extends SchemaItem implements Serializable {
 
     private Id id;
 
-    private List<Property> properties;
+    private Set<Property> properties;
 
-    private List<Relationship> relationships;
+    private Set<Relationship> relationships;
 
     public Entity() {
-        properties = new ArrayList<>();
-        relationships = new ArrayList<>();
-    }
-
-    /**
-     * Copy constructor
-     * */
-    public Entity(Entity anotherEntity) {
-        super(anotherEntity);
-        this.packagePath = anotherEntity.getPackagePath();
-        this.id = anotherEntity.getId();
-        this.properties = anotherEntity.getProperties();
-        this.relationships = anotherEntity.getRelationships();
+        properties = new HashSet<>();
+        relationships = new HashSet<>();
     }
 
     public String getPackagePath() {
@@ -104,12 +98,12 @@ public class Entity extends SchemaItem implements Serializable {
         this.id = id;
     }
 
-    public List<Property> getProperties() {
+    public Set<Property> getProperties() {
         return properties;
     }
 
     @XmlElement(name = "property")
-    public void setProperties(List<Property> properties) {
+    public void setProperties(Set<Property> properties) {
         this.properties = properties;
     }
 
@@ -124,17 +118,18 @@ public class Entity extends SchemaItem implements Serializable {
             properties.remove(property);
     }
 
-    public List<Relationship> getRelationships() {
+    public Set<Relationship> getRelationships() {
         return relationships;
     }
 
     @XmlElement(name = "relation")
-    public void setRelationships(List<Relationship> relationships) {
+    public void setRelationships(Set<Relationship> relationships) {
         this.relationships = relationships;
     }
 
     /**
      * Add Relation to Entity. If Relation exist, override that.
+     *
      * @param relationship
      */
     public void addRelation(Relationship relationship) {
@@ -150,6 +145,7 @@ public class Entity extends SchemaItem implements Serializable {
 
     /**
      * Specify exist a Relation with specifeid relationship name
+     *
      * @param relationshipName
      * @return
      */

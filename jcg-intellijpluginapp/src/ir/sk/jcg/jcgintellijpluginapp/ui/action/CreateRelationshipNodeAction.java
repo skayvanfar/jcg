@@ -3,7 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.RelationshipController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.RelationshipControllerImpl;

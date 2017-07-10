@@ -13,8 +13,8 @@ import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
-import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertiesPanel;
+import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,36 +76,39 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     /**
      * initGenerator
-     * */
+     */
     private void initGenerator() throws JAXBException {
         codeGenerator = new JavaCodeGenerator();
         codeGenerator.setBaseDir(intellijProject.getBasePath());
 
-     //   if(isCorrectJcgProject()) { // When project is Jcg project
-            boolean result = codeGenerator.unmarshalling();
-            if (result) {
-                logger.info("Unmarshaling finished correctly.");// TODO: 4/28/2016
-            }
-     //   }
+        //   if(isCorrectJcgProject()) { // When project is Jcg project
+        boolean result = codeGenerator.unmarshalling();
+        if (result) {
+            logger.info("Unmarshaling finished correctly.");// TODO: 4/28/2016
+        }
+        //   }
     }
 
     /**
      * initToolWindows
-     * */
+     */
     private void initToolWindows() {
         // init jcgTree tool window
         jcgTreeToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Tree", false, ToolWindowAnchor.LEFT);
         jcgTreeToolWindow.setTitle("JCG Tree");
         jcgTreeToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
-        if (!jcgTreeToolWindow.isVisible()) jcgTreeToolWindow.show(() -> {});
+        if (!jcgTreeToolWindow.isVisible()) jcgTreeToolWindow.show(() -> {
+        });
         addContentToJcgTreeToolWindow();
 
         // init jcgProperties tool window
         jcgPropertiesToolWindow = ToolWindowManager.getInstance(intellijProject).registerToolWindow("JCG Properties", false, ToolWindowAnchor.LEFT, true);
         jcgPropertiesToolWindow.setTitle("JCG Properties");
         jcgPropertiesToolWindow.setIcon(JcgIcons.JcgTreeToolWindow); // TODO: 4/28/2016 must change
-        jcgPropertiesToolWindow.setSplitMode(true, () -> {});
-        if (!jcgPropertiesToolWindow.isVisible()) jcgPropertiesToolWindow.show(() -> {});
+        jcgPropertiesToolWindow.setSplitMode(true, () -> {
+        });
+        if (!jcgPropertiesToolWindow.isVisible()) jcgPropertiesToolWindow.show(() -> {
+        });
         addContentToJcgPropertiesToolWindow();
     }
 
@@ -115,7 +118,8 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
         treePanel.setTreeSelectionChangedListener(userObject -> {
             propertiesPanel.setPresentable((Presentable) userObject);
             if (!jcgPropertiesToolWindow.isVisible())
-                jcgPropertiesToolWindow.show(() -> {});
+                jcgPropertiesToolWindow.show(() -> {
+                });
         });
         final Content content = contentManager.getFactory().createContent(treePanel, null, false);
         contentManager.removeAllContents(true);
@@ -127,7 +131,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     private void addContentToJcgPropertiesToolWindow() {
         final ContentManager contentManager = jcgPropertiesToolWindow.getContentManager();
-     //   propertiesPanel = new PropertiesPanel(codeGenerator.getJcgProject());
+        //   propertiesPanel = new PropertiesPanel(codeGenerator.getJcgProject());
         propertiesPanel = new PropertiesPanel();
         final Content content = contentManager.getFactory().createContent(propertiesPanel, null, false);
         contentManager.removeAllContents(true);
@@ -139,7 +143,7 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     /**
      * check to see jcg project is exist and valid
-     * */
+     */
     private boolean isCorrectJcgProject() { // TODO: 5/6/2016 must check existence and correction of project and architectur xml files
         File baseXmlDir = new File(intellijProject.getBasePath() + File.separator + CodeGenerator.JCG_CONFIG_DIR);
         return (baseXmlDir.exists());
@@ -177,35 +181,35 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     /**
      * Facade
-     * */
+     */
     public Object currentSelectedNodeUserObject() {
         return treePanel.currentSelectedNodeUserObject();
     }
 
     /**
      * Facade
-     * */
+     */
     public Object parentSelectedNodeUserObject() {
         return treePanel.parentSelectedNodeUserObject();
     }
 
     /**
      * Set properties
-     * */
+     */
     public void setPropertiesModifiedElement() {
         propertiesPanel.setModifiedElement();
     }
 
     /**
      * Facade
-     * */
+     */
     public TreePath getLeadTreePath() {
         return treePanel.getLeadTreePath();
     }
 
     /**
      * Facade
-     * */
+     */
     public List<Entity> findEntitiesByUserObject() {
         return treePanel.findEntitiesByUserObject();
     }

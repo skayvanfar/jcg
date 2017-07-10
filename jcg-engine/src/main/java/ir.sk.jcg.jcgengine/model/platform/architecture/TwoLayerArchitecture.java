@@ -1,7 +1,7 @@
 package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
-import ir.sk.jcg.jcgengine.model.platform.technology.*;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 

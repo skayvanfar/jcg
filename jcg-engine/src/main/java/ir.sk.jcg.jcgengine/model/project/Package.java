@@ -3,12 +3,17 @@ package ir.sk.jcg.jcgengine.model.project;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.model.project.exception.ElementBeforeExistException;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
+ * Present a package that can have list of other packages and elements
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/29/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -17,26 +22,20 @@ import java.util.List;
 public class Package<T extends SchemaItem> extends ModelElement implements Packageable<T>, Serializable {
 
 
-    private List<Package<T>> packages = new ArrayList<>();
-    private List<T> elements = new ArrayList<>();
+    private Set<Package<T>> packages = new HashSet<>();
+    private Set<T> elements = new HashSet<>();
 
-    public Package() {}
-
-    /**
-     * Copy constructor
-     * */
-    public Package(Package<T> anotherPackage) {
-        super(anotherPackage);
-        this.packages = anotherPackage.getPackages();
-        this.elements = anotherPackage.getElements();
+    public Package() {
     }
 
-    public List<Package<T>> getPackages() {
+    @Override
+    public Set<Package<T>> getPackages() {
         return packages;
     }
 
+    @Override
     @XmlElement(name = "package")
-    public void setPackages(List<Package<T>> packages) {
+    public void setPackages(Set<Package<T>> packages) {
         this.packages = packages;
     }
 
@@ -48,17 +47,23 @@ public class Package<T extends SchemaItem> extends ModelElement implements Packa
     }
 
     @Override
+    public void addPackageAll(Set<? extends Package<T>> packages) {
+        for (Package<T> tPackage : packages)
+            addPackage(tPackage);
+    }
+
+    @Override
     public void removePackage(Package<T> t) {
         if (packages.contains(t))
             packages.remove(t);
     }
 
-    public List<T> getElements() {
+    public Set<T> getElements() {
         return elements;
     }
 
     @XmlElement(name = "element")
-    public void setElements(List<T> elements) {
+    public void setElements(Set<T> elements) {
         this.elements = elements;
     }
 

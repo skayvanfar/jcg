@@ -1,8 +1,8 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ public abstract class MappingType {
 
     /**
      * Static factory method
+     *
      * @param mappingTypeEnum
      * @return
      */
@@ -23,12 +24,12 @@ public abstract class MappingType {
             case HBM_XML_FILE:
                 return new HbmXmlFileMappingType();
             default:
-              //  return null; // TODO: 9/21/2016 use null object
+                //  return null; // TODO: 9/21/2016 use null object
                 throw new IllegalArgumentException("Incorrect type code value");
         }
     }
 
     abstract EntityClass createEntityClass(HibernateHandler hibernateHandler, Entity entity, String packagePath);
 
-    abstract List<ModelImplElement> createDao(HibernateHandler hibernateHandler, Entity entity);
+    abstract List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity);
 }

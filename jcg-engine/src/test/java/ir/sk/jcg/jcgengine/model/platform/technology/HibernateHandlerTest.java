@@ -14,7 +14,7 @@ public class HibernateHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-     //   hibernateHandler = new HibernateHandler("hibernate1", new File("C:/"), null);
+        //   hibernateHandler = new HibernateHandler("hibernate1", new File("C:/"), null);
     }
 
     @After

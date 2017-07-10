@@ -1,16 +1,8 @@
 package ir.sk.jcg.jcglanguageparsertoolkit.lparser.java;
 
-import ir.sk.jcg.jcgcommon.util.FileUtils;
-import ir.sk.jcg.jcglanguageparsertoolkit.lparser.c.CTokenizer;
-import ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer.Tokenizer;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.InputStream;
-
-import static org.junit.Assert.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/5/2017.

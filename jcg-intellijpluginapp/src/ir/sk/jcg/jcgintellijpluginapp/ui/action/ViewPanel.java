@@ -19,7 +19,7 @@ class ViewPanel extends JPanel {
 
     private ViewDto viewDto;
 
-    private JTextField  viewNameTextField;
+    private JTextField viewNameTextField;
     private ComboBox<Entity> targetEntityComboBox;
     private ComboBox<ViewType> viewTypeComboBox;
 

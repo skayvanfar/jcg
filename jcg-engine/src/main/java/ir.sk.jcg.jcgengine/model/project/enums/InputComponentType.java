@@ -1,7 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
-import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Component;
 import ir.sk.jcg.jcgengine.model.project.component.LabelComponent;
 import ir.sk.jcg.jcgengine.model.project.component.TextAreaComponent;
 import ir.sk.jcg.jcgengine.model.project.component.TextFieldComponent;

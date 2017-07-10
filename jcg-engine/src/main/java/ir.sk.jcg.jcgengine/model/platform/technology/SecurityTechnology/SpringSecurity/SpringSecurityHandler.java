@@ -29,7 +29,7 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
 
     @Override
     protected void createDirectories() throws Exception {
-        securityDir = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"security");
+        securityDir = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator + "security");
         securityDir.mkdirs();
     }
 

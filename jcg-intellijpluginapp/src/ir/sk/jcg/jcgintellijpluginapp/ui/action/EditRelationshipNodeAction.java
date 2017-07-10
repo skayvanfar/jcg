@@ -16,7 +16,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 /**
  * Created by saeed on 6/1/16.
  */
-public class EditRelationshipNodeAction extends NodeAction  {
+public class EditRelationshipNodeAction extends NodeAction {
 
     private DialogBuilder builder;
     private RelationshipPanel relationshipPanel;
@@ -67,7 +67,6 @@ public class EditRelationshipNodeAction extends NodeAction  {
         }
         builder.showModal(true);
     }
-
 
 
 }

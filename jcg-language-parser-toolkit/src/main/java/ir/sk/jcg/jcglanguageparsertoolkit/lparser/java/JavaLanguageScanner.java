@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcglanguageparsertoolkit.lparser.java;
 
-import ir.sk.jcg.jcglanguageparsertoolkit.lparser.scanner.*;
+import ir.sk.jcg.jcglanguageparsertoolkit.lparser.scanner.LanguageClass;
+import ir.sk.jcg.jcglanguageparsertoolkit.lparser.scanner.LanguageScanner;
 import ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer.CodeToken;
 import ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer.CommentToken;
 import ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer.Token;
@@ -9,7 +10,6 @@ import ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer.TokenStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
 
 /**
  * This is the JavaLanguageScanner specialized to read prototypes for Java
@@ -23,16 +23,16 @@ public class JavaLanguageScanner implements LanguageScanner {
     private List<LanguageClass> classes;
 
     // The prototype class to build
-  //  private Prototype prototype;
+    //  private Prototype prototype;
 
     // The class to use when building variables
- //   private ClassVariable classVariable;
+    //   private ClassVariable classVariable;
 
     // The class to use when building classes
-  //  private LanguageClass languageClass;
+    //  private LanguageClass languageClass;
 
     // The class to use when build JavaDoc objects
- //   private JavaDoc javaDoc;
+    //   private JavaDoc javaDoc;
 
 
     public JavaLanguageScanner() {
@@ -47,6 +47,7 @@ public class JavaLanguageScanner implements LanguageScanner {
      * This method reads the stream of tokens built by a Tokenizer
      * and fills the @prototypes array with the prototypes
      * that are found.
+     *
      * @param tokenStream An array of tokens built by a Tokenizer
      */
 
@@ -55,7 +56,7 @@ public class JavaLanguageScanner implements LanguageScanner {
         for (int i = 0; i < tokenStream.size(); i++) {
             Token token = tokenStream.get(i);
             if (token.toString().equals("class") || token.toString().equals("interface")) {
-                parseClass( tokenStream, i, null);
+                parseClass(tokenStream, i, null);
                 break;
             }
         }
@@ -65,9 +66,9 @@ public class JavaLanguageScanner implements LanguageScanner {
      * Parses the class and adds it to the class list.
      *
      * @param tokenStream - The full array of tokens in the file
-     * @param start - The start of our class definition
-     * @param baseClass - The name of the base class (null if none)
-    */
+     * @param start       - The start of our class definition
+     * @param baseClass   - The name of the base class (null if none)
+     */
     protected int parseClass(TokenStream tokenStream, int start, String baseClass) {
 
         // Build the class and add it
@@ -82,7 +83,7 @@ public class JavaLanguageScanner implements LanguageScanner {
                     tokenStream.get(index).toString().equals("private") ||
                     tokenStream.get(index).toString().equals("class"))
                 break;
-            index --;
+            index--;
         }
 
         // Add the comments to the class
@@ -105,7 +106,7 @@ public class JavaLanguageScanner implements LanguageScanner {
         boolean holdUntilReturn = false;
 
         // Look through each token
-        for (int i = start; i< tokenStream.size(); i++) {
+        for (int i = start; i < tokenStream.size(); i++) {
             Token token = tokenStream.get(i);
 
             // Handles parsing the class name
@@ -128,7 +129,7 @@ public class JavaLanguageScanner implements LanguageScanner {
             // For imports we wait until a return
             if (holdUntilReturn) {
                 if (token.toString().startsWith("\n"))
-                    holdUntilReturn =false;
+                    holdUntilReturn = false;
                 continue;
             }
 
@@ -208,7 +209,7 @@ public class JavaLanguageScanner implements LanguageScanner {
 
         // Here we are backtracking from the end to find the name
         // within the declaration
-        while (codeTokenStream.size() > 0 ) {
+        while (codeTokenStream.size() > 0) {
             Token frag = codeTokenStream.get(codeTokenStream.size());
             if (frag.toString().equals("["))
                 array = true;
@@ -273,8 +274,8 @@ public class JavaLanguageScanner implements LanguageScanner {
                 // Look for the end of the arguments, when
                 // we find it we dump out of the iterator
                 if (curArg.size() > 0)
-                 //   args.add(curArg); // TODO: 7/6/2017
-                curArg = new TokenStream();
+                    //   args.add(curArg); // TODO: 7/6/2017
+                    curArg = new TokenStream();
                 break;
             } else if (!inArguments) {
                 // If we are not in the arguments then
@@ -285,8 +286,8 @@ public class JavaLanguageScanner implements LanguageScanner {
                 // We are in the arguments, so look for
                 // the comments that seperate the arguments
                 if (token.toString() == ",") {
-                 //   if (curArg.size() > 0)
-                     //   args.add(curArg); // TODO: 7/6/2017
+                    //   if (curArg.size() > 0)
+                    //   args.add(curArg); // TODO: 7/6/2017
                     curArg = new TokenStream();
                 } else
                     curArg.add(token);
@@ -295,7 +296,7 @@ public class JavaLanguageScanner implements LanguageScanner {
 
         // Have the base class build the new prototype
         JavaPrototype proto = new JavaPrototype();
-      //  proto.setJavadocClass(); // TODO: 7/6/2017
+        //  proto.setJavadocClass(); // TODO: 7/6/2017
 
         // Parse the starting declaration and set the prototype
         Map<String, String> startDecl = parseDeclaration(start);
@@ -308,8 +309,8 @@ public class JavaLanguageScanner implements LanguageScanner {
 
         // Parse the arguments and add them to the prototype
         for (Token token : args) {
-           // Map<String, String> argDecl = parseDeclaration(token); // TODO: 7/6/2017
-          //  proto.addArgument(argDecl.get("name"), argDecl.get("type"));
+            // Map<String, String> argDecl = parseDeclaration(token); // TODO: 7/6/2017
+            //  proto.addArgument(argDecl.get("name"), argDecl.get("type"));
         }
 
         // TODO: 7/6/2017
@@ -322,7 +323,7 @@ public class JavaLanguageScanner implements LanguageScanner {
      * Parses a variable declaration and adds it to the class
      *
      * @param languageClass - The class to which we add the variable declaration
-     * @param codefrag - The code fragmen that describes the variable
+     * @param codefrag      - The code fragmen that describes the variable
      */
     protected void parseVariable(LanguageClass languageClass, TokenStream codefrag) {
         // TODO: 7/8/2017

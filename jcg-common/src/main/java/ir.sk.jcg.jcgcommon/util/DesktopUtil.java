@@ -13,12 +13,14 @@ public class DesktopUtil {
     public static void openDefaultBrowser(URI uri) throws IOException {
         if (Desktop.isDesktopSupported()) {
             Desktop.getDesktop().browse(uri);
-        } else {}
+        } else {
+        }
     }
 
     public static void openDefaultMailClient(URI uri) throws IOException {
         if (Desktop.isDesktopSupported()) {
             Desktop.getDesktop().mail(uri);
-        } else {}
+        } else {
+        }
     }
 }

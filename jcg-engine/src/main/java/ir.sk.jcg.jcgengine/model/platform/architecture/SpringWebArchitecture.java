@@ -2,17 +2,19 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.ApplicationContext;
-import ir.sk.jcg.jcgengine.model.platform.technology.*;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.BusinessImplElement;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.model.project.View;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +24,11 @@ import java.util.List;
  */
 @XmlRootElement // TODO: 4/27/2016 must remove from this class
 @Editable
-class SpringWebArchitecture extends Architecture {
+public class SpringWebArchitecture extends Architecture {
 
     private static TechnologyHandlerType[] technologyHandlerTypes = {TechnologyHandlerType.BUILD_TECHNOLOGY, TechnologyHandlerType.ORM_TECHNOLOGY, TechnologyHandlerType.MVC_TECHNOLOGY};
 
-    SpringWebArchitecture() {
+    public SpringWebArchitecture() {
         super("Spring Web Architecture");
     }
 
@@ -54,7 +56,7 @@ class SpringWebArchitecture extends Architecture {
             Config mvcTechnologyConfig = mvcTechnology.createBasePlatform();
 
             List<Config> allConfigs = new ArrayList<>();
-            
+
             allConfigs.add(ormTechnologyConfig);
             allConfigs.add(mvcTechnologyConfig);
             springHandler.addTechnologiesConfig(allConfigs, securityTechnologyHandlerConfig);
@@ -83,8 +85,8 @@ class SpringWebArchitecture extends Architecture {
         applicationContext.setTestResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestResourcesPath());
         applicationContext.setJavaWithPackagePrefixPath(ApplicationContext.getInstance().getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/'));
 
-     //   applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
-      //  applicationContext.setSpringDIType(springHandler.getSpringDIType());
+        //   applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
+        //  applicationContext.setSpringDIType(springHandler.getSpringDIType());
 
         applicationContext.setBuildTechnologyHandler(buildTechnology); // TODO: 6/20/2016
         applicationContext.setOrmTechnologyHandler(ormTechnology);
@@ -95,7 +97,7 @@ class SpringWebArchitecture extends Architecture {
 
     /**
      * Create base dirs
-     * */
+     */
     private void createBasePackage() {
 
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
@@ -112,28 +114,28 @@ class SpringWebArchitecture extends Architecture {
     }
 
     @Override
-    public List<? extends ModelImplElement> createEntity(Entity entity, String packagePath) {
-        List<ModelImplElement> modelImplElements = new ArrayList<>();
+    public List<DomainImplElement> createEntity(Entity entity, String packagePath) {
+        List<DomainImplElement> domainImplElements = new ArrayList<>();
         ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
 
         EntityClass entityClassElement = ormTechnologyHandler.createEntityClass(entity, packagePath);
         if (entityClassElement != null)
-            modelImplElements.add(entityClassElement);
+            domainImplElements.add(entityClassElement);
         // TODO: 7/9/2016 must create Dao ,Service and Controller for specefic Entities as Regards Relationship between Daoes
-        List<ModelImplElement> daoModelImplElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
-        if (daoModelImplElements != null)
-            modelImplElements.addAll(daoModelImplElements);
-        List<ModelImplElement> controllerModelImplElements = mvcTechnologyHandler.createController(entity); // TODO: 6/20/2016 may better not use Controller hear
-        if (controllerModelImplElements != null)
-            modelImplElements.addAll(controllerModelImplElements);
+        List<DomainImplElement> daoDomainImplElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
+        if (daoDomainImplElements != null)
+            domainImplElements.addAll(daoDomainImplElements);
+        List<DomainImplElement> controllerDomainImplElements = mvcTechnologyHandler.createController(entity); // TODO: 6/20/2016 may better not use Controller hear
+        if (controllerDomainImplElements != null)
+            domainImplElements.addAll(controllerDomainImplElements);
 
-        return modelImplElements;
+        return domainImplElements;
     }
 
     @Override
-    public List<? extends ModelImplElement> createView(View view, String packagePath) {
-        List<ModelImplElement> modelImplElements = new ArrayList<>();
+    public List<BusinessImplElement> createView(View view, String packagePath) {
+        List<DomainImplElement> domainImplElements = new ArrayList<>();
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
         return null; // TODO: 6/30/2017
     }

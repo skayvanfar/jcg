@@ -5,10 +5,10 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgcommon.util.SerializationUtil;
 import ir.sk.jcg.jcgengine.model.Presentable;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.editor.RowEditorModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.renderer.RowRendererModel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel.PropertiesTableModel;
@@ -58,7 +58,7 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
 
     /**
      * Set new PropertiesTableModel for PropertyTable with clone object of element
-     * */
+     */
     public void setPresentable(Presentable presentable) {
         realPresentable = presentable;
 
@@ -86,10 +86,10 @@ public class PropertiesPanel extends SimpleToolWindowPanel {
 
     /**
      * Save copy Element to real element
-     * */
+     */
     public void setModifiedElement() {
         java.util.List<Field> fields = ReflectionUtil.findFields(realPresentable.getClass(), Prop.class);
-        for(Field field : fields) {
+        for (Field field : fields) {
             field.setAccessible(true);
             try {
                 String name = field.getName();

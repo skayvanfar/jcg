@@ -65,7 +65,7 @@ public class SpringHandler extends TechnologyHandler {
     @XmlAttribute
     public void setSpringConfigType(SpringConfigType springConfigType) {
         this.springConfigType = springConfigType;
-  //      ApplicationContext.getInstance().setSpringConfigType(springConfigType);
+        //      ApplicationContext.getInstance().setSpringConfigType(springConfigType);
     }
 
     public SpringDIType getSpringDIType() {
@@ -108,7 +108,7 @@ public class SpringHandler extends TechnologyHandler {
 
     /**
      * Create commons files
-     * */
+     */
     private void createCommonFiles() {
         /////////////////////////////////////
         Template localizedEnumTemplate = new Template("LocalizedEnum", "commons/localization/LocalizedEnum.vm",
@@ -157,7 +157,7 @@ public class SpringHandler extends TechnologyHandler {
 
     /**
      * Add Configs with Spring IOC
-    * */
+     */
     public void addTechnologiesConfig(List<Config> configs, Config securityConfig) {
         this.configs.addAll(configs);
         this.securityConfig = securityConfig;

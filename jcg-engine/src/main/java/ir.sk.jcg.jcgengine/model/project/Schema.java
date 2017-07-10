@@ -6,36 +6,32 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
+ * This class is a view to Specific part of project
+ * and can have list of SchemaItem
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/29/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class Schema<T extends SchemaItem> extends ModelElement implements Packageable<T>, Serializable {
 
-
-    private List<Package<T>> packages = new ArrayList<>();
+    // Each Schema maybe has many package of specified SchemaItem
+    private Set<Package<T>> packages = new HashSet<>();
 
     @Override
-    public List<Package<T>> getPackages() {
+    public Set<Package<T>> getPackages() {
         return packages;
     }
 
-    public Schema() {}
-
-    /**
-     * Copy constructor
-     * */
-    public Schema(Schema<T> anotherSchema) {
-        super(anotherSchema);
-        this.packages = anotherSchema.getPackages();
+    public Schema() {
     }
 
     @Override
     @XmlElement(name = "package")
-    public void setPackages(List<Package<T>> packages) {
+    public void setPackages(Set<Package<T>> packages) {
         this.packages = packages;
     }
 
@@ -44,6 +40,12 @@ public class Schema<T extends SchemaItem> extends ModelElement implements Packag
         if (packages.contains(t))
             throw new ElementBeforeExistException(t);
         packages.add(t);
+    }
+
+    @Override
+    public void addPackageAll(Set<? extends Package<T>> packages) {
+        for (Package<T> tPackage : packages)
+            addPackage(tPackage);
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 
 /**
  * contain information about a property of object
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/10/2016
  */
 public class PropertyInfo {
@@ -29,7 +30,7 @@ public class PropertyInfo {
         private Object object;
         private Class<?> typeClass;
 
-        public Builder(String name, Object value,boolean editable, boolean editableInWizard, boolean required) {
+        public Builder(String name, Object value, boolean editable, boolean editableInWizard, boolean required) {
             this.name = name;
             this.value = value;
             this.editable = editable;
@@ -41,18 +42,22 @@ public class PropertyInfo {
             label = val;
             return this;
         }
+
         public Builder componentType(ComponentType val) {
             componentType = val;
             return this;
         }
+
         public Builder values(String[] val) {
             values = val;
             return this;
         }
+
         public Builder object(Object val) {
             object = val;
             return this;
         }
+
         public Builder typeClass(Class<?> val) {
             typeClass = val;
             return this;
@@ -86,7 +91,7 @@ public class PropertyInfo {
         this.typeClass = builder.typeClass;
     }
 
-    public PropertyInfo(String name, String label,Object value, boolean editable, boolean required, ComponentType componentType, String[] values, Object object, Class<?> typeClass) {
+    public PropertyInfo(String name, String label, Object value, boolean editable, boolean required, ComponentType componentType, String[] values, Object object, Class<?> typeClass) {
         this.name = name;
         this.label = label;
         this.value = value;
@@ -181,12 +186,12 @@ public class PropertyInfo {
 
     /**
      * @param field of property
-     * @param o owner of property
+     * @param o     owner of property
      * @throws IllegalAccessException if o not have that property
      */
     public PropertyInfo(Field field, Object o) throws IllegalAccessException {
         field.setAccessible(true);
-        Object value =  field.get(o);
+        Object value = field.get(o);
         Prop prop = field.getAnnotation(Prop.class);
 
         this.name = field.getName();

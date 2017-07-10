@@ -7,23 +7,22 @@ import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.velocity.Template;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @Editable
 public class SpringMVCHandler extends MVCTechnologyHandler {
+
+    private final ResourceBundle messagesBundle = java.util.ResourceBundle.getBundle("messages/messages");
 
     private static final String SPRING_GROUP_ID = "org.springframework";
     private static final String SPRING_VERSION = "4.0.3.RELEASE";
@@ -42,8 +41,8 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     public SpringMVCHandler() {
         super("Spring Technology MVC");
 
-        this.controllerDir = "controller";
-        this.resourcesDir = "resources";
+        this.controllerDir = messagesBundle.getString("springMVCHandler.controllerDir");
+        this.resourcesDir = messagesBundle.getString("springMVCHandler.resourcesDir");
 
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-webmvc", SPRING_VERSION, "compile"));
         dependencies.add(new Dependency("org.apache.tiles", "tiles-extras", "3.0.3", "compile"));
@@ -51,7 +50,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createDirectories() {
-      //  String baseSpringMVCDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
+        //  String baseSpringMVCDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
         controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
         controllerDirFile.mkdirs();
 
@@ -90,7 +89,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     @Override
     protected Config createConfigFiles() throws Exception {
         Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator +"WebConfig.java");
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator + "WebConfig.java");
         SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
         SpringWebConfigTemplate.putReference("basePackage", ApplicationContext.getInstance().getPackagePrefix()); // TODO: 5/20/2016
 
@@ -146,12 +145,12 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     }
 
     @Override
-    public List<ModelImplElement> createController(Entity entity) {
-        List<ModelImplElement> modelImplElements = new ArrayList<>();
+    public List<DomainImplElement> createController(Entity entity) {
+        List<DomainImplElement> domainImplElements = new ArrayList<>();
 
         /////////////////////////////////////////////
         Template controllerTemplate = new Template("Controller", "mvcTechnology/SpringMVC/controller/Controller.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                + File.separator + controllerDir + File.separator  + entity.getName() + "Controller.java");
+                + File.separator + controllerDir + File.separator + entity.getName() + "Controller.java");
         controllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + controllerDir);
         controllerTemplate.putReference("entity", entity);
         // imports
@@ -163,9 +162,9 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
         EntityClass controllerClass = new EntityClass();
         controllerClass.setName(entity.getName() + "Controller.java");
-        modelImplElements.add(controllerClass);
+        domainImplElements.add(controllerClass);
 
 
-        return modelImplElements; // TODO: 5/8/2016
+        return domainImplElements; // TODO: 5/8/2016
     }
 }

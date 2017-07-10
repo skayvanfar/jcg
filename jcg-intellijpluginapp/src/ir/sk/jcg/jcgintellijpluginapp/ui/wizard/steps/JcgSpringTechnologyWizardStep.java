@@ -45,7 +45,7 @@ public class JcgSpringTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Validate input fields.
-     * */
+     */
     @Override
     public boolean validate() throws ConfigurationException {
         jcgCustomTechnologyWizardStepPanel.setComponents();
@@ -58,7 +58,7 @@ public class JcgSpringTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After enter to this step.
-     * */
+     */
     @Override
     public void updateStep() {
         Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
@@ -87,7 +87,7 @@ public class JcgSpringTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After wizard complete on all type of modules.
-     * */
+     */
     @Override
     public void onWizardFinished() throws CommitStepException {
 

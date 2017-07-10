@@ -34,7 +34,7 @@ public enum ArchitectureType implements EnumBase {
         Architecture architecture = null;
         switch (value) {
             case 0:
-           //     architecture = new TwoLayerArchitecture();
+                //     architecture = new TwoLayerArchitecture();
                 break;
             case 1:
                 architecture = new SpringWebArchitecture();

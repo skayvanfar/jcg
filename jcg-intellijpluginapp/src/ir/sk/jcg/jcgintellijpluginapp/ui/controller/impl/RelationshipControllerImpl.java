@@ -18,7 +18,9 @@ public class RelationshipControllerImpl implements RelationshipController {
 
     private static final RelationshipController INSTANCE = new RelationshipControllerImpl();
 
-    public static RelationshipController getInstance() { return INSTANCE; }
+    public static RelationshipController getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void createRelationship(RelationShipDto relationShipDto, Entity entity) {
@@ -56,6 +58,7 @@ public class RelationshipControllerImpl implements RelationshipController {
 
     /**
      * Create tail RelationShip If RelationSHipDto is bidirectional
+     *
      * @param relationShipDto
      * @param parentEntity
      * @return Relationship or null if not needed
@@ -141,7 +144,7 @@ public class RelationshipControllerImpl implements RelationshipController {
 
     /**
      * Initialize a relationship with two side of that
-     * */
+     */
     @Override
     public RelationShipDto initRelationshipDto(Relationship headSideRelationship) {
         Relationship tailSideRelationship = headSideRelationship.getOtherSideRelationship();

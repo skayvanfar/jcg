@@ -5,5 +5,6 @@ package ir.sk.jcg.jcgengine.model.platform.pattern;
  */
 public interface Pattern {
     void doOperation();
+
     void createBase();
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * This class stores all of the information about a prototype
-
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/5/2017.
  */
 public class Prototype {
@@ -91,6 +91,7 @@ public class Prototype {
 
     /**
      * Adds an argument to the ordered argument list
+     *
      * @param name - The name of the argument
      * @param type - The type of the argument
      */
@@ -103,6 +104,7 @@ public class Prototype {
 
     /**
      * Adds a comment to the prototype
+     *
      * @param text - The text of the comment
      */
     public void addComment(String text) {

@@ -9,7 +9,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +49,6 @@ class JcgTechnologyWizardStepPanel extends JPanel {
             x++;
         }
     }
-
 
 
     @Override

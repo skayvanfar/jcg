@@ -4,8 +4,6 @@ import org.apache.velocity.VelocityContext;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016

@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * A generic adapter for use custom mapping enums to xml
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/20/2016
  */
 public class EnumAdapter<T extends Enum> extends XmlAdapter<String, T> {
@@ -24,7 +25,7 @@ public class EnumAdapter<T extends Enum> extends XmlAdapter<String, T> {
     @SuppressWarnings("unchecked")
     public T unmarshal(String v) throws Exception {
 
-        if(v == null || v.isEmpty())
+        if (v == null || v.isEmpty())
             return defaultValue;
 
         return (T) Enum.valueOf(clazz, v);
@@ -32,7 +33,7 @@ public class EnumAdapter<T extends Enum> extends XmlAdapter<String, T> {
 
     @Override
     public String marshal(T v) throws Exception {
-        if(v == defaultValue)
+        if (v == defaultValue)
             return null;
         return v.name();
     }

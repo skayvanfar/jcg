@@ -1,18 +1,19 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.tableModel;
 
 import com.intellij.openapi.ui.ComboBox;
-import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
-import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
+import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
-import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
+import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertyTable;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/5/2016
@@ -35,7 +36,7 @@ public class PropertiesTableModel extends AbstractTableModel {
         List<Field> fields = ReflectionUtil.findFields(presentable.getClass(), Prop.class);
 
         PropertyInfo propertyInfo = null;
-        for(Field field : fields) {
+        for (Field field : fields) {
             try {
                 propertyInfo = new PropertyInfo(field, presentable);
             } catch (IllegalAccessException e) {
@@ -55,7 +56,7 @@ public class PropertiesTableModel extends AbstractTableModel {
 
     /**
      * Set value of selected property in element
-     * */
+     */
     private void setPropertyField(PropertyInfo propertyInfo) {
         try {
             Field field = ReflectionUtil.getFieldByName(propertyInfo.getName(), presentable);
@@ -91,9 +92,9 @@ public class PropertiesTableModel extends AbstractTableModel {
             /////////////////////////// TODO: 5/5/2016 must create another method
             switch (componentType) {
                 case NON_EDITABLE_COMBO:
-                    Class<? extends Enum> classType= (Class<? extends Enum>) propertyInfo.getTypeClass();
+                    Class<? extends Enum> classType = (Class<? extends Enum>) propertyInfo.getTypeClass();
                     Enum[] possibleValues = classType.getEnumConstants();
-                   // JComboBox comboBox = new JComboBox();
+                    // JComboBox comboBox = new JComboBox();
                     ComboBox<Enum<?>> comboBox = new ComboBox<>();
                     for (Enum<?> e : possibleValues) {
                         comboBox.addItem(e);
@@ -187,7 +188,7 @@ public class PropertiesTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
             return false;
-        } else if(editable && propertyInfos.get(rowIndex).isEditable()) {
+        } else if (editable && propertyInfos.get(rowIndex).isEditable()) {
             return true;
         }
         return false;

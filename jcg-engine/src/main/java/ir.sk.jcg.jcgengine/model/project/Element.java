@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 /**
+ * This class is base class for elements that belong to a project
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/2/2016
  */
 @XmlRootElement
@@ -20,17 +22,9 @@ public abstract class Element implements Presentable, Serializable {
     protected Element() {
     }
 
-    /**
-     * Copy constructor
-     * */
-    public Element(Element anotherElement) {
-        this.name = anotherElement.getName(); // you can access
-    }
-
     public String getName() {
         return name;
     }
-
 
     @XmlAttribute(required = true)
     @XmlID

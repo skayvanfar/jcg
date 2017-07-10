@@ -38,7 +38,7 @@ public class XMLParser {
 
         jaxbUnmarshaller.setEventHandler(
                 new ValidationEventHandler() {
-                    public boolean handleEvent(ValidationEvent event ) {
+                    public boolean handleEvent(ValidationEvent event) {
                         System.out.println("exception");
                         throw new RuntimeException(event.getMessage(),
                                 event.getLinkedException());

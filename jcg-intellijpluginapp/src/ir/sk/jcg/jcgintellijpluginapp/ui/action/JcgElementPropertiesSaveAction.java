@@ -2,7 +2,8 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import ir.sk.jcg.jcgengine.model.Presentable;
-import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.Relationship;
 import ir.sk.jcg.jcgengine.model.project.enums.CardinalityType;
 import ir.sk.jcg.jcgengine.model.project.enums.DirectionalityType;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
@@ -37,7 +38,7 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
 
     /**
      * Do stuffs need tob done before save like bidirectional relationships
-     * */
+     */
     private void doBeforeSave(JcgProjectComponent jcgProjectComponent) {
         Presentable presentable = (Presentable) jcgProjectComponent.currentSelectedNodeUserObject();
 

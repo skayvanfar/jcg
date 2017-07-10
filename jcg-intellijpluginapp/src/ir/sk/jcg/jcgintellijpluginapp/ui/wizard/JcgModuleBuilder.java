@@ -36,7 +36,7 @@ public class JcgModuleBuilder extends ModuleBuilder {
 
     private Project intellijProject;
 
-  //  private CodeGenerator codeGenerator = new JavaCodeGenerator(); // TODO: 4/26/2016 must go to constructor may be
+    //  private CodeGenerator codeGenerator = new JavaCodeGenerator(); // TODO: 4/26/2016 must go to constructor may be
 
     private CodeGenerator codeGenerator;
 
@@ -87,7 +87,7 @@ public class JcgModuleBuilder extends ModuleBuilder {
 
     /**
      * Call after project created (After onWizardFinished() on steps)
-     * */
+     */
     @Override
     public void setupRootModel(ModifiableRootModel modifiableRootModel) throws ConfigurationException {
         final Project project = modifiableRootModel.getProject();
@@ -152,7 +152,7 @@ public class JcgModuleBuilder extends ModuleBuilder {
 
     @Override
     public String getDescription() {
-         return bundle.getString("jcgModuleBuilder.mainPanel.description");
+        return bundle.getString("jcgModuleBuilder.mainPanel.description");
     }
 
 }

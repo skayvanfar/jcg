@@ -12,7 +12,7 @@ class CreateNewNodePanel extends JPanel {
 
     private String nodeType;
 
-    private JTextField  nodeNameTextField;
+    private JTextField nodeNameTextField;
 
 
     CreateNewNodePanel(String nodeType) {

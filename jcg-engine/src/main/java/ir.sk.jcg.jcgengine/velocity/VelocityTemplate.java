@@ -1,15 +1,13 @@
 package ir.sk.jcg.jcgengine.velocity;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -28,29 +26,29 @@ public class VelocityTemplate {
     static {
         try {
             velocityEngine = new VelocityEngine();
-         //   String velocityConf = ClassLoader.getSystemResource("/media/saeed/win/E/template/velocity.properties").getPath();
-         //   System.out.printf("ve  " + velocityConf);
+            //   String velocityConf = ClassLoader.getSystemResource("/media/saeed/win/E/template/velocity.properties").getPath();
+            //   System.out.printf("ve  " + velocityConf);
             velocityEngine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
             velocityEngine.setProperty("directive.set.null.allowed", "true");
 
             //    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-       //     velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        //    velocityEngine.setProperty("resource.loader","file,class,jar");
-        //    File file = new File("/resources/template");
-        //    URL res = VelocityTemplate.class.getClassLoader().getResource("/template.oRMTechnology");
-          //  File f = new File(res.getFile());
+            //     velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+            //    velocityEngine.setProperty("resource.loader","file,class,jar");
+            //    File file = new File("/resources/template");
+            //    URL res = VelocityTemplate.class.getClassLoader().getResource("/template.oRMTechnology");
+            //  File f = new File(res.getFile());
 
-         //  URL resource = VelocityTemplate.class.getResource("../mavenBuild.vm");
-         //  File f = Paths.get(resource.toURI()).toFile();
+            //  URL resource = VelocityTemplate.class.getResource("../mavenBuild.vm");
+            //  File f = Paths.get(resource.toURI()).toFile();
 
 
-      //      System.out.println("absolutePath:::::::::::::          "     + "E:/template/buildTechnology/maven");
+            //      System.out.println("absolutePath:::::::::::::          "     + "E:/template/buildTechnology/maven");
             velocityEngine.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, "E:\\template"); // TODO: 4/22/2016 must chnage to relative
             velocityEngine.setProperty(RuntimeConstants.VM_LIBRARY_AUTORELOAD, true);
 
 
             velocityEngine.init();
-        //       Velocity.init(velocityConf);
+            //       Velocity.init(velocityConf);
             //      logger.info("Velocity init success", velocityConf);
             logger.info("Velocity init success");
         } catch (Exception e) {
@@ -61,6 +59,7 @@ public class VelocityTemplate {
 
     /**
      * mergeTemplate
+     *
      * @param template
      * @param outfileName
      * @param context
@@ -87,6 +86,7 @@ public class VelocityTemplate {
 
     /**
      * buildTemplate
+     *
      * @param templateFile
      * @return template
      * @throws Exception
@@ -110,6 +110,7 @@ public class VelocityTemplate {
 
     /**
      * mergeTemplate
+     *
      * @param templateName
      * @param outfileName
      * @param context

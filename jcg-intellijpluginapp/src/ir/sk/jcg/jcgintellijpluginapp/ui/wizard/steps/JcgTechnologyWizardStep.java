@@ -37,7 +37,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
         this.jcgModuleBuilder = jcgModuleBuilder;
         this.wizardContext = wizardContext;
 
-    //    jcgTechnologyWizardStepPanel = new JcgTechnologyWizardStepPanel();
+        //    jcgTechnologyWizardStepPanel = new JcgTechnologyWizardStepPanel();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After wizard complete on all type of modules.
-     * */
+     */
     @Override
     public void onWizardFinished() throws CommitStepException {
         CodeGenerator codeGenerator = jcgModuleBuilder.getCodeGenerator();
@@ -86,7 +86,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Validate input fields.
-     * */
+     */
     @Override
     public boolean validate() throws ConfigurationException {
 //        if (StringUtil.isEmptyOrSpaces(getComponent().getProjectNameField().getText())) {
@@ -110,10 +110,10 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After enter to this step.
-     * */
+     */
     @Override
     public void updateStep() {
-    //    jcgTechnologyWizardStepPanel = new JcgTechnologyWizardStepPanel();
+        //    jcgTechnologyWizardStepPanel = new JcgTechnologyWizardStepPanel();
 
         Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
         jcgTechnologyWizardStepPanel.initComponents(architecture.getTechnologyTypes());
@@ -128,7 +128,7 @@ public class JcgTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After step complete.
-     * */
+     */
     @Override
     public void updateDataModel() {
         wizardContext.setProjectBuilder(jcgModuleBuilder);

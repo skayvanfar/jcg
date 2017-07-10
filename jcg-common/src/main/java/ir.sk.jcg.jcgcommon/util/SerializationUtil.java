@@ -25,8 +25,7 @@ public class SerializationUtil {
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
             return ois.readObject();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -34,9 +33,10 @@ public class SerializationUtil {
 
     /**
      * Create a shallow clone on object that and fill properties that has specified annotation
-     * @param object real Object
+     *
+     * @param object          real Object
      * @param annotationClass specified annotation
-     * */
+     */
     public static Object shallowCloneByAnnotation(Object object, Class<? extends Annotation> annotationClass) throws IllegalAccessException, InstantiationException, NoSuchFieldException {
         Object clonedObject = object.getClass().newInstance();
         java.util.List<Field> objectFields = ReflectionUtil.findFields(object.getClass(), Prop.class);

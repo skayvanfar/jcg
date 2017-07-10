@@ -7,12 +7,12 @@ package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
  */
 public class MavenId {
 
- //   @Nullable
- //   private final String myGroupId;
- //   @Nullable
-  //  private final String myArtifactId;
- //   @Nullable
- //   private final String myVersion;
+    //   @Nullable
+    //   private final String myGroupId;
+    //   @Nullable
+    //  private final String myArtifactId;
+    //   @Nullable
+    //   private final String myVersion;
 
 //    public MavenId(@Nullable String groupId, @Nullable String artifactId, @Nullable String version) {
 //        myGroupId = groupId;

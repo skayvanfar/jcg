@@ -2,20 +2,21 @@ package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
+import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.velocity.Template;
-import ir.sk.jcg.jcgengine.model.platform.Dependency;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
@@ -23,6 +24,8 @@ import java.util.Set;
  */
 @Editable
 public class HibernateHandler extends ORMTechnologyHandler {
+
+    private final ResourceBundle messagesBundle = java.util.ResourceBundle.getBundle("messages/messages");
 
     private static final String HIBERNATE_GROUP_ID = "org.hibernate";
     private static final String HIBERNATE_VERSION = "4.3.7.Final";
@@ -48,14 +51,14 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     public HibernateHandler() {
         super("Hibernate");
-        this.interfaceDAODir = "dao";
-        this.implDAODir = "dao.impl";
-        this.interfaceDAOCommonDir = "dao.common";
-        this.implDAOCommonDir = "dao.common.impl";
-        this.modelDir = "model";
+        this.interfaceDAODir = messagesBundle.getString("hibernateHandler.interfaceDAODir");
+        this.implDAODir = messagesBundle.getString("hibernateHandler.implDAODir");
+        this.interfaceDAOCommonDir = messagesBundle.getString("hibernateHandler.interfaceDAOCommonDir");
+        this.implDAOCommonDir = messagesBundle.getString("hibernateHandler.implDAOCommonDir");
+        this.modelDir = messagesBundle.getString("hibernateHandler.modelDir");
 
-        this.serviceDir = "service";
-        this.implServiceDir = "service.impl";
+        this.serviceDir = messagesBundle.getString("hibernateHandler.serviceDir");
+        this.implServiceDir = messagesBundle.getString("hibernateHandler.implServiceDir");
 
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
@@ -89,15 +92,15 @@ public class HibernateHandler extends ORMTechnologyHandler {
     }
 
     @Override
-    public List<ModelImplElement> createDao(Entity entity) {
+    public List<DomainImplElement> createDao(Entity entity) {
         return mappingType.createDao(this, entity);
     }
 
     @Override
     protected void createDirectories() {
-     //   String baseHibernateDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
+        //   String baseHibernateDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
 
-     //   entityMainPackage = new File(baseDir + modelDir);
+        //   entityMainPackage = new File(baseDir + modelDir);
 
         File modelDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + modelDir);
         modelDirFile.mkdirs();
@@ -129,7 +132,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
         propertiesConfigTemplate.mergeTemplate();
 
         Template SpringConfigTemplate = new Template("Spring Config", "ormTechnology/hibernate/config/DataConfig.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "DataConfig.java");
+                + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator + "DataConfig.java");
         SpringConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
         SpringConfigTemplate.putReference("modelPackage", ApplicationContext.getInstance().getPackagePrefix() + "." + modelDir); // TODO: 6/4/2016 model
         SpringConfigTemplate.mergeTemplate();

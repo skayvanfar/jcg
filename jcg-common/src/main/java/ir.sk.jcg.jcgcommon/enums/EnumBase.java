@@ -5,5 +5,6 @@ package ir.sk.jcg.jcgcommon.enums;
  */
 public interface EnumBase {
     Integer getValue();
+
     String getDescription();
 }

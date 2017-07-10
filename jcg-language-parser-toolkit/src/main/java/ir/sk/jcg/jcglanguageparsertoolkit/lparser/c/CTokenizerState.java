@@ -8,7 +8,7 @@ package ir.sk.jcg.jcglanguageparsertoolkit.lparser.c;
 public abstract class CTokenizerState {
 
     // Special characters that are found as delineators in C
-    public static final String[] specials = {";",",",":","{","}","(",")","[","]","%","+","-","*","."};
+    public static final String[] specials = {";", ",", ":", "{", "}", "(", ")", "[", "]", "%", "+", "-", "*", "."};
 
     protected CTokenizer cTokenizer;
 
@@ -21,6 +21,7 @@ public abstract class CTokenizerState {
      * character from the stream.  Returning true means that the
      * parsing should continue to the next character.  Returning false
      * means the parser should stay on the current character.
+     *
      * @param ch - The character
      * @return
      */

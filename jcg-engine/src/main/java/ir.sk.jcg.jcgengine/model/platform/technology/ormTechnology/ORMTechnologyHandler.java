@@ -7,8 +7,8 @@ import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.HibernateHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -23,7 +23,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
 
     public abstract EntityClass createEntityClass(Entity entity, String packagePath);
 
-    public abstract List<ModelImplElement> createDao(Entity entity); // TODO: 5/8/2016 List<EntityElement>
+    public abstract List<DomainImplElement> createDao(Entity entity); // TODO: 5/8/2016 List<EntityElement>
 
     public enum ORMTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
@@ -47,7 +47,6 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         public String getDescription() {
             return desc;
         }
-
 
 
 //        public ORMTechnologyHandler architectureBuilder(File baseDir) {
@@ -89,7 +88,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
                     ormTechnology = new HibernateHandler(); // Todo: must redefine
                     break;
                 case 1:
-              //      ormTechnology = new MavenHandler(, null, null); // Todo: must create
+                    //      ormTechnology = new MavenHandler(, null, null); // Todo: must create
                     break;
             }
             return ormTechnology;
@@ -176,6 +175,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
     public void setImplServiceDir(String implServiceDir) {
         this.implServiceDir = implServiceDir;
     }
+
     public String getDatabaseSchemaName() {
         return databaseSchemaName;
     }

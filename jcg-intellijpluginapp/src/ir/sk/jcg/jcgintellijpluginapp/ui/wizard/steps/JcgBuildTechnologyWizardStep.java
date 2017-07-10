@@ -4,12 +4,12 @@ import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.ide.util.projectWizard.WizardContext;
 import com.intellij.ide.wizard.CommitStepException;
 import com.intellij.openapi.options.ConfigurationException;
-import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
-import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgcommon.PropertyView.PropertyInfo;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgcommon.util.ReflectionUtil;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
+import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
 import ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder;
 import org.slf4j.Logger;
@@ -47,7 +47,7 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Validate input fields.
-     * */
+     */
     @Override
     public boolean validate() throws ConfigurationException {
         jcgCustomTechnologyWizardStepPanel.setComponents();
@@ -60,7 +60,7 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After enter to this step.
-     * */
+     */
     @Override
     public void updateStep() {
         Architecture architecture = jcgModuleBuilder.getCodeGenerator().getArchitecture();
@@ -94,7 +94,7 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After wizard complete on all type of modules.
-     * */
+     */
     @Override
     public void onWizardFinished() throws CommitStepException {
 
@@ -102,10 +102,10 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
 
     /**
      * Call After step complete.
-     * */
+     */
     @Override
     public void updateDataModel() {
-   //     wizardContext.setProjectBuilder(jcgModuleBuilder);
+        //     wizardContext.setProjectBuilder(jcgModuleBuilder);
         for (PropertyInfo propertyInfo : jcgCustomTechnologyWizardStepPanel.getPropertyInfos()) {
 
             try {

@@ -2,7 +2,8 @@ package ir.sk.jcg.jcgcommon.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/5/2016
@@ -39,7 +40,7 @@ public class ReflectionUtil {
     }
 
     public static void printFieldNames(Object obj) {
-        for(Field field : obj.getClass().getFields()) {
+        for (Field field : obj.getClass().getFields()) {
             System.out.println(field.getName());
         }
     }

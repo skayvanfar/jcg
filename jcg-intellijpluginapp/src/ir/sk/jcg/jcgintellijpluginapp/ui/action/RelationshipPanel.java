@@ -12,6 +12,7 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.dto.RelationShipDto;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
@@ -22,13 +23,13 @@ class RelationshipPanel extends JPanel { // TODO: 5/12/2016 may better extends C
 
     private RelationShipDto relationShipDto;
 
-    private JTextField  relationNameTextField;
+    private JTextField relationNameTextField;
     private ComboBox<CardinalityType> cardinalityComboBox;
     private ComboBox<DirectionalityType> directionalityComboBox;
     private ComboBox<Entity> targetEntityComboBox;
     private ComboBox<CollectionType> collectionComboBox;
 
-    public RelationshipPanel(java.util.List<Entity> entities) {
+    public RelationshipPanel(Set<Entity> entities) {
         relationShipDto = new RelationShipDto();
         setLayout(new GridLayoutManager(5, 2, JBUI.emptyInsets(), -1, -1));
 

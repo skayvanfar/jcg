@@ -1,7 +1,5 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.dto;
 
-import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Relationship;
 import ir.sk.jcg.jcgengine.model.project.enums.CardinalityType;
@@ -12,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * This class contaion information about a relationship with its sides.
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 6/1/2016.
  */
 public class RelationShipDto implements Serializable {

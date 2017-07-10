@@ -5,6 +5,7 @@ import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -13,6 +14,8 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
 public class Project extends ModelElement implements Serializable {
+
+    private final ResourceBundle messagesBundle = java.util.ResourceBundle.getBundle("messages/messages");
 
     // base info
     @Prop(label = "Persian Name", editable = true, required = true)
@@ -32,22 +35,9 @@ public class Project extends ModelElement implements Serializable {
 
     public Project() {
         super();
-        entitiesSchema.setName("Domain Schema");
-        viewsSchema.setName("Business Schema");
-        configPackage = "Configuration";
-    }
-
-    /**
-     * Copy constructor
-     * */
-    public Project(Project anotherProject) {
-        super(anotherProject);
-        this.persianName = anotherProject.getPersianName();
-        this.packagePrefix = anotherProject.getPackagePrefix();
-        this.configPackage = anotherProject.getConfigPackage();
-        this.tableNamePattern = anotherProject.getTableNamePattern();
-        this.entitiesSchema = anotherProject.getEntitiesSchema();
-        this.viewsSchema = anotherProject.getViewsSchema();
+        entitiesSchema.setName(messagesBundle.getString("project.entitiesSchema.name"));
+        viewsSchema.setName(messagesBundle.getString("project.viewsSchema.name"));
+        configPackage = messagesBundle.getString("project.configPackage");
     }
 
     public String getPersianName() {

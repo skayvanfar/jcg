@@ -1,7 +1,6 @@
 package ir.sk.jcg.jcgengine.model.project;
 
 import ir.sk.jcg.jcgcommon.PropertyView.ComponentType;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.model.project.enums.CardinalityType;
 import ir.sk.jcg.jcgengine.model.project.enums.CollectionType;
@@ -32,7 +31,7 @@ public class Relationship extends ModelElement implements Serializable {
     @Prop(label = "Is Head")
     private boolean head;
 
-  //  @Prop(label = "Target Entity", required = true) // TODO: 5/12/2016 may required = true not needed
+    //  @Prop(label = "Target Entity", required = true) // TODO: 5/12/2016 may required = true not needed
     private Entity targetEntity;
 
     @Prop(label = "Collection Type", componentType = ComponentType.NON_EDITABLE_COMBO, editable = true, required = true)

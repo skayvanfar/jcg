@@ -3,16 +3,16 @@ package ir.sk.jcg.jcgengine;
 
 import ir.sk.jcg.jcgcommon.util.XMLParser;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Schema;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Project;
+import ir.sk.jcg.jcgengine.model.project.Schema;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -31,13 +31,13 @@ public class JavaCodeGeneratorTest {
         Package<Entity> entityPackage = new Package<>();
         entityPackage.setName("com");
 
-        List<Entity> entities = new ArrayList<>();
+        Set<Entity> entities = new HashSet<>();
         Entity entity = new Entity();
         entity.setName("Person");
         entities.add(entity);
 
         entityPackage.setElements(entities);
-        List<Package<Entity>> packageList = new ArrayList<>();
+        Set<Package<Entity>> packageList = new HashSet<>();
         packageList.add(entityPackage);
         entitySchema.setPackages(packageList);
         project.setEntitiesSchema(entitySchema);
@@ -53,7 +53,7 @@ public class JavaCodeGeneratorTest {
 
     @Test
     public void marshallingArchitecture() throws Exception {
-      //  codeGenerator.marshallingArchitecture();
+        //  codeGenerator.marshallingArchitecture();
     }
 
     @Test
@@ -122,7 +122,7 @@ public class JavaCodeGeneratorTest {
 
     @Test
     public void addEntity() throws Exception {
-   //     codeGenerator.addEntity(null);
+        //     codeGenerator.addEntity(null);
     }
 
 }

@@ -45,7 +45,7 @@ public class CustomNodePanel extends JPanel {
 
     public void setComponents() {
         for (PropertyInfo propertyInfo : componentsMap.keySet()) {
-            JComponent component =componentsMap.get(propertyInfo);
+            JComponent component = componentsMap.get(propertyInfo);
             if (component instanceof JTextField)
                 propertyInfo.setValue(((JTextField) component).getText());
             else if (component instanceof ComboBox)

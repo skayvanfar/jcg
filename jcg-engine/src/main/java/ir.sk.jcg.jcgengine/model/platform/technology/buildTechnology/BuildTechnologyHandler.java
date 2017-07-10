@@ -3,9 +3,9 @@ package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
-import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerEnumBase;
+import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven.MavenHandler;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -147,15 +147,15 @@ public abstract class BuildTechnologyHandler extends TechnologyHandler {
     public void setTestResourcesPath(String testResourcesPath) {
         this.testResourcesPath = testResourcesPath;
     }
-    
+
     public void addDependency(Dependency dependency) {
         if (!dependencies.contains(dependency)) // TODO: 4/24/2016 must throws exception in other way
             dependencies.add(dependency);
     }
-    
+
     public void addDependencies(List<Dependency> dependencies) {
         for (Dependency dependency : dependencies)
-            if(!this.dependencies.contains(dependency))
+            if (!this.dependencies.contains(dependency))
                 this.dependencies.add(dependency); // TODO: 4/24/2016 must throws exception in other way
     }
 

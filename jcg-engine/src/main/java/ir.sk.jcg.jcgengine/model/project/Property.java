@@ -19,7 +19,7 @@ public class Property extends ModelElement implements Serializable {
     private String labelName;
     @Prop(label = "Type", componentType = ComponentType.EDITABLE_COMBO, values = {"int", "Integer", "short", "Short", "long", "Long", "String", "java.sql.Timestamp"}, editable = true, required = true)
     private String type;
-//    @Prop(label = "Value", editable = true, required = true)
+    //    @Prop(label = "Value", editable = true, required = true)
 //    private String value;
     @Prop(label = "Column Name", editable = true, required = true)
     private String columnName;
@@ -28,17 +28,9 @@ public class Property extends ModelElement implements Serializable {
     @Prop(label = "Is Nullable", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
     private boolean nullable;
 
-  //  private List<ValidationRule> validationRules; // TODO: 5/12/2016
+    //  private List<ValidationRule> validationRules; // TODO: 5/12/2016
 
     public Property() {
-    }
-
-    /**
-     * Copy constructor
-     * */
-    public Property(Property anotherProperty) {
-        super(anotherProperty);
-     //   this.value = anotherProperty.getValue();
     }
 
     public String getLabelName() {

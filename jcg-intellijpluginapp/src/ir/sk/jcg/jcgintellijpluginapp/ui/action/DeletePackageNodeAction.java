@@ -3,9 +3,9 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.model.project.SchemaItem;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgengine.model.project.Packageable;
+import ir.sk.jcg.jcgengine.model.project.SchemaItem;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -48,7 +48,7 @@ public class DeletePackageNodeAction extends DeleteNodeAction {
                 } else { // when package has child
                     System.out.println("Selected package has child."); // TODO: 5/3/2016 must show a dialog window 
                 }
-                
+
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }
 

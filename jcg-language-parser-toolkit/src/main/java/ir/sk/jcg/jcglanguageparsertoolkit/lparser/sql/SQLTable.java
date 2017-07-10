@@ -53,6 +53,7 @@ public class SQLTable {
 
     /**
      * Adds a field to the table
+     *
      * @param sqlField - The field object
      */
     public void addField(SQLField sqlField) {
@@ -62,6 +63,7 @@ public class SQLTable {
 
     /**
      * Fetchs a field object based on it's name
+     *
      * @param name - The name of the field
      */
     public SQLField getField(String name) {

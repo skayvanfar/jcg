@@ -1,13 +1,15 @@
 package ir.sk.jcg.jcgengine.xmlParser;
 
-import ir.sk.jcg.jcgengine.model.project.Project;
-
-import javax.xml.bind.*;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 
 /**
  * // TODO: 5/5/2016 may use next
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/5/2016
  */
 public class Marshalling<T> {

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/jcg-common/jcg-common.iml" filepath="$PROJECT_DIR$/jcg-common/jcg-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/jcg-engine/jcg-engine.iml" filepath="$PROJECT_DIR$/jcg-engine/jcg-engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/jcg-intellijpluginapp/jcg-intellijpluginapp.iml" filepath="$PROJECT_DIR$/jcg-intellijpluginapp/jcg-intellijpluginapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcg-language-parser-toolkit/jcg-language-parser-toolkit.iml" filepath="$PROJECT_DIR$/jcg-language-parser-toolkit/jcg-language-parser-toolkit.iml" />
     </modules>
   </component>
 </project>

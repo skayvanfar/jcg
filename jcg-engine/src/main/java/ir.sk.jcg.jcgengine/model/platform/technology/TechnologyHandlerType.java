@@ -15,7 +15,7 @@ public enum TechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase
     BUILD_TECHNOLOGY(0, "Build Technology Handler", BuildTechnologyHandler.BuildTechnologyHandlerType.values()), // todo: must define
     ORM_TECHNOLOGY(1, "ORM Technology Handler", ORMTechnologyHandler.ORMTechnologyHandlerType.values()),
     MVC_TECHNOLOGY(2, "MVC Technology Handler", MVCTechnologyHandler.MVCTechnologyHandlerType.values());
- //   CLIENT_VIEW_TECHNOLOGY(1, "Client view TechnologyHandler", ORMTechnologyType.values());
+    //   CLIENT_VIEW_TECHNOLOGY(1, "Client view TechnologyHandler", ORMTechnologyType.values());
 
     private Integer value;
     private String description;

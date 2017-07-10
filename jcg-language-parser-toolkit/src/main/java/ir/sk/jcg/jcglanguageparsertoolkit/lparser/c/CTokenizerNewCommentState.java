@@ -4,6 +4,7 @@ import ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer.CommentToken;
 
 /**
  * State object for new style C comments (e.g. //)
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/5/2017.
  */
 public class CTokenizerNewCommentState extends CTokenizerState {

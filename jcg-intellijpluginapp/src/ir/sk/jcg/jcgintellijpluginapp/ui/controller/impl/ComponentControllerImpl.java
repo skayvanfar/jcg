@@ -13,7 +13,9 @@ public class ComponentControllerImpl implements ComponentController {
 
     private static final ComponentController INSTANCE = new ComponentControllerImpl();
 
-    public static ComponentController getInstance() { return INSTANCE; }
+    public static ComponentController getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public void createInputComponent(ComponentDto componentDto, View view) {

@@ -1,148 +1,151 @@
 <idea-plugin version="2">
-  <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
-  <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <id>com.your.company.unique.plugin.id</id>
+    <name>Plugin display name here</name>
+    <version>1.0</version>
+    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
-  <description><![CDATA[
+    <description><![CDATA[
       Enter short description for your plugin here.<br>
       <em>most HTML tags may be used</em>
     ]]></description>
 
-  <change-notes><![CDATA[
+    <change-notes><![CDATA[
       Add change notes here.<br>
       <em>most HTML tags may be used</em>
     ]]>
-  </change-notes>
+    </change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="141.0"/>
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="141.0"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
 
-  <project-components>
-    <!-- Add your project components here -->
-    <component>
-      <implementation-class>ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent</implementation-class>
-    </component>
-  </project-components>
+    <project-components>
+        <!-- Add your project components here -->
+        <component>
+            <implementation-class>ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent
+            </implementation-class>
+        </component>
+    </project-components>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
-    <moduleBuilder builderClass="ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder"/>
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <moduleBuilder builderClass="ir.sk.jcg.jcgintellijpluginapp.ui.wizard.JcgModuleBuilder"/>
 
-  </extensions>
+    </extensions>
 
-  <actions>
-    <!-- Add your actions here -->
+    <actions>
+        <!-- Add your actions here -->
 
-    <action id="Create Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePackageNodeAction"
-            icon="/actions/newFolder.png" text="Create Package"/>
-    <action id="Delete Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeletePackageNodeAction"
-            icon="/actions/delete.png" text="Delete Package"/>
-    <action id="Generate Code" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.GenerateCodeAction"
-            icon="/actions/execute.png" text="Generate Code" description="Generate Code"/>
-    <action id="Create New Component" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateComponentNodeAction"
-            icon="/nodes/jsf/component.png" text="Create Component"/>
+        <action id="Create Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePackageNodeAction"
+                icon="/actions/newFolder.png" text="Create Package"/>
+        <action id="Delete Package" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeletePackageNodeAction"
+                icon="/actions/delete.png" text="Delete Package"/>
+        <action id="Generate Code" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.GenerateCodeAction"
+                icon="/actions/execute.png" text="Generate Code" description="Generate Code"/>
+        <action id="Create New Component" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateComponentNodeAction"
+                icon="/nodes/jsf/component.png" text="Create Component"/>
 
-    <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
-      <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
-              icon="/actions/refresh.png" text="Refresh" description="Refresh JCG"/>
-      <separator/>
-      <reference ref="Generate Code" />
-    </group>
+        <group id="JCG.TreeToolbar" text="JCG Tree ToolBar">
+            <action id="JCGTreeRefreshAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgTreeRefreshAction"
+                    icon="/actions/refresh.png" text="Refresh" description="Refresh JCG"/>
+            <separator/>
+            <reference ref="Generate Code"/>
+        </group>
 
-    <group id="JCG.ProjectOperationMenu" text="JCG Operations" popup="true">
-      <action id="Show Architecture" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.ShowArchitectureAction"
-            icon="/actions/properties.png" text="Show Architecture"/>
-      <separator/>
-      <reference ref="Generate Code" />
-    </group>
+        <group id="JCG.ProjectOperationMenu" text="JCG Operations" popup="true">
+            <action id="Show Architecture" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.ShowArchitectureAction"
+                    icon="/actions/properties.png" text="Show Architecture"/>
+            <separator/>
+            <reference ref="Generate Code"/>
+        </group>
 
-    <group id="JCG.ModelOperationMenu" text="JCG Operations" popup="true">
-      <reference ref="Create Package" />
-      <separator/>
-      <reference ref="Generate Code" />
-    </group>
+        <group id="JCG.ModelOperationMenu" text="JCG Operations" popup="true">
+            <reference ref="Create Package"/>
+            <separator/>
+            <reference ref="Generate Code"/>
+        </group>
 
-    <group id="JCG.PackageEntityOperationMenu" text="JCG Operations" popup="true">
-      <action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"
-              icon="/nodes/class.png" text="Create Entity"/>
-      <separator/>
-      <reference ref="Create Package" />
-      <reference ref="Delete Package" />
-      <separator/>
-      <reference ref="Generate Code" />
-    </group>
-    <group id="JCG.PackageViewOperationMenu" text="JCG Operations" popup="true">
-      <action id="Create New View" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateViewNodeAction"
-              icon="/nodes/advice.png" text="Create View"/>
-      <separator/>
-      <reference ref="Create Package" />
-      <reference ref="Delete Package" />
-      <separator/>
-      <reference ref="Generate Code" />
-    </group>
+        <group id="JCG.PackageEntityOperationMenu" text="JCG Operations" popup="true">
+            <action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityNodeAction"
+                    icon="/nodes/class.png" text="Create Entity"/>
+            <separator/>
+            <reference ref="Create Package"/>
+            <reference ref="Delete Package"/>
+            <separator/>
+            <reference ref="Generate Code"/>
+        </group>
+        <group id="JCG.PackageViewOperationMenu" text="JCG Operations" popup="true">
+            <action id="Create New View" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateViewNodeAction"
+                    icon="/nodes/advice.png" text="Create View"/>
+            <separator/>
+            <reference ref="Create Package"/>
+            <reference ref="Delete Package"/>
+            <separator/>
+            <reference ref="Generate Code"/>
+        </group>
 
-    <group id="JCG.EntityOperationMenu" text="JCG Operations" popup="true">
-      <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
-               icon="/css/property.png" text="Create Property"/>
-      <separator/>
-      <action id="Create New Relation" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateRelationshipNodeAction"
-              icon="/javaee/persistenceRelationship.png" text="Create Relationship"/>
-      <separator/>
-      <reference ref="Generate Code" />
-      <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityCreateNodeActionAction"-->
-              <!--icon="/actions/new.png" text="Create Entity"/>-->
-      <!--<separator/>-->
-      <!--<action id="Delete Node" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeleteNodeAction"-->
-              <!--icon="/actions/delete.png" text="Delete Node"/>-->
-      <!--<separator/>-->
-      <!--<action id="Copy Node Path" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CopyNodePathAction"-->
-              <!--icon="/actions/copy.png" text="Copy Node Path"/>-->
-    </group>
+        <group id="JCG.EntityOperationMenu" text="JCG Operations" popup="true">
+            <action id="Create New Property" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreatePropertyNodeAction"
+                    icon="/css/property.png" text="Create Property"/>
+            <separator/>
+            <action id="Create New Relation"
+                    class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateRelationshipNodeAction"
+                    icon="/javaee/persistenceRelationship.png" text="Create Relationship"/>
+            <separator/>
+            <reference ref="Generate Code"/>
+            <!--<action id="Create New Entity" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CreateEntityCreateNodeActionAction"-->
+            <!--icon="/actions/new.png" text="Create Entity"/>-->
+            <!--<separator/>-->
+            <!--<action id="Delete Node" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.DeleteNodeAction"-->
+            <!--icon="/actions/delete.png" text="Delete Node"/>-->
+            <!--<separator/>-->
+            <!--<action id="Copy Node Path" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.CopyNodePathAction"-->
+            <!--icon="/actions/copy.png" text="Copy Node Path"/>-->
+        </group>
 
-    <group id="JCG.DisplayViewOperationMenu" text="JCG Operations" popup="true">
-      <reference ref="Create New Component" />
-      <reference ref="Generate Code" />
-    </group>
-    <group id="JCG.SearchViewOperationMenu" text="JCG Operations" popup="true">
-      <reference ref="Create New Component" />
-      <reference ref="Generate Code" />
-    </group>
-    <group id="JCG.CreateEditViewOperationMenu" text="JCG Operations" popup="true">
-      <reference ref="Create New Component" />
-      <reference ref="Generate Code" />
-    </group>
+        <group id="JCG.DisplayViewOperationMenu" text="JCG Operations" popup="true">
+            <reference ref="Create New Component"/>
+            <reference ref="Generate Code"/>
+        </group>
+        <group id="JCG.SearchViewOperationMenu" text="JCG Operations" popup="true">
+            <reference ref="Create New Component"/>
+            <reference ref="Generate Code"/>
+        </group>
+        <group id="JCG.CreateEditViewOperationMenu" text="JCG Operations" popup="true">
+            <reference ref="Create New Component"/>
+            <reference ref="Generate Code"/>
+        </group>
 
 
-    <group id="JCG.RelationshipOperationMenu" text="JCG Operations" popup="true">
-      <action id="Edit Relationship" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.EditRelationshipNodeAction"
-              icon="/javaee/persistenceRelationship.png" text="Edit Relationship"/>
-      <separator/>
-    </group>
+        <group id="JCG.RelationshipOperationMenu" text="JCG Operations" popup="true">
+            <action id="Edit Relationship" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.EditRelationshipNodeAction"
+                    icon="/javaee/persistenceRelationship.png" text="Edit Relationship"/>
+            <separator/>
+        </group>
 
-    <group id="JCG.DataGridOperationMenu" text="JCG Operations" popup="true">
-      <reference ref="Create New Component" />
-    </group>
+        <group id="JCG.DataGridOperationMenu" text="JCG Operations" popup="true">
+            <reference ref="Create New Component"/>
+        </group>
 
-    <group id="JCG.PropertiesOperationMenu" text="JCG Operations" popup="true">
+        <group id="JCG.PropertiesOperationMenu" text="JCG Operations" popup="true">
 
-    </group>
+        </group>
 
-    <group id="JCG.ComponentOperationMenu" text="JCG Operations" popup="true">
+        <group id="JCG.ComponentOperationMenu" text="JCG Operations" popup="true">
 
-    </group>
+        </group>
 
-    <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
-      <action id="JCGPropertiesSaveAction" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgElementPropertiesSaveAction"
-              icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>
-    </group>
+        <group id="JCG.PropertiesToolbar" text="JCG Properties ToolBar">
+            <action id="JCGPropertiesSaveAction"
+                    class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgElementPropertiesSaveAction"
+                    icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>
+        </group>
 
-  </actions>
+    </actions>
 
 </idea-plugin>

@@ -3,7 +3,6 @@ package ir.sk.jcg.jcgcommon.util;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.net.URL;
 import java.util.Set;
 
@@ -56,10 +55,10 @@ public class Utils {
 
     /**
      * Convert a array ofString to a String with separator
-     * */
+     */
     public static String covertStringArrayToString(String[] array, char separator) {
         StringBuilder builder = new StringBuilder();
-        for(String s : array) {
+        for (String s : array) {
             builder.append(s).append(separator);
         }
         return (builder.deleteCharAt(builder.length() - 1)).toString();
@@ -67,7 +66,7 @@ public class Utils {
 
     /**
      * Convert a array of Objects to array of toString methods of those objects
-     * */
+     */
     public static String[] convertObjectArrayToStringArray(Object[] objects) {
         String[] stringArray = new String[objects.length];
         for (int i = 0; i < objects.length; i++)
@@ -77,6 +76,7 @@ public class Utils {
 
     /**
      * Return a non repeated name
+     *
      * @param name
      * @param allNames
      * @return

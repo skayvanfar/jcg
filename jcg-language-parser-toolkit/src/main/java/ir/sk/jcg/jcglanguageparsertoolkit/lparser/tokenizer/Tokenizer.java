@@ -23,12 +23,13 @@ public abstract class Tokenizer {
 
     /**
      * parse( text )
-     *
+     * <p>
      * text - The string of code to be turned into tokens
-     *
+     * <p>
      * This should be overridden by all derived classes. It is
      * meant to parse the text into tokens. Which should be stored
      * in @tokens.
+     *
      * @param text
      */
     public abstract void parse(String text);

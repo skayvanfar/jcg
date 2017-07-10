@@ -12,6 +12,7 @@ public interface ViewController {
 
     /**
      * Create View of a ViewDto
+     *
      * @param viewDto
      * @param viewPackage that is parent
      */

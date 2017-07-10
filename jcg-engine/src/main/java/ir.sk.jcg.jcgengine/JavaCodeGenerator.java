@@ -17,9 +17,9 @@ public class JavaCodeGenerator implements CodeGenerator {
 
     private static final Logger logger = LoggerFactory.getLogger(JavaCodeGenerator.class);
 
- //   private JAXBContext jaxbContext; // TODO: 5/5/2016 add marshaler hear 
- //   private Marshaller marshaller;
- //   private Unmarshaller unmarshaller;
+    //   private JAXBContext jaxbContext; // TODO: 5/5/2016 add marshaler hear
+    //   private Marshaller marshaller;
+    //   private Unmarshaller unmarshaller;
 
     private Project jcgProject;
     private Architecture architecture;
@@ -65,7 +65,7 @@ public class JavaCodeGenerator implements CodeGenerator {
     @Override
     public boolean marshalling() throws JAXBException {
         logger.info("marshaling ... ");
-        if(!baseXmlDir.exists())
+        if (!baseXmlDir.exists())
             baseXmlDir.mkdir();
         marshallingProject();
         marshallingArchitecture();
@@ -88,8 +88,8 @@ public class JavaCodeGenerator implements CodeGenerator {
     @Override
     public boolean marshallingProject() throws JAXBException {
         XMLParser.marshaling(new File(baseXmlDir + File.separator + JCG_CONFIG_PROJECT_FILE_NAME), jcgProject);
-     //   File outputFile = new File(baseXmlDir + File.separator + JCG_CONFIG_PROJECT_FILE_NAME);
-    //    this.marshaller.marshal(jcgProject, new StreamResult(outputFile));
+        //   File outputFile = new File(baseXmlDir + File.separator + JCG_CONFIG_PROJECT_FILE_NAME);
+        //    this.marshaller.marshal(jcgProject, new StreamResult(outputFile));
         return true;
     }
 
@@ -132,13 +132,13 @@ public class JavaCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public List<? extends ModelImplElement> addEntity(Entity entity , String packagePath) {
-        return architecture.createEntity(entity ,packagePath);
+    public List<DomainImplElement> addEntity(Entity entity, String packagePath) {
+        return architecture.createEntity(entity, packagePath);
     }
 
     @Override
-    public List<? extends ImplElement> addView(View view, String packagePath) {
-        return architecture.createView(view , packagePath);
+    public List<BusinessImplElement> addView(View view, String packagePath) {
+        return architecture.createView(view, packagePath);
     }
 
 //    private void initJAXBContext() {

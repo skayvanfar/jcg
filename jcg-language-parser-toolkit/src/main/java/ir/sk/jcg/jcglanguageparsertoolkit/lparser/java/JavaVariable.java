@@ -4,7 +4,7 @@ import ir.sk.jcg.jcglanguageparsertoolkit.lparser.scanner.ClassVariable;
 
 /**
  * A specialized ClassVariable that includes the JavaDoc for the class
-
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/5/2017.
  */
 public class JavaVariable extends ClassVariable {
@@ -35,7 +35,7 @@ public class JavaVariable extends ClassVariable {
     /**
      * Override of the comment set method to not only set the comment but also
      * to parse it into the JavaDoc
-     * */
+     */
     @Override
     public void setComment(String comment) {
         super.setComment(comment);

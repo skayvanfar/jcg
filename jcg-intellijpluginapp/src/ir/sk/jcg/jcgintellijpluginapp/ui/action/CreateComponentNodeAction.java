@@ -3,13 +3,16 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.DataGrid;
+import ir.sk.jcg.jcgengine.model.project.ModelElement;
+import ir.sk.jcg.jcgengine.model.project.Property;
+import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ComponentController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.ComponentControllerImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
@@ -30,7 +33,7 @@ public class CreateComponentNodeAction extends CreateNodeAction {
         ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
         boolean viewOrDataGrid = true; // Default is View
         View view = null;
-        List<Property> properties = new ArrayList<>();
+        Set<Property> properties = new HashSet<>();
         if (modelElement instanceof View) {
             view = (View) modelElement;
             properties.add(view.getTargetEntity().getId());

@@ -11,6 +11,7 @@ import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ComponentDto;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
@@ -21,13 +22,13 @@ class ComponentPanel extends JPanel {
 
     private ComponentDto componentDto;
 
-    private JTextField  componentNameTextField;
+    private JTextField componentNameTextField;
     private ComboBox<Property> targetPropertyComboBox;
     private ComboBox<Enum> componentTypeComboBox;
 
     private boolean isInput;
 
-    ComponentPanel(java.util.List<Property> properties, boolean isInput) {
+    ComponentPanel(Set<Property> properties, boolean isInput) {
         componentDto = new ComponentDto();
         setLayout(new GridLayoutManager(3, 2, JBUI.emptyInsets(), -1, -1));
 

@@ -7,11 +7,4 @@ public class BusinessImplElement extends ImplElement {
 
     public BusinessImplElement() {
     }
-
-    /**
-     * Copy constructor
-     * */
-    public BusinessImplElement(BusinessImplElement anotherBusinessImplElement) {
-        this.name = anotherBusinessImplElement.getName(); // you can access
-    }
 }

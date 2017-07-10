@@ -1,7 +1,7 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl;
 
-import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ViewController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ViewDto;
 
@@ -12,7 +12,9 @@ public class ViewControllerImpl implements ViewController {
 
     private static final ViewController INSTANCE = new ViewControllerImpl();
 
-    public static ViewController getInstance() { return INSTANCE; }
+    public static ViewController getInstance() {
+        return INSTANCE;
+    }
 
 
     @Override

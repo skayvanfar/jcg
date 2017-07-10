@@ -1,8 +1,6 @@
 package ir.sk.jcg.jcglanguageparsertoolkit.lparser.tokenizer;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 /**
  * An array of tokens with many useful helper methods
@@ -124,7 +122,7 @@ public class TokenStream extends ArrayList<Token> {
      * @param codeToken - The code token text as a string
      * @return
      */
-    public long find (CodeToken codeToken) {
+    public long find(CodeToken codeToken) {
         // TODO: 7/8/2017
         return 0;
     }
@@ -156,6 +154,7 @@ public class TokenStream extends ArrayList<Token> {
 
     /**
      * Converts all of the tokens back to text
+     *
      * @return
      */
     @Override

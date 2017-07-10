@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  * Exclusion from a dependency
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/21/2016
  */
 public class Exclusion {

@@ -77,6 +77,7 @@ public class LanguageClass {
 
     /**
      * Adds a method
+     *
      * @param method - The method object
      */
     public void addMethod(Prototype method) {
@@ -85,6 +86,7 @@ public class LanguageClass {
 
     /**
      * Adds a parent class
+     *
      * @param parent - The parent name as text
      */
     public void addParent(String parent) {
@@ -93,6 +95,7 @@ public class LanguageClass {
 
     /**
      * Adds a variable to the class definition
+     *
      * @param variable - The variable object
      */
     public void addVariable(ClassVariable variable) {

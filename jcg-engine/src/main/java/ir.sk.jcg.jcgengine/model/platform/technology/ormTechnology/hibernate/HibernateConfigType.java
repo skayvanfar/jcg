@@ -1,7 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
-import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringConfigType;
 
 import java.util.Objects;
 

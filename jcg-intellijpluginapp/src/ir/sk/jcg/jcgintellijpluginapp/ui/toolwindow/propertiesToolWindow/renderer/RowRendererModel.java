@@ -2,7 +2,6 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.render
 
 import javax.swing.table.TableCellRenderer;
 import java.util.HashMap;
-import java.util.Hashtable;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/5/2016

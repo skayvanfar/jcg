@@ -15,7 +15,7 @@ import java.util.Vector;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/5/2016
  */
 public class PropertyTable extends JTable {
-    
+
     private RowEditorModel rowEditorModel;
     private RowRendererModel rowRendererModel;
 

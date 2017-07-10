@@ -6,23 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class is base class for all Model elements
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/9/2016
  */
 @XmlSeeAlso({Schema.class, Package.class, Project.class, Property.class, Id.class})
 public class ModelElement extends Element {
 
+    // List of all impl elements that created for this element
     private List<ImplElement> implElements;
-
 
     public ModelElement() {
         implElements = new ArrayList<>();
-    }
-
-    /**
-     * Copy constructor
-     * */
-    public ModelElement(ModelElement anotherModelElement) {
-        this.name = anotherModelElement.getName(); // you can access
     }
 
     public List<ImplElement> getImplElements() {
@@ -34,7 +29,7 @@ public class ModelElement extends Element {
         this.implElements = implElements;
     }
 
-    public void addAllImplElements(List<ImplElement> implElements) {
+    public void addAllImplElements(List<? extends ImplElement> implElements) {
         for (ImplElement implElement : implElements) {
             if (this.implElements.contains(implElement))
                 this.implElements.remove(implElement);

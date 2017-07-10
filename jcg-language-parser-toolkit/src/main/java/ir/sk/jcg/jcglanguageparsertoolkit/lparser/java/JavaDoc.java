@@ -1,7 +1,5 @@
 package ir.sk.jcg.jcglanguageparsertoolkit.lparser.java;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +38,7 @@ public class JavaDoc {
 
     /**
      * Parses the JavaDoc comment and stores the contents
+     *
      * @param text - The JavaDoc comment
      */
     public void parse(String text) { // TODO: 7/6/2017 must be tested
@@ -74,24 +73,24 @@ public class JavaDoc {
         String str = "";
         List<String> tokens = new ArrayList<>();
         for (char ch : cleanedText.toString().toCharArray()) {
-             if (ch == ' ' || ch == '\n') { // TODO: 7/5/2017
-                 if (inWhitespace)
-                     str += ch;
-                 else {
-                     if (str.length() > 0)
+            if (ch == ' ' || ch == '\n') { // TODO: 7/5/2017
+                if (inWhitespace)
+                    str += ch;
+                else {
+                    if (str.length() > 0)
                         tokens.add(str.toString());
-                     str = String.valueOf(ch);
-                     inWhitespace = true;
-                 }
-             } else {
-                 if (inWhitespace) {
-                     if (str.length() > 0)
-                         tokens.add(str.toString());
-                     str = String.valueOf(ch);
-                     inWhitespace = false;
-                 } else
-                     str += ch;
-             }
+                    str = String.valueOf(ch);
+                    inWhitespace = true;
+                }
+            } else {
+                if (inWhitespace) {
+                    if (str.length() > 0)
+                        tokens.add(str.toString());
+                    str = String.valueOf(ch);
+                    inWhitespace = false;
+                } else
+                    str += ch;
+            }
 
         }
 
@@ -104,9 +103,9 @@ public class JavaDoc {
         String curName = "@desc";
         StringBuilder buffer = new StringBuilder("");
 
-        for (String token: tokens) {
+        for (String token : tokens) {
             if (token.startsWith("@")) { // // TODO: 7/6/2017 must replace with regex to ignore @@somthing
-                if ( buffer.length() > 0 )
+                if (buffer.length() > 0)
                     addToTags(curName, buffer.toString());
                 buffer = new StringBuilder("");
                 curName = token;
@@ -115,7 +114,7 @@ public class JavaDoc {
         }
 
         // Make sure we get the contents of the buffer at the end
-        if ( buffer.length() > 0 )
+        if (buffer.length() > 0)
             addToTags(curName, buffer.toString());
         cleanTags();
     }
@@ -124,7 +123,8 @@ public class JavaDoc {
      * This adds some more text to the tag. This is the method you would
      * override if you wanted to add your own JavaDoc tag to a parser, but
      * only if that tag had special parsing requirements.
-     * @param key - The tag name (e.g. '@see' )
+     *
+     * @param key  - The tag name (e.g. '@see' )
      * @param text - The text of the tag
      */
     protected void addToTags(String key, String text) {

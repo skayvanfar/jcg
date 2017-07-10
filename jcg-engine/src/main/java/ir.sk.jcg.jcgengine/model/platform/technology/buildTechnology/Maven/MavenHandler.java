@@ -1,16 +1,18 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.Maven;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
-import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.velocity.VelocityTemplate;
 import org.apache.velocity.VelocityContext;
-//import org.jetbrains.annotations.Nullable;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import java.io.File;
+import java.util.ResourceBundle;
+
+//import org.jetbrains.annotations.Nullable;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -18,8 +20,10 @@ import java.io.File;
 @Editable
 public class MavenHandler extends BuildTechnologyHandler {
 
-   // @Prop
-   // private MavenId mavenId; // TODO: 5/10/2016 better use later
+    private final ResourceBundle messagesBundle = java.util.ResourceBundle.getBundle("messages/messages");
+
+    // @Prop
+    // private MavenId mavenId; // TODO: 5/10/2016 better use later
 
     @Prop(label = "Group Id", editableInWizard = true, required = true)
     private String groupId;
@@ -32,11 +36,11 @@ public class MavenHandler extends BuildTechnologyHandler {
         super("Maven");
         version = "0.0.1-SNAPSHOT";
 
-        mainJavaPath = "/src/main/java";
-        mainResourcesPath = "/src/main/resources";
-        mainWebPath = "/src/main/webapp";
-        testJavaPath = "/src/test/java";
-        testResourcesPath = "/src/test/resources";
+        mainJavaPath = messagesBundle.getString("mavenHandler.mainJavaPath");
+        mainResourcesPath = messagesBundle.getString("mavenHandler.mainResourcesPath");
+        mainWebPath = messagesBundle.getString("mavenHandler.mainWebPath");
+        testJavaPath = messagesBundle.getString("mavenHandler.testJavaPath");
+        testResourcesPath = messagesBundle.getString("mavenHandler.testResourcesPath");
     }
 
 //    public MavenId getMavenId() {
@@ -104,7 +108,7 @@ public class MavenHandler extends BuildTechnologyHandler {
 
     /**
      * set Package prefix of project into group id and artifact id of maven
-     * */
+     */
     public void setGroupIdAndArtifactIdWithPackagePrefix(String packagePrefix) {
         int lastIndexOf = packagePrefix.lastIndexOf('.');
         if (lastIndexOf != -1) { // When packagePrefix include '.' character

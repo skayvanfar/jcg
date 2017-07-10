@@ -12,6 +12,7 @@ public class Token {
 
     /**
      * Initialieze the token with it's text
+     *
      * @param text - The text of the token
      */
     public Token(String text) {

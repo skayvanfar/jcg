@@ -22,37 +22,37 @@ public class ApplicationContext {
 
     /**
      * Absolute Path of project
-     * */
+     */
     private String baseProjectPath;
 
     /**
      * Absolute Path of java source of project
-     * */
+     */
     private String mainJavaPath;
 
     /**
      * Absolute Path of Resources of project
-     * */
+     */
     private String mainResourcesPath;
 
     /**
      * Absolute Path of web source of project
-     * */
+     */
     private String mainWebPath;
 
     /**
      * Absolute Path of test source of project
-     * */
+     */
     private String testJavaPath;
 
     /**
      * Path of java test resources of project
-     * */
+     */
     private String testResourcesPath;
 
     /**
      * Absolute Java source with package prefix of project
-     * */
+     */
     private String JavaWithPackagePrefixPath;
 
     private String packagePrefix;
@@ -75,7 +75,9 @@ public class ApplicationContext {
 
     private SecurityTechnologyHandler securityTechnologyHandler;
 
-    public static ApplicationContext getInstance() { return INSTANCE; }
+    public static ApplicationContext getInstance() {
+        return INSTANCE;
+    }
 
     public String getProjectName() {
         return projectName;
@@ -177,7 +179,7 @@ public class ApplicationContext {
         return map;
     }
 
-    public void setAttribute(String key , Object value) {
+    public void setAttribute(String key, Object value) {
         map.put(key, value);
     }
 

@@ -16,7 +16,7 @@ class JcgModuleBuilderHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(JcgModuleBuilderHelper.class);
 
-   // private final Project jcgProject;
+    // private final Project jcgProject;
     private final CodeGenerator codeGenerator;
 
     private final String commandName;
@@ -32,7 +32,7 @@ class JcgModuleBuilderHelper {
 
     /**
      * Call Engine to make base Architecture
-     * */
+     */
     void configure() {
         codeGenerator.getArchitecture().createBaseArchitecture();
 

@@ -11,14 +11,16 @@ public interface RelationshipController {
 
     /**
      * Create Relationships of a RelationshipDto
+     *
      * @param relationShipDto
-     * @param entity that is parent of head Relation
+     * @param entity          that is parent of head Relation
      */
     void createRelationship(RelationShipDto relationShipDto, Entity entity);
 
 
     /**
      * Create anf full a RelationshipDto by head Relationship
+     *
      * @param headRelationship
      * @return
      */
@@ -27,6 +29,7 @@ public interface RelationshipController {
 
     /**
      * Edit Relationships of a RelationshipDto
+     *
      * @param editedRelationShipDto
      * @param headRelationship
      * @param entity

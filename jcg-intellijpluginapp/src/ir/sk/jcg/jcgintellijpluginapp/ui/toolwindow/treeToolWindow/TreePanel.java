@@ -9,14 +9,12 @@ import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
-import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Component;
+import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.listener.TreeSelectionChangedListener;
 
 import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
@@ -44,8 +42,8 @@ public class TreePanel extends SimpleToolWindowPanel {
 
         ToolTipManager.sharedInstance().registerComponent(jcgTree);
         jcgTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-     //   CustomizationUtil.installPopupHandler(jcgTree, "JCG.OperationMenu", ActionPlaces.UNKNOWN);
-         jcgTree.setCellRenderer(new JcgTreeRenderer()); // TODO: 4/29/2016
+        //   CustomizationUtil.installPopupHandler(jcgTree, "JCG.OperationMenu", ActionPlaces.UNKNOWN);
+        jcgTree.setCellRenderer(new JcgTreeRenderer()); // TODO: 4/29/2016
 
         jcgTree.addTreeSelectionListener(e -> {
 
@@ -95,28 +93,28 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     /**
      * update UI and expand selected node
-     * */
+     */
     public void updateAndExpandUI(TreePath treePath) {
 
 
         jcgTree.updateUI();
         if (treePath != null) { // TODO: 5/6/2016 expand not work correctly 
-        //    TreePath treePath1 = new TreePath(treePath.getPath());
-          //  jcgTree.setSelectionPath(treePath1);
-              //      jcgTree.scrollPathToVisible(treePath1);
-     //       TreePath t =jcgTree.getSelectionPath();
-       //     jcgTree.expandPath(new TreePath(treePath.getPath()));
-       //     jcgTree.expandRow(1);
-       //     jcgTree.expandRow(2);
+            //    TreePath treePath1 = new TreePath(treePath.getPath());
+            //  jcgTree.setSelectionPath(treePath1);
+            //      jcgTree.scrollPathToVisible(treePath1);
+            //       TreePath t =jcgTree.getSelectionPath();
+            //     jcgTree.expandPath(new TreePath(treePath.getPath()));
+            //     jcgTree.expandRow(1);
+            //     jcgTree.expandRow(2);
 //            SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath, 3, true);
-     //           SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
+            //           SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
 
         }
     }
 
-   // public Tree getJcgTree() {
-   //     return jcgTree;
-  //  }
+    // public Tree getJcgTree() {
+    //     return jcgTree;
+    //  }
 //    private final Icon rootIcon = IconLoader.findIcon("/icons/zookeeper_small.png");
 
     private JComponent createToolBar() {
@@ -129,7 +127,7 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     /**
      * Full a tree of node from jcgProject
-     * */
+     */
     private void initJcgTree() { // TODO: 5/12/2016 auto create tree
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode();
 
@@ -175,7 +173,7 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     /**
      * Load packages and entities recursive
-     * */
+     */
     private <T extends SchemaItem> void loadPackages(Package<T> aPackage, DefaultMutableTreeNode parentNode, boolean hasEntity) { // TODO: 4/29/2016 must go to a util class
         for (T t : aPackage.getElements()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(t);
@@ -188,7 +186,7 @@ public class TreePanel extends SimpleToolWindowPanel {
             } else {
                 loadInputComponents((View) t, tNode);
                 if (t instanceof SearchView)
-                loadDataGrid((SearchView) t, tNode);
+                    loadDataGrid((SearchView) t, tNode);
             }
         }
         for (Package<T> bPackage : aPackage.getPackages()) {
@@ -265,7 +263,7 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     /**
      * Return user object from current selected node
-     * */
+     */
     public Object currentSelectedNodeUserObject() {
         TreePath treePath = jcgTree.getSelectionPath();
         DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
@@ -274,7 +272,7 @@ public class TreePanel extends SimpleToolWindowPanel {
 
     /**
      * Return user object from parent of selected node
-     * */
+     */
     public Object parentSelectedNodeUserObject() {
         TreePath treePath = jcgTree.getSelectionPath().getParentPath();
         DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();

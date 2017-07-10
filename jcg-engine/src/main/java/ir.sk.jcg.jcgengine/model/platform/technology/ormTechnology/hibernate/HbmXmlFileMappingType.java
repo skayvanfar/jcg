@@ -1,8 +1,8 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class HbmXmlFileMappingType extends MappingType {
     }
 
     @Override
-    List<ModelImplElement> createDao(HibernateHandler hibernateHandler, Entity entity) {
+    List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity) {
         return null;
     }
 }

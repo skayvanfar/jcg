@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Present an View in domain
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
@@ -17,23 +19,15 @@ import java.util.List;
 @Editable
 public abstract class View extends SchemaItem implements Serializable {
 
-    @Prop(label = "Target Entity", editable = false, required = true)
+    @Prop(label = "Target Entity", required = true)
     private Entity targetEntity;
 
-
+    // List of components that is used by subclasses
     private List<Component> components;
 
     public View() {
         components = new ArrayList<>();
     }
-
-    /**
-     * Copy constructor
-     * */
-    public View(View anotherView) {
-        super(anotherView);
-    }
-
 
     public Entity getTargetEntity() {
         return targetEntity;

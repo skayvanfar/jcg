@@ -7,8 +7,9 @@ import ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SpringSe
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
+import ir.sk.jcg.jcgengine.model.project.BusinessImplElement;
+import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.ModelImplElement;
 import ir.sk.jcg.jcgengine.model.project.View;
 
 import javax.xml.bind.annotation.*;
@@ -81,17 +82,17 @@ public abstract class Architecture implements Presentable {
 
     /**
      * Create base config and essential files for all technologies
-     * */
+     */
     public abstract void createBaseArchitecture();
 
     /**
      * Call after unmrshalling for set temp values
-     * */
+     */
     public abstract void initialize(String baseDir, String packagePrefix, String configPackage);
 
-    public abstract List<? extends ModelImplElement> createEntity(Entity entity, String packagePath);
+    public abstract List<DomainImplElement> createEntity(Entity entity, String packagePath);
 
-    public abstract List<? extends ModelImplElement> createView(View view, String packagePath);
+    public abstract List<BusinessImplElement> createView(View view, String packagePath);
 
     public abstract TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType);
 

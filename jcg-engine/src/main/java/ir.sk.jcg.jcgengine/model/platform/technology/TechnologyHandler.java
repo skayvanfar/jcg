@@ -1,7 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
-import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.Presentable;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
@@ -26,12 +25,12 @@ public abstract class TechnologyHandler implements Presentable {
     @Prop(label = "Name", required = true)
     private String name;
 
-   // protected String baseDir;
- //   protected String basePackageName;
- //   protected String baseConfigDir;
+    // protected String baseDir;
+    //   protected String basePackageName;
+    //   protected String baseConfigDir;
 
     protected List<Dependency> dependencies = new ArrayList<>();
-  //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
+    //  protected List<Pattern> patterns; // TODO: 4/22/2016 not for now
 
     public TechnologyHandler() {
         name = "Technology";

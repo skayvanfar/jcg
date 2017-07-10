@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Call after create project
+ *
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/19/2016
  */
 public class JcgAPIManagerCallback implements CallBackHandler {
@@ -16,11 +17,9 @@ public class JcgAPIManagerCallback implements CallBackHandler {
         progressIndicator.setText("Creating Base Project");
 
 
-
-
         //  MavenDependenciesManager comManager = new MavenDependenciesManager();
 
-    //    return comManager.retrieveAsposeMavenDependencies(progressIndicator);
+        //    return comManager.retrieveAsposeMavenDependencies(progressIndicator);
         return true; //todo: must define
 
     }

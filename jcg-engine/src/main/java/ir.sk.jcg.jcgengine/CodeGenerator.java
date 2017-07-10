@@ -35,18 +35,21 @@ public interface CodeGenerator {
     boolean createBaseProject();
 
     boolean marshalling() throws JAXBException;
+
     boolean unmarshalling() throws JAXBException;
 
     boolean marshallingProject() throws JAXBException;
+
     boolean unmarshallingProject() throws JAXBException;
 
     boolean marshallingArchitecture() throws JAXBException;
+
     boolean unmarshallingArchitecture() throws JAXBException;
 
     /**
      * Add Entity to project and generate implementation
-     * */
-    List<? extends ImplElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
+     */
+    List<DomainImplElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
 
-    List<? extends ImplElement> addView(View view, String packagePath); // TODO: 6/30/2017 better change to addBusiness // TODO: 6/30/2017 maybe packagePath not needed.
+    List<BusinessImplElement> addView(View view, String packagePath); // TODO: 6/30/2017 better change to addBusiness // TODO: 6/30/2017 maybe packagePath not needed.
 }

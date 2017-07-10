@@ -14,12 +14,12 @@ public class PropertyViewHelper {
         JComponent propertyFieldComponent;
         switch (propertyInfo.getComponentType()) {
             case NON_EDITABLE_COMBO:
-                    Class<? extends Enum> classType= (Class<? extends Enum>) propertyInfo.getTypeClass();
-                    Enum[] possibleValues = classType.getEnumConstants();
-                    ComboBox<Enum<?>> comboBox = new ComboBox<>();
-                    for (Enum<?> e : possibleValues) {
-                        comboBox.addItem(e);
-                    }
+                Class<? extends Enum> classType = (Class<? extends Enum>) propertyInfo.getTypeClass();
+                Enum[] possibleValues = classType.getEnumConstants();
+                ComboBox<Enum<?>> comboBox = new ComboBox<>();
+                for (Enum<?> e : possibleValues) {
+                    comboBox.addItem(e);
+                }
                 propertyFieldComponent = comboBox;
                 break;
             case EDITABLE_COMBO:

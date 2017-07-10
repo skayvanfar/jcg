@@ -38,6 +38,11 @@ public class DataGrid extends ModelElement {
         components.add(component);
     }
 
+    public void addComponentAll(List<? extends Component> components) {
+        for (Component component : components)
+            addComponent(component);
+    }
+
     public void removeComponent(Component component) {
         if (components.contains(component))
             components.remove(component);
