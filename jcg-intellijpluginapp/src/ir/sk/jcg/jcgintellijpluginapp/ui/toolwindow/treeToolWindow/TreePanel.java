@@ -53,7 +53,9 @@ public class TreePanel extends SimpleToolWindowPanel {
             }
             if (treeNode.isRoot()) {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
-            } else if (treeNode.getUserObject() instanceof Schema) {
+            } else if (treeNode.getUserObject() instanceof Project) {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
+            }  else if (treeNode.getUserObject() instanceof Schema) {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
             } else if (treeNode.getUserObject() instanceof Package) {
                 DefaultMutableTreeNode schemaNode = (DefaultMutableTreeNode) e.getPath().getPathComponent(2);
@@ -78,6 +80,8 @@ public class TreePanel extends SimpleToolWindowPanel {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.DataGridOperationMenu", ActionPlaces.UNKNOWN);
             } else if (treeNode.getUserObject() instanceof Component) {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.ComponentOperationMenu", ActionPlaces.UNKNOWN);
+            } else {
+                CustomizationUtil.installPopupHandler(jcgTree, "JCG.NothingOperationMenu", ActionPlaces.UNKNOWN);
             }
         });
 

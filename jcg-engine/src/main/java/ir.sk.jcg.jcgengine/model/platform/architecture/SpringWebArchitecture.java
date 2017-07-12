@@ -85,9 +85,6 @@ public class SpringWebArchitecture extends Architecture {
         applicationContext.setTestResourcesPath(ApplicationContext.getInstance().getBaseProjectPath() + File.separator + buildTechnology.getTestResourcesPath());
         applicationContext.setJavaWithPackagePrefixPath(ApplicationContext.getInstance().getMainJavaPath() + File.separator + ApplicationContext.getInstance().getPackagePrefix().replace('.', '/'));
 
-        //   applicationContext.setSpringConfigType(springHandler.getSpringConfigType());
-        //  applicationContext.setSpringDIType(springHandler.getSpringDIType());
-
         applicationContext.setBuildTechnologyHandler(buildTechnology); // TODO: 6/20/2016
         applicationContext.setOrmTechnologyHandler(ormTechnology);
         applicationContext.setMvcTechnologyHandler(mvcTechnology);
@@ -99,7 +96,6 @@ public class SpringWebArchitecture extends Architecture {
      * Create base dirs
      */
     private void createBasePackage() {
-
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
 
         // Create config package
@@ -114,7 +110,7 @@ public class SpringWebArchitecture extends Architecture {
     }
 
     @Override
-    public List<DomainImplElement> createEntity(Entity entity, String packagePath) {
+    public void createEntity(Entity entity, String packagePath) {
         List<DomainImplElement> domainImplElements = new ArrayList<>();
         ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
@@ -129,15 +125,13 @@ public class SpringWebArchitecture extends Architecture {
         List<DomainImplElement> controllerDomainImplElements = mvcTechnologyHandler.createController(entity); // TODO: 6/20/2016 may better not use Controller hear
         if (controllerDomainImplElements != null)
             domainImplElements.addAll(controllerDomainImplElements);
-
-        return domainImplElements;
+        entity.addAllImplElements(domainImplElements);
     }
 
     @Override
-    public List<BusinessImplElement> createView(View view, String packagePath) {
+    public void createView(View view, String packagePath) {
         List<DomainImplElement> domainImplElements = new ArrayList<>();
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
-        return null; // TODO: 6/30/2017
     }
 
     public TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change

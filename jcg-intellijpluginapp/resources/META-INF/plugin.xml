@@ -58,10 +58,10 @@
         </group>
 
         <group id="JCG.ProjectOperationMenu" text="JCG Operations" popup="true">
-            <action id="Show Architecture" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.ShowArchitectureAction"
+            <!--<action id="Show Architecture" class="ir.sk.jcg.jcgintellijpluginapp.ui.action.ShowArchitectureAction"
                     icon="/actions/properties.png" text="Show Architecture"/>
             <separator/>
-            <reference ref="Generate Code"/>
+            <reference ref="Generate Code"/>-->
         </group>
 
         <group id="JCG.ModelOperationMenu" text="JCG Operations" popup="true">
@@ -144,6 +144,10 @@
             <action id="JCGPropertiesSaveAction"
                     class="ir.sk.jcg.jcgintellijpluginapp.ui.action.JcgElementPropertiesSaveAction"
                     icon="/actions/menu-saveall.png" text="Save" description="Save JCG"/>
+        </group>
+
+        <group id="JCG.NothingOperationMenu" text="JCG Operations" popup="true">
+
         </group>
 
     </actions>

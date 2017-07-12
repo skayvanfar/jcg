@@ -6,11 +6,11 @@ import com.intellij.openapi.ui.DialogWrapper;
 import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Package;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.swing.tree.DefaultMutableTreeNode;
+import java.util.*;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/6/2016
@@ -38,35 +38,54 @@ public class GenerateCodeAction extends NodeAction {
 
             @Override
             public void run() {
-
                 JcgProjectComponent jcgProjectComponent = JcgProjectComponent.getInstance(e.getProject());
                 codeGenerator = jcgProjectComponent.getCodeGenerator();
                 ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
 
-                Object[] pathArray = jcgProjectComponent.getSelectionPath().getPath();
+                Object[] nodeObjects =  jcgProjectComponent.getSelectionPath().getPath();
 
-                String[] packagePathArray = Arrays.copyOfRange(Utils.convertObjectArrayToStringArray(pathArray), 2, pathArray.length ); // TODO: 5/9/2016  on project throws ArrayIndexOutOfBoundException fo 2
-                List<? extends ImplElement> implElements = generate(modelElement, packagePathArray);
+                String packagePatch = getPackagePath(nodeObjects);
 
-                modelElement.addAllImplElements((List<ImplElement>) implElements);
+                Map<String, Set<? extends ModelElement>> allModelElements = new HashMap<>();
+
+                if (modelElement instanceof Packageable) {
+                    getAllModelElements(packagePatch, (Packageable) modelElement, allModelElements);
+                } else
+                    allModelElements.put(packagePatch, ((Package) modelElement).getElements());
+
+                codeGenerator.addAllModelElements(allModelElements);
 
                 marshalingAndReloadTree();
 
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }
 
-            private List<? extends ImplElement> generate(ModelElement modelElement, String[] packagePathArray) {
-                List<? extends ImplElement> implElements = new ArrayList<>();
-                if (modelElement instanceof Entity) {
-                    implElements = codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
-                } else if (modelElement instanceof View) {
-                    implElements = codeGenerator.addView((View) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
-                } else {
-
+            private String getPackagePath(Object[] nodeObjects) {
+                StringBuilder stringPackage = new StringBuilder();
+                for (int i = 0; i < nodeObjects.length; i++) {
+                    if (((DefaultMutableTreeNode) nodeObjects[i]).getUserObject()instanceof Package)
+                        stringPackage.append('.').append(nodeObjects[i].toString());
                 }
-                return implElements;
+                return stringPackage.toString().contains(".") ? stringPackage.toString().substring(1): stringPackage.toString();
+            }
+
+            private void generate(ModelElement modelElement, String[] packagePathArray) {
+                if (modelElement instanceof Entity) {
+                    codeGenerator.addEntity((Entity) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
+                } else if (modelElement instanceof View) {
+                    codeGenerator.addView((View) modelElement, Utils.covertStringArrayToString(packagePathArray, '.'));
+                }
             }
         });
         builder.showModal(true);
+    }
+
+    private void getAllModelElements(String path, Packageable packageable, Map<String, Set<? extends ModelElement>> allModelElements) {
+        if (packageable instanceof Package) {
+            allModelElements.put(path, ((Package) packageable).getElements());
+        }
+        if (packageable.getPackages().size() > 0) {
+            packageable.getPackages().forEach(aPackage ->  getAllModelElements(path.equals("") ? aPackage.toString() : (path + '.' + aPackage), (Packageable) aPackage, allModelElements));
+        }
     }
 }

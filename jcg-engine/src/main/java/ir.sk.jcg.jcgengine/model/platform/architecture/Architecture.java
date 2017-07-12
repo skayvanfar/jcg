@@ -90,9 +90,9 @@ public abstract class Architecture implements Presentable {
      */
     public abstract void initialize(String baseDir, String packagePrefix, String configPackage);
 
-    public abstract List<DomainImplElement> createEntity(Entity entity, String packagePath);
+    public abstract void createEntity(Entity entity, String packagePath);
 
-    public abstract List<BusinessImplElement> createView(View view, String packagePath);
+    public abstract void createView(View view, String packagePath);
 
     public abstract TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType);
 

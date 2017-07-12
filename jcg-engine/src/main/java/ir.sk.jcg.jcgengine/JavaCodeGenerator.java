@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine;
 
+import ir.sk.jcg.jcgcommon.util.Utils;
 import ir.sk.jcg.jcgcommon.util.XMLParser;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.project.*;
@@ -9,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -132,13 +135,27 @@ public class JavaCodeGenerator implements CodeGenerator {
     }
 
     @Override
-    public List<DomainImplElement> addEntity(Entity entity, String packagePath) {
-        return architecture.createEntity(entity, packagePath);
+    public void addEntity(Entity entity, String packagePath) {
+        architecture.createEntity(entity, packagePath);
     }
 
     @Override
-    public List<BusinessImplElement> addView(View view, String packagePath) {
-        return architecture.createView(view, packagePath);
+    public void addAllModelElements(Map<String, Set<? extends ModelElement>> allModelElements) {
+        allModelElements.forEach((packagePath, modelElements) -> modelElements.forEach(modelElement -> addModelElement(modelElement, packagePath)));
+    }
+
+    @Override
+    public void addModelElement(ModelElement modelElement, String packagePath) {
+        if (modelElement instanceof Entity) {
+            addEntity((Entity) modelElement, packagePath); // TODO: 7/12/2017 may use generic
+        } else if (modelElement instanceof View) {
+            addView((View) modelElement, packagePath);
+        }
+    }
+
+    @Override
+    public void addView(View view, String packagePath) {
+        architecture.createView(view, packagePath);
     }
 
 //    private void initJAXBContext() {

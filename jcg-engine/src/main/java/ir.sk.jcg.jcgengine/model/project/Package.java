@@ -91,4 +91,8 @@ public class Package<T extends SchemaItem> extends ModelElement implements Packa
         return result;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

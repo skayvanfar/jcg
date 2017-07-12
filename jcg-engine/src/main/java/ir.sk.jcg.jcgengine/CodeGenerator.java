@@ -6,6 +6,8 @@ import ir.sk.jcg.jcgengine.model.project.*;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 4/13/2016
@@ -49,7 +51,11 @@ public interface CodeGenerator {
     /**
      * Add Entity to project and generate implementation
      */
-    List<DomainImplElement> addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
+    void addEntity(Entity entity, String packagePath); // TODO: 5/3/2016 use boolean parameter for implements dao
 
-    List<BusinessImplElement> addView(View view, String packagePath); // TODO: 6/30/2017 better change to addBusiness // TODO: 6/30/2017 maybe packagePath not needed.
+    void addAllModelElements(Map<String, Set<? extends ModelElement>> allModelElements);
+
+    void addModelElement(ModelElement modelElement, String packagePath);
+
+    void addView(View view, String packagePath); // TODO: 6/30/2017 better change to addBusiness // TODO: 6/30/2017 maybe packagePath not needed.
 }
