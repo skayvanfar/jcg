@@ -141,11 +141,14 @@ public class VelocityTemplate {
             logger.error("mergeTemplate[" + outfileName + "] error in template " + templateName + ":" + e);
         }
 
-        CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
-        try {
-             boolean result = codeFormatter.formatFile(new File(outfileName));
-        } catch (ExporterException e) {
-            e.printStackTrace();
+        // format just for java files
+        if (outfileName.endsWith(".java")) {
+            CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
+            try {
+                 boolean result = codeFormatter.formatFile(new File(outfileName));
+            } catch (ExporterException e) {
+                e.printStackTrace();
+            }
         }
     }
 
