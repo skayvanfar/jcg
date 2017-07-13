@@ -103,6 +103,9 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/controller/BaseController.vm",
                 controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java");
         baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
+        Set<String> baseControllerImportSet = new HashSet<>();
+        baseControllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
+        baseControllerTemplate.putReference("imports", baseControllerImportSet);
         baseControllerTemplate.mergeTemplate();
 
         // Definitions
@@ -155,8 +158,8 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         controllerTemplate.putReference("entity", entity);
         // imports
         Set<String> controllerImportSet = new HashSet<>();
-        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServiceDir() + "." + entity.getName() + "Service");
-        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelDir() + "." + entity.getName());
+        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + entity.getName() + "Service");
+        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + entity.getName());
         controllerTemplate.putReference("imports", controllerImportSet);
         controllerTemplate.mergeTemplate();
 

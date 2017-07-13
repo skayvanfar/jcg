@@ -6,7 +6,6 @@
 /*
 import com.packt.webstore.domain.Menu;
 import com.packt.webstore.service.MenuService; */
-import ir.sk.commons.persistence.PersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;

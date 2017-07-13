@@ -8,7 +8,7 @@ package ${packagePrefix}.commons.localization;
  */
 
 public interface LocalizedEnum {
-    public String getString();
-    public int getOrdinal();
-    public String getCode();
+    String getString();
+    int getOrdinal();
+    String getCode();
 }

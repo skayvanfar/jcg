@@ -31,5 +31,5 @@ public abstract class MappingType {
 
     abstract EntityClass createEntityClass(HibernateHandler hibernateHandler, Entity entity, String packagePath);
 
-    abstract List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity);
+    abstract List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity, String packagePath);
 }

@@ -119,7 +119,7 @@ public class SpringWebArchitecture extends Architecture {
         if (entityClassElement != null)
             domainImplElements.add(entityClassElement);
         // TODO: 7/9/2016 must create Dao ,Service and Controller for specefic Entities as Regards Relationship between Daoes
-        List<DomainImplElement> daoDomainImplElements = ormTechnologyHandler.createDao(entity); // TODO: 5/8/2016 EntityElement
+        List<DomainImplElement> daoDomainImplElements = ormTechnologyHandler.createDao(entity, packagePath); // TODO: 5/8/2016 EntityElement
         if (daoDomainImplElements != null)
             domainImplElements.addAll(daoDomainImplElements);
         List<DomainImplElement> controllerDomainImplElements = mvcTechnologyHandler.createController(entity); // TODO: 6/20/2016 may better not use Controller hear

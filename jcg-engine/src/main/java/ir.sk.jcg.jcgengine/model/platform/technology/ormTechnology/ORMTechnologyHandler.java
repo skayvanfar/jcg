@@ -23,7 +23,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
 
     public abstract EntityClass createEntityClass(Entity entity, String packagePath);
 
-    public abstract List<DomainImplElement> createDao(Entity entity); // TODO: 5/8/2016 List<EntityElement>
+    public abstract List<DomainImplElement> createDao(Entity entity, String packagePath); // TODO: 5/8/2016 List<EntityElement>
 
     public enum ORMTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 
@@ -100,80 +100,98 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         }
     }
 
-    @Prop(label = "Interface DAO Directory", editableInWizard = true, required = true)
-    protected String interfaceDAODir;
-    @Prop(label = "Impl DAO Directory", editableInWizard = true, required = true)
-    protected String implDAODir;
-    protected String interfaceDAOCommonDir;
-    protected String implDAOCommonDir;
-    @Prop(label = "Model Directory", editableInWizard = true, required = true)
-    protected String modelDir;
-    @Prop(label = "Interface Service Directory", editableInWizard = true, required = true)
-    protected String serviceDir;
-    @Prop(label = "Impl Service Directory", editableInWizard = true, required = true)
-    protected String implServiceDir;
+    @Prop(label = "Interface DAO Package", editableInWizard = true, required = true)
+    protected String interfaceDAOPackage;
+    @Prop(label = "Impl DAO Package", editableInWizard = true, required = true)
+    protected String implDAOPackage;
+    protected String interfaceDAOCommonPackage;
+    protected String implDAOCommonPackage;
+    @Prop(label = "Model Package", editableInWizard = true, required = true)
+    protected String modelPackage;
+    @Prop(label = "Interface Service Package", editableInWizard = true, required = true)
+    protected String servicePackage;
+    @Prop(label = "Impl Service Package", editableInWizard = true, required = true)
+    protected String implServicePackage;
+    protected String interfaceServiceCommonPackage;
+    protected String implServiceCommonPackage;
     @Prop(label = "Database schema Name", editableInWizard = true, required = true)
     protected String databaseSchemaName;
 
-    public String getInterfaceDAODir() {
-        return interfaceDAODir;
+    public String getInterfaceDAOPackage() {
+        return interfaceDAOPackage;
     }
 
     @XmlAttribute
-    public void setInterfaceDAODir(String interfaceDAODir) {
-        this.interfaceDAODir = interfaceDAODir;
+    public void setInterfaceDAOPackage(String interfaceDAOPackage) {
+        this.interfaceDAOPackage = interfaceDAOPackage;
     }
 
-    public String getImplDAODir() {
-        return implDAODir;
-    }
-
-    @XmlAttribute
-    public void setImplDAODir(String implDAODir) {
-        this.implDAODir = implDAODir;
-    }
-
-    public String getInterfaceDAOCommonDir() {
-        return interfaceDAOCommonDir;
-    }
-
-    public void setInterfaceDAOCommonDir(String interfaceDAOCommonDir) {
-        this.interfaceDAOCommonDir = interfaceDAOCommonDir;
-    }
-
-    public String getImplDAOCommonDir() {
-        return implDAOCommonDir;
-    }
-
-    public void setImplDAOCommonDir(String implDAOCommonDir) {
-        this.implDAOCommonDir = implDAOCommonDir;
-    }
-
-    public String getModelDir() {
-        return modelDir;
+    public String getImplDAOPackage() {
+        return implDAOPackage;
     }
 
     @XmlAttribute
-    public void setModelDir(String modelDir) {
-        this.modelDir = modelDir;
+    public void setImplDAOPackage(String implDAOPackage) {
+        this.implDAOPackage = implDAOPackage;
     }
 
-    public String getServiceDir() {
-        return serviceDir;
+    public String getInterfaceDAOCommonPackage() {
+        return interfaceDAOCommonPackage;
+    }
+
+    public void setInterfaceDAOCommonPackage(String interfaceDAOCommonPackage) {
+        this.interfaceDAOCommonPackage = interfaceDAOCommonPackage;
+    }
+
+    public String getImplDAOCommonPackage() {
+        return implDAOCommonPackage;
+    }
+
+    public void setImplDAOCommonPackage(String implDAOCommonPackage) {
+        this.implDAOCommonPackage = implDAOCommonPackage;
+    }
+
+    public String getModelPackage() {
+        return modelPackage;
     }
 
     @XmlAttribute
-    public void setServiceDir(String serviceDir) {
-        this.serviceDir = serviceDir;
+    public void setModelPackage(String modelPackage) {
+        this.modelPackage = modelPackage;
     }
 
-    public String getImplServiceDir() {
-        return implServiceDir;
+    public String getServicePackage() {
+        return servicePackage;
     }
 
     @XmlAttribute
-    public void setImplServiceDir(String implServiceDir) {
-        this.implServiceDir = implServiceDir;
+    public void setServicePackage(String servicePackage) {
+        this.servicePackage = servicePackage;
+    }
+
+    public String getImplServicePackage() {
+        return implServicePackage;
+    }
+
+    @XmlAttribute
+    public void setImplServicePackage(String implServicePackage) {
+        this.implServicePackage = implServicePackage;
+    }
+
+    public String getInterfaceServiceCommonPackage() {
+        return interfaceServiceCommonPackage;
+    }
+
+    public void setInterfaceServiceCommonPackage(String interfaceServiceCommonPackage) {
+        this.interfaceServiceCommonPackage = interfaceServiceCommonPackage;
+    }
+
+    public String getImplServiceCommonPackage() {
+        return implServiceCommonPackage;
+    }
+
+    public void setImplServiceCommonPackage(String implServiceCommonPackage) {
+        this.implServiceCommonPackage = implServiceCommonPackage;
     }
 
     public String getDatabaseSchemaName() {

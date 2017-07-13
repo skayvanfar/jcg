@@ -11,6 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> 4/13/2016
@@ -119,6 +123,12 @@ public class VelocityTemplate {
     public static void mergeTemplate(String templateName, String outfileName,
                                      VelocityContext context) {
         Template t = buildTemplate(templateName);
+        Path path = Paths.get(outfileName).getParent();
+        try {
+            Files.createDirectories(path);
+        } catch (IOException e) {
+            logger.error("Cannot create directories - " + e);
+        }
         try {
             mergeTemplate(t, outfileName, context);
         } catch (Exception e) {

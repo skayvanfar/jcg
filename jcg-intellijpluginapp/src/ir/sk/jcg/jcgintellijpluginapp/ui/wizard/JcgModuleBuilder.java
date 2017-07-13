@@ -32,7 +32,7 @@ import java.io.File;
  */
 public class JcgModuleBuilder extends ModuleBuilder {
 
-    private final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("/messages/messages"); // NOI18N
+    private final java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("/messages/pluginMessages"); // NOI18N
 
     private Project intellijProject;
 

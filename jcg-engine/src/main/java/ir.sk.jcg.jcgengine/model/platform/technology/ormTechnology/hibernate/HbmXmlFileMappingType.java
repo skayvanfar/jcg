@@ -16,7 +16,7 @@ public class HbmXmlFileMappingType extends MappingType {
     }
 
     @Override
-    List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity) {
+    List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity, String packagePath) {
         return null;
     }
 }

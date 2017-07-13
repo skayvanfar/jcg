@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  */
 public class JcgIntroWizardStep extends ModuleWizardStep implements Disposable {
 
-    private final ResourceBundle bundle = ResourceBundle.getBundle("/messages/messages");
+    private final ResourceBundle bundle = ResourceBundle.getBundle("/messages/pluginMessages");
 
     private JLabel jcgIntroLabel;
     private JComponent myMainPanel;

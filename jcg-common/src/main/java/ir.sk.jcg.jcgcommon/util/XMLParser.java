@@ -37,12 +37,10 @@ public class XMLParser {
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
         jaxbUnmarshaller.setEventHandler(
-                new ValidationEventHandler() {
-                    public boolean handleEvent(ValidationEvent event) {
-                        System.out.println("exception");
-                        throw new RuntimeException(event.getMessage(),
-                                event.getLinkedException());
-                    }
+                event -> {
+                    System.out.println("exception");
+                    throw new RuntimeException(event.getMessage(),
+                            event.getLinkedException());
                 });
 
         T t = (T) jaxbUnmarshaller.unmarshal(file);

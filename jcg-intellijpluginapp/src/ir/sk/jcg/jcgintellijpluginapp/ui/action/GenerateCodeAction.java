@@ -50,8 +50,11 @@ public class GenerateCodeAction extends NodeAction {
 
                 if (modelElement instanceof Packageable) {
                     getAllModelElements(packagePatch, (Packageable) modelElement, allModelElements);
-                } else
-                    allModelElements.put(packagePatch, ((Package) modelElement).getElements());
+                } else {
+                    Set<ModelElement> modelSet = new HashSet<>();
+                    modelSet.add(modelElement);
+                    allModelElements.put(packagePatch, modelSet);
+                }
 
                 codeGenerator.addAllModelElements(allModelElements);
 

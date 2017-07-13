@@ -80,13 +80,13 @@ public class SpringHandler extends TechnologyHandler {
     @Override
     protected void createDirectories() throws Exception {
         // Create commons package
-        File localizationDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+        /*File localizationDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                 + File.separator + "commons" + File.separator + "localization");
         localizationDirFile.mkdirs();
 
         File persistenceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                 + File.separator + "commons" + File.separator + "persistence");
-        persistenceDirFile.mkdirs();
+        persistenceDirFile.mkdirs();*/
 
         File utilDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                 + File.separator + "commons" + File.separator + "util");
