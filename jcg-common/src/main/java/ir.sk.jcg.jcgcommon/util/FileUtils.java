@@ -10,6 +10,11 @@ import java.io.InputStream;
  */
 public class FileUtils {
 
+    /**
+     * Get content of inputStream
+     * @param inputStream
+     * @return - content of inputStream
+     */
     public static String getFile(InputStream inputStream) {
 
         String result = "";

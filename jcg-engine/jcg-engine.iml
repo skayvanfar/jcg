@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
@@ -21,6 +22,20 @@
     <orderEntry type="library" name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.6.4" level="project" />
     <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.json:1.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jdt:core:3.3.0-v_771" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:resources:3.3.0-v20070604" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:expressions:3.3.0-v20070606-0010" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:runtime:3.10.0-v20140318-2214" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:osgi:3.10.0-v20140606-1445" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.equinox:common:3.6.200-v20130402-1505" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:jobs:3.6.0-v20140424-0053" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.equinox:registry:3.5.400-v20140428-1507" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.equinox:preferences:3.5.200-v20140224-1527" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:contenttype:3.4.200-v20140207-1251" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.equinox:app:1.3.200-v20130910-1609" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:filesystem:1.1.0-v20070606" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse:text:3.3.0-v20070606-0010" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.core:commands:3.3.0-I20070605-0010" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava-base:r03" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava-annotations:r03" level="project" />

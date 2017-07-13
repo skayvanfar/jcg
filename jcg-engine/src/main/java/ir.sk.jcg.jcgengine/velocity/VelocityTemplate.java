@@ -1,5 +1,9 @@
 package ir.sk.jcg.jcgengine.velocity;
 
+import ir.sk.jcg.jcgcommon.util.FileUtils;
+import ir.sk.jcg.jcgengine.codeFormatter.CodeFormatter;
+import ir.sk.jcg.jcgengine.codeFormatter.JavaCodeFormatter;
+import ir.sk.jcg.jcgengine.exception.ExporterException;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -10,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -134,6 +139,13 @@ public class VelocityTemplate {
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("mergeTemplate[" + outfileName + "] error in template " + templateName + ":" + e);
+        }
+
+        CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
+        try {
+             boolean result = codeFormatter.formatFile(new File(outfileName));
+        } catch (ExporterException e) {
+            e.printStackTrace();
         }
     }
 
