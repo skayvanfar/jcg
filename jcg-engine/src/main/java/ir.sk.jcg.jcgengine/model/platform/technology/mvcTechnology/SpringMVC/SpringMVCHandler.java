@@ -119,6 +119,14 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
             e.printStackTrace();
         }
 
+        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tags\\utils");
+        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tags" + File.separator + "utils");
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles");
         dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tiles");
         try {

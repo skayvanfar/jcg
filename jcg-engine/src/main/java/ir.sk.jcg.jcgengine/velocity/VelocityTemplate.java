@@ -1,5 +1,8 @@
 package ir.sk.jcg.jcgengine.velocity;
 
+import ir.sk.jcg.jcgengine.codeFormatter.CodeFormatter;
+import ir.sk.jcg.jcgengine.codeFormatter.JavaCodeFormatter;
+import ir.sk.jcg.jcgengine.exception.ExporterException;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -9,10 +12,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -138,12 +138,12 @@ public class VelocityTemplate {
 
         // format just for java files
         if (outfileName.endsWith(".java")) {
-            //     CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
-            //   try {
-            //      boolean result = codeFormatter.formatFile(new File(outfileName));
-            //   } catch (ExporterException e) {
-            //        e.printStackTrace();
-            //    }
+                 CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
+               try {
+                  boolean result = codeFormatter.formatFile(new File(outfileName));
+               } catch (ExporterException e) {
+                    e.printStackTrace();
+                }
         }
     }
 

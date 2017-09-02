@@ -111,6 +111,7 @@ public class SpringHandler extends TechnologyHandler {
      * Create commons files
      */
     private void createCommonFiles() {
+        // TODO: 9/2/2017 all Commons file must go to another module
         /////////////////////////////////////
         GenerateTemplate localizedEnumNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("LocalizedEnum",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/localization/LocalizedEnum.java", "commons/localization/LocalizedEnum.vm");
