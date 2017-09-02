@@ -1,11 +1,13 @@
 package ir.sk.jcg.jcgengine;
 
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
-import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.ModelElement;
+import ir.sk.jcg.jcgengine.model.project.Project;
+import ir.sk.jcg.jcgengine.model.project.View;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

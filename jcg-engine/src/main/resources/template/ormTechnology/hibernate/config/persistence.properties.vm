@@ -7,4 +7,4 @@ jdbc.user=root
 jdbc.pass=metalgearsolid5
 hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 hibernate.show_sql=true
-hibernate.hbm2ddl.auto=
+hibernate.hbm2ddl.auto=update

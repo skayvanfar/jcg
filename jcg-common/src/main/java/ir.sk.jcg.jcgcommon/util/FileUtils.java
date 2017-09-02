@@ -1,9 +1,11 @@
 package ir.sk.jcg.jcgcommon.util;
 
+import com.google.common.base.Charsets;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/5/2017.
@@ -15,7 +17,7 @@ public class FileUtils {
      * @param inputStream
      * @return - content of inputStream
      */
-    public static String getFile(InputStream inputStream) {
+    public static String getFileContentByInputStream(InputStream inputStream) {
 
         String result = "";
 
@@ -27,5 +29,15 @@ public class FileUtils {
 
         return result;
 
+    }
+
+    public static String getFileContentByPath(Path path) {
+        String content = "";
+        try {
+            content = com.google.common.io.Files.toString(path.toFile(), Charsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return content;
     }
 }

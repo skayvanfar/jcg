@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "${entity.tableName}", schema = "", catalog = "${databaseSchemaName}")
 public class ${entity.name} implements Serializable {
 
+    /* GENERATED CODE SECTION TYPE(Property) ENABLED START */
     #idName($entity.id)
 
     #set($properties = ${entity.properties})
@@ -22,11 +23,13 @@ public class ${entity.name} implements Serializable {
 
     #set($relationships = ${entity.relationships})
     #relationshipsName($relationships)
+    /* GENERATED CODE END */
 
+    /* GENERATED CODE SECTION TYPE(GetterSetter) ENABLED START */
     #idGetterAndSetter($entity.id);
 
     #propertiesGetterAndSetter($properties)
 
     #relationshipsGetterAndSetter($relationships)
-
+    /* GENERATED CODE END */
 }

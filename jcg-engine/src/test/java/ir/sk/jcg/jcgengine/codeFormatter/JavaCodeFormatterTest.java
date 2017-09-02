@@ -1,13 +1,8 @@
 package ir.sk.jcg.jcgengine.codeFormatter;
 
-import ir.sk.jcg.jcgcommon.util.FileUtils;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.InputStream;
 
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/13/2017.
@@ -34,11 +29,11 @@ public class JavaCodeFormatterTest {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("FirstTestUnformatted.java");
 
-        String fileContent = FileUtils.getFile(inputStream);
+        String fileContent = FileUtils.getFileContentByInputStream(inputStream);
 
         classLoader = getClass().getClassLoader();
         inputStream = classLoader.getResourceAsStream("FirstTestFormatted.java");
-        String expectedValue = FileUtils.getFile(inputStream);
+        String expectedValue = FileUtils.getFileContentByInputStream(inputStream);
         String actualValue = codeFormatter.format(fileContent);*/
  //       Assert.assertEquals(expectedValue, actualValue);
     }
@@ -46,7 +41,7 @@ public class JavaCodeFormatterTest {
     @Test
     public void formatFile() throws Exception {
 
-        /*boolean actualValue = codeFormatter.formatFile(new File(getClass().getClassLoader().getResource("FirstTestUnformatted.java").getFile()));
+        /*boolean actualValue = codeFormatter.formatFile(new File(getClass().getClassLoader().getResource("FirstTestUnformatted.java").getFileContentByInputStream()));
         System.out.println(actualValue);*/
     }
 }

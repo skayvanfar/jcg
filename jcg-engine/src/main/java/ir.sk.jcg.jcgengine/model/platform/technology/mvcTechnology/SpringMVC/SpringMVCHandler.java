@@ -6,10 +6,11 @@ import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.element.ViewElement;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
-import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.velocity.Template;
+import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.velocity.GenerateTemplate;
+import ir.sk.jcg.jcgengine.velocity.NewFileGenerateGenerateTemplate;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -38,6 +39,29 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     private File tilesDefinitionsFile;
     private File tilesTemplateFile;
 
+    @Override
+    public ViewElement createView(View view, String packagePath) {
+        String outputPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views"
+                 + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getName() + ".jsp";
+     //   Path path = Paths.get("outputPath");
+        ViewElement viewElement = new ViewElement();
+        NewFileGenerateGenerateTemplate viewNewFileGenerateGenerateTemplate = null;
+        if (view instanceof DisplayView)
+            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("Display View Element", "mvcTechnology/SpringMVC/view/DisplayView.vm", outputPath);
+        else if (view instanceof SearchView)
+            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("Search View Element", "mvcTechnology/SpringMVC/view/SearchView.vm", outputPath);
+        else if (view instanceof CreateEditView)
+            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View Element", "mvcTechnology/SpringMVC/view/CreateEditView.vm", outputPath);
+     /*   else if (view instanceof SearcE)
+            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View Element", "mvcTechnology/SpringMVC/view/EntityWithAnnotation.vm", outputPath);*/
+
+        viewNewFileGenerateGenerateTemplate.putReference("view", view);
+
+        viewNewFileGenerateGenerateTemplate.mergeTemplate();
+        viewElement.setName(view.getName() + ".java");
+        return viewElement;
+    }
+
     public SpringMVCHandler() {
         super("Spring Technology MVC");
 
@@ -50,13 +74,34 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createDirectories() {
-        //  String baseSpringMVCDir = getBaseProjectPath() + File.separator + getBasePackageName().replace('.', '/');
         controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
         controllerDirFile.mkdirs();
 
-        // resources
-        resourcesDirFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
-        resourcesDirFile.mkdirs();
+        File flowsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "flows");
+        flowsFile.mkdirs();
+    }
+
+    @Override
+    protected Config createConfigFiles() throws Exception {
+        GenerateTemplate springWebConfigNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("WebConfig.java",
+                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator + "WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm");
+        springWebConfigNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
+        springWebConfigNewFileGenerateTemplate.putReference("basePackage", ApplicationContext.getInstance().getPackagePrefix()); // TODO: 5/20/2016
+
+        springWebConfigNewFileGenerateTemplate.mergeTemplate();
+        return new Config("WebConfig");
+    }
+
+    @Override
+    protected void createBaseFiles() throws Exception {
+        ///////////////////////////////////////////
+        GenerateTemplate baseControllerNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("BaseController",
+                controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java", "mvcTechnology/SpringMVC/controller/BaseController.vm");
+        baseControllerNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
+        Set<String> baseControllerImportSet = new HashSet<>();
+        baseControllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
+        baseControllerNewFileGenerateTemplate.putReference("imports", baseControllerImportSet);
+        baseControllerNewFileGenerateTemplate.mergeTemplate();
 
         File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\resources"); // TODO: 7/10/2016 must not be hard code
         File dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
@@ -66,102 +111,46 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
             e.printStackTrace();
         }
 
-        // WEB-INF
-        File webInfFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF");
-        webInfFile.mkdirs();
+        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tags\\form\\foundation");
+        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tags" + File.separator + "zurb-foundation-form");
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        File flowsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "flows");
-        flowsFile.mkdirs();
-        File springFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "spring" + File.separator + "webcontext");
-        springFile.mkdirs();
-        File tagsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tags");
-        tagsFile.mkdirs();
+        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles");
+        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tiles");
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        tilesDefinitionsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "definitions");
-        tilesDefinitionsFile.mkdirs();
-        tilesTemplateFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles" + File.separator + "template");
-        tilesTemplateFile.mkdirs();
-
-        File viewsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views");
-        viewsFile.mkdirs();
+        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\web-inf");
+        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator);
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    protected Config createConfigFiles() throws Exception {
-        Template SpringWebConfigTemplate = new Template("WebConfig.java", "mvcTechnology/SpringMVC/config/WebConfig.vm",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator + "WebConfig.java");
-        SpringWebConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage()); // TODO: 5/20/2016
-        SpringWebConfigTemplate.putReference("basePackage", ApplicationContext.getInstance().getPackagePrefix()); // TODO: 5/20/2016
-
-        SpringWebConfigTemplate.mergeTemplate();
-        return new Config("WebConfig");
-    }
-
-    @Override
-    protected void createBaseFiles() throws Exception {
-        ///////////////////////////////////////////
-        Template baseControllerTemplate = new Template("BaseController", "mvcTechnology/SpringMVC/controller/BaseController.vm",
-                controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java");
-        baseControllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
-        Set<String> baseControllerImportSet = new HashSet<>();
-        baseControllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
-        baseControllerTemplate.putReference("imports", baseControllerImportSet);
-        baseControllerTemplate.mergeTemplate();
-
-        // Definitions
-        ///////////////////////////////////////////
-        Template layoutTileDefinitionTemplate = new Template("LayoutTileDefinition", "mvcTechnology/SpringMVC/view/tiles/definitions/layout-tile-definition.vm",
-                tilesDefinitionsFile.getAbsolutePath() + File.separator + "layout-tile-definition.xml");
-        layoutTileDefinitionTemplate.mergeTemplate();
-
-        ///////////////////////////////////////////
-        Template pagesTileDefinitionTemplate = new Template("PagesTileDefinition", "mvcTechnology/SpringMVC/view/tiles/definitions/pages-tile-definition.vm",
-                tilesDefinitionsFile.getAbsolutePath() + File.separator + "pages-tile-definition.xml");
-        pagesTileDefinitionTemplate.mergeTemplate();
-
-        // Templates
-        ///////////////////////////////////////////
-        Template baseLayoutTemplate = new Template("BaseLayout", "mvcTechnology/SpringMVC/view/tiles/templates/baseLayout.vm",
-                tilesTemplateFile.getAbsolutePath() + File.separator + "baseLayout.jsp");
-        baseLayoutTemplate.putReference("resourcesDir", resourcesDir);
-        baseLayoutTemplate.mergeTemplate();
-
-        ///////////////////////////////////////////
-        Template headerTemplate = new Template("Header", "mvcTechnology/SpringMVC/view/tiles/templates/header.vm",
-                tilesTemplateFile.getAbsolutePath() + File.separator + "header.jsp");
-        headerTemplate.mergeTemplate();
-
-        ///////////////////////////////////////////
-        Template navigationTemplate = new Template("Navigation", "mvcTechnology/SpringMVC/view/tiles/templates/navigation.vm",
-                tilesTemplateFile.getAbsolutePath() + File.separator + "navigation.jsp");
-        navigationTemplate.mergeTemplate();
-
-        ///////////////////////////////////////////
-        Template footerTemplate = new Template("Footer", "mvcTechnology/SpringMVC/view/tiles/templates/footer.vm",
-                tilesTemplateFile.getAbsolutePath() + File.separator + "footer.jsp");
-        footerTemplate.mergeTemplate();
-
-        ///////////////////////////////////////////
-        Template logoutTemplate = new Template("Logout", "mvcTechnology/SpringMVC/view/tiles/templates/logout.vm",
-                tilesTemplateFile.getAbsolutePath() + File.separator + "logout.jsp");
-        logoutTemplate.mergeTemplate();
-    }
-
-    @Override
-    public List<DomainImplElement> createController(Entity entity) {
+    public List<DomainImplElement> createController(Entity entity, String packagePath) {
         List<DomainImplElement> domainImplElements = new ArrayList<>();
 
         /////////////////////////////////////////////
-        Template controllerTemplate = new Template("Controller", "mvcTechnology/SpringMVC/controller/Controller.vm", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                + File.separator + controllerDir + File.separator + entity.getName() + "Controller.java");
-        controllerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + controllerDir);
-        controllerTemplate.putReference("entity", entity);
+        GenerateTemplate controllerNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("Controller", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + controllerDir + File.separator + entity.getName() + "Controller.java", "mvcTechnology/SpringMVC/controller/Controller.vm");
+        controllerNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + controllerDir);
+        controllerNewFileGenerateTemplate.putReference("entity", entity);
         // imports
         Set<String> controllerImportSet = new HashSet<>();
-        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + entity.getName() + "Service");
-        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + entity.getName());
-        controllerTemplate.putReference("imports", controllerImportSet);
-        controllerTemplate.mergeTemplate();
+        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + packagePath + "." + entity.getName() + "Service");
+        controllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + "." + entity.getName());
+        controllerNewFileGenerateTemplate.putReference("imports", controllerImportSet);
+        controllerNewFileGenerateTemplate.mergeTemplate();
 
         EntityClass controllerClass = new EntityClass();
         controllerClass.setName(entity.getName() + "Controller.java");

@@ -1,7 +1,0 @@
-#**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/10/2106.
- *#
-
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-

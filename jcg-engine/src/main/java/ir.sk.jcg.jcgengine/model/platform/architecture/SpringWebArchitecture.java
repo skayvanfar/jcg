@@ -7,9 +7,9 @@ import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.platform.technology.buildTechnology.BuildTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
+import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.element.ViewElement;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
-import ir.sk.jcg.jcgengine.model.project.BusinessImplElement;
 import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.View;
@@ -122,7 +122,7 @@ public class SpringWebArchitecture extends Architecture {
         List<DomainImplElement> daoDomainImplElements = ormTechnologyHandler.createDao(entity, packagePath); // TODO: 5/8/2016 EntityElement
         if (daoDomainImplElements != null)
             domainImplElements.addAll(daoDomainImplElements);
-        List<DomainImplElement> controllerDomainImplElements = mvcTechnologyHandler.createController(entity); // TODO: 6/20/2016 may better not use Controller hear
+        List<DomainImplElement> controllerDomainImplElements = mvcTechnologyHandler.createController(entity, packagePath); // TODO: 6/20/2016 may better not use Controller hear
         if (controllerDomainImplElements != null)
             domainImplElements.addAll(controllerDomainImplElements);
         entity.addAllImplElements(domainImplElements);
@@ -132,6 +132,8 @@ public class SpringWebArchitecture extends Architecture {
     public void createView(View view, String packagePath) {
         List<DomainImplElement> domainImplElements = new ArrayList<>();
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
+        ViewElement viewElement = mvcTechnologyHandler.createView(view, packagePath);
+        domainImplElements.add(viewElement);
     }
 
     public TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change

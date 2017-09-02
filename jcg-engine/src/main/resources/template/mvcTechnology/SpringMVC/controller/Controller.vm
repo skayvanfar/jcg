@@ -29,4 +29,17 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/${lowerCaseName}s")
 public class ${entity.name}Controller extends BaseController {
 
+    @Autowired
+    private ${entity.name}Service ${lowerCaseName}Service;
+
+    /* GENERATED CODE SECTION TYPE(Property) ENABLED START */
+
+    /* GENERATED CODE END */
+
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public String testHome(Model model) {
+        ${entity.name} ${lowerCaseName} = new ${entity.name}();
+        userService.save(${lowerCaseName});
+        return "home";
+    }
 }

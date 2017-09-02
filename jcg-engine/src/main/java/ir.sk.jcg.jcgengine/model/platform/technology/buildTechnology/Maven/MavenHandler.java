@@ -109,13 +109,15 @@ public class MavenHandler extends BuildTechnologyHandler {
     /**
      * set Package prefix of project into group id and artifact id of maven
      */
-    public void setGroupIdAndArtifactIdWithPackagePrefix(String packagePrefix) {
-        int lastIndexOf = packagePrefix.lastIndexOf('.');
+    public void setGroupIdAndArtifactIdWithPackagePrefix(String packagePrefix, String artifactName) {
+        /*int lastIndexOf = packagePrefix.lastIndexOf('.');
         if (lastIndexOf != -1) { // When packagePrefix include '.' character
             groupId = packagePrefix.substring(0, lastIndexOf);
             artifactId = packagePrefix.substring(lastIndexOf + 1);
         } else {
             groupId = packagePrefix;
-        }
+        }*/
+        groupId = packagePrefix;
+        artifactId = artifactName;
     }
 }

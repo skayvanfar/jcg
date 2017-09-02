@@ -1,9 +1,5 @@
 package ir.sk.jcg.jcgengine.velocity;
 
-import ir.sk.jcg.jcgcommon.util.FileUtils;
-import ir.sk.jcg.jcgengine.codeFormatter.CodeFormatter;
-import ir.sk.jcg.jcgengine.codeFormatter.JavaCodeFormatter;
-import ir.sk.jcg.jcgengine.exception.ExporterException;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -14,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,7 +41,7 @@ public class VelocityTemplate {
             //    velocityEngine.setProperty("resource.loader","file,class,jar");
             //    File file = new File("/resources/template");
             //    URL res = VelocityTemplate.class.getClassLoader().getResource("/template.oRMTechnology");
-            //  File f = new File(res.getFile());
+            //  File f = new File(res.getFileContentByInputStream());
 
             //  URL resource = VelocityTemplate.class.getResource("../mavenBuild.vm");
             //  File f = Paths.get(resource.toURI()).toFile();
@@ -125,8 +121,7 @@ public class VelocityTemplate {
      * @param context
      * @throws Exception
      */
-    public static void mergeTemplate(String templateName, String outfileName,
-                                     VelocityContext context) {
+    public static void mergeTemplate(String templateName, String outfileName, VelocityContext context) {
         Template t = buildTemplate(templateName);
         Path path = Paths.get(outfileName).getParent();
         try {
@@ -143,13 +138,34 @@ public class VelocityTemplate {
 
         // format just for java files
         if (outfileName.endsWith(".java")) {
-            CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
-            try {
-                 boolean result = codeFormatter.formatFile(new File(outfileName));
-            } catch (ExporterException e) {
-                e.printStackTrace();
-            }
+            //     CodeFormatter codeFormatter = new JavaCodeFormatter(); // TODO: 7/13/2017 Must be singleton
+            //   try {
+            //      boolean result = codeFormatter.formatFile(new File(outfileName));
+            //   } catch (ExporterException e) {
+            //        e.printStackTrace();
+            //    }
         }
     }
 
+    /**
+     * mergeTemplateInWriter
+     *
+     * @param context
+     * @throws Exception
+     */
+    public static void mergeTemplateInWriter(String templateName, Writer writer,
+                                             VelocityContext context) {
+        try {
+            Template template = buildTemplate(templateName);
+
+            if (template != null)
+                template.merge(context, writer);
+
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

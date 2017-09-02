@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>artmart-utils</short-name>
+    <uri>http://sk.ir/jcg/utils</uri>
+    <tag-file>
+        <name>top-menu</name>
+        <path>/WEB-INF/tags/utils/top-menu.tag</path>
+    </tag-file>
+    <!--
+    <tag-file>
+        <name>forum</name>
+        <path>/WEB-INF/tags/utils/forum.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>sub-forum</name>
+        <path>/WEB-INF/tags/utils/sub-forum.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>thread</name>
+        <path>/WEB-INF/tags/utils/thread.tag</path>
+    </tag-file>-->
+</taglib>

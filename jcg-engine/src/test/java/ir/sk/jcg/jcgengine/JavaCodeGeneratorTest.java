@@ -42,7 +42,7 @@ public class JavaCodeGeneratorTest {
         entitySchema.setPackages(packageList);
         project.setEntitiesSchema(entitySchema);
 
-        XMLParser.marshaling(new File("e:/h.xml"), project);
+        XMLParser.marshaling(new File("e:/cropper.xml"), project);
 
     }
 

@@ -35,7 +35,7 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
 
     @Override
     protected Config createConfigFiles() throws Exception {
-        /*Template springSecurityConfigTemplate = new Template("Spring Security Config Initializer", "securityTechnology/springSecurity/config/SecurityConfig.vm",
+        /*NewFileGenerateGenerateTemplate springSecurityConfigTemplate = new NewFileGenerateGenerateTemplate("Spring Security Config Initializer", "securityTechnology/springSecurity/config/SecurityConfig.vm",
                 ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + ApplicationContext.getInstance().getConfigPackage() + File.separator  + "SecurityConfig.java");
         springSecurityConfigTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage());
         springSecurityConfigTemplate.mergeTemplate();
@@ -47,19 +47,19 @@ public class SpringSecurityHandler extends SecurityTechnologyHandler {
     @Override
     protected void createBaseFiles() throws Exception {
         /*        //////////////////////
-        Template springSecurityInitializerTemplate = new Template("Spring Security Initializer", "securityTechnology/springSecurity/SpringSecurityInitializer.vm",
+        NewFileGenerateGenerateTemplate springSecurityInitializerTemplate = new NewFileGenerateGenerateTemplate("Spring Security Initializer", "securityTechnology/springSecurity/SpringSecurityInitializer.vm",
                 securityDir.getAbsolutePath() + File.separator  + "SpringSecurityInitializer.java");
         springSecurityInitializerTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage() + "." + "security");
         springSecurityInitializerTemplate.mergeTemplate();
 
         //////////////////////
-        Template projectUserDetailsTemplate = new Template("ProjectUserDetails", "securityTechnology/springSecurity/ProjectUserDetails.vm",
+        NewFileGenerateGenerateTemplate projectUserDetailsTemplate = new NewFileGenerateGenerateTemplate("ProjectUserDetails", "securityTechnology/springSecurity/ProjectUserDetails.vm",
                 securityDir.getAbsolutePath() + File.separator  + "ProjectUserDetails.java");
         projectUserDetailsTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage() + "." + "security");
         projectUserDetailsTemplate.mergeTemplate();
 
         //////////////////////
-        Template projectUserDetailsServiceTemplate = new Template("ProjectUserDetailsService", "securityTechnology/springSecurity/ProjectUserDetailsService.vm",
+        NewFileGenerateGenerateTemplate projectUserDetailsServiceTemplate = new NewFileGenerateGenerateTemplate("ProjectUserDetailsService", "securityTechnology/springSecurity/ProjectUserDetailsService.vm",
                 securityDir.getAbsolutePath() + File.separator  + "ProjectUserDetailsService.java");
         projectUserDetailsServiceTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getConfigPackage() + "." + "security");
         projectUserDetailsServiceTemplate.mergeTemplate();*/

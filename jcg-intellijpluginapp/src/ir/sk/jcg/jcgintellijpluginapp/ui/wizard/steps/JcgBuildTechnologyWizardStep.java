@@ -70,7 +70,8 @@ public class JcgBuildTechnologyWizardStep extends ModuleWizardStep {
 
         // If Build Handler is Maven then set Package prefix of project into group id and artifact id of maven
         if (technologyHandler instanceof MavenHandler)
-            ((MavenHandler) technologyHandler).setGroupIdAndArtifactIdWithPackagePrefix(jcgModuleBuilder.getCodeGenerator().getJcgProject().getPackagePrefix());
+            ((MavenHandler) technologyHandler).setGroupIdAndArtifactIdWithPackagePrefix(jcgModuleBuilder.getCodeGenerator().getJcgProject().getPackagePrefix(),
+                    jcgModuleBuilder.getCodeGenerator().getJcgProject().getName());
 
         List<PropertyInfo> propertyInfos = new ArrayList<>();
         List<Field> fields = ReflectionUtil.findFields(technologyHandler.getClass(), Prop.class);

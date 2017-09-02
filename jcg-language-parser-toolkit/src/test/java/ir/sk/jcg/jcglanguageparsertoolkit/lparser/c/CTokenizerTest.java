@@ -28,7 +28,7 @@ public class CTokenizerTest {
         ClassLoader classLoader = getClass().getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream("FirstTest.java");
 
-        String fileContent = FileUtils.getFile(inputStream);
+        String fileContent = FileUtils.getFileContentByInputStream(inputStream);
 
         Tokenizer tokenizer = new CTokenizer();
 

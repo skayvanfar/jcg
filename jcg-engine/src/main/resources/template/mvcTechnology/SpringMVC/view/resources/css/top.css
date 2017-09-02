@@ -1,0 +1,23 @@
+/* Use for Top bar in base page */
+.s-top-bar {
+    position: fixed;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    right: 0;
+    left: 0;
+    background: rgba(203, 230, 243, 1);
+    opacity: .9;
+}
+
+
+.s-top-bar .s-top-section {
+    display: none;
+    padding: 0;
+    margin: 0;
+}
+
+.s-top-bar .s-top-section.active {
+    display: block;
+    padding: 5px 0;
+}

@@ -7,8 +7,6 @@ import ir.sk.jcg.jcgengine.model.platform.technology.SecurityTechnology.SpringSe
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
-import ir.sk.jcg.jcgengine.model.project.BusinessImplElement;
-import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.View;
 
