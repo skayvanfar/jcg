@@ -12,6 +12,7 @@
         <module>jcg-common</module>
         <module>jcg-engine</module>
         <module>jcg-language-parser-toolkit</module>
+        <module>jcg-library</module>
     </modules>
 
     <!-- More Project Information -->
