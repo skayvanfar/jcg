@@ -7,6 +7,8 @@
       <module fileurl="file://$PROJECT_DIR$/jcg-engine/jcg-engine.iml" filepath="$PROJECT_DIR$/jcg-engine/jcg-engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/jcg-intellijpluginapp/jcg-intellijpluginapp.iml" filepath="$PROJECT_DIR$/jcg-intellijpluginapp/jcg-intellijpluginapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/jcg-language-parser-toolkit/jcg-language-parser-toolkit.iml" filepath="$PROJECT_DIR$/jcg-language-parser-toolkit/jcg-language-parser-toolkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcg-library/jcg-lib-hibernate-handler/jcg-lib-hibernate-handler.iml" filepath="$PROJECT_DIR$/jcg-library/jcg-lib-hibernate-handler/jcg-lib-hibernate-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jcg-library/jcg-library.iml" filepath="$PROJECT_DIR$/jcg-library/jcg-library.iml" />
     </modules>
   </component>
 </project>
