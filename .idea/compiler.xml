@@ -10,6 +10,7 @@
         <module name="jcg-engine" />
         <module name="jcg-language-parser-toolkit" />
         <module name="jcg-lib-hibernate-handler" />
+        <module name="jcg-lib-springmvc-handler" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
@@ -18,6 +19,7 @@
       <module name="jcg-engine" target="1.8" />
       <module name="jcg-language-parser-toolkit" target="1.8" />
       <module name="jcg-lib-hibernate-handler" target="1.8" />
+      <module name="jcg-lib-springmvc-handler" target="1.8" />
       <module name="jcg-library" target="1.8" />
     </bytecodeTargetLevel>
   </component>
