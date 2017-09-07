@@ -1,6 +1,6 @@
 package ir.sk.jcg.lib.jcglibhibernatehandler.service;
 
-import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 
 import java.io.Serializable;
 import java.util.List;

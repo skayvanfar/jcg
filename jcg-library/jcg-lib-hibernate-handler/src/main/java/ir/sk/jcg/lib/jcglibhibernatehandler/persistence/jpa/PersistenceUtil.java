@@ -1,7 +1,9 @@
 package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa;
 
-import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
-import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceExceptionType;
+import ir.sk.jcg.jcglibcommon.persistence.BaseEntity;
+
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceExceptionType;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
@@ -87,12 +89,12 @@ public class PersistenceUtil {
      * @param entities
      * @exception PersistenceException
      */
-    protected static void checkIsValid(EntityBase... entities)
+    protected static void checkIsValid(BaseEntity ... entities)
             throws PersistenceException {
         if (entities == null || entities.length == 0) {
             throw new PersistenceException(PersistenceExceptionType.BadParameter);
         }
-        for (EntityBase e : entities) {
+        for (BaseEntity e : entities) {
             String args = e.getInValidProperty();
             if (args != null) {
                 throw new PersistenceException(PersistenceExceptionType.BadParameter, args);

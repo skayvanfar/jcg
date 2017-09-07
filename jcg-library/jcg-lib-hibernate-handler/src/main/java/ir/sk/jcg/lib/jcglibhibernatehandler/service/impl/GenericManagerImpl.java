@@ -2,6 +2,7 @@ package ir.sk.jcg.lib.jcglibhibernatehandler.service.impl;
 
 import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.GenericDAO;
 import ir.sk.jcg.lib.jcglibhibernatehandler.service.GenericManager;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;

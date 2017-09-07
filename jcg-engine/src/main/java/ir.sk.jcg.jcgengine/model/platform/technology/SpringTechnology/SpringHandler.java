@@ -81,14 +81,6 @@ public class SpringHandler extends TechnologyHandler {
     @Override
     protected void createDirectories() throws Exception {
         // Create commons package
-        /*File localizationDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                + File.separator + "commons" + File.separator + "localization");
-        localizationDirFile.mkdirs();
-
-        File persistenceDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                + File.separator + "commons" + File.separator + "persistence");
-        persistenceDirFile.mkdirs();*/
-
         File utilDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                 + File.separator + "commons" + File.separator + "util");
         utilDirFile.mkdirs();
@@ -102,51 +94,7 @@ public class SpringHandler extends TechnologyHandler {
         //   springAppConfigNewFileGenerateTemplate.putReference("securityConfig", securityConfig.toString()); // TODO: 6/4/16 for now
         springAppConfigNewFileGenerateTemplate.putReference("configs", configs);
         springAppConfigNewFileGenerateTemplate.mergeTemplate();
-
-        createCommonFiles();
         return null;
-    }
-
-    /**
-     * Create commons files
-     */
-    private void createCommonFiles() {
-        // TODO: 9/2/2017 all Commons file must go to another module
-        /////////////////////////////////////
-        GenerateTemplate localizedEnumNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("LocalizedEnum",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/localization/LocalizedEnum.java", "commons/localization/LocalizedEnum.vm");
-        localizedEnumNewFileGenerateTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
-        localizedEnumNewFileGenerateTemplate.mergeTemplate();
-
-        /////////////////////////////////////
-        GenerateTemplate pagingDataListNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("PagingDataList",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/PagingDataList.java", "commons/persistence/PagingDataList.vm");
-        pagingDataListNewFileGenerateTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
-        pagingDataListNewFileGenerateTemplate.mergeTemplate();
-
-        ///////////////////////////////////////
-        GenerateTemplate persistenceExceptionNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("PersistenceException",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/PersistenceException.java", "commons/persistence/PersistenceException.vm");
-        persistenceExceptionNewFileGenerateTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
-        persistenceExceptionNewFileGenerateTemplate.mergeTemplate();
-
-        ///////////////////////////////////////
-        GenerateTemplate persistenceExceptionTypeNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("persistenceExceptionType",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/PersistenceExceptionType.java", "commons/persistence/PersistenceExceptionType.vm");
-        persistenceExceptionTypeNewFileGenerateTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
-        persistenceExceptionTypeNewFileGenerateTemplate.mergeTemplate();
-
-        ///////////////////////////////////////
-        GenerateTemplate sortableDataListNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("SortableDataList",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/SortableDataList.java", "commons/persistence/SortableDataList.vm");
-        sortableDataListNewFileGenerateTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
-        sortableDataListNewFileGenerateTemplate.mergeTemplate();
-
-        ///////////////////////////////////////
-        GenerateTemplate sortOrderNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("SortOrder",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + "commons/persistence/SortOrder.java", "commons/persistence/SortOrder.vm");
-        sortOrderNewFileGenerateTemplate.putReference("packagePrefix", ApplicationContext.getInstance().getPackagePrefix());
-        sortOrderNewFileGenerateTemplate.mergeTemplate();
     }
 
     @Override
