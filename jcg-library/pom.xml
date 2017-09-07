@@ -14,6 +14,7 @@
     <modules>
         <module>jcg-lib-hibernate-handler</module>
         <module>jcg-lib-springmvc-handler</module>
+        <module>jcg-lib-common</module>
     </modules>
 
     <properties>

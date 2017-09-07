@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/jcg-engine" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jcg-language-parser-toolkit" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jcg-library" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jcg-library/jcg-lib-common" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jcg-library/jcg-lib-hibernate-handler" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/jcg-library/jcg-lib-springmvc-handler" charset="UTF-8" />
   </component>
