@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<taglib xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>security-filter</short-name>
+    <uri>http://sk.ir/common/tags/security-filter</uri>
+    <tag-file>
+        <name>csrfHidden</name>
+        <path>/META-INF/tags/security-filter/csrfHidden.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>csrfUrl</name>
+        <path>/META-INF/tags/security-filter/csrfUrl.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>hashHidden</name>
+        <path>/META-INF/tags/security-filter/hashHidden.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>hashLongUrl</name>
+        <path>/META-INF/tags/security-filter/hashLongUrl.tag</path>
+    </tag-file>
+    <tag-file>
+        <name>hashLong</name>
+        <path>/META-INF/tags/security-filter/hashLong.tag</path>
+    </tag-file>
+</taglib>

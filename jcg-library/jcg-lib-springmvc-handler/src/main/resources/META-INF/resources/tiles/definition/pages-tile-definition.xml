@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="home" extends="baseLayout">
+        <put-attribute name="title" value="Welcome" />
+        <put-attribute name="top" value="/tiles/template/generic/top.jsp"/>
+        <put-attribute name="heading" value="Welcome to Test App" />
+        <put-attribute name="tagline" value="The amazing  Test App" />
+        <put-attribute name="content" value="/views/home.jsp" />
+    </definition>
+
+</tiles-definitions>

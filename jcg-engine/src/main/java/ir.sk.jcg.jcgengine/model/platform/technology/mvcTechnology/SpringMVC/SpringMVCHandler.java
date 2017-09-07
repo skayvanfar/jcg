@@ -70,12 +70,13 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
         dependencies.add(new Dependency(SPRING_GROUP_ID, "spring-webmvc", SPRING_VERSION, "compile"));
         dependencies.add(new Dependency("org.apache.tiles", "tiles-extras", "3.0.3", "compile"));
+        dependencies.add(new Dependency("ir.sk.jcg", "jcg-lib-springmvc-handler", "1.0.0", "compile"));
     }
 
     @Override
     protected void createDirectories() {
-        controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
-        controllerDirFile.mkdirs();
+        /*controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
+        controllerDirFile.mkdirs();*/
 
         File flowsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "flows");
         flowsFile.mkdirs();
@@ -95,23 +96,23 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     @Override
     protected void createBaseFiles() throws Exception {
         ///////////////////////////////////////////
-        GenerateTemplate baseControllerNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("BaseController",
+        /*GenerateTemplate baseControllerNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("BaseController",
                 controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java", "mvcTechnology/SpringMVC/controller/BaseController.vm");
         baseControllerNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
         Set<String> baseControllerImportSet = new HashSet<>();
         baseControllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
         baseControllerNewFileGenerateTemplate.putReference("imports", baseControllerImportSet);
-        baseControllerNewFileGenerateTemplate.mergeTemplate();
+        baseControllerNewFileGenerateTemplate.mergeTemplate();*/
 
-        File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\resources"); // TODO: 7/10/2016 must not be hard code
+        /*File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\resources"); // TODO: 7/10/2016 must not be hard code
         File dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
         try {
             FileUtils.copyDirectory(source, dest);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tags\\form\\foundation");
+        /*source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tags\\form\\foundation");
         dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tags" + File.separator + "zurb-foundation-form");
         try {
             FileUtils.copyDirectory(source, dest);
@@ -125,9 +126,9 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
             FileUtils.copyDirectory(source, dest);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
-        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles");
+        /*source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles");
         dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tiles");
         try {
             FileUtils.copyDirectory(source, dest);
@@ -141,7 +142,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
             FileUtils.copyDirectory(source, dest);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
