@@ -1,25 +1,21 @@
-#**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 6/4/2106.
- *#
-#parse("vmComponents/packageName.vm")
+package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-#parse("vmComponents/import.vm")
-
 /**
- * Generic Manager that talks to GenericDAO to CRUD POJOs.
+ * Generic DAO (Data Access Object) with common methods to CRUD POJOs.
  *
- * <p>Extend this interface if you want typesafe (no casting necessary) managers
- * for your domain objects.
+ * <p>Extend this interface if you want typesafe (no casting necessary) DAO's for your
+ * domain objects.
  *
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/8/2016
+ * @author <a href="mailto:kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on on 1/6/2017.
+ *
  * @param <T> a type variable
  * @param <PK> the primary key for that type
  */
-public interface GenericManager<T, PK extends Serializable> {
+public interface GenericDAO<T, PK extends Serializable> {
 
     /**
      * Generic method to get an object based on class and identifier. An
@@ -28,7 +24,6 @@ public interface GenericManager<T, PK extends Serializable> {
      *
      * @param id the identifier (primary key) of the object to get
      * @return a populated object
-     * @see org.springframework.orm.ObjectRetrievalFailureException
      */
     T get(PK id);
 
@@ -55,11 +50,10 @@ public interface GenericManager<T, PK extends Serializable> {
      * @param property
      * @param ids the identifiers (primary keys) of the object to get
      * @return List of populated objects
-     * @see org.springframework.orm.ObjectRetrievalFailureException
      */
     List<T> getByIds(String property, String[] ids);
 
-    <V extends Object> T getObjectByPropertyEqualTo(String propertyName, V propertyValue) throws PersistenceException;
+    <V extends Object> T getObjectByPropertyEqualTo(String propertyName, V propertyValue);
 
     <V extends Object> List<T> getByPropertyEqualTo(String propertyName, V propertyValue);
 
@@ -79,11 +73,11 @@ public interface GenericManager<T, PK extends Serializable> {
     <V extends Object> boolean existByProperty(String propertyName, V propertyValue);
 
     <V extends Object> List<T> getByAscOrder(String propertyForOrder);
+
     <V extends Object> List<T> getByDescOrder(String propertyForOrder);
+
     <V extends Object> List<T> getByPageAndRow(int page, int row);
     //
-
-
 
     <V extends Object> List<T> getByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value);
 
@@ -106,6 +100,7 @@ public interface GenericManager<T, PK extends Serializable> {
     <V extends Object> T getObjectByPropertyEqualToIgnoreCase(String propertyName, V propertyValue);
 
     <V extends Object> List<T> getByProperties(String[] propertyName, V[] propertyValue);
+
 
     <V extends Object> List<T> getByPropertiesWithDescOrder(String[] propertyName, V[] propertyValue, String propertyForOrder);
 

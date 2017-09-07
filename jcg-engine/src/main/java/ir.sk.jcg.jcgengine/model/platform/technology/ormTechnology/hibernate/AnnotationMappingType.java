@@ -67,7 +67,7 @@ public class AnnotationMappingType extends MappingType {
         daoNewFileGenerateTemplate.putReference("entity", entity);
         // imports
         Set<String> daoImportSet = new HashSet<>();
-        daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOCommonPackage() + ".GenericDAO");
+     //   daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOCommonPackage() + ".GenericDAO");
         daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
         daoNewFileGenerateTemplate.putReference("imports", daoImportSet);
 
@@ -84,7 +84,7 @@ public class AnnotationMappingType extends MappingType {
         hibernateDaoNewFileGenerateTemplate.putReference("entity", entity);
         // imports
         Set<String> hibernateDaoImportSet = new HashSet<>();
-        hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getImplDAOCommonPackage() + ".HibernateGenericDAO");
+      //  hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getImplDAOCommonPackage() + ".HibernateGenericDAO");
         hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
         hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOPackage() + "." + packagePath + "." + entity.getName() + "DAO");
         hibernateDaoNewFileGenerateTemplate.putReference("imports", hibernateDaoImportSet);
@@ -104,7 +104,7 @@ public class AnnotationMappingType extends MappingType {
         serviceNewFileGenerateTemplate.putReference("entity", entity);
         // imports
         Set<String> serviceImportSet = new HashSet<>();
-        serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceServiceCommonPackage() + ".GenericManager");
+      //  serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceServiceCommonPackage() + ".GenericManager");
         serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
         serviceNewFileGenerateTemplate.putReference("imports", serviceImportSet);
 
@@ -121,7 +121,7 @@ public class AnnotationMappingType extends MappingType {
         serviceImplNewFileGenerateTemplate.putReference("entity", entity);
         // imports
         Set<String> serviceImplImportSet = new HashSet<>();
-        serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getImplServiceCommonPackage() + ".GenericManagerImpl");
+       // serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getImplServiceCommonPackage() + ".GenericManagerImpl");
         serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
         serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getServicePackage() +  "." + packagePath + "." + entity.getName() + "Service");
         serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOPackage() + "." + packagePath + "." + entity.getName() + "DAO");

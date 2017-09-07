@@ -4,6 +4,8 @@
 #parse("vmComponents/packageName.vm")
 
 import org.springframework.stereotype.Repository;
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.hibernateImpl.HibernateGenericDAO;
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
 
 #parse("vmComponents/import.vm")
 

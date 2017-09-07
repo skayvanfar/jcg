@@ -1,26 +1,22 @@
-#**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
- *#
-#parse("vmComponents/packageName.vm")
+package ir.sk.jcg.lib.jcglibhibernatehandler.service;
+
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-#parse("vmComponents/import.vm")
-
 /**
- * Generic DAO (Data Access Object) with common methods to CRUD POJOs.
+ * Generic Manager that talks to GenericDAO to CRUD POJOs.
  *
- * <p>Extend this interface if you want typesafe (no casting necessary) DAO's for your
- * domain objects.
+ * <p>Extend this interface if you want typesafe (no casting necessary) managers
+ * for your domain objects.
  *
- * @author <a href="mailto:kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/8/2016
- *
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/6/2017.
  * @param <T> a type variable
  * @param <PK> the primary key for that type
  */
-public interface GenericDAO<T, PK extends Serializable> {
+public interface GenericManager<T, PK extends Serializable> {
 
     /**
      * Generic method to get an object based on class and identifier. An
@@ -60,7 +56,7 @@ public interface GenericDAO<T, PK extends Serializable> {
      */
     List<T> getByIds(String property, String[] ids);
 
-    <V extends Object> T getObjectByPropertyEqualTo(String propertyName, V propertyValue);
+    <V extends Object> T getObjectByPropertyEqualTo(String propertyName, V propertyValue) throws PersistenceException;
 
     <V extends Object> List<T> getByPropertyEqualTo(String propertyName, V propertyValue);
 
@@ -107,7 +103,6 @@ public interface GenericDAO<T, PK extends Serializable> {
     <V extends Object> T getObjectByPropertyEqualToIgnoreCase(String propertyName, V propertyValue);
 
     <V extends Object> List<T> getByProperties(String[] propertyName, V[] propertyValue);
-
 
     <V extends Object> List<T> getByPropertiesWithDescOrder(String[] propertyName, V[] propertyValue, String propertyForOrder);
 

@@ -53,11 +53,14 @@ public class HibernateHandler extends ORMTechnologyHandler {
         this.interfaceServiceCommonPackage = messagesBundle.getString("hibernateHandler.interfaceServiceCommonPackage");
         this.implServiceCommonPackage = messagesBundle.getString("hibernateHandler.implServiceCommonPackage");
 
+        // TODO: 9/7/2017 better to omit these dependencies
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-core", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-entitymanager", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency(HIBERNATE_GROUP_ID, "hibernate-c3p0", HIBERNATE_VERSION, "compile"));
         dependencies.add(new Dependency("org.apache.commons", "commons-dbcp2", "2.0.1", "compile"));
         dependencies.add(new Dependency("mysql", "mysql-connector-java", "5.1.34", "compile"));
+        // add jcg-lib-hibernate-handler for this technology
+        dependencies.add(new Dependency("ir.sk.jcg", "jcg-lib-hibernate-handler", "1.0.0", "compile"));
     }
 
     public MappingTypeEnum getMappingTypeEnum() {
@@ -115,40 +118,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
 
     @Override
     protected void createBaseFiles() throws Exception {
-        /////////////////////////////////////////// interfaceDAOCommonPackage
-        GenerateTemplate genericDAONewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("Generic DAO",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + interfaceDAOCommonPackage.replace('.', File.separatorChar) + File.separator +"GenericDAO.java", "ormTechnology/hibernate/dao/GenericDAO.vm");
-        genericDAONewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAOCommonPackage);
-        genericDAONewFileGenerateTemplate.mergeTemplate();
 
-        ////////////////////////////////////////// implDAOCommonPackage
-        GenerateTemplate hibernateGenericDAONewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("Hibernate Generic DAO",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + implDAOCommonPackage.replace('.', File.separatorChar) + File.separator +"HibernateGenericDAO.java", "ormTechnology/hibernate/dao/HibernateGenericDAO.vm");
-        Set<String> importSet = new HashSet<>();
-        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAOCommonPackage + ".GenericDAO");
-        hibernateGenericDAONewFileGenerateTemplate.putReference("imports", importSet);
-        hibernateGenericDAONewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + implDAOCommonPackage);
-        hibernateGenericDAONewFileGenerateTemplate.mergeTemplate();
-
-
-        /////////////////////////////////////////// serviceDirFile
-        GenerateTemplate genericManagerNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("Generic Manager",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + interfaceServiceCommonPackage.replace('.', File.separatorChar) + File.separator + "GenericManager.java", "ormTechnology/hibernate/service/GenericManager.vm");
-        Set<String> genericDAOImportSet = new HashSet<>();
-        genericDAOImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
-        genericManagerNewFileGenerateTemplate.putReference("imports", genericDAOImportSet);
-        genericManagerNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceServiceCommonPackage);
-        genericManagerNewFileGenerateTemplate.mergeTemplate();
-
-        ////////////////////////////////////////// implServiceDirFile
-        GenerateTemplate genericManagerImplNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("Generic Manager Impl",
-                ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + implServiceCommonPackage.replace('.', File.separatorChar) + File.separator + "GenericManagerImpl.java", "ormTechnology/hibernate/service/GenericManagerImpl.vm");
-        Set<String> genericManagerImplTemplateImportSet = new HashSet<>();
-        genericManagerImplTemplateImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceServiceCommonPackage + ".GenericManager");
-        genericManagerImplTemplateImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + interfaceDAOCommonPackage + ".GenericDAO");
-        genericManagerImplNewFileGenerateTemplate.putReference("imports", genericManagerImplTemplateImportSet);
-        genericManagerImplNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + implServiceCommonPackage);
-        genericManagerImplNewFileGenerateTemplate.mergeTemplate();
     }
 
 }

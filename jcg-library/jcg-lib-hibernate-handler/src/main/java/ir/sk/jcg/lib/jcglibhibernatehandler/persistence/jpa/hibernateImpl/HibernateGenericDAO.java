@@ -1,15 +1,12 @@
-#**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
- *#
-#parse("vmComponents/packageName.vm")
+package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.hibernateImpl;
+
+
+
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.GenericDAO;
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.PersistenceUtil;
 
 import org.hibernate.*;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.hibernate.criterion.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.orm.ObjectRetrievalFailureException;
@@ -18,8 +15,6 @@ import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
-
-#parse("vmComponents/import.vm")
 
 /**
  * This class serves as the Base class for all other DAOs - namely to hold
@@ -35,17 +30,16 @@ import java.util.*;
  *
  * @param <T>  a type variable
  * @param <PK> the primary key for that type
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/8/2016
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/6/2017
  *         Updated by jgarcia: update hibernate3 to hibernate4
  */
-
-public class HibernateGenericDAO<T, PK extends Serializable> implements GenericDAO<T, PK> {
+public class HibernateGenericDAO<T, PK extends Serializable> extends PersistenceUtil implements GenericDAO<T, PK> {
 
     /**
      * Log variable for all child classes. Uses LogFactory.getLog(getClass()) from Commons Logging
      */
 
-  //  private static final Logger logger = LoggerFactory.getLogger(HibernateGenericDAO.class);
+    //  private static final Logger logger = LoggerFactory.getLogger(HibernateGenericDAO.class);
 
     private Class<T> persistentClass;
 

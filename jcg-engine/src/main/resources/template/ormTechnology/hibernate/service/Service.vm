@@ -3,6 +3,9 @@
  *#
 #parse("vmComponents/packageName.vm")
 
+import ir.sk.jcg.lib.jcglibhibernatehandler.service.GenericManager;
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
+
 #parse("vmComponents/import.vm")
 
 #set($capitalizeType = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## capitalize entity.id.type

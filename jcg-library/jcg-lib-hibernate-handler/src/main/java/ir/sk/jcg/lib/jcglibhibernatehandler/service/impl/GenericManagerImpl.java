@@ -1,8 +1,7 @@
-#**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 6/4/2106.
- *#
-#parse("vmComponents/packageName.vm")
+package ir.sk.jcg.lib.jcglibhibernatehandler.service.impl;
 
+import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.GenericDAO;
+import ir.sk.jcg.lib.jcglibhibernatehandler.service.GenericManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
-#parse("vmComponents/import.vm")
 
 /**
  * This class serves as the Base class for all other Managers - namely to hold
@@ -45,7 +42,7 @@ import java.util.Map;
  *
  * @param <T>  a type variable
  * @param <PK> the primary key for that type
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/8/2016
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 1/6/2017.
  */
 @Transactional
 public class GenericManagerImpl<T, PK extends Serializable> implements GenericManager<T, PK> {
@@ -381,5 +378,4 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     public boolean exists(PK id) {
         return dao.exists(id);
     }
-
 }
