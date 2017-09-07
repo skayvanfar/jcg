@@ -4,12 +4,12 @@
 
 <tiles-definitions>
 
-    <definition name="home" extends="baseLayout">
+    <definition name="home2" extends="baseLayout">
         <put-attribute name="title" value="Welcome" />
-        <put-attribute name="top" value="/WEB-INF/tiles/template/generic/top.jsp"/>
+        <put-attribute name="top" value="/WEB-INF/tiles/template/home/top.jsp"/>
         <put-attribute name="heading" value="Welcome to Patient Talk" />
         <put-attribute name="tagline" value="The amazing Patient Talk Forum" />
-        <put-attribute name="content" value="/WEB-INF/home.jsp" />
+        <put-attribute name="content" value="/WEB-INF/view/main.jsp" />
     </definition>
 
 </tiles-definitions>

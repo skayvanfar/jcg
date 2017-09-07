@@ -77,9 +77,50 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     protected void createDirectories() {
         /*controllerDirFile = new File(ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir);
         controllerDirFile.mkdirs();*/
+        // add hooks
+        GenerateTemplate tagsREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("tagsREADME",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tags" + File.separator
+                        + "README.txt", "mvcTechnology/SpringMVC/hook/README.vm");
+        tagsREADMENewFileGenerateTemplate.putReference("description", "Put your tags files here.");
+        tagsREADMENewFileGenerateTemplate.mergeTemplate();
 
-        File flowsFile = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "flows");
-        flowsFile.mkdirs();
+        GenerateTemplate flowsREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("flowsREADME",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "flows" + File.separator
+                        + "README.txt", "mvcTechnology/SpringMVC/hook/README.vm");
+        flowsREADMENewFileGenerateTemplate.putReference("description", "Put your flows files here.");
+        flowsREADMENewFileGenerateTemplate.mergeTemplate();
+
+        GenerateTemplate tilesDefinitionREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("tileDefinitionsREADME",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\definition" + File.separator
+                        + "README.txt", "mvcTechnology/SpringMVC/hook/README.vm");
+        tilesDefinitionREADMENewFileGenerateTemplate.putReference("description", "Put your tiles Definition files here.");
+        tilesDefinitionREADMENewFileGenerateTemplate.mergeTemplate();
+
+        File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles\\definition"); // TODO: 7/10/2016 must not be hard code
+        File dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\definition");
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        GenerateTemplate tilesTemplatesREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("tilesTemplatesREADME",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\template" + File.separator
+                        + "README.txt", "mvcTechnology/SpringMVC/hook/README.vm");
+        tilesTemplatesREADMENewFileGenerateTemplate.putReference("description", "Put your tiles Template files here.");
+        tilesTemplatesREADMENewFileGenerateTemplate.mergeTemplate();
+
+        GenerateTemplate viewsREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("viewsREADME",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views" + File.separator
+                        + "README.txt", "mvcTechnology/SpringMVC/hook/README.vm");
+        viewsREADMENewFileGenerateTemplate.putReference("description", "Put your view files here.");
+        viewsREADMENewFileGenerateTemplate.mergeTemplate();
+
+        GenerateTemplate resourcesREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("resourcesREADME",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "resources" + File.separator
+                        + "README.txt", "mvcTechnology/SpringMVC/hook/README.vm");
+        resourcesREADMENewFileGenerateTemplate.putReference("description", "Put your resource files here.");
+        resourcesREADMENewFileGenerateTemplate.mergeTemplate();
     }
 
     @Override
