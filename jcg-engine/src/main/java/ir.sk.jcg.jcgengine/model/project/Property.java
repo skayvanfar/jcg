@@ -33,6 +33,13 @@ public class Property extends ModelElement implements Serializable {
     public Property() {
     }
 
+    public Property(String name, String labelName, String type, String columnName) {
+        this.name = name;
+        this.labelName = labelName;
+        this.type = type;
+        this.columnName = columnName;
+    }
+
     public String getLabelName() {
         return labelName;
     }

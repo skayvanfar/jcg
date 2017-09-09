@@ -5,6 +5,7 @@ import ir.sk.jcg.jcglibcommon.persistence.BaseEntity;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceExceptionType;
 
+import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;

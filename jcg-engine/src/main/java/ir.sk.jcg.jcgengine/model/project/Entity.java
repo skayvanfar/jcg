@@ -29,9 +29,9 @@ public class Entity extends SchemaItem implements Serializable {
     @Prop(label = "Label Name", editable = true, required = true)
     private String labelName;
     @Prop(label = "Is Logically Deletable", editable = true, componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
-    private boolean isLogicallyDeletable;
+    private boolean isLogicallyDeletable = true;
     @Prop(label = "Is Trackable", editable = true, componentType = ComponentType.BOOLEAN_CHECKBOX, required = true)
-    private boolean isTrackable;
+    private boolean isTrackable = true;
 
     private Id id;
 
@@ -43,6 +43,8 @@ public class Entity extends SchemaItem implements Serializable {
         properties = new HashSet<>();
         relationships = new HashSet<>();
     }
+
+
 
     public String getPackagePath() {
         return packagePath;

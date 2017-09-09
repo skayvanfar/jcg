@@ -378,3 +378,62 @@ fieldset {
     left: 3px;
     z-index: 2;
 }
+
+/* ///////////////////////////////// my-panel ////////////////////////////// */
+.my-panel {
+    display: table;
+    width: 98%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    /*border: #87e0ff 1px solid;*/
+    border: rgba(115, 177, 204, 0.8) 1px solid;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+
+}
+
+.my-panel .my-panel-header {
+    padding: .5em .2em;
+    display: table-row;
+    background-color: rgba(115, 177, 204, 0.8);
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+/*.my-panel .my-panel-body > div {
+    height: 100%;
+    position: relative;
+}
+.my-panel-body > div > div {
+    overflow: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}*/
+
+.my-panel .my-panel-title {
+    /* margin-top: 0;
+     margin-bottom: 0;*/
+    padding: .4em 2em;
+    font-size: 16px;
+    color: inherit;
+    text-align: center;
+}
+
+.my-panel .my-panel-body {
+    display: table-row;
+    padding: 15px;
+}
+
+.my-panel .my-panel-footer {
+    display: table-row;
+    padding: 10px 15px;
+    background-color: rgba(115, 177, 204, 0.8);
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}

@@ -3,7 +3,7 @@
  *#
 #parse("vmComponents/packageName.vm")
 
-import ir.sk.jcg.lib.jcglibhibernatehandler.service.GenericManager;
+import ir.sk.jcg.jcglibcommon.persistence.GenericManager;
 import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
 
 #parse("vmComponents/import.vm")

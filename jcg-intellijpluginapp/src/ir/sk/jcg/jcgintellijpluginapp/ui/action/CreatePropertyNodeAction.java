@@ -28,9 +28,7 @@ public class CreatePropertyNodeAction extends CreateNodeAction {
                 JcgProjectComponent jcgProjectComponent1 = JcgProjectComponent.getInstance(e.getProject());
                 Entity entity = (Entity) jcgProjectComponent1.currentSelectedNodeUserObject();
 
-                Property property = new Property(); // TODO: 5/3/2016 create new method
-                property.setName(propertyName);
-
+                Property property = new Property(propertyName, propertyName, "String", propertyName); // TODO: 5/3/2016 create new method
                 // add to project
                 entity.addProperty(property);
 

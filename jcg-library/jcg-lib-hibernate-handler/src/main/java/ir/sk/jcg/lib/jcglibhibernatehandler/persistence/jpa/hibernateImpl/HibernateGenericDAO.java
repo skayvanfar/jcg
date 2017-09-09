@@ -2,7 +2,10 @@ package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.hibernateImpl;
 
 
 
-import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.GenericDAO;
+import ir.sk.jcg.jcglibcommon.persistence.GenericDAO;
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
+import ir.sk.jcg.jcglibcommon.web.PagingDataList;
+import ir.sk.jcg.jcglibcommon.web.SearchData;
 import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.PersistenceUtil;
 
 import org.hibernate.*;
@@ -110,6 +113,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    @Override
     public T get(PK id) {
         IdentifierLoadAccess byId = getSession().byId(persistentClass);
         T entity = (T) byId.load(id);
@@ -126,6 +130,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    @Override
     public List<T> getAll() {
         return getSession().createCriteria(persistentClass).list();
     }
@@ -134,6 +139,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    @Override
     public List<T> getAllDistinct() {
         Collection<T> result = new LinkedHashSet<>(getAll());
         return new ArrayList<>(result);
@@ -142,6 +148,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByIds(String property, String[] ids) {
         Criteria criteria = getSession().createCriteria(persistentClass);
 
@@ -160,6 +167,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.list();
     }
 
+    @Override
     public <V> T getObjectByPropertyEqualTo(String propertyName, V propertyValue) {
         return (T) getSession().createCriteria(persistentClass)
                 .add(Restrictions.eq(propertyName, propertyValue))
@@ -167,12 +175,14 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .uniqueResult();
     }
 
+    @Override
     public <V> List<T> getByPropertyEqualTo(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.eq(propertyName, propertyValue))
                 .list();
     }
 
+    @Override
     public <V> List<T> getByProperties(String propertyName, V[] propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         Criterion criterion = null;
@@ -186,6 +196,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.add(criterion).list();
     }
 
+    @Override
     public List<T> getByProperties(String propertyName, String[] propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         Criterion criterion = null;
@@ -199,6 +210,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.add(criterion).list();
     }
 
+    @Override
     public List<T> getByProperties(String[] propertyName, String[] propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         for (int i = 0; i < propertyName.length; ++i) {
@@ -208,6 +220,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
     }
 
     //////////////////////////////////////////////////
+    @Override
     public <V> List<T> getByPropertiesLikeExact(String[] propertyName, V[] propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         for (int i = 0; i < propertyName.length; ++i) {
@@ -216,6 +229,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.list();
     }
 
+    @Override
     public List<T> getByPropertiesLikeExact(String[] propertyName, String propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         for (int i = 0; i < propertyName.length; ++i) {
@@ -224,6 +238,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.list();
     }
 
+    @Override
     public <V> boolean existByProperty(String propertyName, V propertyValue) {
         return !Objects.isNull(getSession().createCriteria(persistentClass)
                 .add(Restrictions.eq(propertyName, propertyValue))
@@ -231,16 +246,19 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .uniqueResult());
     }
 
+    @Override
     public <V extends Object> List<T> getByAscOrder(String propertyForOrder) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         return criteria.addOrder(Order.asc(propertyForOrder)).list();
     }
 
+    @Override
     public <V extends Object> List<T> getByDescOrder(String propertyForOrder) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         return criteria.addOrder(Order.desc(propertyForOrder)).list();
     }
 
+    @Override
     public <V extends Object> List<T> getByPageAndRow(int page, int row) {
         int firstRow = (page - 1) * row;
         Criteria criteria = getSession().createCriteria(persistentClass);
@@ -250,6 +268,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
     }
 //////////////////////////////////////////////////
 
+    @Override
     public T getObjectByProperties(String[] propertyName, String[] propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
 
@@ -268,6 +287,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return (T) criteria.setMaxResults(1).uniqueResult();
     }
 
+    @Override
     public <V> List<T> getByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value) {
         return getSession().createCriteria(persistentClass)
                 .createCriteria(property)
@@ -275,6 +295,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .list();
     }
 
+    @Override
     public <V> T getObjectByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value) {
         return (T) getSession().createCriteria(persistentClass)
                 .createCriteria(property)
@@ -283,48 +304,56 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .uniqueResult();
     }
 
+    @Override
     public <V> List<T> getByPropertyEqualToIgnoreCase(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.eq(propertyName, propertyValue).ignoreCase())
                 .list();
     }
 
+    @Override
     public <V> List<T> getByPropertyLessThanOrEqualTo(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.le(propertyName, propertyValue))
                 .list();
     }
 
+    @Override
     public <V> List<T> getByPropertyGreaterThanOrEqualTo(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.ge(propertyName, propertyValue))
                 .list();
     }
 
+    @Override
     public <V> List<T> getByPropertyLessThan(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.lt(propertyName, propertyValue))
                 .list();
     }
 
+    @Override
     public <V> List<T> getByPropertyGreaterThan(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.gt(propertyName, propertyValue))
                 .list();
     }
 
+    @Override
     public List<T> getByPropertyLikeAnyWhereMode(String propertyName, String propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.like(propertyName, propertyValue, MatchMode.ANYWHERE))
                 .list();
     }
 
+    @Override
     public List<T> getByPropertyLikeAnyWhereModeIgnoreCase(String propertyName, String propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.like(propertyName, propertyValue, MatchMode.ANYWHERE).ignoreCase())
                 .list();
     }
 
+    @Override
     public <V> T getObjectByPropertyEqualToIgnoreCase(String propertyName, V propertyValue) {
         return (T) getSession().createCriteria(persistentClass)
                 .add(Restrictions.eq(propertyName, propertyValue).ignoreCase())
@@ -332,6 +361,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .uniqueResult();
     }
 
+    @Override
     public <V> List<T> getByProperties(String[] propertyName, V[] propertyValue) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         for (int i = 0; i < propertyName.length; ++i) {
@@ -340,6 +370,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.list();
     }
 
+    @Override
     public <V> List<T> getByPropertiesWithDescOrder(String[] propertyName, V[] propertyValue, String propertyForOrder) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         for (int i = 0; i < propertyName.length; ++i) {
@@ -349,6 +380,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.list();
     }
 
+    @Override
     public <V> List<T> getByPropertiesWithAscOrder(String[] propertyName, V[] propertyValue, String propertyForOrder) {
         Criteria criteria = getSession().createCriteria(persistentClass);
         for (int i = 0; i < propertyName.length; ++i) {
@@ -358,18 +390,21 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         return criteria.list();
     }
 
+    @Override
     public <V> List<T> getByPropertyNotEqualTo(String propertyName, V propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.ne(propertyName, propertyValue))
                 .list();
     }
 
+    @Override
     public List<T> getByPropertyLikeExact(String propertyName, String propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.ilike(propertyName, propertyValue, MatchMode.EXACT))
                 .list();
     }
 
+    @Override
     public T getByPropertyLikeExactModeIgnoreCase(String propertyName, String propertyValue) {
         return (T) getSession().createCriteria(persistentClass)
                 .add(Restrictions.like(propertyName, propertyValue, MatchMode.EXACT).ignoreCase())
@@ -377,6 +412,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .uniqueResult();
     }
 
+    @Override
     public T getByPropertyLikeModeIgnoreCase(String propertyName, String propertyValue) {
         return (T) getSession().createCriteria(persistentClass)
                 .add(Restrictions.like(propertyName, propertyValue).ignoreCase())
@@ -384,12 +420,14 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .uniqueResult();
     }
 
+    @Override
     public List<T> getByPropertyLikeAnyWhereModeIgnoreCasePartially(String propertyName, String propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .add(Restrictions.like(propertyName, "%" + propertyValue + "%", MatchMode.ANYWHERE).ignoreCase())
                 .list();
     }
 
+    @Override
     public List<T> getByAssociatedProperty(String associatedProperty, String propertyName, Integer propertyValue) {
         return getSession().createCriteria(persistentClass)
                 .createCriteria(associatedProperty)
@@ -397,6 +435,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 .list();
     }
 
+    @Override
     public void reattachToSession(T object) {
         Session session = getSession();
 
@@ -410,10 +449,12 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
 
     }
 
+    @Override
     public void update(T object) {
         getSession().update(object);
     }
 
+    @Override
     public void saveOrUpdate(T object) {
         getSession().saveOrUpdate(object);
     }
@@ -422,6 +463,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    @Override
     public T save(T object) {
         return (T) getSession().merge(object);
     }
@@ -429,6 +471,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
     /**
      * {@inheritDoc}
      */
+    @Override
     public void remove(T object) {
         getSession().delete(object);
     }
@@ -436,6 +479,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
     /**
      * {@inheritDoc}
      */
+    @Override
     public void remove(PK id) {
         Session session = getSession();
         IdentifierLoadAccess byId = session.byId(persistentClass);
@@ -443,11 +487,13 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         session.delete(entity);
     }
 
+    @Override
     public void deleteAll() {
         getSession().createQuery("delete " + persistentClass)
                 .executeUpdate();
     }
 
+    @Override
     public long count() {
         return (Long) getSession()
                 .createQuery("select count(*) from " + persistentClass)
@@ -458,6 +504,7 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    @Override
     public List<T> findByNamedQuery(String queryName, Map<String, Object> queryParams) {
         Session sess = getSession();
         Query namedQuery = sess.getNamedQuery(queryName);
@@ -476,9 +523,23 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
+    @Override
     public boolean exists(PK id) {
         IdentifierLoadAccess byId = getSession().byId(persistentClass);
         T entity = (T) byId.load(id);
         return entity != null;
+    }
+
+    @Override
+    public PagingDataList<T> search(SearchData searchData) throws PersistenceException {
+        Map<String, Object> properties = searchData.getSearchParams();
+        Criteria criteria = getSession().createCriteria(persistentClass);
+
+        for (Map.Entry<String, Object> propertyEntry : properties.entrySet()) {
+            if (propertyEntry.getValue() != null && !propertyEntry.getValue().equals(""))
+                criteria.add(Restrictions.like(propertyEntry.getKey(), propertyEntry.getValue()));
+        }
+
+        return paging(criteria, searchData.getPage(), searchData.getPageSize(), Order.asc("id"));
     }
 }

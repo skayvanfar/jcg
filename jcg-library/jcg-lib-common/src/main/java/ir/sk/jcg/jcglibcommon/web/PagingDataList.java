@@ -1,4 +1,4 @@
-package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa;
+package ir.sk.jcg.jcglibcommon.web;
 
 import java.util.List;
 

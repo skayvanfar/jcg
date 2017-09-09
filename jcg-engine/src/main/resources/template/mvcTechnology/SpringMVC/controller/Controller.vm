@@ -3,7 +3,7 @@
  *#
 #parse("vmComponents/packageName.vm")
 
-import ir.sk.jcg.lib.jcglibspringmvchandler.controller.BaseController;
+import ir.sk.jcg.lib.jcglibspringmvchandler.controller.GenericController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/${lowerCaseName}s")
-public class ${entity.name}Controller extends BaseController {
+public class ${entity.name}Controller extends GenericController<${entity.name}, ${entity.name}SearchData, Long> { # Long must replace by actual type#
 
     @Autowired
     private ${entity.name}Service ${lowerCaseName}Service;

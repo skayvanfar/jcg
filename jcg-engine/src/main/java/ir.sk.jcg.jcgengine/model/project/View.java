@@ -19,6 +19,19 @@ import java.util.List;
 @Editable
 public abstract class View extends SchemaItem implements Serializable {
 
+
+    /**
+     * Name of view file
+     */
+    @Prop(label = "View File Name", required = true, editable = true)
+    private String viewFileName;
+
+    /**
+     * Counts of components in each row
+     */
+    @Prop(label = "Span", required = true, editable = true)
+    private String span = "3";
+
     @Prop(label = "Target Entity", required = true)
     private Entity targetEntity;
 
@@ -27,6 +40,24 @@ public abstract class View extends SchemaItem implements Serializable {
 
     public View() {
         components = new ArrayList<>();
+    }
+
+    public String getViewFileName() {
+        return viewFileName;
+    }
+
+    @XmlAttribute
+    public void setViewFileName(String viewFileName) {
+        this.viewFileName = viewFileName;
+    }
+
+    public String getSpan() {
+        return span;
+    }
+
+    @XmlAttribute
+    public void setSpan(String span) {
+        this.span = span;
     }
 
     public Entity getTargetEntity() {

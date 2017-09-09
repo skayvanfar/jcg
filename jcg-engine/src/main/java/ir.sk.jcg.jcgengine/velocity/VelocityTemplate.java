@@ -35,6 +35,9 @@ public class VelocityTemplate {
             //   System.out.printf("ve  " + velocityConf);
             velocityEngine.setProperty("runtime.log.logsystem.class", "org.apache.velocity.runtime.log.NullLogSystem");
             velocityEngine.setProperty("directive.set.null.allowed", "true");
+            velocityEngine.setProperty("input.encoding", "UTF8");
+            velocityEngine.setProperty("output.encoding", "UTF8");
+
 
             //    velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
             //     velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());

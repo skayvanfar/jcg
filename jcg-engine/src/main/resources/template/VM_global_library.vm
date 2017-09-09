@@ -3,6 +3,10 @@
 *#
 ## todo must move to other macro library
 ## ############################################################################ Hibernate Handler START
+## Specefic Characters
+#set ($s = "*")
+#set ($p = "+")
+#set ($ko = "{")
 
 ## Define id name
 #macro(idName $id)
@@ -96,6 +100,101 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
         SEQUENCE
     #elseif(${cardinalityType} == "Native")
         TABLE
+    #end
+#end
+
+## ############################################################################ Hibernate Handler END
+
+## ############################################################################ View START
+## Define properties name
+#macro(viewComponents $components $span)
+    #set($Integer = 0)
+    #set($realSpan = 12/$Integer.parseInt($span))   ## Calculate real span
+    #foreach(${component} in ${components})
+    <div class="column small-${realSpan} medium-${realSpan} large-${realSpan}">
+        #set($call = "#${component.class.simpleName}")
+        #evaluate($call)
+    </div>
+    #end
+#end
+
+## Components
+
+## Define TextField component
+#macro(TextFieldComponent $component)
+    <form:text path="${component.targetProperty.name}" placeholder="${component.targetProperty.labelName}" label="${component.targetProperty.labelName}" maxlength="${component.maxLength}"/>
+#end
+
+## Define TextArea component
+#macro(TextAreaComponent $component)
+<form:textarea path="${component.targetProperty.name}" placeholder="${component.targetProperty.labelName}" label="${component.targetProperty.labelName}"/>
+#end
+
+## Define PasswordTextField component
+#macro(PasswordTextField $component)
+<form:password path="${component.targetProperty.name}" placeholder="${component.targetProperty.labelName}" label="${component.targetProperty.labelName}"/>
+#end
+
+
+## DataGrid headers
+#macro(dataGridHeaders $dataGrid)
+<tr class="my-panel-header">
+        <th>ردیف</th>
+    #foreach(${component} in ${dataGrid.components})
+        <th>component.labelName</th>
+    #end
+</tr>
+#end
+
+## DataGrid Contents
+#macro(dataGridContents $view)
+<c:forEach var="${view.targetEntity.name}" items="${${view.targetEntity.name}s.data}" varStatus="forIndex">
+    <tr>
+        <td>${ko}users.page ${s} ${view.targetEntity.name}s.pageSize ${p} forIndex.index ${p} 1}</td>
+        #foreach(${component} in ${view.dataGrid.components})
+            <td>${${view.targetEntity.name}.${component.targetProperty.name}}</td>
+        #end
+
+        <td>
+            <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${view.targetEntity.name}.id}" />" class="radius button split">
+            ویرایش
+            <span data-dropdown="drop${forIndex.index}"></span>
+            </a>
+            <ul id="drop${forIndex.index}" class="f-dropdown" data-dropdown-content>
+                <li>
+                    <a href="<filter:hashLongUrl url="/manage/artist" name="id" value="${${view.targetEntity.name}.id}" />">
+                    حذف
+                    </a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</c:forEach>
+#end
+
+
+## Define Data properties name
+#macro(dataPropertiesName $components)
+    #foreach(${component} in ${components})
+        #set($property = ${component.targetProperty})
+        @SearchParam
+        private ${property.type} ${property.name};
+    #end
+#end
+
+## Define Data properties setters and getters
+#macro(dataPropertiesGetterAndSetter $components)
+    #foreach(${component} in ${components})
+        #set($property = ${component.targetProperty})
+        #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
+
+        public ${property.type} get${capitalizeName}() {
+            return ${property.name};
+        }
+
+        public void set${capitalizeName}(${property.type} ${property.name}) {
+            this.${property.name} = ${property.name};
+        }
     #end
 #end
 

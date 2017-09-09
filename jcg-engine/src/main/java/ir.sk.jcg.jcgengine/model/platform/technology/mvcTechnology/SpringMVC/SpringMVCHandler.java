@@ -34,26 +34,36 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     @Prop(label = "Resources Directory", editableInWizard = true, required = true)
     private String resourcesDir;
 
-    private File controllerDirFile;
-    private File resourcesDirFile;
-    private File tilesDefinitionsFile;
-    private File tilesTemplateFile;
-
     @Override
     public ViewElement createView(View view, String packagePath) {
-        String outputPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views"
-                 + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getName() + ".jsp";
-     //   Path path = Paths.get("outputPath");
+
+        GenerateTemplate searchDataNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("SearchData", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + "dto" + File.separator + view.getTargetEntity().getName() + "SearchData.java", "mvcTechnology/SpringMVC/controller/SearchData.vm");
+        searchDataNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "dto");
+        searchDataNewFileGenerateTemplate.putReference("view", view);
+        searchDataNewFileGenerateTemplate.mergeTemplate();
+        // TODO: 9/9/2017 mabe need to add searchData to artifacts
+
+
+        //   Path path = Paths.get("outputPath");
         ViewElement viewElement = new ViewElement();
         NewFileGenerateGenerateTemplate viewNewFileGenerateGenerateTemplate = null;
-        if (view instanceof DisplayView)
-            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("Display View Element", "mvcTechnology/SpringMVC/view/DisplayView.vm", outputPath);
-        else if (view instanceof SearchView)
-            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("Search View Element", "mvcTechnology/SpringMVC/view/SearchView.vm", outputPath);
-        else if (view instanceof CreateEditView)
-            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View Element", "mvcTechnology/SpringMVC/view/CreateEditView.vm", outputPath);
+        String vmPath = "";
+        String viewFileName = "";
+        if (view instanceof DisplayView) {
+            vmPath = "mvcTechnology/SpringMVC/view/DisplayView.vm";
+        } else if (view instanceof SearchView) {
+            vmPath = "mvcTechnology/SpringMVC/view/SearchView.vm";
+        } else if (view instanceof CreateEditView) {
+            vmPath = "mvcTechnology/SpringMVC/view/CreateEditView.vm";
+        }
      /*   else if (view instanceof SearcE)
             viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View Element", "mvcTechnology/SpringMVC/view/EntityWithAnnotation.vm", outputPath);*/
+
+        String outputPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views"
+                + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getViewFileName() + ".jsp";
+
+        viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View", outputPath, vmPath);
 
         viewNewFileGenerateGenerateTemplate.putReference("view", view);
 

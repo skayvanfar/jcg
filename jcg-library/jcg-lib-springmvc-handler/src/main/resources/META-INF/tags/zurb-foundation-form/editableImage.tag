@@ -3,9 +3,9 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="f" uri="http://sk.ir/patienttalk/zurb-foundation-form" %>
+<%@ taglib prefix="f" uri="http://sk.ir/jcg/zurb-foundation-form" %>
 
-<%@ attribute name="location" required="false" rtexprvalue="true" type="ir.sk.patienttalk.common.persistence.file.web.FileItem"
+<%@ attribute name="location" required="false" rtexprvalue="true" type="ir.sk.jcg.lib.jcglibspringmvchandler.file.web.FileItem"
               deferredValue="false" %>
 <%@ attribute name="tempLocation" required="false" rtexprvalue="true" type="java.lang.String" deferredValue="false" %>
 <%@ attribute name="width" required="true" rtexprvalue="true" type="java.lang.String" deferredValue="false" %>

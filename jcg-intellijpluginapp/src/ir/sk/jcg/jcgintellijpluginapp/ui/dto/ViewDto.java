@@ -11,14 +11,16 @@ import java.io.Serializable;
 public class ViewDto implements Serializable {
 
     private String name;
+    private String viewFileName;
     private Entity targetEntity;
     private ViewType viewType;
 
     public ViewDto() {
     }
 
-    public ViewDto(String name, Entity targetEntity, ViewType viewType) {
+    public ViewDto(String name, String viewFileName, Entity targetEntity, ViewType viewType) {
         this.name = name;
+        this.viewFileName = viewFileName;
         this.targetEntity = targetEntity;
         this.viewType = viewType;
     }
@@ -29,6 +31,14 @@ public class ViewDto implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getViewFileName() {
+        return viewFileName;
+    }
+
+    public void setViewFileName(String viewFileName) {
+        this.viewFileName = viewFileName;
     }
 
     public Entity getTargetEntity() {

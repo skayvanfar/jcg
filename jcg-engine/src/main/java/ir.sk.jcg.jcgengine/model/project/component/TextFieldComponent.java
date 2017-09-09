@@ -21,6 +21,10 @@ public class TextFieldComponent extends Component {
         super.name = "Text Field";
     }
 
+    public TextFieldComponent(String maxLength) {
+        this.maxLength = maxLength;
+    }
+
     @Prop(label = "Max Length", editable = true, required = true)
     private String maxLength;
 

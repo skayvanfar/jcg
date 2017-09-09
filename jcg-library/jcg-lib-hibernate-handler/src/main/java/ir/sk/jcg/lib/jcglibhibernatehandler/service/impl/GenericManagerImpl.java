@@ -1,7 +1,10 @@
 package ir.sk.jcg.lib.jcglibhibernatehandler.service.impl;
 
-import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.GenericDAO;
-import ir.sk.jcg.lib.jcglibhibernatehandler.service.GenericManager;
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
+import ir.sk.jcg.jcglibcommon.web.PagingDataList;
+import ir.sk.jcg.jcglibcommon.web.SearchData;
+import ir.sk.jcg.jcglibcommon.persistence.GenericDAO;
+import ir.sk.jcg.jcglibcommon.persistence.GenericManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,6 +72,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public T get(PK id) {
         return dao.get(id);
     }
@@ -76,6 +80,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getAll() {
         return dao.getAll();
     }
@@ -83,6 +88,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getAllDistinct() {
         return dao.getAllDistinct();
     }
@@ -90,6 +96,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByIds(String property, String[] ids) {
         return dao.getByIds(property, ids);
     }
@@ -97,6 +104,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> T getObjectByPropertyEqualTo(String propertyName, V propertyValue) {
         return dao.getObjectByPropertyEqualTo(propertyName, propertyValue);
     }
@@ -104,6 +112,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyEqualTo(String propertyName, V propertyValue) {
         return dao.getByPropertyEqualTo(propertyName, propertyValue);
     }
@@ -111,6 +120,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByProperties(String propertyName, V[] propertyValue) {
         return dao.getByProperties(propertyName, propertyValue);
     }
@@ -118,6 +128,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByProperties(String propertyName, String[] propertyValue) {
         return dao.getByProperties(propertyName, propertyValue);
     }
@@ -125,6 +136,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByProperties(String[] propertyName, String[] propertyValue) {
         return dao.getByProperties(propertyName, propertyValue);
     }
@@ -132,6 +144,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public T getObjectByProperties(String[] propertyName, String[] propertyValue) {
         return dao.getObjectByProperties(propertyName, propertyValue);
     }
@@ -140,6 +153,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V> List<T> getByPropertiesLikeExact(String[] propertyName, V[] propertyValue) {
         return dao.getByPropertiesLikeExact(propertyName, propertyValue);
     }
@@ -147,6 +161,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByPropertiesLikeExact(String[] propertyName, String propertyValue) {
         return dao.getByPropertiesLikeExact(propertyName, propertyValue);
     }
@@ -154,6 +169,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> boolean existByProperty(String propertyName, V propertyValue) {
         return dao.existByProperty(propertyName, propertyValue);
     }
@@ -178,6 +194,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value) {
         return dao.getByPropertyOfPropertyEqualTo(property, propertyOfProperty, value);
     }
@@ -185,6 +202,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> T getObjectByPropertyOfPropertyEqualTo(String property, String propertyOfProperty, V value) {
         return dao.getObjectByPropertyOfPropertyEqualTo(property, propertyOfProperty, value);
     }
@@ -192,6 +210,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyEqualToIgnoreCase(String propertyName, V propertyValue) {
         return dao.getByPropertyEqualToIgnoreCase(propertyName, propertyValue);
     }
@@ -199,6 +218,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyLessThanOrEqualTo(String propertyName, V propertyValue) {
         return dao.getByPropertyLessThanOrEqualTo(propertyName, propertyValue);
     }
@@ -206,6 +226,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyGreaterThanOrEqualTo(String propertyName, V propertyValue) {
         return dao.getByPropertyGreaterThanOrEqualTo(propertyName, propertyValue);
     }
@@ -213,6 +234,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyLessThan(String propertyName, V propertyValue) {
         return dao.getByPropertyLessThan(propertyName, propertyValue);
     }
@@ -220,6 +242,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyGreaterThan(String propertyName, V propertyValue) {
         return dao.getByPropertyGreaterThan(propertyName, propertyValue);
     }
@@ -227,6 +250,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByPropertyLikeAnyWhereMode(String propertyName, String propertyValue) {
         return dao.getByPropertyLikeAnyWhereMode(propertyName, propertyValue);
     }
@@ -234,6 +258,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByPropertyLikeAnyWhereModeIgnoreCase(String propertyName, String propertyValue) {
         return dao.getByPropertyLikeAnyWhereModeIgnoreCase(propertyName, propertyValue);
     }
@@ -241,6 +266,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> T getObjectByPropertyEqualToIgnoreCase(String propertyName, V propertyValue) {
         return dao.getObjectByPropertyEqualToIgnoreCase(propertyName, propertyValue);
     }
@@ -248,6 +274,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByProperties(String[] propertyName, V[] propertyValue) {
         return dao.getByProperties(propertyName, propertyValue);
     }
@@ -255,6 +282,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertiesWithDescOrder(String[] propertyName, V[] propertyValue, String propertyForOrder) {
         return dao.getByPropertiesWithDescOrder(propertyName, propertyValue, propertyForOrder);
     }
@@ -262,6 +290,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertiesWithAscOrder(String[] propertyName, V[] propertyValue, String propertyForOrder) {
         return dao.getByPropertiesWithAscOrder(propertyName, propertyValue, propertyForOrder);
     }
@@ -269,6 +298,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public <V extends Object> List<T> getByPropertyNotEqualTo(String propertyName, V propertyValue) {
         return dao.getByPropertyNotEqualTo(propertyName, propertyValue);
     }
@@ -276,6 +306,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByPropertyLikeExact(String propertyName, String propertyValue) {
         return dao.getByPropertyLikeExact(propertyName, propertyValue);
     }
@@ -283,6 +314,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public T getByPropertyLikeExactModeIgnoreCase(String propertyName, String propertyValue) {
         return dao.getByPropertyLikeExactModeIgnoreCase(propertyName, propertyValue);
     }
@@ -290,6 +322,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public T getByPropertyLikeModeIgnoreCase(String propertyName, String propertyValue){
         return dao.getByPropertyLikeModeIgnoreCase(propertyName, propertyValue);
     }
@@ -297,6 +330,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByPropertyLikeAnyWhereModeIgnoreCasePartially(String propertyName, String propertyValue) {
         return dao.getByPropertyLikeAnyWhereModeIgnoreCasePartially(propertyName, propertyValue);
     }
@@ -304,6 +338,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> getByAssociatedProperty(String associatedProperty, String propertyName, Integer propertyValue) {
         return dao.getByAssociatedProperty(associatedProperty, propertyName, propertyValue);
     }
@@ -311,6 +346,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public T save(T object) {
         return dao.save(object);
     }
@@ -318,6 +354,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void reattachToSession(T object) {
         dao.reattachToSession(object);
     }
@@ -325,6 +362,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void update(T object) {
 
     }
@@ -332,6 +370,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void saveOrUpdate(T object) {
         dao.saveOrUpdate(object);
     }
@@ -341,6 +380,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void remove(T object) {
         dao.remove(object);
     }
@@ -348,6 +388,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void remove(PK id) {
         dao.remove(id);
     }
@@ -355,6 +396,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public void deleteAll() {
         dao.deleteAll();
     }
@@ -362,6 +404,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public List<T> findByNamedQuery(String queryName, Map<String, Object> queryParams) {
         return dao.findByNamedQuery(queryName, queryParams);
     }
@@ -369,6 +412,7 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public long count() {
         return dao.count();
     }
@@ -376,7 +420,13 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean exists(PK id) {
         return dao.exists(id);
+    }
+
+    @Override
+    public PagingDataList<T> search(SearchData searchData) throws PersistenceException {
+        return dao.search(searchData);
     }
 }
