@@ -8,12 +8,19 @@ import java.io.Serializable;
  */
 public class NewFileGenerateGenerateTemplate extends GenerateTemplate implements Serializable, Comparable<NewFileGenerateGenerateTemplate> {
 
+    protected final String[] templateFilePath;
+
     public NewFileGenerateGenerateTemplate(String name, String  outfilePath, String ... templateFilePath) {
-        super(name, outfilePath, templateFilePath);
+        super(name, outfilePath);
+        this.templateFilePath = templateFilePath;
     }
 
     public NewFileGenerateGenerateTemplate(String name, File pathFile, File outfileName) {
         this(name, pathFile.getPath(), outfileName.getPath());
+    }
+
+    public String[] getTemplateFilePath() {
+        return templateFilePath;
     }
 
     @Override

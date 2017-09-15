@@ -8,15 +8,15 @@ import ir.sk.jcg.jcglibcommon.web.SearchParam;
 
 #parse("vmComponents/import.vm")
 
-public class ${view.targetEntity.name}SearchData extends SearchData {
+public class ${view.viewFileName}SearchData extends SearchData {
 
     #set($components = ${view.components})
     #dataPropertiesName($components)
 
-    public ${view.targetEntity.name}SearchData() {
+    public ${view.viewFileName}SearchData() {
     }
 
-    public ${view.targetEntity.name}SearchData(int pageSize) {
+    public ${view.viewFileName}SearchData(int pageSize) {
         super(pageSize);
     }
 

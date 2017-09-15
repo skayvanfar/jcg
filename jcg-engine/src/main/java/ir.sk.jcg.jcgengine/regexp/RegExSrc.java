@@ -42,6 +42,6 @@ public abstract class RegExSrc {
      * @param generatedCodeType
      * @param code
      */
-    public abstract void addModelElement(GeneratedCodeType generatedCodeType, String code) throws ModelElementAlreadyExistException;
+    public abstract String addModelElement(GeneratedCodeType generatedCodeType, String code) throws ModelElementAlreadyExistException;
 
 }

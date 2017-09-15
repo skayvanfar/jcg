@@ -3,6 +3,8 @@ package ir.sk.jcg.jcgcommon.util;
 import com.google.common.base.Charsets;
 import org.apache.commons.io.IOUtils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -25,6 +27,12 @@ public class FileUtils {
             result = IOUtils.toString(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return result;
@@ -39,5 +47,17 @@ public class FileUtils {
             e.printStackTrace();
         }
         return content;
+    }
+
+    public static void writeToFile(String fileName, String content) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
+            bw.write(content);
+
+            // no need to close it.
+            //bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

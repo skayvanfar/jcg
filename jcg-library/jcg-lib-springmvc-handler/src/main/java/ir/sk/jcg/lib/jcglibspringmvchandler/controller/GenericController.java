@@ -40,12 +40,12 @@ public class GenericController<T, K extends SearchData, PK extends Serializable>
         this.genericManager = genericManager;
     }
 
-    @RequestMapping("/search")
+    /*@RequestMapping("/search")
     public String search(@ModelAttribute K searchData, Map<String, Object> model) throws PersistenceException {
         model.put(searchData.getClass().getSimpleName(), searchData);
         model.put(entityClass.getSimpleName().toLowerCase() + "s", genericManager.search(searchData));
         return entityClass.getSimpleName().toLowerCase() + "/search";
-    }
+    }*/
 
 /*
     @Autowired

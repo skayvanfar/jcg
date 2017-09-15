@@ -11,19 +11,23 @@ public class ClassWithGeneratedCode implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "hhhId", unique = false, nullable = false)
-    private Long hhhId;
-
+    private Long testId;
 	/* GENERATED CODE END */
 
-	/* GENERATED CODE SECTION TYPE(GetterSetter) ENABLED START */
-
-    public Long getHhhId() {
-        return hhhId;
+    /* GENERATED CODE SECTION TYPE(GetterSetter) ENABLED START */
+    public Long getTestId() {
+        return testId;
     }
 
-    public void setHhhId(Long hhhId) {
-        this.hhhId = hhhId;
-    };
+    public void setTestId(Long testId) {
+        this.testId = testId;
+    }
+    /* GENERATED CODE END */
 
-	/* GENERATED CODE END */
+    /* GENERATED CODE SECTION TYPE(Controller) ENABLED START */
+    @RequestMapping(value="/", method = RequestMethod.GET)
+    public void addUser(String User) {
+        dao.saveUser(user);
+    }
+    /* GENERATED CODE END */
 }

@@ -156,6 +156,19 @@ public class VelocityTemplate {
      * @param context
      * @throws Exception
      */
+    public static StringWriter mergeTemplateInWriter(String templateName,
+                                             VelocityContext context) {
+        StringWriter stringWriter = new StringWriter();
+        mergeTemplateInWriter(templateName, stringWriter, context);
+        return stringWriter;
+    }
+
+    /**
+     * mergeTemplateInWriter
+     *
+     * @param context
+     * @throws Exception
+     */
     public static void mergeTemplateInWriter(String templateName, Writer writer,
                                              VelocityContext context) {
         try {

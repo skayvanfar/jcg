@@ -1,0 +1,12 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/15/2107.
+ *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+@RequestMapping("/${view.viewFileName}")
+public String ${view.viewFileName}(@ModelAttribute ${searchDataPackage}.${view.viewFileName}SearchData ${lowerCaseViewFileName}SearchData, Map<String, Object> model) throws PersistenceException {
+    model.put("${lowerCaseViewFileName}SearchData", ${lowerCaseViewFileName}SearchData);
+    model.put("${lowerCaseEntityName}s", ${lowerCaseEntityName}Service.search(${lowerCaseViewFileName}SearchData));
+    return "${entityName}/${lowerCaseViewFileName}";
+}

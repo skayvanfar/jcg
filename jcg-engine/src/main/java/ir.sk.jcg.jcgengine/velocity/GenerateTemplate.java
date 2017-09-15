@@ -11,14 +11,14 @@ public abstract class GenerateTemplate {
 
     protected String name;
 
-    protected final String[] templateFilePath;
+
 
     protected final String outfilePath;
 
-    public GenerateTemplate(String name, String outfilePath, String ... templateFilePath) {
+    public GenerateTemplate(String name, String outfilePath) {
         this.name = name;
         this.outfilePath = outfilePath;
-        this.templateFilePath = templateFilePath;
+
     }
 
     public String getName() {
@@ -29,26 +29,24 @@ public abstract class GenerateTemplate {
         this.name = name;
     }
 
-    public String[] getTemplateFilePath() {
-        return templateFilePath;
-    }
+
 
     public String getOutfilePath() {
         return outfilePath;
     }
 
-    public static GenerateTemplate create(GenerateTemplateType generateTemplateType, String name,String outfilePath, String ... templateFilePath) {
+    /*public static GenerateTemplate create(GenerateTemplateType generateTemplateType, String name,String outfilePath, String ... templateFilePath) {
         switch (generateTemplateType) {
             case NEW_FILE_GENERATE_TEMPLATE:
                 return new NewFileGenerateGenerateTemplate(name, outfilePath, templateFilePath[0]);
             case SECTION_GENERATE_TEMPLATE:
                 return new SectionGenerateTemplate(name, outfilePath, templateFilePath);
             case ADD_ELEMENT_TO_SECTION_GENERATE_TEMPLATE:
-                return new AddElementToSectionGenerateTemplate(name, outfilePath, templateFilePath);
+                return new AddElementToSectionGenerateTemplate(name, outfilePath);
             default:
                 throw new IllegalArgumentException("Incorrect type code value");
         }
-    }
+    }*/
 
     public void putReference(String key, Object value) {
         velocityContext.put(key, value);

@@ -37,19 +37,18 @@ public class JavaRegExSrcTest {
 
     @Test
     public void hasModelElementForProperty() throws Exception {
-        /*boolean expectedValue = true;
+        boolean expectedValue = true;
         boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.PROPERTY, "private Long testId;");
-        Assert.assertEquals(expectedValue, actualValue);*/
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
     @Test
     public void hasModelElementForPropertyByMistake() throws Exception {
-        /*boolean expectedValue = false;
+        boolean expectedValue = false;
         boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.PROPERTY, "private Longg testId;");
-        Assert.assertEquals(expectedValue, actualValue);*/
+        Assert.assertEquals(expectedValue, actualValue);
     }
 
-    /*
     @Test
     public void hasModelElementForGetterSetter() throws Exception {
         boolean expectedValue = true;
@@ -62,11 +61,12 @@ public class JavaRegExSrcTest {
         boolean expectedValue = false;
         boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.PROPERTY, "private Longg testId;");
         Assert.assertEquals(expectedValue, actualValue);
-    }*/
+    }
 
     @Test
     public void hasModelElementForControl() throws Exception {
-        /*String code = "public void addUser(String User) {\n" +
+        /* String code = " @RequestMapping(value=\"/\", method = RequestMethod.GET)" +
+                "public void addUser(String User) {\n" +
                 "        dao.saveUser(user);\n" +
                 "    }";
         boolean expectedValue = true;
@@ -85,8 +85,24 @@ public class JavaRegExSrcTest {
     }
 
     @Test
-    public void addModelElement() throws Exception {
-        /*regExSrc.addModelElement(GeneratedCodeType.PROPERTY, "private int bb;");*/
+    public void addPropertyModelElement() throws Exception {
+        String value = regExSrc.addModelElement(GeneratedCodeType.PROPERTY, "private int bb;");
+        System.out.println(value);
+    }
+
+    @Test
+    public void addGetterSetterModelElement() throws Exception {
+        String value = regExSrc.addModelElement(GeneratedCodeType.GETTER_SETTER, "public Long getTestId2\\(\\) \\{\nreturn testId2;\n\\}\npublic void setTestId2\\(Long testId2\\) \\{\nthis.testId2 = testId2;\n\\}");
+        System.out.println(value);
+    }
+
+    @Test
+    public void addControllerModelElement() throws Exception {
+        String value = regExSrc.addModelElement(GeneratedCodeType.CONTROL, "@RequestMapping\\(value=\"/\", method = RequestMethod.GET\\)\n" +
+                "    public void addUser\\(String User2\\) \\{\n" +
+                "        dao.saveUser\\(user\\);\n" +
+                "    \\}");
+        System.out.println(value);
     }
 
     /*@Test(expected = ModelElementAlreadyExistException.class)

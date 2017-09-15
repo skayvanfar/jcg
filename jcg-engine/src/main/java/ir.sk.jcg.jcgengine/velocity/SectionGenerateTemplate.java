@@ -10,8 +10,8 @@ import java.io.Serializable;
 public class SectionGenerateTemplate extends GenerateTemplate implements Serializable, Comparable<SectionGenerateTemplate> {
     private VelocityContext velocityContext = new VelocityContext();
 
-    public SectionGenerateTemplate(String name,String outfilePath, String ... templateFilePath) {
-        super(name, outfilePath, templateFilePath);
+    public SectionGenerateTemplate(String name,String outfilePath) {
+        super(name, outfilePath);
     }
 
     public void putReference(String key, Object value) {

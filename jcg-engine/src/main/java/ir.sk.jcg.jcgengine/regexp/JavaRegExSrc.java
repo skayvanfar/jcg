@@ -76,7 +76,7 @@ public class JavaRegExSrc extends RegExSrc {
     }
 
     @Override
-    public void addModelElement(GeneratedCodeType generatedCodeType, String code) throws ModelElementAlreadyExistException {
+    public String addModelElement(GeneratedCodeType generatedCodeType, String code) throws ModelElementAlreadyExistException {
         boolean isExist = hasModelElement(generatedCodeType, code);
         if (isExist) {
             throw new ModelElementAlreadyExistException();
@@ -88,9 +88,10 @@ public class JavaRegExSrc extends RegExSrc {
                 matcher.appendReplacement(sb ,matcher.group(0).replaceFirst(Pattern.quote(matcher.group("insertPlace")) + "/\\* GENERATED CODE END \\*/", "\n" + code + "\n/\\* GENERATED CODE END \\*/"));
                 // append the rest of the contents
                 matcher.appendTail(sb);
-                System.out.println(sb.toString());
+                return sb.toString();
             }
         }
+        return null;
     }
 
     /*@Override

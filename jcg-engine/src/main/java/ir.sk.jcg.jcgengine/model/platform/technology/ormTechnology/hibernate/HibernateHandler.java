@@ -60,7 +60,7 @@ public class HibernateHandler extends ORMTechnologyHandler {
         dependencies.add(new Dependency("org.apache.commons", "commons-dbcp2", "2.0.1", "compile"));
         dependencies.add(new Dependency("mysql", "mysql-connector-java", "5.1.34", "compile"));
         // add jcg-lib-hibernate-handler for this technology
-        dependencies.add(new Dependency("ir.sk.jcg", "jcg-lib-hibernate-handler", "1.0.0", "compile"));
+        dependencies.add(new Dependency("ir.sk.jcg", "jcg-lib-hibernate-handler", "1.0-SNAPSHOT", "compile"));
     }
 
     public MappingTypeEnum getMappingTypeEnum() {

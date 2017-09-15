@@ -3,8 +3,12 @@
  *#
 #parse("vmComponents/packageName.vm")
 
-import ir.sk.jcg.lib.jcglibspringmvchandler.controller.GenericController;
+## import ir.sk.jcg.lib.jcglibspringmvchandler.controller.GenericController;
 
+import ir.sk.jcg.lib.jcglibspringmvchandler.controller.BaseController;
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
+
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +33,13 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/${lowerCaseName}s")
-public class ${entity.name}Controller extends GenericController<${entity.name}, ${entity.name}SearchData, Long> { # Long must replace by actual type#
+##public class ${entity.name}Controller extends GenericController<${entity.name}, ${entity.name}SearchData, Long> { ## Long must replace by actual type#
+public class ${entity.name}Controller extends BaseController {
 
     @Autowired
     private ${entity.name}Service ${lowerCaseName}Service;
 
-    /* GENERATED CODE SECTION TYPE(Property) ENABLED START */
+    /* GENERATED CODE SECTION TYPE(Controller) ENABLED START */
 
     /* GENERATED CODE END */
 

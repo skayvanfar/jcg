@@ -133,7 +133,8 @@ public class SpringWebArchitecture extends Architecture {
         List<DomainImplElement> domainImplElements = new ArrayList<>();
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
         ViewElement viewElement = mvcTechnologyHandler.createView(view, packagePath);
-        domainImplElements.add(viewElement);
+        if (viewElement != null)
+            domainImplElements.add(viewElement);
     }
 
     public TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change

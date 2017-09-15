@@ -24,7 +24,7 @@ public abstract class View extends SchemaItem implements Serializable {
      * Name of view file
      */
     @Prop(label = "View File Name", required = true, editable = true)
-    private String viewFileName;
+    private String viewFileName; // TODO: 9/15/2017 Better chaneg this property name
 
     /**
      * Counts of components in each row

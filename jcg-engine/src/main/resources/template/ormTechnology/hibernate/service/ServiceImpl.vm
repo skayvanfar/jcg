@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ir.sk.jcg.lib.jcglibhibernatehandler.service.impl.GenericManagerImpl;
-import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.PersistenceException;
+import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 
 #parse("vmComponents/import.vm")
 
 #set($capitalizeType = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## capitalize entity.id.type
-#set($lowercaseName = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## lowercase entity.id.type
+#set($lowercaseName = ${entity.name.substring(0, 1).toLowerCase()}+${entity.name.substring(1)})   ## lowercase entity.id.type
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  */

@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public enum GeneratedCodeType implements EnumBase {
 
-    PROPERTY(0, "Property") {
+    PROPERTY(0, "Property", "") { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
@@ -18,7 +18,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    GETTER_SETTER(1, "GetterSetter") {
+    GETTER_SETTER(1, "GetterSetter", "") { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
@@ -27,7 +27,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    CONTROL(2, "Control") {
+    CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/ControllerElement.vm") {
         @Override
         public String getFreeFormRegexp(String code) {
             String result = code.replaceAll("\\s+", "\\\\s+");
@@ -39,14 +39,23 @@ public enum GeneratedCodeType implements EnumBase {
             result = result.replaceAll("\\{.*\\}", "\\\\{.*\\\\}");
             return result;
         }
-    };
+    },
+    TILES_DEFINITIONS(3, "Tiles Definition", "") {
+        @Override
+        public String getFreeFormRegexp(String code) {
+            String result = code.replaceAll("\\s+", ""); // TODO: 9/15/2017
+            return result;
+        }
+    }; // TODO: 9/15/2017
 
     private Integer value;
     private String desc;
+    private String pathTemplate;
 
-    GeneratedCodeType(Integer value, String desc) {
+    GeneratedCodeType(Integer value, String desc, String pathTemplate) {
         this.value = value;
         this.desc = desc;
+        this.pathTemplate = pathTemplate;
     }
 
     @Override
@@ -57,6 +66,10 @@ public enum GeneratedCodeType implements EnumBase {
     @Override
     public String getDescription() {
         return desc;
+    }
+
+    public String getPathTemplate() {
+        return pathTemplate;
     }
 
     public static GeneratedCodeType valueOf(Integer type) {
