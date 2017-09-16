@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public enum GeneratedCodeType implements EnumBase {
 
-    PROPERTY(0, "Property", "") { // TODO: 9/15/2017
+    PROPERTY(0, "Property", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
@@ -18,7 +18,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    GETTER_SETTER(1, "GetterSetter", "") { // TODO: 9/15/2017
+    GETTER_SETTER(1, "GetterSetter", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
@@ -27,7 +27,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/ControllerElement.vm") {
+    CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/ControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             String result = code.replaceAll("\\s+", "\\\\s+");
@@ -40,7 +40,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    TILES_DEFINITIONS(3, "Tiles Definition", "") {
+    TILES_DEFINITION(3, "TilesDefinition", "mvcTechnology/SpringMVC/view/tiles/definition/tile-definitionElement.vm", RegExType.XML_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             String result = code.replaceAll("\\s+", ""); // TODO: 9/15/2017
@@ -51,11 +51,13 @@ public enum GeneratedCodeType implements EnumBase {
     private Integer value;
     private String desc;
     private String pathTemplate;
+    private RegExType regExType;
 
-    GeneratedCodeType(Integer value, String desc, String pathTemplate) {
+    GeneratedCodeType(Integer value, String desc, String pathTemplate, RegExType regExType) {
         this.value = value;
         this.desc = desc;
         this.pathTemplate = pathTemplate;
+        this.regExType = regExType;
     }
 
     @Override
@@ -70,6 +72,10 @@ public enum GeneratedCodeType implements EnumBase {
 
     public String getPathTemplate() {
         return pathTemplate;
+    }
+
+    public RegExType getRegExType() {
+        return regExType;
     }
 
     public static GeneratedCodeType valueOf(Integer type) {

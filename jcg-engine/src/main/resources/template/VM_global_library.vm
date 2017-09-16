@@ -141,7 +141,7 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 <tr class="my-panel-header">
         <th>ردیف</th>
     #foreach(${component} in ${dataGrid.components})
-        <th>component.labelName</th>
+        <th>${component.labelName}</th>
     #end
 </tr>
 #end

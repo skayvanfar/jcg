@@ -3,7 +3,6 @@ package ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgengine.ApplicationContext;
-import ir.sk.jcg.jcgengine.exception.ModelElementAlreadyExistException;
 import ir.sk.jcg.jcgengine.model.platform.Dependency;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnologyHandler;
@@ -11,8 +10,6 @@ import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.ele
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.regexp.GeneratedCodeType;
-import ir.sk.jcg.jcgengine.regexp.JavaRegExSrc;
-import ir.sk.jcg.jcgengine.regexp.RegExSrc;
 import ir.sk.jcg.jcgengine.velocity.AddElementToSectionGenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.GenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.NewFileGenerateGenerateTemplate;
@@ -20,7 +17,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -86,7 +82,12 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         addControllerMethodGenerateTemplate.mergeTemplate();
 
         // add tiles definition
-        // TODO: 9/15/2017
+        String fileDefinitionPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\definition\\tile-definition.xml";
+
+        GenerateTemplate addTileDefinitionMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add tile definition", fileDefinitionPath, GeneratedCodeType.TILES_DEFINITION);
+        addTileDefinitionMethodGenerateTemplate.putReference("view", view);
+        //   addTileDefinitionMethodGenerateTemplate.putReference("searchDataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
+        addTileDefinitionMethodGenerateTemplate.mergeTemplate();
 
         return viewElement;
     }
@@ -125,13 +126,13 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         tilesDefinitionREADMENewFileGenerateTemplate.putReference("description", "Put your tiles Definition files here.");
         tilesDefinitionREADMENewFileGenerateTemplate.mergeTemplate();
 
-        File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles\\definition"); // TODO: 7/10/2016 must not be hard code
+        /*File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles\\definition"); // TODO: 7/10/2016 must not be hard code
         File dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\definition");
         try {
             FileUtils.copyDirectory(source, dest);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         GenerateTemplate tilesTemplatesREADMENewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("tilesTemplatesREADME",
                 ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\template" + File.separator
@@ -165,54 +166,9 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
     @Override
     protected void createBaseFiles() throws Exception {
-        ///////////////////////////////////////////
-        /*GenerateTemplate baseControllerNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("BaseController",
-                controllerDirFile.getAbsolutePath() + File.separator + "BaseController.java", "mvcTechnology/SpringMVC/controller/BaseController.vm");
-        baseControllerNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + "." + "controller");
-        Set<String> baseControllerImportSet = new HashSet<>();
-        baseControllerImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".commons.persistence.PersistenceException");
-        baseControllerNewFileGenerateTemplate.putReference("imports", baseControllerImportSet);
-        baseControllerNewFileGenerateTemplate.mergeTemplate();*/
-
-        /*File source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\resources"); // TODO: 7/10/2016 must not be hard code
-        File dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + resourcesDir);
-        try {
-            FileUtils.copyDirectory(source, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tags\\form\\foundation");
-        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tags" + File.separator + "zurb-foundation-form");
-        try {
-            FileUtils.copyDirectory(source, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tags\\utils");
-        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tags" + File.separator + "utils");
-        try {
-            FileUtils.copyDirectory(source, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        /*source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\tiles");
-        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + File.separator + "tiles");
-        try {
-            FileUtils.copyDirectory(source, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        source = new File("E:\\template\\mvcTechnology\\SpringMVC\\view\\web-inf");
-        dest = new File(ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator);
-        try {
-            FileUtils.copyDirectory(source, dest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        GenerateTemplate tilesDefinitionNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("TilesDefinition",
+                ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\definition\\tile-definition.xml", "mvcTechnology/SpringMVC/view/tiles/definition/tile-definition.vm");
+        tilesDefinitionNewFileGenerateTemplate.mergeTemplate();
     }
 
     @Override
