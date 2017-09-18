@@ -15,7 +15,7 @@ public interface RelationshipController {
      * @param relationShipDto
      * @param entity          that is parent of head Relation
      */
-    void createRelationship(RelationShipDto relationShipDto, Entity entity);
+    Relationship createRelationship(RelationShipDto relationShipDto, Entity entity);
 
 
     /**

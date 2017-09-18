@@ -61,7 +61,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
             viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View Element", "mvcTechnology/SpringMVC/view/EntityWithAnnotation.vm", outputPath);*/
 
         String outputPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views"
-                + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getViewFileName() + ".jsp";
+                + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getTargetEntity().getName().toLowerCase() + File.separator + view.getViewFileName() + ".jsp";
 
         viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View", outputPath, vmPath);
 
@@ -86,6 +86,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
 
         GenerateTemplate addTileDefinitionMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add tile definition", fileDefinitionPath, GeneratedCodeType.TILES_DEFINITION);
         addTileDefinitionMethodGenerateTemplate.putReference("view", view);
+        addTileDefinitionMethodGenerateTemplate.putReference("packagePath", packagePath);
         //   addTileDefinitionMethodGenerateTemplate.putReference("searchDataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
         addTileDefinitionMethodGenerateTemplate.mergeTemplate();
 

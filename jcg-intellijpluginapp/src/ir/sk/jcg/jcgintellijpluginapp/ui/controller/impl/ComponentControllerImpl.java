@@ -18,22 +18,24 @@ public class ComponentControllerImpl implements ComponentController {
     }
 
     @Override
-    public void createInputComponent(ComponentDto componentDto, View view) {
+    public Component createInputComponent(ComponentDto componentDto, View view) {
         Component component = componentDto.getInputComponentType().createComponent();
 
         component.setName(componentDto.getName());
         component.setTargetProperty(componentDto.getTargetProperty());
 
         view.addComponent(component);
+        return component;
     }
 
     @Override
-    public void createOutputComponent(ComponentDto componentDto, DataGrid dataGrid) {
+    public Component createOutputComponent(ComponentDto componentDto, DataGrid dataGrid) {
         Component component = componentDto.getOutputComponentType().createComponent();
 
         component.setName(componentDto.getName());
         component.setTargetProperty(componentDto.getTargetProperty());
 
         dataGrid.addComponent(component);
+        return component;
     }
 }

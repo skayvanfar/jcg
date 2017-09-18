@@ -7,6 +7,8 @@ import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Property;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/6/2016
  */
@@ -32,7 +34,12 @@ public class CreatePropertyNodeAction extends CreateNodeAction {
                 // add to project
                 entity.addProperty(property);
 
-                marshalingAndReloadTree();
+                DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(property);
+          //      parentNode.add(tNode);
+
+                jcgProjectComponent.addNeededNodes(property);
+
+                marshalingAndReloadTree(false);
             }
             builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });

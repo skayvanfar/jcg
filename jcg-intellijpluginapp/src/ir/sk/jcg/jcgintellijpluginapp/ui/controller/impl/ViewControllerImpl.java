@@ -19,7 +19,7 @@ public class ViewControllerImpl implements ViewController {
 
 
     @Override
-    public void createView(ViewDto viewDto, Package<View> viewPackage) {
+    public View createView(ViewDto viewDto, Package<View> viewPackage) {
         View view = viewDto.getViewType().createView();
 
         view.setName(viewDto.getName());
@@ -31,6 +31,7 @@ public class ViewControllerImpl implements ViewController {
         }
 
         viewPackage.addElement(view);
+        return view;
     }
 
     private void addDefaultComponents(SearchView searchView) {

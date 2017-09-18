@@ -5,7 +5,7 @@
 
 <%@ attribute name="modelAttribute" required="false" rtexprvalue="true" deferredValue="false" %>
 <%@ attribute name="cssClass" required="false" rtexprvalue="true" deferredValue="false" %>
-<%@ attribute name="list" type="ir.sk.patienttalk.common.persistence.jpa.PagingDataList" required="false" rtexprvalue="true"
+<%@ attribute name="list" type="ir.sk.jcg.jcglibcommon.web.PagingDataList" required="false" rtexprvalue="true"
               deferredValue="false" %>
 <%@ attribute name="pageCount" required="false" type="java.lang.Integer" rtexprvalue="true" deferredValue="false" %>
 <%@ attribute name="currentPage" required="false" type="java.lang.Integer" rtexprvalue="true" deferredValue="false" %>

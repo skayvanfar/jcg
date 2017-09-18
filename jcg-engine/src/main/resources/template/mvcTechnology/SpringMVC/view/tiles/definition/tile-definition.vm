@@ -1,6 +1,3 @@
-#**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/16/2107.
- *#
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
@@ -11,12 +8,7 @@
 
     <!-- GENERATED CODE END -->
 
-    <definition name="home2" extends="baseLayout">
-        <put-attribute name="title" value="Welcome" />
-        <put-attribute name="top" value="/WEB-INF/tiles/template/home/top.jsp"/>
-        <put-attribute name="heading" value="Welcome to Patient Talk" />
-        <put-attribute name="tagline" value="The amazing Patient Talk Forum" />
-        <put-attribute name="content" value="/WEB-INF/view/main.jsp" />
-    </definition>
-
 </tiles-definitions>
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/16/2107.
+ *#

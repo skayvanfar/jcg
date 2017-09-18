@@ -92,7 +92,7 @@
     <nav id="s-navigation">
         <tiles:insertAttribute name="navigation"/>
     </nav>
-    <section id="s-content" data-magellan-destination="s-content" class="row">
+    <section id="s-content" data-magellan-destination="s-content" <%--class="row"--%>>
         <tiles:insertAttribute name="content"/>
     </section>
 </section>

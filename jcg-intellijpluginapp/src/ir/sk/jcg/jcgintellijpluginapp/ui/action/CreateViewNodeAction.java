@@ -41,9 +41,10 @@ public class CreateViewNodeAction extends CreateNodeAction {
             ViewController viewController = ViewControllerImpl.getInstance();
             Package<View> viewPackage = (Package<View>) jcgProjectComponent.currentSelectedNodeUserObject();
 
-            viewController.createView(viewPanel.getViewDto(), viewPackage);
+            View view = viewController.createView(viewPanel.getViewDto(), viewPackage);
+            jcgProjectComponent.addNeededNodes(view);
 
-            marshalingAndReloadTree();
+            marshalingAndReloadTree(false);
             builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });
         builder.showModal(true);

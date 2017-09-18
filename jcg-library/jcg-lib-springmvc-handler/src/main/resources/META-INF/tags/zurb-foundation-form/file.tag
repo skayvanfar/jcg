@@ -2,7 +2,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="f" uri="http://sk.ir/patienttalk/zurb-foundation-form" %>
+<%@ taglib prefix="f" uri="http://sk.ir/jcg/zurb-foundation-form" %>
 
 <%@ attribute name="path" required="true" type="java.lang.String" rtexprvalue="true" deferredValue="false" %>
 <%@ attribute name="id" required="false" type="java.lang.String" rtexprvalue="true" deferredValue="false" %>

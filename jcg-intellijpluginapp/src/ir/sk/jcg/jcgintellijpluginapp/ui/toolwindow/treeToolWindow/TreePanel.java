@@ -7,6 +7,7 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
+import ir.sk.jcg.jcgcommon.util.SimpleNavigatorTreeUtil;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.Component;
@@ -55,7 +56,7 @@ public class TreePanel extends SimpleToolWindowPanel {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
             } else if (treeNode.getUserObject() instanceof Project) {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.ProjectOperationMenu", ActionPlaces.UNKNOWN);
-            }  else if (treeNode.getUserObject() instanceof Schema) {
+            } else if (treeNode.getUserObject() instanceof Schema) {
                 CustomizationUtil.installPopupHandler(jcgTree, "JCG.ModelOperationMenu", ActionPlaces.UNKNOWN);
             } else if (treeNode.getUserObject() instanceof Package) {
                 DefaultMutableTreeNode schemaNode = (DefaultMutableTreeNode) e.getPath().getPathComponent(2);
@@ -101,18 +102,25 @@ public class TreePanel extends SimpleToolWindowPanel {
     public void updateAndExpandUI(TreePath treePath) {
 
 
-        jcgTree.updateUI();
+        //   jcgTree.updateUI();
         if (treePath != null) { // TODO: 5/6/2016 expand not work correctly 
-            //    TreePath treePath1 = new TreePath(treePath.getPath());
-            //  jcgTree.setSelectionPath(treePath1);
-            //      jcgTree.scrollPathToVisible(treePath1);
-            //       TreePath t =jcgTree.getSelectionPath();
-            //     jcgTree.expandPath(new TreePath(treePath.getPath()));
-            //     jcgTree.expandRow(1);
-            //     jcgTree.expandRow(2);
-//            SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath, 3, true);
-            //           SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
+            TreePath treePath1 = new TreePath(treePath.getPath());
+        //   jcgTree.setSelectionPath(treePath1);
+        //    jcgTree.scrollPathToVisible(treePath1);
+        //    TreePath t = jcgTree.getSelectionPath();
 
+          //  jcgTree.expandRow(1);
+        //    jcgTree.expandRow(2);
+        //    SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath, 3, true);
+        //    SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
+         //   SimpleNavigatorTreeUtil.expandOrCollapsToLevel(jcgTree, treePath1, 3, true);
+
+            jcgTree.treeDidChange();
+         //   jcgTree.expandPath(new TreePath(treePath.getPath()));
+            jcgTree.revalidate();
+            jcgTree.repaint();
+            jcgTree.setVisible(true);
+            jcgTree.updateUI();
         }
     }
 
@@ -281,6 +289,29 @@ public class TreePanel extends SimpleToolWindowPanel {
         TreePath treePath = jcgTree.getSelectionPath().getParentPath();
         DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) treePath.getLastPathComponent();
         return currentNode.getUserObject();
+    }
+
+    public void addNeededNodes(ModelElement modelElement) {
+        DefaultMutableTreeNode tNodeParent = new DefaultMutableTreeNode(modelElement);
+        ((DefaultMutableTreeNode) getSelectionPath().getLastPathComponent()).add(tNodeParent);
+        loadImplElements(modelElement, tNodeParent);
+
+        if (modelElement instanceof Entity) {
+            loadId((Entity) modelElement, tNodeParent);
+            loadProperties((Entity) modelElement, tNodeParent);
+            loadRelations((Entity) modelElement, tNodeParent);
+        } else if (modelElement instanceof View) {
+            loadInputComponents((View) modelElement, tNodeParent);
+            if (modelElement instanceof SearchView)
+                loadDataGrid((SearchView) modelElement, tNodeParent);
+        } else if (modelElement instanceof Property) {
+        } else if (modelElement instanceof Relationship) {
+            DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(((Relationship) modelElement).getTargetEntity());
+            tNodeParent.add(targetEntityNode);
+        } else if (modelElement instanceof Component) {
+            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(((Component) modelElement).getTargetProperty());
+            tNodeParent.add(targetPropertyNode);
+        }
     }
 
     public TreePath getSelectionPath() {

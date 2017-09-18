@@ -62,7 +62,7 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                             packageable.addPackage(elementPackage);
                         }
 
-                        marshalingAndReloadTree();
+                        marshalingAndReloadTree(true);
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016  
                     }

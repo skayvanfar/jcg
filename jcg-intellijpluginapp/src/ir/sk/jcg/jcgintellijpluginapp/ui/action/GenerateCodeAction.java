@@ -61,7 +61,7 @@ public class GenerateCodeAction extends NodeAction {
 
                 codeGenerator.addAllModelElements(allModelElements);
 
-                marshalingAndReloadTree();
+                marshalingAndReloadTree(true);
 
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             }

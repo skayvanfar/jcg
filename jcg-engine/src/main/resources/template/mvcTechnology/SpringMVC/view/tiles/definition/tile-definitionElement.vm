@@ -6,8 +6,8 @@
 #set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
 <definition name="${lowerCaseEntityName}/${lowerCaseViewFileName}" extends="baseLayout">
     <put-attribute name="title" value="${view.name}" />
-    <put-attribute name="top" value="/WEB-INF/tiles/template/home/top.jsp"/>
+    <put-attribute name="top" value="/tiles/template/generic/top.jsp"/>
     <put-attribute name="heading" value="Welcome to Test" />
     <put-attribute name="tagline" value="The amazing Test Forum" />
-    <put-attribute name="content" value="/WEB-INF/views/${lowerCaseEntityName}/${view.viewFileName}.jsp" />
+    <put-attribute name="content" value="/WEB-INF/views/${packagePath}/${lowerCaseEntityName}/${view.viewFileName}.jsp" />
 </definition>

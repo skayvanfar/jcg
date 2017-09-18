@@ -5,6 +5,7 @@ import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
 import ir.sk.jcg.jcgengine.model.project.Entity;
 import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgengine.model.project.Relationship;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.RelationshipController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.RelationshipControllerImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
@@ -35,9 +36,11 @@ public class CreateRelationshipNodeAction extends NodeAction {
             RelationshipController relationshipController = RelationshipControllerImpl.getInstance();
             Entity entity = (Entity) jcgProjectComponent.currentSelectedNodeUserObject();
 
-            relationshipController.createRelationship(relationshipPanel.getRelationShipDto(), entity);
+            Relationship relationship = relationshipController.createRelationship(relationshipPanel.getRelationShipDto(), entity);
 
-            marshalingAndReloadTree();
+            jcgProjectComponent.addNeededNodes(relationship);
+
+            marshalingAndReloadTree(false);
             builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });
         builder.showModal(true);

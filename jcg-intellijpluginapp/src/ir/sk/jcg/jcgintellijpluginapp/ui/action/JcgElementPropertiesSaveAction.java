@@ -33,7 +33,7 @@ public class JcgElementPropertiesSaveAction extends NodeAction {
 
         doBeforeSave(jcgProjectComponent);
 
-        marshalingAndReloadTree();
+        marshalingAndReloadTree(true);
     }
 
     /**

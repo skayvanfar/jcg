@@ -16,6 +16,6 @@ public interface ViewController {
      * @param viewDto
      * @param viewPackage that is parent
      */
-    void createView(ViewDto viewDto, Package<View> viewPackage);
+    View createView(ViewDto viewDto, Package<View> viewPackage);
 
 }

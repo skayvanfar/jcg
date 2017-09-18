@@ -48,7 +48,9 @@ public class CreateEntityNodeAction extends CreateNodeAction {
                 // add to project
                 entityPackage.addElement(entity);
 
-                marshalingAndReloadTree();
+                jcgProjectComponent.addNeededNodes(entity);
+
+                marshalingAndReloadTree(false);
             }
             builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });

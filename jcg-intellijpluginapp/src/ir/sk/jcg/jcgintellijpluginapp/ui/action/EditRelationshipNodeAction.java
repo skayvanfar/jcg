@@ -60,7 +60,7 @@ public class EditRelationshipNodeAction extends NodeAction {
 
                 relationshipController.editRelationship(editedRelationShipDto, headRelationship, entity);
 
-                marshalingAndReloadTree();
+                marshalingAndReloadTree(true);
 
                 builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
             });

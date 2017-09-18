@@ -11,7 +11,10 @@ import com.intellij.ui.content.ContentManager;
 import ir.sk.jcg.jcgengine.CodeGenerator;
 import ir.sk.jcg.jcgengine.JavaCodeGenerator;
 import ir.sk.jcg.jcgengine.model.Presentable;
+import ir.sk.jcg.jcgengine.model.project.Element;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.ModelElement;
+import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.icon.JcgIcons;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.propertiesToolWindow.PropertiesPanel;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.treeToolWindow.TreePanel;
@@ -49,6 +52,10 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     public static JcgProjectComponent getInstance(Project project) {
         return project.getComponent(JcgProjectComponent.class);
+    }
+
+    public void updateUI(TreePath treePath) {
+        treePanel.updateAndExpandUI(treePath);;
     }
 
     @Override
@@ -177,6 +184,13 @@ public class JcgProjectComponent extends DoubleClickListener implements ProjectC
 
     public TreePath getSelectionPath() {
         return treePanel.getSelectionPath();
+    }
+
+    /**
+     * Facade
+     */
+    public void addNeededNodes(ModelElement modelElement) {
+        treePanel.addNeededNodes(modelElement);
     }
 
     /**

@@ -23,11 +23,12 @@ public class RelationshipControllerImpl implements RelationshipController {
     }
 
     @Override
-    public void createRelationship(RelationShipDto relationShipDto, Entity entity) {
+    public Relationship createRelationship(RelationShipDto relationShipDto, Entity entity) {
         Relationship headRelationship = new Relationship();
         String uuid = UUID.randomUUID().toString();
         headRelationship.setId(uuid);
         initRelationships(entity, headRelationship, relationShipDto);
+        return headRelationship;
     }
 
     /**

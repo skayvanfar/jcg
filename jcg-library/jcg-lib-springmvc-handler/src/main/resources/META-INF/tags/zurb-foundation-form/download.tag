@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
-<%@ attribute name="location" required="true" rtexprvalue="true" type="ir.sk.patienttalk.common.persistence.file.web.FileItem"
+<%@ attribute name="location" required="true" rtexprvalue="true" type="ir.sk.jcg.lib.jcglibspringmvchandler.file.web.FileItem"
               deferredValue="false" %>
 
 <c:set var="urn">/download/file</c:set>

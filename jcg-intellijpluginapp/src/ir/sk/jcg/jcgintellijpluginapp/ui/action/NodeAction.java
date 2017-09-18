@@ -31,7 +31,7 @@ public abstract class NodeAction extends AnAction {
     /**
      *
      */
-    void marshalingAndReloadTree() {
+    void marshalingAndReloadTree(boolean reload) {
         CodeGenerator codeGenerator = jcgProjectComponent.getCodeGenerator();
         try {
             codeGenerator.marshalling();
@@ -39,8 +39,10 @@ public abstract class NodeAction extends AnAction {
             e.printStackTrace();
             logger.error("buildTemplate error in template : " + e);
         }
-
-        jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+        if (reload)
+            jcgProjectComponent.reloadJcgTree(jcgProjectComponent.getSelectionPath());
+        else
+            jcgProjectComponent.updateUI(jcgProjectComponent.getSelectionPath());
     }
 
 }

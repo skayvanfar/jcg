@@ -3,10 +3,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.action;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.openapi.ui.DialogWrapper;
-import ir.sk.jcg.jcgengine.model.project.DataGrid;
-import ir.sk.jcg.jcgengine.model.project.ModelElement;
-import ir.sk.jcg.jcgengine.model.project.Property;
-import ir.sk.jcg.jcgengine.model.project.View;
+import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ComponentController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl.ComponentControllerImpl;
 import ir.sk.jcg.jcgintellijpluginapp.ui.toolwindow.JcgProjectComponent;
@@ -56,15 +53,17 @@ public class CreateComponentNodeAction extends CreateNodeAction {
         builder.setOkOperation(() -> {
             ComponentController componentController = ComponentControllerImpl.getInstance();
 
+            Component component = null;
             if (finalViewOrDataGrid)
-                componentController.createInputComponent(componentPanel.getComponentDto(), finalView);
+                component = componentController.createInputComponent(componentPanel.getComponentDto(), finalView);
             else {
                 DataGrid dataGrid = (DataGrid) modelElement;
-                componentController.createOutputComponent(componentPanel.getComponentDto(), dataGrid);
+                component = componentController.createOutputComponent(componentPanel.getComponentDto(), dataGrid);
             }
 
+            jcgProjectComponent.addNeededNodes(component);
 
-            marshalingAndReloadTree();
+            marshalingAndReloadTree(false);
             builder.getDialogWrapper().close(DialogWrapper.OK_EXIT_CODE);
         });
         builder.showModal(true);

@@ -3,10 +3,6 @@
 *#
 ## todo must move to other macro library
 ## ############################################################################ Hibernate Handler START
-## Specefic Characters
-#set ($s = "*")
-#set ($p = "+")
-#set ($ko = "{")
 
 ## Define id name
 #macro(idName $id)
@@ -141,28 +137,32 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 <tr class="my-panel-header">
         <th>ردیف</th>
     #foreach(${component} in ${dataGrid.components})
-        <th>${component.labelName}</th>
+        <th>${component.targetProperty.labelName}</th>
+        <th></th>
     #end
 </tr>
 #end
 
 ## DataGrid Contents
 #macro(dataGridContents $view)
-<c:forEach var="${view.targetEntity.name}" items="${${view.targetEntity.name}s.data}" varStatus="forIndex">
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+<c:forEach var="${lowerCaseEntityName}" items="${${lowerCaseEntityName}s.data}" varStatus="forIndex">
     <tr>
-        <td>${ko}users.page ${s} ${view.targetEntity.name}s.pageSize ${p} forIndex.index ${p} 1}</td>
+        <td>${${lowerCaseEntityName}s.page * ${lowerCaseEntityName}s.pageSize + forIndex.index + 1}</td>
         #foreach(${component} in ${view.dataGrid.components})
-            <td>${${view.targetEntity.name}.${component.targetProperty.name}}</td>
+            <td>${${lowerCaseEntityName}.${component.targetProperty.name}}</td>
         #end
 
         <td>
-            <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${view.targetEntity.name}.id}" />" class="radius button split">
+            <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}d}" />" class="radius button split">
             ویرایش
             <span data-dropdown="drop${forIndex.index}"></span>
             </a>
             <ul id="drop${forIndex.index}" class="f-dropdown" data-dropdown-content>
                 <li>
-                    <a href="<filter:hashLongUrl url="/manage/artist" name="id" value="${${view.targetEntity.name}.id}" />">
+                    <a href="<filter:hashLongUrl url="/manage/artist" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />">
                     حذف
                     </a>
                 </li>

@@ -10,6 +10,8 @@ import ir.sk.jcg.jcglibcommon.web.SearchParam;
 
 public class ${view.viewFileName}SearchData extends SearchData {
 
+    private int id;
+
     #set($components = ${view.components})
     #dataPropertiesName($components)
 

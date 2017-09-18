@@ -41,7 +41,7 @@ public class DeletePackageNodeAction extends DeleteNodeAction {
                     try {
                         parentPackageable.removePackage(currentPackage);
 
-                        marshalingAndReloadTree();
+                        marshalingAndReloadTree(true);
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016
                     }
