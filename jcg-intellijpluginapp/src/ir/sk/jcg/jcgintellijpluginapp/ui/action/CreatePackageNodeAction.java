@@ -60,9 +60,11 @@ public class CreatePackageNodeAction extends CreateNodeAction {
                             Package<SchemaItem> elementPackage = new Package<>();
                             elementPackage.setName(packageName);
                             packageable.addPackage(elementPackage);
+
+                            jcgProjectComponent.addNeededNodes(elementPackage);
                         }
 
-                        marshalingAndReloadTree(true);
+                        marshalingAndReloadTree(false);
                     } catch (Exception e) {
                         e.printStackTrace(); // TODO: 5/2/2016  
                     }

@@ -7,7 +7,6 @@ import com.intellij.openapi.actionSystem.ActionPlaces;
 import com.intellij.openapi.ui.SimpleToolWindowPanel;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.ui.treeStructure.Tree;
-import ir.sk.jcg.jcgcommon.util.SimpleNavigatorTreeUtil;
 import ir.sk.jcg.jcgengine.model.platform.architecture.Architecture;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.Component;
@@ -304,7 +303,6 @@ public class TreePanel extends SimpleToolWindowPanel {
             loadInputComponents((View) modelElement, tNodeParent);
             if (modelElement instanceof SearchView)
                 loadDataGrid((SearchView) modelElement, tNodeParent);
-        } else if (modelElement instanceof Property) {
         } else if (modelElement instanceof Relationship) {
             DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(((Relationship) modelElement).getTargetEntity());
             tNodeParent.add(targetEntityNode);
