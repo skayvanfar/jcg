@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ir.sk.jcg.jcglibcommon.persistence.entity.Menu" table="TBL_BIS_MENU">
+
+        <id name="id" type="long">
+            <generator class="increment"/>
+        </id>
+
+        <property name="title"  not-null="true"/>
+        <property name="imageName"/>
+        <property name="priority" not-null="true" precision="3"/>
+        <property name="url"/>
+        <property name="parentId"/>
+
+    </class>
+</hibernate-mapping>

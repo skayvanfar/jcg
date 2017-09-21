@@ -7,7 +7,7 @@
 <dd class="s-top-section" data-magellan-arrival="${arrival}">
     <div class="row medium-12 small-12">
         <div class="columns medium-4 small-4 inline-menu-icons">
-            <img src="<s:url value="/resources/img/logo-circle-small.png"/>"/>
+            <img src="<s:url value="/resources/images/favicon.ico"/>"/>
             <span class="icon-text_justify inline-menu-right-icon logo-purple"></span>
         </div>
         <div class="columns medium-4 small-4 inline-menu-center">

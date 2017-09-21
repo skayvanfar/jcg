@@ -29,20 +29,11 @@
     <meta name="author" content="Saeed Kayvanfar">
     <title><tiles:insertAttribute name="title"/></title>
 
-    <script src="<c:url value="/resources/js/jquery-3.1.1.min.js" />"></script>
-    <%--
-        <script src="<c:url value="/resources/js/core.js" />"></script>
-    --%>
-    <%--<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">--%>
-
     <link rel="stylesheet" href="<s:url value="/resources/css/normalize.css" />"/>
     <link rel="stylesheet" href="<s:url value="/resources/css/foundation/foundation.css" />"/>
-<%--
-    <link rel="stylesheet" href="<s:url value="/resources/zurb-foundation-6.3.0/css/foundation.min.css" />"/>
---%>
     <link rel="stylesheet" href="<s:url value="/resources/css/main.css" />"/>
     <link rel="stylesheet" href="<s:url value="/resources/css/icon.css" />"/>
-    <link rel="stylesheet" href="<s:url value="/resources/font/material-design-icons/material-icons.css" />"/>
+    <link rel="stylesheet" href="<s:url value="/resources/fonts/material-design-icons/material-icons.css" />"/>
     <link rel="stylesheet" href="<s:url value="/resources/slick/slick.css" />"/>
     <link rel="stylesheet" href="<s:url value="/resources/css/top.css" />"/>
 <%--

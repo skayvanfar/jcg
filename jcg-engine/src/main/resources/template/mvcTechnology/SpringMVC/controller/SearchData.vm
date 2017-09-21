@@ -1,16 +1,18 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 09/09/2107.
  *#
+
 #parse("vmComponents/packageName.vm")
 
 import ir.sk.jcg.jcglibcommon.web.SearchData;
 import ir.sk.jcg.jcglibcommon.web.SearchParam;
 
 #parse("vmComponents/import.vm")
-
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
 public class ${view.viewFileName}SearchData extends SearchData {
 
-    private int id;
+    private long ${lowerCaseEntityName}Id;
 
     #set($components = ${view.components})
     #dataPropertiesName($components)
@@ -20,6 +22,14 @@ public class ${view.viewFileName}SearchData extends SearchData {
 
     public ${view.viewFileName}SearchData(int pageSize) {
         super(pageSize);
+    }
+
+    public long get${entityName}Id() {
+        return ${lowerCaseEntityName}Id;
+    }
+
+    public void set${entityName}Id(long ${lowerCaseEntityName}Id) {
+        this.${lowerCaseEntityName}Id = ${lowerCaseEntityName}Id;
     }
 
     #dataPropertiesGetterAndSetter($components)

@@ -138,8 +138,8 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
         <th>ردیف</th>
     #foreach(${component} in ${dataGrid.components})
         <th>${component.targetProperty.labelName}</th>
-        <th></th>
     #end
+    <th></th>
 </tr>
 #end
 
@@ -156,7 +156,7 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
         #end
 
         <td>
-            <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}d}" />" class="radius button split">
+            <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />" class="radius button split">
             ویرایش
             <span data-dropdown="drop${forIndex.index}"></span>
             </a>

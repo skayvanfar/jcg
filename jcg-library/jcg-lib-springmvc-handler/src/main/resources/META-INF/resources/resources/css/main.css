@@ -437,3 +437,132 @@ fieldset {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
+
+.row-max-with {
+    max-width: 100%;
+}
+/* recents*/
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+}
+
+hr {
+    color: #c8a3c2;
+}
+
+section.page-section {
+    width: auto;
+    direction: rtl;
+}
+
+section.page-section > h1 {
+    color: #99538F;
+    margin-top: -30px;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+section.page-section h1 span {
+    background: #ffffff;
+}
+
+.a-pagination li {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    font-size: 17px;
+    color: #ffffff;
+    line-height: 38px;
+    text-align: center;
+    display: inline-block;
+    background: #cccccc;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.a-pagination .current {
+    background: #67cb33;
+}
+
+.a-pagination a {
+    color: #000000;
+}
+
+.a-pagination {
+    text-align: center;
+    direction: ltr;
+}
+
+.hr {
+    border-bottom: 1px solid #c8a3c2;
+    height: 6px;
+    margin: 15px 0;
+    width: 100%;
+}
+
+.search-border {
+    border: solid #7FCCE8 1px;
+    border-top-color: #ffffff;
+    width: 100%;
+    height: 10px;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 0px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 5px;
+    top: 13px;
+    z-index: 1;
+    color: #7fcce8;
+    font-size: 20px;
+    display: inline;
+}
+
+.search-query-handler {
+    color: #99538F;
+    padding: 10px;
+    border: 0 none;
+    display: inline;
+    width: 100%;
+}
+
+.search-box {
+    display: inline-block;
+    width: 27%;
+    position: absolute;
+    top: -25px;
+}
+
+.inline-menu-right-icon {
+    margin-right: 15px;
+    color: #924885;
+}
+
+.inline-menu-left-icon {
+    margin-left: 15px;
+    float: left;
+}
+
+.inline-menu-center {
+    text-align: center;
+}
+
+.inline-menu-icons {
+    font-size: 25px;
+    margin-top: 25px;
+}
+
+.logo-purple {
+    color: #924885;
+}
+
+.basket-green {
+    color: #5CC91E;
+}
+
+.find-blue {
+    color: #83CADE;
+}
+/**/

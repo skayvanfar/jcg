@@ -14,7 +14,7 @@
 <%@ taglib prefix="u" uri="http://sk.ir/jcg/utils" %>
 
 <u:top-menu arrival="s-content">
-    <img src="<s:url value="/resources/img/jcg.png"/>"/>
+    <img src="<s:url value="/resources/images/favicon.ico"/>"/>
 </u:top-menu>
 <dd class="s-top-section" data-magellan-arrival="s-footer">
 </dd>

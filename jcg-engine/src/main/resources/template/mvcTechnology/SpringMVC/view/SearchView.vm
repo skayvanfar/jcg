@@ -22,9 +22,13 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
             <div class="my-panel">
                 <div class="my-panel-body">
                     <form:form modelAttribute="${lowerCaseViewFileName}SearchData">
-                        #set($components = ${view.components})
-                        #viewComponents($components $view.span)
-                        <div class="column small-2 medium-2 large-2"><form:button label="جستجو"/></div>
+                        <div class="row row-max-with">
+                            #set($components = ${view.components})
+                            #viewComponents($components $view.span)
+                        </div>
+                        <div class="row row-max-with">
+                            <div class="column small-2 medium-2 large-2"><form:button label="جستجو"/></div>
+                        </div>
                     </form:form>
                 </div>
             </div>

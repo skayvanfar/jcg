@@ -10,6 +10,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
 
@@ -25,14 +26,28 @@
                 </ul>
             </li>
             <%--@elvariable id="categories" type="java.util.List<ir.jcg.test.access.entities.Category>"--%>
-            <c:forEach items="${categories}" var="c" varStatus="ci">
+            <c:forEach items="${menus}" var="menu" varStatus="ci">
                 <li>
-                    <a href="<s:url value="/production/search?query=&cat=${c.title}"/>">${c.title}</a>
-                    <c:if test="${not empty c.children}">
+                    <c:choose>
+                        <c:when test="${not empty fn:trim(menu.url)}">
+                            <a href="<s:url value="${menu.url}"/>">${menu.title}</a>
+                        </c:when>
+                        <c:otherwise>
+                            ${menu.title}
+                        </c:otherwise>
+                    </c:choose>
+                    <c:if test="${not empty menu.children}">
                         <ul>
-                            <c:forEach items="${c.children}" var="ch" varStatus="chi">
+                            <c:forEach items="${menu.children}" var="subMenu" varStatus="chi">
                                 <li>
-                                    <a href="<s:url value="/production/search?query=&cat=${ch.title}"/>">${ch.title}</a>
+                                    <c:choose>
+                                        <c:when test="${not empty fn:trim(subMenu.url)}">
+                                            <a href="<s:url value="${subMenu.url}"/>">${subMenu.title}</a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${subMenu.title}
+                                        </c:otherwise>
+                                    </c:choose>
                                 </li>
                             </c:forEach>
                         </ul>
