@@ -2,6 +2,9 @@ package ir.sk.jcg.jcgengine.model.platform.architecture;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
 import ir.sk.jcg.jcgengine.ApplicationContext;
+import ir.sk.jcg.jcgengine.databaseAccess.DatabaseDao;
+import ir.sk.jcg.jcgengine.databaseAccess.JDBCDatabaseDao;
+import ir.sk.jcg.jcgengine.databaseAccess.Menu;
 import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.Config;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
@@ -12,10 +15,12 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnology
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.Project;
 import ir.sk.jcg.jcgengine.model.project.View;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,13 +72,14 @@ public class SpringWebArchitecture extends Architecture {
     }
 
     @Override
-    public void initialize(String baseDir, String packagePrefix, String configPackage) {
+    public void initialize(String baseDir, Project project) {
         ApplicationContext applicationContext = ApplicationContext.getInstance();
 
         applicationContext.setBaseProjectPath(baseDir);
-        applicationContext.setPackagePrefix(packagePrefix);
-        applicationContext.setConfigPackage(configPackage);
-
+        applicationContext.setPackagePrefix(project.getPackagePrefix());
+        applicationContext.setConfigPackage(project.getConfigPackage());
+        applicationContext.setProjectName(project.getName());
+        applicationContext.setPersianProjectName(project.getPersianName());
         BuildTechnologyHandler buildTechnology = (BuildTechnologyHandler) getTechnologyByType(TechnologyHandlerType.BUILD_TECHNOLOGY);
         ORMTechnologyHandler ormTechnology = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnology = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
@@ -126,6 +132,18 @@ public class SpringWebArchitecture extends Architecture {
         if (controllerDomainImplElements != null)
             domainImplElements.addAll(controllerDomainImplElements);
         entity.addAllImplElements(domainImplElements);
+
+        // Add Menu record to db
+        Menu modelMenu = new Menu();
+        modelMenu.setTitle(entity.getLabelName());
+        modelMenu.setPriority(0L);
+        String connectionUrl = "jdbc:mysql://localhost:3306/" + ApplicationContext.getInstance().getProjectName() + "?characterEncoding=UTF-8";
+        DatabaseDao databaseDao = new JDBCDatabaseDao("com.mysql.jdbc.Driver", connectionUrl, 3306, "root", "metalgearsolid5");
+        try {
+            databaseDao.save(modelMenu);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

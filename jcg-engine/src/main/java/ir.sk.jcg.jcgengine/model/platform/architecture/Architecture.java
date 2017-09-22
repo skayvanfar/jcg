@@ -8,6 +8,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.SpringTechnology.SpringHand
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandlerType;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.Project;
 import ir.sk.jcg.jcgengine.model.project.View;
 
 import javax.xml.bind.annotation.*;
@@ -86,7 +87,7 @@ public abstract class Architecture implements Presentable {
     /**
      * Call after unmrshalling for set temp values
      */
-    public abstract void initialize(String baseDir, String packagePrefix, String configPackage);
+    public abstract void initialize(String baseDir, Project project);
 
     public abstract void createEntity(Entity entity, String packagePath);
 

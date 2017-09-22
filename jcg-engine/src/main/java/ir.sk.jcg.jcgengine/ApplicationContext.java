@@ -20,6 +20,8 @@ public class ApplicationContext {
 
     private String projectName;
 
+    private String persianProjectName;
+
     /**
      * Absolute Path of project
      */
@@ -85,6 +87,14 @@ public class ApplicationContext {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public String getPersianProjectName() {
+        return persianProjectName;
+    }
+
+    public void setPersianProjectName(String persianProjectName) {
+        this.persianProjectName = persianProjectName;
     }
 
     public String getBaseProjectPath() {
