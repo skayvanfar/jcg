@@ -2,9 +2,9 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.project.Component;
-import ir.sk.jcg.jcgengine.model.project.component.LabelComponent;
-import ir.sk.jcg.jcgengine.model.project.component.TextAreaComponent;
-import ir.sk.jcg.jcgengine.model.project.component.TextFieldComponent;
+import ir.sk.jcg.jcgengine.model.project.component.Label;
+import ir.sk.jcg.jcgengine.model.project.component.TextArea;
+import ir.sk.jcg.jcgengine.model.project.component.TextField;
 
 import java.util.Objects;
 
@@ -48,13 +48,13 @@ public enum InputComponentType implements EnumBase {
         Component component = null;
         switch (this) {
             case LABEL_COMPONENT:
-                component = new LabelComponent();
+                component = new Label();
                 break;
             case TEXT_BOX_COMPONENT:
-                component = new TextFieldComponent();
+                component = new TextField();
                 break;
             case TEXT_AREA_COMPONENT:
-                component = new TextAreaComponent();
+                component = new TextArea();
                 break;
         }
         return component;

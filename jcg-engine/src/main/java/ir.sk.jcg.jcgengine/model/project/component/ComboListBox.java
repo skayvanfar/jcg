@@ -7,12 +7,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/9/2016
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/23/2017.
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class LabelComponent extends Component {
-    public LabelComponent() {
-        super.name = "Label";
+public class ComboListBox extends Component {
+
+    public ComboListBox() {
+        super.name = "ComboListBox";
     }
+
 }

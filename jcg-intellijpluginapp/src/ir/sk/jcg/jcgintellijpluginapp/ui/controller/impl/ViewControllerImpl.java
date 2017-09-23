@@ -2,7 +2,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl;
 
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
-import ir.sk.jcg.jcgengine.model.project.component.TextFieldComponent;
+import ir.sk.jcg.jcgengine.model.project.component.TextField;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ViewController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ViewDto;
 
@@ -37,12 +37,12 @@ public class ViewControllerImpl implements ViewController {
     private void addDefaultComponents(SearchView searchView) {
         for (Property property : searchView.getTargetEntity().getProperties()) {
             // TODO: 9/9/2017 must create a map between components and propety types like textField for String
-            Component component = new TextFieldComponent("20");
+            Component component = new TextField("20");
             component.setName(property.getLabelName());
             component.setTargetProperty(property);
             searchView.addComponent(component);
-            // TODO: 9/9/2017 must add LabelComponent for DataGrid
-            Component gridComponent = new TextFieldComponent("20");
+            // TODO: 9/9/2017 must add Label for DataGrid
+            Component gridComponent = new TextField("20");
             gridComponent.setName(property.getLabelName());
             gridComponent.setTargetProperty(property);
             searchView.getDataGrid().addComponent(gridComponent);

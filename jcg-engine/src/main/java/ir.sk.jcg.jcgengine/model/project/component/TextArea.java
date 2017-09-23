@@ -6,13 +6,14 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
- * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/9/2016
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class PasswordTextField extends TextField {
+public class TextArea extends TextField {
 
-    public PasswordTextField() {
-        super.name = "Password Text Field";
+    public TextArea() {
+        super.name = "Text Area";
     }
+
 }

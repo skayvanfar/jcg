@@ -13,15 +13,15 @@ import javax.xml.bind.annotation.XmlSeeAlso;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/8/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlSeeAlso({PasswordTextField.class, TextAreaComponent.class})
+@XmlSeeAlso({PasswordTextField.class, TextArea.class})
 @Editable
-public class TextFieldComponent extends Component {
+public class TextField extends Component {
 
-    public TextFieldComponent() {
+    public TextField() {
         super.name = "Text Field";
     }
 
-    public TextFieldComponent(String maxLength) {
+    public TextField(String maxLength) {
         this.maxLength = maxLength;
     }
 

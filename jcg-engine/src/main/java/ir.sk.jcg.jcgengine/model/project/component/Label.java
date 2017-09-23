@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgengine.model.project.component;
 
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Editable;
+import ir.sk.jcg.jcgengine.model.project.Component;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -10,9 +11,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class PasswordTextField extends TextField {
-
-    public PasswordTextField() {
-        super.name = "Password Text Field";
+public class Label extends Component {
+    public Label() {
+        super.name = "Label";
     }
 }

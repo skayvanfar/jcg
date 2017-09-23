@@ -2,7 +2,7 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.project.Component;
-import ir.sk.jcg.jcgengine.model.project.component.LabelComponent;
+import ir.sk.jcg.jcgengine.model.project.component.Label;
 
 import java.util.Objects;
 
@@ -44,7 +44,7 @@ public enum OutputComponentType implements EnumBase {
         Component component = null;
         switch (this) {
             case LABEL_COMPONENT:
-                component = new LabelComponent();
+                component = new Label();
                 break;
         }
         return component;
