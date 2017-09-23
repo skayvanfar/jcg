@@ -198,6 +198,7 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
         return databaseSchemaName;
     }
 
+    @XmlAttribute
     public void setDatabaseSchemaName(String databaseSchemaName) {
         this.databaseSchemaName = databaseSchemaName;
     }

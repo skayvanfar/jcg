@@ -1,3 +1,38 @@
 #**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/9/2106.
  *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://sk.ir/jcg/zurb-foundation-form" %>
+<%@ taglib prefix="u" uri="http://sk.ir/common/tags/utils" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="filter" uri="http://sk.ir/common/tags/security-filter" %>
+
+<div class="my-panel">
+    <div class="my-panel-header">
+        <h3 class="my-panel-title">${view.name}</h3>
+    </div>
+    <div class="my-panel-body">
+        <div class="column small-12 medium-12 large-12">
+            <div class="my-panel">
+                <div class="my-panel-body">
+                    <div class="row row-max-with">
+                        #set($components = ${view.components})
+                        #viewComponents($components $view.span)
+                    </div>
+                #*<div class="row row-max-with">
+                    <div class="column small-2 medium-2 large-2"><form:button label="جستجو"/></div>
+                </div>*#
+                </div>
+            </div>
+        </div>
+        <div class="my-panel-footer">
+            <h3 class="my-panel-title"></h3>
+        </div>
+    </div>
+</div>

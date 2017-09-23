@@ -1,0 +1,11 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/23/2107.
+ *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+@RequestMapping("/${lowerCaseViewFileName}")
+public String ${view.viewFileName}ById(Model model, @RequestParam("id") Long ${lowerCaseEntityName}Id) throws PersistenceException {
+    model.addAttribute("displayData", ${lowerCaseEntityName}Service.getByOutputClass("${lowerCaseEntityName}Id", ${lowerCaseEntityName}Id, new ir.sk.dto.test.${view.viewFileName}DisplayData())); ## todo "displayData" better be dynamic like userDisplayData as SearchView
+    return "${lowerCaseEntityName}/${lowerCaseViewFileName}";
+}

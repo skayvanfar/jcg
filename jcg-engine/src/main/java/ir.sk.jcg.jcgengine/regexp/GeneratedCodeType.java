@@ -27,7 +27,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/ControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+    SEARCH_CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/SearchControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             String result = code.replaceAll("\\s+", "\\\\s+");
@@ -38,6 +38,18 @@ public enum GeneratedCodeType implements EnumBase {
             result = result.replaceAll("\\s*\\}\\s*", "\\\\s*\\\\}\\\\s*");
             result = result.replaceAll("\\{.*\\}", "\\\\{.*\\\\}");
             return result;
+        }
+    },
+    DISPLAY_CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/DisplayControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+        @Override
+        public String getFreeFormRegexp(String code) {
+            return null; // TODO: 9/23/2017
+        }
+    },
+    CREATE_CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/CreateControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+        @Override
+        public String getFreeFormRegexp(String code) {
+            return null; // TODO: 9/23/2017
         }
     },
     TILES_DEFINITION(3, "TilesDefinition", "mvcTechnology/SpringMVC/view/tiles/definition/tile-definitionElement.vm", RegExType.XML_REG_EX_TYPE) {

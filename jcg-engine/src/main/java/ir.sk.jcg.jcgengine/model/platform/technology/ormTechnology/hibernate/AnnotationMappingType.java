@@ -34,7 +34,7 @@ public class AnnotationMappingType extends MappingType {
             GenerateTemplate springConfigNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("Entity Class", outputPath, "ormTechnology/hibernate/EntityWithAnnotation.vm");
             springConfigNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + '.' + hibernateHandler.getModelPackage()+ "." + packagePath);
            // springConfigNewFileGenerateTemplate.putReference("schema", hibernateHandler.getDatabaseSchemaName());
-            springConfigNewFileGenerateTemplate.putReference("databaseSchemaName", hibernateHandler.getDatabaseSchemaName());
+            springConfigNewFileGenerateTemplate.putReference("databaseSchemaName", hibernateHandler.getDatabaseSchemaName()); // hibernateHandler.getDatabaseSchemaName()
             springConfigNewFileGenerateTemplate.putReference("entity", entity);
 
             springConfigNewFileGenerateTemplate.mergeTemplate();

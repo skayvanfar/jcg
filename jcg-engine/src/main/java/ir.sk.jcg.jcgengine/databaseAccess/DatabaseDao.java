@@ -12,4 +12,5 @@ public interface DatabaseDao {
     boolean disconnect();
     void save(Menu download) throws SQLException;
     void delete(int id) throws SQLException;
+    Long loadMenuIdByTitleName(String titleName) throws SQLException;;
 }

@@ -134,6 +134,7 @@ public class SpringWebArchitecture extends Architecture {
         entity.addAllImplElements(domainImplElements);
 
         // Add Menu record to db
+        // TODO: 9/22/2017
         Menu modelMenu = new Menu();
         modelMenu.setTitle(entity.getLabelName());
         modelMenu.setPriority(0L);
@@ -153,6 +154,25 @@ public class SpringWebArchitecture extends Architecture {
         ViewElement viewElement = mvcTechnologyHandler.createView(view, packagePath);
         if (viewElement != null)
             domainImplElements.add(viewElement);
+
+        //////////////////////////////////////
+        Menu subMenu = new Menu();
+        String connectionUrl = "jdbc:mysql://localhost:3306/" + ApplicationContext.getInstance().getProjectName() + "?characterEncoding=UTF-8";
+        DatabaseDao databaseDao = new JDBCDatabaseDao("com.mysql.jdbc.Driver", connectionUrl, 3306, "root", "metalgearsolid5");
+        try {
+            Long mainIdMenu = databaseDao.loadMenuIdByTitleName(view.getTargetEntity().getLabelName());
+            Menu viewMenu = new Menu();
+            viewMenu.setTitle(view.getName());
+            viewMenu.setPriority(0l);
+            String lowerCaseEntityName = Character.toLowerCase(view.getTargetEntity().getName().charAt(0)) + view.getTargetEntity().getName().substring(1);
+            String lowerCaseViewFileName = Character.toLowerCase(view.getViewFileName().charAt(0)) + view.getViewFileName().substring(1);
+            viewMenu.setUrl(lowerCaseEntityName + "s/" + lowerCaseViewFileName);
+            viewMenu.setParentId(mainIdMenu);
+            databaseDao.save(viewMenu);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public TechnologyHandler getTechnologyByType(TechnologyHandlerType technologyHandlerType) { // TODO: 4/28/2016 must change

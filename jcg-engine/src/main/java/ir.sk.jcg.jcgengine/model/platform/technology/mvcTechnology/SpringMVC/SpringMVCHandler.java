@@ -13,10 +13,8 @@ import ir.sk.jcg.jcgengine.regexp.GeneratedCodeType;
 import ir.sk.jcg.jcgengine.velocity.AddElementToSectionGenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.GenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.NewFileGenerateGenerateTemplate;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -39,26 +37,31 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
     @Override
     public ViewElement createView(View view, String packagePath) {
 
-        GenerateTemplate searchDataNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate("SearchData", ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
-                + File.separator + "dto" + File.separator + packagePath + File.separator + view.getViewFileName() + "SearchData.java", "mvcTechnology/SpringMVC/controller/SearchData.vm");
+        String vmPath = "";
+        GeneratedCodeType generatedCodeType = null;
+        String dataName = "";
+        if (view instanceof DisplayView) { // TODO: 9/23/2017 Refactor by replace Type code
+            vmPath = "mvcTechnology/SpringMVC/view/DisplayView.vm";
+            dataName = "DisplayData";
+            generatedCodeType = GeneratedCodeType.DISPLAY_CONTROL;
+        } else if (view instanceof SearchView) {
+            vmPath = "mvcTechnology/SpringMVC/view/SearchView.vm";
+            dataName = "SearchData";
+            generatedCodeType = GeneratedCodeType.SEARCH_CONTROL;
+        } else if (view instanceof CreateEditView) {
+            vmPath = "mvcTechnology/SpringMVC/view/CreateEditView.vm";
+            dataName = "CreateData";
+            generatedCodeType = GeneratedCodeType.CREATE_CONTROL;
+        }
+
+        GenerateTemplate searchDataNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate(dataName, ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + "dto" + File.separator + packagePath + File.separator + view.getViewFileName() + dataName + ".java", "mvcTechnology/SpringMVC/controller/" + dataName + ".vm");
         searchDataNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dto" + "." + packagePath);
         searchDataNewFileGenerateTemplate.putReference("view", view);
         searchDataNewFileGenerateTemplate.mergeTemplate();
-        // TODO: 9/9/2017 mabe need to add searchData to artifacts
 
-        //   Path path = Paths.get("outputPath");
         ViewElement viewElement = new ViewElement();
         NewFileGenerateGenerateTemplate viewNewFileGenerateGenerateTemplate = null;
-        String vmPath = "";
-        if (view instanceof DisplayView) {
-            vmPath = "mvcTechnology/SpringMVC/view/DisplayView.vm";
-        } else if (view instanceof SearchView) {
-            vmPath = "mvcTechnology/SpringMVC/view/SearchView.vm";
-        } else if (view instanceof CreateEditView) {
-            vmPath = "mvcTechnology/SpringMVC/view/CreateEditView.vm";
-        }
-     /*   else if (view instanceof SearcE)
-            viewNewFileGenerateGenerateTemplate = new NewFileGenerateGenerateTemplate("View Element", "mvcTechnology/SpringMVC/view/EntityWithAnnotation.vm", outputPath);*/
 
         String outputPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "views"
                 + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getTargetEntity().getName().toLowerCase() + File.separator + view.getViewFileName() + ".jsp";
@@ -74,7 +77,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         String filePath = ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir
                 + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getTargetEntity().getName() + "Controller.java";
 
-        GenerateTemplate addControllerMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add Controller Method", filePath, GeneratedCodeType.CONTROL);
+        GenerateTemplate addControllerMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add Controller Method", filePath, generatedCodeType);
         addControllerMethodGenerateTemplate.putReference("view", view);
         // TODO: 9/15/2017 better to place all related filed to a model go to specific model
         addControllerMethodGenerateTemplate.putReference("searchDataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);

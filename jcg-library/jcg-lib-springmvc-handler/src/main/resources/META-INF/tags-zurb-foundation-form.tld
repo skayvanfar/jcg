@@ -63,4 +63,8 @@
         <name>editableImage</name>
         <path>/META-INF/tags/zurb-foundation-form/editableImage.tag</path>
     </tag-file>
+    <tag-file>
+        <name>label</name>
+        <path>/META-INF/tags/zurb-foundation-form/label.tag</path>
+    </tag-file>
 </taglib>

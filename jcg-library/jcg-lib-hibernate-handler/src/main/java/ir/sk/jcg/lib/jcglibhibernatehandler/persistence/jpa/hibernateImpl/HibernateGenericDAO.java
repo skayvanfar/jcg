@@ -4,12 +4,14 @@ package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.hibernateImpl;
 
 import ir.sk.jcg.jcglibcommon.persistence.GenericDAO;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
+import ir.sk.jcg.jcglibcommon.web.DisplayData;
 import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import ir.sk.jcg.jcglibcommon.web.SearchData;
 import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.PersistenceUtil;
 
 import org.hibernate.*;
 import org.hibernate.criterion.*;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.orm.ObjectRetrievalFailureException;
@@ -541,5 +543,18 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         }
 
         return paging(criteria, searchData.getPage(), searchData.getPageSize(), Order.asc("id"));
+    }
+
+    @Override
+    public DisplayData getByOutputClass(String idName, PK idValue, DisplayData displayData) {
+        Set<String> propertyNames = displayData.getDisplayParamNames();
+        ProjectionList projectionList = Projections.projectionList();
+        propertyNames.stream().forEach(s -> projectionList.add(Projections.property(s), s));
+        Criteria criteria = getSession().createCriteria(persistentClass)
+                .setProjection(projectionList).setResultTransformer(Transformers.aliasToBean(displayData.getClass()));
+
+        criteria.add(Restrictions.eq(idName, idValue));
+
+        return (DisplayData) criteria.uniqueResult();
     }
 }

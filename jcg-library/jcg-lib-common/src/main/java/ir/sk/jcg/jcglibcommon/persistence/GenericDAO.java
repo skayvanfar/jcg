@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcglibcommon.persistence;
 
+import ir.sk.jcg.jcglibcommon.web.DisplayData;
 import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import ir.sk.jcg.jcglibcommon.web.SearchData;
 
@@ -168,4 +169,6 @@ public interface GenericDAO<T, PK extends Serializable> {
     boolean exists(PK id);
 
     PagingDataList<T> search(SearchData searchData) throws PersistenceException;
+
+    DisplayData getByOutputClass(String idName, PK id, DisplayData displayData);
 }

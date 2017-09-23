@@ -12,4 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
 public class LabelComponent extends Component {
+    public LabelComponent() {
+        super.name = "Label";
+    }
 }

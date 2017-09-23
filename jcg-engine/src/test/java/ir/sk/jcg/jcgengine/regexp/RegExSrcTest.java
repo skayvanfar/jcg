@@ -1,7 +1,6 @@
 package ir.sk.jcg.jcgengine.regexp;
 
 import ir.sk.jcg.jcgcommon.util.FileUtils;
-import ir.sk.jcg.jcgengine.exception.ModelElementAlreadyExistException;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -75,7 +74,7 @@ public class RegExSrcTest {
                 "        dao.saveUser(user);\n" +
                 "    }";
         boolean expectedValue = true;
-        boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.CONTROL, code);
+        boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.SEARCH_CONTROL, code);
         Assert.assertEquals(expectedValue, actualValue);*/
     }
 
@@ -85,7 +84,7 @@ public class RegExSrcTest {
                 "        dao.saveUser(user);\n" +
                 "    }";
         boolean expectedValue = false;
-        boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.CONTROL, code);
+        boolean actualValue = regExSrc.hasModelElement(GeneratedCodeType.SEARCH_CONTROL, code);
         Assert.assertEquals(expectedValue, actualValue);*/
     }
 
@@ -106,7 +105,7 @@ public class RegExSrcTest {
     @Test
     public void addControllerModelElement() throws Exception {
         regExSrc = new RegExSrc(fileContent, RegExType.JAVA_REG_EX_TYPE);
-        String value = regExSrc.addModelElement(GeneratedCodeType.CONTROL, "@RequestMapping\\(value=\"/\", method = RequestMethod.GET\\)\n" +
+        String value = regExSrc.addModelElement(GeneratedCodeType.SEARCH_CONTROL, "@RequestMapping\\(value=\"/\", method = RequestMethod.GET\\)\n" +
                 "    public void addUser\\(String User2\\) \\{\n" +
                 "        dao.saveUser\\(user\\);\n" +
                 "    \\}");

@@ -172,4 +172,21 @@ public class JDBCDatabaseDao implements DatabaseDao {
         //    con.commit();
         disconnect();
     }
+
+    @Override
+    public Long loadMenuIdByTitleName(String titleName) throws SQLException {
+        connect();
+        String loadSql = "SELECT ID FROM TBL_BIS_MENU WHERE TITLE = ?";
+        PreparedStatement loadStatement = con.prepareStatement(loadSql);
+        loadStatement.setString(1, titleName);
+        ResultSet menuResultSet = loadStatement.executeQuery();
+        menuResultSet.next();
+
+        Long mainMenuId = menuResultSet.getLong("ID");
+
+        loadStatement.close();
+        disconnect();
+
+        return mainMenuId;
+    }
 }
