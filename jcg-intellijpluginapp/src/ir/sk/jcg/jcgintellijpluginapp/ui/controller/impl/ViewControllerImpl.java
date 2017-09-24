@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl;
 
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgengine.model.project.component.Label;
 import ir.sk.jcg.jcgengine.model.project.component.TextField;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ViewController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ViewDto;
@@ -24,7 +25,8 @@ public class ViewControllerImpl implements ViewController {
 
         view.setName(viewDto.getName());
         view.setViewFileName(viewDto.getViewFileName());
-        view.setTargetEntity(viewDto.getTargetEntity());
+     //   view.setTargetEntity(viewDto.getTargetEntity());
+        viewDto.getTargetEntity().addView(view);
 
         if (view instanceof SearchView) { // TODO: 9/9/2017
             addDefaultComponents((SearchView) view);
@@ -39,12 +41,12 @@ public class ViewControllerImpl implements ViewController {
             // TODO: 9/9/2017 must create a map between components and propety types like textField for String
             Component component = new TextField("20");
             component.setName(property.getLabelName());
-            component.setTargetProperty(property);
+            component.setTargetEntityElement(property);
             searchView.addComponent(component);
             // TODO: 9/9/2017 must add Label for DataGrid
-            Component gridComponent = new TextField("20");
+            Component gridComponent = new Label();
             gridComponent.setName(property.getLabelName());
-            gridComponent.setTargetProperty(property);
+            gridComponent.setTargetEntityElement(property);
             searchView.getDataGrid().addComponent(gridComponent);
         }
     }

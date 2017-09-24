@@ -3,6 +3,8 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.project.Component;
 import ir.sk.jcg.jcgengine.model.project.component.Label;
+import ir.sk.jcg.jcgengine.model.project.component.Link;
+import ir.sk.jcg.jcgengine.model.project.component.LinkList;
 
 import java.util.Objects;
 
@@ -11,7 +13,9 @@ import java.util.Objects;
  */
 public enum OutputComponentType implements EnumBase {
 
-    LABEL_COMPONENT(0, "Label");
+    LABEL(0, "Label"),
+    LINK(1, "Link"),
+    LINK_LIST(2, "LinkList");
 
     private Integer value;
     private String desc;
@@ -43,8 +47,14 @@ public enum OutputComponentType implements EnumBase {
     public Component createComponent() {
         Component component = null;
         switch (this) {
-            case LABEL_COMPONENT:
+            case LABEL:
                 component = new Label();
+                break;
+            case LINK:
+                component = new Link();
+                break;
+            case LINK_LIST:
+                component = new LinkList();
                 break;
         }
         return component;

@@ -15,7 +15,7 @@ import java.io.Serializable;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 5/12/2016
  */
 // @Editable
-public class Relationship extends ModelElement implements Serializable {
+public class Relationship extends EntityElement implements Serializable {
 
     // Unique id
     @Prop(label = "Id")

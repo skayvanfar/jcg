@@ -22,7 +22,7 @@ public class ComponentControllerImpl implements ComponentController {
         Component component = componentDto.getInputComponentType().createComponent();
 
         component.setName(componentDto.getName());
-        component.setTargetProperty(componentDto.getTargetProperty());
+        component.setTargetEntityElement(componentDto.getTargetEntityElement());
 
         view.addComponent(component);
         return component;
@@ -33,7 +33,7 @@ public class ComponentControllerImpl implements ComponentController {
         Component component = componentDto.getOutputComponentType().createComponent();
 
         component.setName(componentDto.getName());
-        component.setTargetProperty(componentDto.getTargetProperty());
+        component.setTargetEntityElement(componentDto.getTargetEntityElement());
 
         dataGrid.addComponent(component);
         return component;

@@ -251,7 +251,7 @@ public class TreePanel extends SimpleToolWindowPanel {
     private void loadInputComponents(View view, DefaultMutableTreeNode parentNode) {
         for (Component component : view.getComponents()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
-            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetProperty());
+            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetEntityElement());
             tNode.add(targetPropertyNode);
             parentNode.add(tNode);
         }
@@ -266,7 +266,7 @@ public class TreePanel extends SimpleToolWindowPanel {
     private void loadOutputComponents(DataGrid dataGrid, DefaultMutableTreeNode parentNode) {
         for (Component component : dataGrid.getComponents()) {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
-            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetProperty());
+            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetEntityElement());
             tNode.add(targetPropertyNode);
             parentNode.add(tNode);
         }
@@ -307,7 +307,7 @@ public class TreePanel extends SimpleToolWindowPanel {
             DefaultMutableTreeNode targetEntityNode = new DefaultMutableTreeNode(((Relationship) modelElement).getTargetEntity());
             tNodeParent.add(targetEntityNode);
         } else if (modelElement instanceof Component) {
-            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(((Component) modelElement).getTargetProperty());
+            DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(((Component) modelElement).getTargetEntityElement());
             tNodeParent.add(targetPropertyNode);
         }
     }

@@ -13,18 +13,14 @@ import java.io.Serializable;
  */
 @XmlSeeAlso(Id.class)
 @Editable
-public class Property extends ModelElement implements Serializable {
+public class Property extends EntityElement implements Serializable {
 
-    @Prop(label = "Label Name", editable = true, required = true)
-    private String labelName;
     @Prop(label = "Type", componentType = ComponentType.EDITABLE_COMBO, values = {"int", "Integer", "short", "Short", "long", "Long", "String", "java.sql.Timestamp"}, editable = true, required = true)
     private String type;
     //    @Prop(label = "Value", editable = true, required = true)
 //    private String value;
     @Prop(label = "Column Name", editable = true, required = true)
     private String columnName;
-    @Prop(label = "Is Unique", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
-    private boolean unique;
     @Prop(label = "Is Nullable", componentType = ComponentType.BOOLEAN_CHECKBOX, editable = true, required = true)
     private boolean nullable;
 
@@ -34,19 +30,10 @@ public class Property extends ModelElement implements Serializable {
     }
 
     public Property(String name, String labelName, String type, String columnName) {
+        super(labelName);
         this.name = name;
-        this.labelName = labelName;
         this.type = type;
         this.columnName = columnName;
-    }
-
-    public String getLabelName() {
-        return labelName;
-    }
-
-    @XmlAttribute
-    public void setLabelName(String labelName) {
-        this.labelName = labelName;
     }
 
     public String getType() {
@@ -74,15 +61,6 @@ public class Property extends ModelElement implements Serializable {
     @XmlAttribute
     public void setColumnName(String columnName) {
         this.columnName = columnName;
-    }
-
-    public boolean isUnique() {
-        return unique;
-    }
-
-    @XmlAttribute
-    public void setUnique(boolean unique) {
-        this.unique = unique;
     }
 
     public boolean isNullable() {

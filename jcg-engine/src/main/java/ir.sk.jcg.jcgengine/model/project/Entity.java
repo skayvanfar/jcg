@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Present an Entity in domain
@@ -39,12 +41,13 @@ public class Entity extends SchemaItem implements Serializable {
 
     private Set<Relationship> relationships;
 
+    private Set<View> views;
+
     public Entity() {
         properties = new HashSet<>();
         relationships = new HashSet<>();
+        views = new HashSet<>();
     }
-
-
 
     public String getPackagePath() {
         return packagePath;
@@ -129,6 +132,29 @@ public class Entity extends SchemaItem implements Serializable {
         this.relationships = relationships;
     }
 
+    public Set<View> getViews() {
+        return views;
+    }
+
+    @XmlElement(name = "views")
+    public void setViews(Set<View> views) {
+        this.views = views;
+    }
+
+    public Set<View> getDisplayViews() {
+        return views.stream().filter(view -> view instanceof DisplayView).collect(Collectors.toSet());
+    }
+
+    // A convenience method simplifies relationship management
+    public void addView(View view) {
+        if (view == null)
+            throw new NullPointerException("Can't add null View"); // Be defensive
+        if (view.getTargetEntity() != null && !view.getTargetEntity().equals(this))
+            throw new IllegalStateException("View is already assigned to an Entity");
+        getViews().add(view);
+        view.setTargetEntity(this);
+    }
+
     /**
      * Add Relation to Entity. If Relation exist, override that.
      *
@@ -156,6 +182,14 @@ public class Entity extends SchemaItem implements Serializable {
             if (relationship.getName().equals(relationshipName))
                 return true;
         return false;
+    }
+
+    public Set<EntityElement> getAllEntityElements() {
+        Set<EntityElement> entityElements = new HashSet<>();
+        entityElements.add(id);
+        entityElements.addAll(properties);
+        entityElements.addAll(relationships);
+        return entityElements;
     }
 
 }

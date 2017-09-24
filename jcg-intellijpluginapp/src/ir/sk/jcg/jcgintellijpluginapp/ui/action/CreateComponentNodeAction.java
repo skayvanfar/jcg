@@ -30,18 +30,16 @@ public class CreateComponentNodeAction extends CreateNodeAction {
         ModelElement modelElement = (ModelElement) jcgProjectComponent.currentSelectedNodeUserObject();
         boolean viewOrDataGrid = true; // Default is View
         View view = null;
-        Set<Property> properties = new HashSet<>();
-        if (modelElement instanceof View) {
+        if (modelElement instanceof SearchView) {
             view = (View) modelElement;
-            properties.add(view.getTargetEntity().getId());
-            properties.addAll(view.getTargetEntity().getProperties());
-            componentPanel = new ComponentPanel(properties, true);
-        } else if (modelElement instanceof DataGrid) {
+            componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), true);
+        } if (modelElement instanceof DisplayView) {
+            componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), false);
+        }
+        else if (modelElement instanceof DataGrid) {
             viewOrDataGrid = false;
             view = (View) jcgProjectComponent.parentSelectedNodeUserObject();
-            properties.add(view.getTargetEntity().getId());
-            properties.addAll(view.getTargetEntity().getProperties());
-            componentPanel = new ComponentPanel(properties, false);
+            componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), false);
         }
 
         builder = new DialogBuilder(e.getProject());

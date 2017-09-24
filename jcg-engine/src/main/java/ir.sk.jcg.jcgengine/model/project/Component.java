@@ -17,16 +17,18 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 @Editable
 public abstract class Component extends ModelElement { // TODO: 7/8/2016 may better use Interface
 
-    private Property targetProperty;
+    private EntityElement targetEntityElement;
 
     // TODO: 7/8/2016 add Converters and Validators
 
-    public Property getTargetProperty() {
-        return targetProperty;
+
+    public EntityElement getTargetEntityElement() {
+        return targetEntityElement;
     }
 
     @XmlElement
-    public void setTargetProperty(Property targetProperty) {
-        this.targetProperty = targetProperty;
+    public void setTargetEntityElement(EntityElement targetEntityElement) {
+        this.targetEntityElement = targetEntityElement;
     }
+
 }
