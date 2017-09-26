@@ -12,6 +12,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.TechnologyHandler;
 import ir.sk.jcg.jcgengine.model.project.Component;
 import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.Package;
+import ir.sk.jcg.jcgengine.model.project.component.Link;
 import ir.sk.jcg.jcgintellijpluginapp.ui.listener.TreeSelectionChangedListener;
 
 import javax.swing.*;
@@ -194,6 +195,7 @@ public class TreePanel extends SimpleToolWindowPanel {
                 loadId((Entity) t, tNode);
                 loadProperties((Entity) t, tNode);
                 loadRelations((Entity) t, tNode);
+                loadViews((Entity) t, tNode);
             } else {
                 loadInputComponents((View) t, tNode);
                 if (t instanceof SearchView)
@@ -236,6 +238,14 @@ public class TreePanel extends SimpleToolWindowPanel {
         }
     }
 
+    private void loadViews(Entity entity, DefaultMutableTreeNode parentNode) {
+        for (View view : entity.getViews()) {
+            DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(view);
+            parentNode.add(tNode);
+        }
+    }
+
+
     private void loadSpringTechnologyHandler(Architecture architecture, DefaultMutableTreeNode parentNode) {
         DefaultMutableTreeNode springTechnologyHandlerNode = new DefaultMutableTreeNode(architecture.getSpringHandler());
         parentNode.add(springTechnologyHandlerNode);
@@ -268,6 +278,12 @@ public class TreePanel extends SimpleToolWindowPanel {
             DefaultMutableTreeNode tNode = new DefaultMutableTreeNode(component);
             DefaultMutableTreeNode targetPropertyNode = new DefaultMutableTreeNode(component.getTargetEntityElement());
             tNode.add(targetPropertyNode);
+
+            if (component instanceof Link) {
+                DefaultMutableTreeNode targetViewNode = new DefaultMutableTreeNode(((Link) component).getTargetView());
+                tNode.add(targetViewNode);
+            }
+
             parentNode.add(tNode);
         }
     }

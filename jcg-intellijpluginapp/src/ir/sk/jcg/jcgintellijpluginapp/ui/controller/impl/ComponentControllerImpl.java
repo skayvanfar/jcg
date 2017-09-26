@@ -1,8 +1,10 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.controller.impl;
 
 import ir.sk.jcg.jcgengine.model.project.Component;
+import ir.sk.jcg.jcgengine.model.project.ComponentContainer;
 import ir.sk.jcg.jcgengine.model.project.DataGrid;
 import ir.sk.jcg.jcgengine.model.project.View;
+import ir.sk.jcg.jcgengine.model.project.component.Link;
 import ir.sk.jcg.jcgintellijpluginapp.ui.controller.ComponentController;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ComponentDto;
 
@@ -29,13 +31,16 @@ public class ComponentControllerImpl implements ComponentController {
     }
 
     @Override
-    public Component createOutputComponent(ComponentDto componentDto, DataGrid dataGrid) {
+    public Component createOutputComponent(ComponentDto componentDto, ComponentContainer componentContainer) {
         Component component = componentDto.getOutputComponentType().createComponent();
 
         component.setName(componentDto.getName());
         component.setTargetEntityElement(componentDto.getTargetEntityElement());
 
-        dataGrid.addComponent(component);
+        if (component instanceof Link) // TODO: 9/25/2017
+            ((Link) component).setTargetView(componentDto.getTargetView());
+
+        componentContainer.addComponent(component);
         return component;
     }
 }

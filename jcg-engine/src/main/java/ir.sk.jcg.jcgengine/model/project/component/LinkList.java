@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class LinkList extends Component {
+public class LinkList extends Link {
 
     public LinkList() {
         super.name = "Link List";

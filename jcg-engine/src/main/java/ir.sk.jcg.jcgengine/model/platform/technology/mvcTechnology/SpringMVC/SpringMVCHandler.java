@@ -80,7 +80,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         GenerateTemplate addControllerMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add Controller Method", filePath, generatedCodeType);
         addControllerMethodGenerateTemplate.putReference("view", view);
         // TODO: 9/15/2017 better to place all related filed to a model go to specific model
-        addControllerMethodGenerateTemplate.putReference("searchDataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
+        addControllerMethodGenerateTemplate.putReference("dataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
 
         addControllerMethodGenerateTemplate.mergeTemplate();
 

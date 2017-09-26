@@ -117,32 +117,37 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 ## Components
 
 ## Define TextField component
-#macro(TextFieldComponent $component)
-    <form:text path="${component.targetProperty.name}" placeholder="${component.targetProperty.labelName}" label="${component.targetProperty.labelName}" maxlength="${component.maxLength}"/>
+#macro(TextField $component)
+    <form:text path="${component.targetEntityElement.name}" placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}" maxlength="${component.maxLength}"/>
 #end
 
 ## Define TextArea component
-#macro(TextAreaComponent $component)
-<form:textarea path="${component.targetProperty.name}" placeholder="${component.targetProperty.labelName}" label="${component.targetProperty.labelName}"/>
+#macro(TextArea $component)
+<form:textarea path="${component.targetEntityElement.name}" placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}"/>
 #end
 
 ## Define PasswordTextField component
 #macro(PasswordTextField $component)
-<form:password path="${component.targetProperty.name}" placeholder="${component.targetProperty.labelName}" label="${component.targetProperty.labelName}"/>
+<form:password path="${component.targetEntityElement.name}" placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}"/>
 #end
 
 ## Define Label component
-#macro(LabelComponent $component)
-<form:label path="${component.targetProperty.name}" label="${component.targetProperty.labelName}" content="#[[${displayData.]]#${component.targetProperty.name}}"/>
+#macro(Label $component)
+<form:label path="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" content="#[[${displayData.]]#${component.targetEntityElement.name}}"/>
 #end
 
+## Define Link component
+#macro(Link $component)
+#set($url = ${component.targetView.getTargetEntity().getName().toLowerCase()} + "s/" + ${component.targetView.getViewFileName()})   ## lowerCase of targetView file name
+<form:link name="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" url="${url}" idQuery="#[[${displayData.]]#${component.targetView.getTargetEntity().getName().toLowerCase()}Id}"/>
+#end
 
 ## DataGrid headers
 #macro(dataGridHeaders $dataGrid)
 <tr class="my-panel-header">
         <th>ردیف</th>
     #foreach(${component} in ${dataGrid.components})
-        <th>${component.targetProperty.labelName}</th>
+        <th>${component.targetEntityElement.labelName}</th>
     #end
     <th></th>
 </tr>
@@ -157,7 +162,8 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
     <tr>
         <td>${${lowerCaseEntityName}s.page * ${lowerCaseEntityName}s.pageSize + forIndex.index + 1}</td>
         #foreach(${component} in ${view.dataGrid.components})
-            <td>${${lowerCaseEntityName}.${component.targetProperty.name}}</td>
+            #set($call = "#${component.class.simpleName}")
+            <td>#evaluate($call)</td>
         #end
 
         <td>
@@ -191,7 +197,7 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 ## Define Data properties name
 #macro(dataPropertiesName $components)
     #foreach(${component} in ${components})
-        #set($property = ${component.targetProperty})
+        #set($property = ${component.targetEntityElement})
         @SearchParam
         private ${property.type} ${property.name};
     #end
@@ -200,7 +206,7 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 ## Define Data properties setters and getters
 #macro(dataPropertiesGetterAndSetter $components)
     #foreach(${component} in ${components})
-        #set($property = ${component.targetProperty})
+        #set($property = ${component.targetEntityElement})
         #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
 
         public ${property.type} get${capitalizeName}() {

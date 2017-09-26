@@ -43,10 +43,4 @@ public class ${entity.name}Controller extends BaseController {
 
     /* GENERATED CODE END */
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public String testHome(Model model) {
-        ${entity.name} ${lowerCaseName} = new ${entity.name}();
-        userService.save(${lowerCaseName});
-        return "home";
-    }
 }

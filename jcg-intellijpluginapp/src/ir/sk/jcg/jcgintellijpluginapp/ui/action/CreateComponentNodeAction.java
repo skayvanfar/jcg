@@ -34,6 +34,8 @@ public class CreateComponentNodeAction extends CreateNodeAction {
             view = (View) modelElement;
             componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), true);
         } if (modelElement instanceof DisplayView) {
+            viewOrDataGrid = false;
+            view = (View) modelElement;
             componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), false);
         }
         else if (modelElement instanceof DataGrid) {
@@ -55,8 +57,8 @@ public class CreateComponentNodeAction extends CreateNodeAction {
             if (finalViewOrDataGrid)
                 component = componentController.createInputComponent(componentPanel.getComponentDto(), finalView);
             else {
-                DataGrid dataGrid = (DataGrid) modelElement;
-                component = componentController.createOutputComponent(componentPanel.getComponentDto(), dataGrid);
+                ComponentContainer componentContainer = (ComponentContainer) modelElement;
+                component = componentController.createOutputComponent(componentPanel.getComponentDto(), componentContainer);
             }
 
             jcgProjectComponent.addNeededNodes(component);

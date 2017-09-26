@@ -67,4 +67,8 @@
         <name>label</name>
         <path>/META-INF/tags/zurb-foundation-form/label.tag</path>
     </tag-file>
+    <tag-file>
+        <name>link</name>
+        <path>/META-INF/tags/zurb-foundation-form/link.tag</path>
+    </tag-file>
 </taglib>

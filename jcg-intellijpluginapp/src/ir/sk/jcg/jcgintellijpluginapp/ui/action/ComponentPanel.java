@@ -43,8 +43,8 @@ class ComponentPanel extends JPanel {
         componentNameTextField = new JTextField();
         add(componentNameTextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
 
-        JLabel targetPropertyLabel = new JLabel("Target :");
-        add(targetPropertyLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        JLabel targetEntityElementLabel = new JLabel("Target :");
+        add(targetEntityElementLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         targetEntityElementComboBox = new ComboBox<>();
         for (EntityElement entityElement : entityElements)
             targetEntityElementComboBox.addItem(entityElement);
@@ -65,7 +65,7 @@ class ComponentPanel extends JPanel {
                 componentTypeComboBox.addItem(outputComponentType);
 
         componentTypeComboBox.addItemListener(e -> {
-            if (e.getItem() == OutputComponentType.LINK || e.getItem() == OutputComponentType.LINK_LIST) {
+            if (e.getItem() == OutputComponentType.LINK) {
                 EntityElement entityElement = (EntityElement) targetEntityElementComboBox.getSelectedItem();
                 if (entityElement instanceof Relationship) {
                     Set<View> views = ((Relationship)entityElement).getTargetEntity().getDisplayViews();
@@ -118,13 +118,15 @@ class ComponentPanel extends JPanel {
             componentDto.setInputComponentType((InputComponentType) componentTypeComboBox.getSelectedItem());
         else
             componentDto.setOutputComponentType((OutputComponentType) componentTypeComboBox.getSelectedItem());
+        componentDto.setTargetView((View) targetViewComboBox.getSelectedItem());
         return componentDto;
     }
 
     void setComponentDto(ComponentDto componentDto) {
         componentNameTextField.setText(componentDto.getName());
         targetEntityElementComboBox.setSelectedItem(componentDto.getTargetEntityElement());
-        targetEntityElementComboBox.setSelectedItem(componentDto.getInputComponentType());
+        componentTypeComboBox.setSelectedItem(componentDto.getInputComponentType());
+        targetViewComboBox.setSelectedItem(componentDto.getTargetView());
 
         this.componentDto = componentDto;
     }

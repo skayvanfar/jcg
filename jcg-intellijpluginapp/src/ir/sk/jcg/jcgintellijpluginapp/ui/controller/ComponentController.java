@@ -1,6 +1,7 @@
 package ir.sk.jcg.jcgintellijpluginapp.ui.controller;
 
 import ir.sk.jcg.jcgengine.model.project.Component;
+import ir.sk.jcg.jcgengine.model.project.ComponentContainer;
 import ir.sk.jcg.jcgengine.model.project.DataGrid;
 import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgintellijpluginapp.ui.dto.ComponentDto;
@@ -18,5 +19,5 @@ public interface ComponentController {
      */
     Component createInputComponent(ComponentDto componentDto, View view);
 
-    Component createOutputComponent(ComponentDto componentDto, DataGrid dataGrid);
+    Component createOutputComponent(ComponentDto componentDto, ComponentContainer componentContainer);
 }

@@ -2,6 +2,7 @@ package ir.sk.jcg.jcgintellijpluginapp.ui.dto;
 
 import ir.sk.jcg.jcgengine.model.project.EntityElement;
 import ir.sk.jcg.jcgengine.model.project.Property;
+import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgengine.model.project.enums.InputComponentType;
 import ir.sk.jcg.jcgengine.model.project.enums.OutputComponentType;
 
@@ -16,6 +17,7 @@ public class ComponentDto implements Serializable {
     private EntityElement targetEntityElement;
     private InputComponentType inputComponentType;
     private OutputComponentType outputComponentType;
+    private View targetView;
 
     public String getName() {
         return name;
@@ -48,4 +50,13 @@ public class ComponentDto implements Serializable {
     public void setOutputComponentType(OutputComponentType outputComponentType) {
         this.outputComponentType = outputComponentType;
     }
+
+    public View getTargetView() {
+        return targetView;
+    }
+
+    public void setTargetView(View targetView) {
+        this.targetView = targetView;
+    }
+
 }

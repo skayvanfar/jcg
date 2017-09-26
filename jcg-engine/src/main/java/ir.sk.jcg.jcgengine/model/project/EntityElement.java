@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/24/2017.
  */
-@XmlSeeAlso(Id.class)
+@XmlSeeAlso({Id.class, Property.class, Relationship.class})
 @Editable
 public class EntityElement extends ModelElement implements Serializable {
 

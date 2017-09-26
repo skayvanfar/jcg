@@ -14,7 +14,7 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Editable
-public class DataGrid extends ModelElement {
+public class DataGrid extends ModelElement implements ComponentContainer {
 
     private List<Component> components;
 
@@ -23,15 +23,18 @@ public class DataGrid extends ModelElement {
         components = new ArrayList<>();
     }
 
+    @Override
     public List<Component> getComponents() {
         return components;
     }
 
     @XmlElement(name = "component")
+    @Override
     public void setComponents(List<Component> components) {
         this.components = components;
     }
 
+    @Override
     public void addComponent(Component component) { // // TODO: 5/2/2016 repeated code(in Schema)
         if (components.contains(component))
             throw new ElementBeforeExistException(component);
