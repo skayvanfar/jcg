@@ -6,16 +6,21 @@
 
 ## Define id name
 #macro(idName $id)
-    @Id
-    @GeneratedValue(strategy = GenerationType.#idGeneratorTypeHibernate($id.idGeneratorType))
-    @Column(name = "${id.columnName}", unique = ${id.unique}, nullable = ${id.nullable})
-    private ${id.type} ${id.name};
+## private ${id.type} ${id.name};
 #end
 
 ## Define id setters and getters
+#macro(idGetterAndSetterEntity $id)
+    @Id
+    @GeneratedValue(strategy = GenerationType.#idGeneratorTypeHibernate($id.idGeneratorType))
+    @Column(name = "${id.columnName}", unique = ${id.unique}, nullable = ${id.nullable})
+    @Override
+    #idGetterAndSetter($id)
+#end
+
+#########################################################
 #macro(idGetterAndSetter $id)
     #set($capitalizeName = ${id.name.substring(0, 1).toUpperCase()}+${id.name.substring(1)})   ## capitalize of property.name
-
     public ${id.type} get${capitalizeName}() {
         return ${id.name};
     }
@@ -26,19 +31,29 @@
 #end
 
 ## Define properties name
-#macro(propertiesName $properties)
+#macro(propertiesNameEntity $properties)
     #foreach(${property} in ${properties})
-    @Basic
-    @Column(name = "${property.columnName}", unique = ${property.unique}, nullable = ${property.nullable})
-    private ${property.type} ${property.name};
+        #propertyName($property)
     #end
 #end
 
-## Define properties setters and getters
-#macro(propertiesGetterAndSetter $properties)
-    #foreach(${property} in ${properties})
-    #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
+#########################################################
+#macro(propertyName $property)
+    private ${property.type} ${property.name};
+#end
 
+## Define properties setters and getters
+#macro(propertiesGetterAndSetterEntity $properties)
+    #foreach(${property} in ${properties})
+        @Basic
+        @Column(name = "${property.columnName}", unique = ${property.unique}, nullable = ${property.nullable})
+        #propertyGetterAndSetter($property)
+    #end
+#end
+
+#########################################################
+#macro(propertyGetterAndSetter $property)
+    #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
     public ${property.type} get${capitalizeName}() {
         return ${property.name};
     }
@@ -46,23 +61,31 @@
     public void set${capitalizeName}(${property.type} ${property.name}) {
         this.${property.name} = ${property.name};
     }
-    #end
 #end
 
 ## Define relationships name
-#macro(relationshipsName $relationships)
+#macro(relationshipsNameEntity $relationships)
     #foreach(${relationship} in ${relationships})
-#relationshipCardinalityTypeHibernate($relationship.cardinalityType)#if((!${relationship.head} && ${relationship.cardinalityType} != "* ... 1") || (${relationship.directionalityType} == "Bidirectional") && ${relationship.cardinalityType} == "1 ... *")(mappedBy = "${relationship.otherSideRelationship.name}")#end
-
-private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name};
+        #relationshipName($relationship)
     #end
 #end
 
-## Define relationships setters and getters
-#macro(relationshipsGetterAndSetter $relationships)
-    #foreach(${relationship} in ${entity.relationships})
-    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
+#########################################################
+#macro(relationshipName $relationship)
+    private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name};
+#end
 
+## Define relationships setters and getters
+#macro(relationshipsGetterAndSetterEntity $relationships)
+    #foreach(${relationship} in ${entity.relationships})
+        #relationshipCardinalityTypeHibernate($relationship.cardinalityType)#if((!${relationship.head} && ${relationship.cardinalityType} != "* ... 1") || (${relationship.directionalityType} == "Bidirectional") && ${relationship.cardinalityType} == "1 ... *")(mappedBy = "${relationship.otherSideRelationship.name}")#end
+        #relationshipGetterAndSetter($relationship)
+    #end
+#end
+
+#########################################################
+#macro(relationshipGetterAndSetter $relationship)
+    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
     public #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end get${capitalizeName}() {
         return ${relationship.name};
     }
@@ -70,7 +93,6 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
     public void set${capitalizeName}(#if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name}) {
         this.${relationship.name} = ${relationship.name};
     }
-    #end
 #end
 
 ## Define relationship cardinalityType for hibernate
@@ -103,9 +125,9 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 
 ## ############################################################################ View START
 ## Define properties name
-#macro(viewComponents $components $span)
+#macro(viewComponents $components $view)
     #set($Integer = 0)
-    #set($realSpan = 12/$Integer.parseInt($span))   ## Calculate real span
+    #set($realSpan = 12/$Integer.parseInt($view.span))   ## Calculate real span
     #foreach(${component} in ${components})
     <div class="column small-${realSpan} medium-${realSpan} large-${realSpan}">
         #set($call = "#${component.class.simpleName}")
@@ -117,29 +139,37 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 ## Components
 
 ## Define TextField component
-#macro(TextField $component)
+#macro(TextField $component $view)
     <form:text path="${component.targetEntityElement.name}" placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}" maxlength="${component.maxLength}"/>
 #end
 
 ## Define TextArea component
-#macro(TextArea $component)
+#macro(TextArea $component $view)
 <form:textarea path="${component.targetEntityElement.name}" placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}"/>
 #end
 
 ## Define PasswordTextField component
-#macro(PasswordTextField $component)
+#macro(PasswordTextField $component $view)
 <form:password path="${component.targetEntityElement.name}" placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}"/>
 #end
 
+## Define PasswordTextField component
+#macro(Tag $component $view)
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+<form:tag path="${component.targetEntityElement.name}" #*maxCount="1"*# placeholder="${component.targetEntityElement.labelName}" label="${component.targetEntityElement.labelName}" filterUrl="/${lowerCaseEntityName}/${lowerCaseViewFileName}/filter/${component.targetEntityElement.name}"/>
+#end
+
 ## Define Label component
-#macro(Label $component)
-<form:label path="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" content="#[[${displayData.]]#${component.targetEntityElement.name}}"/>
+#macro(Label $component $view)
+<form:label path="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" content="${${view.targetEntity.name}.${component.targetEntityElement.name}}"/>
 #end
 
 ## Define Link component
-#macro(Link $component)
+#macro(Link $component $view)
 #set($url = ${component.targetView.getTargetEntity().getName().toLowerCase()} + "s/" + ${component.targetView.getViewFileName()})   ## lowerCase of targetView file name
-<form:link name="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" url="${url}" idQuery="#[[${displayData.]]#${component.targetView.getTargetEntity().getName().toLowerCase()}Id}"/>
+<form:link name="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" url="${url}" idQuery="${${view.targetEntity.name}.id}"/>
 #end
 
 ## DataGrid headers
@@ -197,26 +227,60 @@ private #if(${relationship.collectionType} != "Nothing")${relationship.collectio
 ## Define Data properties name
 #macro(dataPropertiesName $components)
     #foreach(${component} in ${components})
-        #set($property = ${component.targetEntityElement})
-        @SearchParam
-        private ${property.type} ${property.name};
+        #if(${component.targetEntityElement.class.simpleName} == "Property")
+            #set($property = ${component.targetEntityElement})
+            @SearchParam
+            #propertyName($property)
+        #elseif(${component.targetEntityElement.class.simpleName} == "Relationship")
+            #set($relationship = ${component.targetEntityElement})
+            @SearchParam
+            #suggestionDataRelationshipName($relationship)
+        #end
     #end
+#end
+
+##############################################################
+#macro(suggestionDataRelationshipName $relationships)
+    private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end#[[HashedLongSuggestionData]]##if($relationship.collectionType != "Nothing")>#end ${relationship.name};
 #end
 
 ## Define Data properties setters and getters
 #macro(dataPropertiesGetterAndSetter $components)
     #foreach(${component} in ${components})
-        #set($property = ${component.targetEntityElement})
-        #set($capitalizeName = ${property.name.substring(0, 1).toUpperCase()}+${property.name.substring(1)})   ## capitalize of property.name
-
-        public ${property.type} get${capitalizeName}() {
-            return ${property.name};
-        }
-
-        public void set${capitalizeName}(${property.type} ${property.name}) {
-            this.${property.name} = ${property.name};
-        }
+        #if(${component.targetEntityElement.class.simpleName} == "Property")
+            #set($property = ${component.targetEntityElement})
+            #propertyGetterAndSetter($property)
+        #elseif(${component.targetEntityElement.class.simpleName} == "Relationship")
+            #set($relationship = ${component.targetEntityElement})
+            @Valid
+            #suggestionDataRelationshipGetterAndSetter($relationship)
+            #suggestionDataRelationshipGetterIds($relationship)
+        #end
     #end
+#end
+
+##############################################################
+#macro(suggestionDataRelationshipGetterAndSetter $relationship)
+    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
+    public #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end HashedLongSuggestionData #if($relationship.collectionType != "Nothing")>#end get${capitalizeName}() {
+        return ${relationship.name};
+    }
+
+    public void set${capitalizeName}(#if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end HashedLongSuggestionData #if($relationship.collectionType != "Nothing")>#end ${relationship.name}) {
+        this.${relationship.name} = ${relationship.name};
+    }
+#end
+
+#macro(suggestionDataRelationshipGetterIds $relationship)
+    #set($capitalizeName = ${relationship.name.substring(0, 1).toUpperCase()}+${relationship.name.substring(1)})   ## capitalize of relation.name
+    public Long[] get${capitalizeName}Id() {
+        final List<Long> l = new ArrayList<>();
+        if (${relationship.name} != null)
+            for (HashedLongSuggestionData t : ${relationship.name})
+                if (t != null && t.getId() != null)
+                    l.add(t.getId());
+        return l.toArray(new Long[l.size()]);
+    }
 #end
 
 ## ############################################################################ Hibernate Handler END

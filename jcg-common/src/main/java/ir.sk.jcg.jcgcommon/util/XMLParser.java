@@ -41,7 +41,7 @@ public class XMLParser {
 
         jaxbUnmarshaller.setEventHandler(
                 event -> {
-                    System.out.println("exception");
+                    System.out.println("exception in unmarshalling");
                     throw new RuntimeException(event.getMessage(),
                             event.getLinkedException());
                 });

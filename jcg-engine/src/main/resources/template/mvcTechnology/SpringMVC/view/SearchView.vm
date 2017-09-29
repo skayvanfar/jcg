@@ -24,7 +24,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
                     <form:form modelAttribute="${lowerCaseViewFileName}SearchData">
                         <div class="row row-max-with">
                             #set($components = ${view.components})
-                            #viewComponents($components $view.span)
+                            #viewComponents($components $view)
                         </div>
                         <div class="row row-max-with">
                             <div class="column small-2 medium-2 large-2"><form:button label="جستجو"/></div>

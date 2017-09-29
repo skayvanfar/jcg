@@ -173,4 +173,6 @@ public interface GenericManager<T, PK extends Serializable> {
 
     DisplayData getByOutputClass(String idName, PK id, DisplayData displayData);
 
+    PagingDataList<T> searchFilter(String propertyName, String propertyValue, int page, int pageSize) throws PersistenceException;
+
 }

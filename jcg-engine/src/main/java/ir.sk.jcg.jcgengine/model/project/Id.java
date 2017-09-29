@@ -19,6 +19,7 @@ public class Id extends Property implements Serializable {
 
     public Id() {
         idGeneratorType = IdGeneratorType.NATIVE;
+        name = "id";
     }
 
     public IdGeneratorType getIdGeneratorType() {

@@ -7,6 +7,7 @@ import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 import ir.sk.jcg.jcglibcommon.web.DisplayData;
 import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import ir.sk.jcg.jcglibcommon.web.SearchData;
+import ir.sk.jcg.jcglibcommon.web.SuggestionData;
 import ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.PersistenceUtil;
 
 import org.hibernate.*;
@@ -15,6 +16,9 @@ import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.orm.ObjectRetrievalFailureException;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -542,6 +546,16 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
                 criteria.add(Restrictions.like(propertyEntry.getKey(), propertyEntry.getValue()));
         }
 
+        Map<String, Object> SuggestionDataCollections = searchData.getSearchParamsCollections();
+        for (Map.Entry<String, Object> propertyEntry : SuggestionDataCollections.entrySet()) {
+            Collection<SuggestionData> suggestionDataCollection = ((Collection<SuggestionData>) propertyEntry.getValue());
+            if (propertyEntry.getValue() != null && !(suggestionDataCollection.size() != 0)) {
+                for (SuggestionData suggestionData : suggestionDataCollection) {
+                    criteria.add(Restrictions.eq(persistentClass.getSimpleName() + '.' + propertyEntry.getKey(), suggestionData.getValue()));
+                }
+            }
+        }
+
         return paging(criteria, searchData.getPage(), searchData.getPageSize(), Order.asc("id"));
     }
 
@@ -556,5 +570,16 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
         criteria.add(Restrictions.eq(idName, idValue));
 
         return (DisplayData) criteria.uniqueResult();
+    }
+
+    @Override
+    public PagingDataList<T> searchFilter(String propertyName, String propertyValue, int page, int pageSize)
+            throws PersistenceException {
+        Criteria criteria = getSession().createCriteria(persistentClass);
+        if (propertyValue != null) {
+            String search = convertToSearch(propertyValue, true);
+            criteria.add(Restrictions.like(propertyName, search));
+        }
+        return paging(criteria, page, pageSize);
     }
 }

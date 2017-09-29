@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgengine.model.project.enums;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.model.project.Component;
 import ir.sk.jcg.jcgengine.model.project.component.Label;
+import ir.sk.jcg.jcgengine.model.project.component.Tag;
 import ir.sk.jcg.jcgengine.model.project.component.TextArea;
 import ir.sk.jcg.jcgengine.model.project.component.TextField;
 
@@ -14,8 +15,9 @@ import java.util.Objects;
 public enum InputComponentType implements EnumBase {
 
     LABEL_COMPONENT(0, "Label"),
-    TEXT_BOX_COMPONENT(0, "Text Field"),
-    TEXT_AREA_COMPONENT(1, "Text Area");
+    TEXT_BOX_COMPONENT(1, "Text Field"),
+    TEXT_AREA_COMPONENT(2, "Text Area"),
+    TAG(3, "Tag");
 
     private Integer value;
     private String desc;
@@ -55,6 +57,9 @@ public enum InputComponentType implements EnumBase {
                 break;
             case TEXT_AREA_COMPONENT:
                 component = new TextArea();
+                break;
+            case TAG:
+                component = new Tag();
                 break;
         }
         return component;

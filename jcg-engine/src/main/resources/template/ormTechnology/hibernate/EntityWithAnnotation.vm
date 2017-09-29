@@ -9,27 +9,29 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import ir.sk.jcg.lib.jcglibhibernatehandler.entity.GenericEntity;
+
 #parse("vmComponents/import.vm")
 
 @Entity
 @Table(name = "${entity.tableName}", schema = "", catalog = "${databaseSchemaName}")
-public class ${entity.name} implements Serializable {
+public class ${entity.name} extends GenericEntity<Long> implements Serializable {
 
     /* GENERATED CODE SECTION TYPE(Property) ENABLED START */
     #idName($entity.id)
 
     #set($properties = ${entity.properties})
-    #propertiesName($properties)
+    #propertiesNameEntity($properties)
 
     #set($relationships = ${entity.relationships})
-    #relationshipsName($relationships)
+    #relationshipsNameEntity($relationships)
     /* GENERATED CODE END */
 
     /* GENERATED CODE SECTION TYPE(GetterSetter) ENABLED START */
-    #idGetterAndSetter($entity.id);
+    #idGetterAndSetterEntity($entity.id);
 
-    #propertiesGetterAndSetter($properties)
+    #propertiesGetterAndSetterEntity($properties)
 
-    #relationshipsGetterAndSetter($relationships)
+    #relationshipsGetterAndSetterEntity($relationships)
     /* GENERATED CODE END */
 }

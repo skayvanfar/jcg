@@ -3,6 +3,9 @@
  *#
  #parse("vmComponents/packageName.vm")
 
+ import ir.sk.jcg.lib.jcglibspringmvchandler.web.securityFilter.impl.*;
+ import ir.sk.jcg.lib.jcglibspringmvchandler.web.securityFilter.StringTrimConverter;
+
  import org.hibernate.SessionFactory;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.context.annotation.Bean;
@@ -60,6 +63,13 @@
      public void addResourceHandlers(ResourceHandlerRegistry registry) {
          registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
      }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(new HashedLongConverter());
+        registry.addConverter(new HashedStringConverter());
+        registry.addConverter(new StringTrimConverter());
+    }
 
      @Autowired
      SessionFactory sessionFactory;

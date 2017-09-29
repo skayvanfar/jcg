@@ -113,18 +113,22 @@ public class RelationshipControllerImpl implements RelationshipController {
         switch (cardinalityType) {
             case ONE_TO_ONE:
                 relationship.setName(relationshipName);
+                relationship.setLabelName(relationshipName);
                 relationship.setCollectionType(CollectionType.NOTHING);
                 break;
             case ONE_TO_MANY:
                 relationship.setName(relationshipsName);
+                relationship.setLabelName(relationshipName);
                 relationship.setCollectionType(collectionType);
                 break;
             case Many_TO_ONE:
                 relationship.setName(relationshipName);
+                relationship.setLabelName(relationshipName);
                 relationship.setCollectionType(CollectionType.NOTHING);
                 break;
             case MANY_TO_MANY:
                 relationship.setName(relationshipsName);
+                relationship.setLabelName(relationshipName);
                 relationship.setCollectionType(collectionType);
                 break;
         }

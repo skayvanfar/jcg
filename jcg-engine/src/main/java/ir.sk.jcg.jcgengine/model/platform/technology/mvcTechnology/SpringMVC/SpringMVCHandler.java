@@ -9,6 +9,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnology
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.element.ViewElement;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.model.project.component.Tag;
 import ir.sk.jcg.jcgengine.regexp.GeneratedCodeType;
 import ir.sk.jcg.jcgengine.velocity.AddElementToSectionGenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.GenerateTemplate;
@@ -83,6 +84,16 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         addControllerMethodGenerateTemplate.putReference("dataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
 
         addControllerMethodGenerateTemplate.mergeTemplate();
+
+        ///////////////////////////////// add Controllers for components
+        for (Component component : view.getComponents()) {
+            if (component instanceof Tag) {
+                GenerateTemplate tagControllerMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add Tag Controller Method", filePath, GeneratedCodeType.valueOfByName(component.getClass().getSimpleName()));
+                tagControllerMethodGenerateTemplate.putReference("view", view);
+                tagControllerMethodGenerateTemplate.putReference("component", component);
+                tagControllerMethodGenerateTemplate.mergeTemplate();
+            }
+        }
 
         // add tiles definition
         String fileDefinitionPath = ApplicationContext.getInstance().getMainWebPath() + File.separator + "WEB-INF" + File.separator + "tiles\\definition\\tile-definition.xml";

@@ -41,7 +41,6 @@ public class CreateEntityNodeAction extends CreateNodeAction {
                 id.setName(StringUtils.toCamelCase(entity.getName()) + "Id");
                 id.setIdGeneratorType(IdGeneratorType.AUTO);
                 id.setType("Long");
-                id.setLabelName(StringUtils.toCamelCase(entity.getName()) + "Id");
                 id.setColumnName(id.getName());
                 entity.setId(id);
 

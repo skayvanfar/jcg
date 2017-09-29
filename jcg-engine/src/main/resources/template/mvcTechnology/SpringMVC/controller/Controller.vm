@@ -6,9 +6,12 @@
 ## import ir.sk.jcg.lib.jcglibspringmvchandler.controller.GenericController;
 
 import ir.sk.jcg.lib.jcglibspringmvchandler.controller.BaseController;
+import ir.sk.jcg.jcglibcommon.web.SuggestionData;
+import ir.sk.jcg.lib.jcglibspringmvchandler.web.component.HashedLongSuggestionData;
+import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 
-import java.util.Map;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.ModelAndView;
 #parse("vmComponents/import.vm")
@@ -32,7 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  */
 @Controller
-@RequestMapping("/${lowerCaseName}s")
+@RequestMapping("/${lowerCaseName}")
 ##public class ${entity.name}Controller extends GenericController<${entity.name}, ${entity.name}SearchData, Long> { ## Long must replace by actual type#
 public class ${entity.name}Controller extends BaseController {
 

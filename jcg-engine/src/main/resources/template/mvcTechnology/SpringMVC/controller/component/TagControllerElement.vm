@@ -1,0 +1,25 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 09/28/2107.
+ *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+#set($componentName = ${component.targetEntityElement.name}) ## name of Component
+#set($capitalizeComponentName = ${view.viewFileName.substring(0, 1).toUpperCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+#set($componentTargetEntityName = ${component.targetEntityElement.targetEntity.name}) ## name of taregt Entity Component name
+#set($lowerCaseComponentTargetEntityName = ${componentTargetEntityName.substring(0, 1).toLowerCase()}+${componentTargetEntityName.substring(1)}) ## name of taregt Entity Component name
+#set($capitalizeTextName = ${component.text.substring(0, 1).toUpperCase()}+${component.text.substring(1)})
+
+@Autowired
+private ${componentTargetEntityName}Service ${lowerCaseComponentTargetEntityName}Service;
+
+@RequestMapping(value = "/${lowerCaseViewFileName}/filter/${componentName}")
+public
+@ResponseBody
+List<SuggestionData> ${lowerCaseViewFileName}Filter${capitalizeComponentName}(String query) throws PersistenceException {
+    final PagingDataList<${componentTargetEntityName}> ${lowerCaseComponentTargetEntityName}s = ${lowerCaseComponentTargetEntityName}Service.searchFilter("${component.text}", query, 0, 20);
+    final List<SuggestionData> res = new ArrayList<>();
+    for (${componentTargetEntityName} ${lowerCaseComponentTargetEntityName} : ${lowerCaseComponentTargetEntityName}s.getData())
+        res.add(new HashedLongSuggestionData(${lowerCaseComponentTargetEntityName}.get${capitalizeTextName}(), ${lowerCaseComponentTargetEntityName}.getId()));
+    return res;
+}

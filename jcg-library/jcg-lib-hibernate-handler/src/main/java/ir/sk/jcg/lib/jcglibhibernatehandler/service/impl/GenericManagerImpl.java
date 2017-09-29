@@ -435,4 +435,9 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     public DisplayData getByOutputClass(String idName, PK id, DisplayData displayData) {
         return dao.getByOutputClass(idName, id, displayData);
     }
+
+    @Override
+    public PagingDataList<T> searchFilter(String propertyName, String propertyValue, int page, int pageSize) throws PersistenceException {
+        return dao.searchFilter(propertyName, propertyValue, page, pageSize);
+    }
 }

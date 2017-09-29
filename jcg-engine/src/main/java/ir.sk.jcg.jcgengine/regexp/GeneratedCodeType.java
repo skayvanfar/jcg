@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public enum GeneratedCodeType implements EnumBase {
 
-    PROPERTY(0, "Property", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
+    PROPERTY(0, "Property", "Property", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
@@ -18,7 +18,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    GETTER_SETTER(1, "GetterSetter", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
+    GETTER_SETTER(1, "GetterSetter", "GetterSetter", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
@@ -27,7 +27,7 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    SEARCH_CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/SearchControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+    SEARCH_CONTROL(2, "Search Controller", "Controller", "mvcTechnology/SpringMVC/controller/SearchControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             String result = code.replaceAll("\\s+", "\\\\s+");
@@ -40,33 +40,41 @@ public enum GeneratedCodeType implements EnumBase {
             return result;
         }
     },
-    DISPLAY_CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/DisplayControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+    DISPLAY_CONTROL(3, "Search Controller", "Controller", "mvcTechnology/SpringMVC/controller/DisplayControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             return null; // TODO: 9/23/2017
         }
     },
-    CREATE_CONTROL(2, "Controller", "mvcTechnology/SpringMVC/controller/CreateControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+    CREATE_CONTROL(4, "Search Controller", "Controller", "mvcTechnology/SpringMVC/controller/CreateControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             return null; // TODO: 9/23/2017
         }
     },
-    TILES_DEFINITION(3, "TilesDefinition", "mvcTechnology/SpringMVC/view/tiles/definition/tile-definitionElement.vm", RegExType.XML_REG_EX_TYPE) {
+    TILES_DEFINITION(5, "Tiles Definition", "TilesDefinition", "mvcTechnology/SpringMVC/view/tiles/definition/tile-definitionElement.vm", RegExType.XML_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             String result = code.replaceAll("\\s+", ""); // TODO: 9/15/2017
             return result;
         }
+    },
+    TAG_CONTROL(4, "Tag", "Controller", "mvcTechnology/SpringMVC/controller/component/TagControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+        @Override
+        public String getFreeFormRegexp(String code) {
+            return null; // TODO: 9/23/2017
+        }
     }; // TODO: 9/15/2017
 
     private Integer value;
+    private String name;
     private String desc;
     private String pathTemplate;
     private RegExType regExType;
 
-    GeneratedCodeType(Integer value, String desc, String pathTemplate, RegExType regExType) {
+    GeneratedCodeType(Integer value, String name, String desc, String pathTemplate, RegExType regExType) {
         this.value = value;
+        this. name = name;
         this.desc = desc;
         this.pathTemplate = pathTemplate;
         this.regExType = regExType;
@@ -75,6 +83,10 @@ public enum GeneratedCodeType implements EnumBase {
     @Override
     public Integer getValue() {
         return value;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -93,6 +105,15 @@ public enum GeneratedCodeType implements EnumBase {
     public static GeneratedCodeType valueOf(Integer type) {
         for (GeneratedCodeType code : GeneratedCodeType.values()) {
             if (Objects.equals(type, code.getValue())) {
+                return code;
+            }
+        }
+        return null;
+    }
+
+    public static GeneratedCodeType valueOfByName(String name) {
+        for (GeneratedCodeType code : GeneratedCodeType.values()) {
+            if (Objects.equals(name, code.getName())) {
                 return code;
             }
         }
