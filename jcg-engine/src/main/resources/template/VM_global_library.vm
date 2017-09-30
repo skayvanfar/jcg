@@ -113,11 +113,11 @@
 ## Define relationship cardinalityType for hibernate
 #macro(relationshipCardinalityTypeHibernate $cardinalityType)
     #if(${cardinalityType} == "1 ... 1")
-        @OneToOne
+        @OneToOne(fetch = FetchType.EAGER)
     #elseif(${cardinalityType} == "1 ... *")
-        @OneToMany
+        @OneToMany(fetch = FetchType.EAGER)
     #elseif(${cardinalityType} == "* ... 1")
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.EAGER)
     #elseif(${cardinalityType} == "* ... *")
         @ManyToMany
     #end
@@ -178,13 +178,29 @@
 
 ## Define Label component
 #macro(Label $component $view)
-<form:label path="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" content="${${view.targetEntity.name}.${component.targetEntityElement.name}}"/>
+#set($lowerCaseEntityName = ${view.targetEntity.name.substring(0, 1).toLowerCase()}+${view.targetEntity.name.substring(1)})   ## lowerCase of entity name
+<form:label path="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" content="${${lowerCaseEntityName}.${component.targetEntityElement.name}}"/>
 #end
 
 ## Define Link component
 #macro(Link $component $view)
-#set($url = ${component.targetView.getTargetEntity().getName().toLowerCase()} + "s/" + ${component.targetView.getViewFileName()})   ## lowerCase of targetView file name
-<form:link name="${component.targetEntityElement.name}" label="${component.targetEntityElement.labelName}" url="${url}" idQuery="${${view.targetEntity.name}.id}"/>
+    #set($lowerCaseEntityName = ${view.targetEntity.name.substring(0, 1).toLowerCase()}+${view.targetEntity.name.substring(1)})   ## lowerCase of entity name
+    #set($lowerCaseViewFileName = ${component.targetView.getViewFileName().substring(0, 1).toLowerCase()}+${component.targetView.getViewFileName().substring(1)})
+    #if(${component.targetEntityElement.class.simpleName} == "Id")
+
+        #if(${component.targetView.class.simpleName} == "DisplayView")
+            #set($linkType = "/display")
+        #elseif(${component.targetView.class.simpleName} == "CreateEditView")
+            #set($linkType = "/edit")
+        #end
+        #set($url = "/" + ${lowerCaseEntityName} + "/" + ${lowerCaseViewFileName} + ${linkType})   ## lowerCase of targetView file name
+        #set($idQuery = ${lowerCaseEntityName})
+    #elseif(${component.targetEntityElement.class.simpleName} == "Relationship")
+        #set($url = "/" + ${component.targetView.getTargetEntity().getName().toLowerCase()} + "/" + ${lowerCaseViewFileName} + "/display")   ## lowerCase of targetView file name
+        #set($idQuery = ${component.targetEntityElement.name})
+    #end
+
+<form:link name="${component.targetView.name}" url="${url}" idQuery="${${idQuery}.id}"/>
 #end
 
 ## DataGrid headers
@@ -214,18 +230,6 @@
         <td>
             <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button round dropdown">عملیات</button><br>
             <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-                <li>
-                    <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />"
-                    class="primary round button">
-                    نمایش
-                    </a>
-                </li>
-                <li>
-                    <a href="<filter:hashLongUrl url="/manage/user" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />"
-                    class="success round button">
-                    ویرایش
-                    </a>
-                </li>
                 <li>
                     <a href="<filter:hashLongUrl url="/manage/artist" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />"
                     class="alert round button">

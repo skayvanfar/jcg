@@ -69,6 +69,13 @@ public class AnnotationMappingType extends MappingType {
         Set<String> daoImportSet = new HashSet<>();
      //   daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOCommonPackage() + ".GenericDAO");
         daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
+
+        //////////////////// // TODO: 9/30/2017
+        daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + ".*");
+        daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getInterfaceDAOPackage() + "." + packagePath + ".*");
+        daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + packagePath + ".*");
+        daoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath + ".*");
+
         daoNewFileGenerateTemplate.putReference("imports", daoImportSet);
 
         daoNewFileGenerateTemplate.mergeTemplate();
@@ -87,6 +94,12 @@ public class AnnotationMappingType extends MappingType {
       //  hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getImplDAOCommonPackage() + ".HibernateGenericDAO");
         hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
         hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOPackage() + "." + packagePath + "." + entity.getName() + "DAO");
+        //////////////////// // TODO: 9/30/2017
+        hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + ".*");
+        hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getInterfaceDAOPackage() + "." + packagePath + ".*");
+        hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + packagePath + ".*");
+        hibernateDaoImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath + ".*");
+
         hibernateDaoNewFileGenerateTemplate.putReference("imports", hibernateDaoImportSet);
 
         hibernateDaoNewFileGenerateTemplate.mergeTemplate();
@@ -106,6 +119,11 @@ public class AnnotationMappingType extends MappingType {
         Set<String> serviceImportSet = new HashSet<>();
       //  serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceServiceCommonPackage() + ".GenericManager");
         serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
+        //////////////////// // TODO: 9/30/2017
+        serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + ".*");
+        serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getInterfaceDAOPackage() + "." + packagePath + ".*");
+        serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + packagePath + ".*");
+        serviceImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath + ".*");
         serviceNewFileGenerateTemplate.putReference("imports", serviceImportSet);
 
         serviceNewFileGenerateTemplate.mergeTemplate();
@@ -125,6 +143,12 @@ public class AnnotationMappingType extends MappingType {
         serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getModelPackage() + "." + packagePath + "." + entity.getName());
         serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getServicePackage() +  "." + packagePath + "." + entity.getName() + "Service");
         serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + hibernateHandler.getInterfaceDAOPackage() + "." + packagePath + "." + entity.getName() + "DAO");
+
+        //////////////////// // TODO: 9/30/2017
+        serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + ".*");
+        serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getInterfaceDAOPackage() + "." + packagePath + ".*");
+        serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + packagePath + ".*");
+        serviceImplImportSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath + ".*");
 
         serviceImplNewFileGenerateTemplate.putReference("imports", serviceImplImportSet);
 

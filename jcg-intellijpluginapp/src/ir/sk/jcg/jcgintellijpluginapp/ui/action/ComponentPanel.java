@@ -4,10 +4,7 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.util.ui.JBUI;
-import ir.sk.jcg.jcgengine.model.project.EntityElement;
-import ir.sk.jcg.jcgengine.model.project.Relationship;
-import ir.sk.jcg.jcgengine.model.project.SearchView;
-import ir.sk.jcg.jcgengine.model.project.View;
+import ir.sk.jcg.jcgengine.model.project.*;
 import ir.sk.jcg.jcgengine.model.project.component.Link;
 import ir.sk.jcg.jcgengine.model.project.component.LinkList;
 import ir.sk.jcg.jcgengine.model.project.enums.InputComponentType;
@@ -71,9 +68,14 @@ class ComponentPanel extends JPanel {
                     Set<View> views = ((Relationship)entityElement).getTargetEntity().getDisplayViews();
                     targetViewComboBox.removeAllItems();
                     views.stream().forEach(view -> targetViewComboBox.addItem(view));
-                } else {
-                    throw new IllegalStateException("For a Link Component, EntityElement must be Relationship.");
-                }
+                } else if (entityElement instanceof Id) {
+                    Set<View> views = ((Id)entityElement).getEntity().getDisplayViews();
+                    views.addAll(((Id)entityElement).getEntity().getEditViews());
+                    targetViewComboBox.removeAllItems();
+                    views.stream().forEach(view -> targetViewComboBox.addItem(view));
+                } else
+                    throw new IllegalStateException("For a Link Component, EntityElement must be Relationship or Id.");
+
                 setStateOfTargetViewComboBox(true);
             } else {
                 targetViewComboBox.removeAllItems();

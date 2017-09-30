@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.*;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 7/7/2016
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlSeeAlso({Label.class, TextField.class, Tag.class})
+@XmlSeeAlso({Label.class, TextField.class, Link.class, Tag.class})
 @Editable
 public abstract class Component extends ModelElement { // TODO: 7/8/2016 may better use Interface
 

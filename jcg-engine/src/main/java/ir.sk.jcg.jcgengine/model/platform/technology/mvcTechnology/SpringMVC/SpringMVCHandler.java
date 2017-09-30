@@ -61,6 +61,12 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         searchDataNewFileGenerateTemplate.putReference("entityPackageName", ApplicationContext.getInstance().getPackagePrefix() + ".model" + "." + packagePath);
         Set<String> importSet = new HashSet<>();
         importSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + "." + view.getTargetEntity().getName());
+        //////////////////// // TODO: 9/30/2017
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + ".*");
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getInterfaceDAOPackage() + "." + packagePath + ".*");
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getServicePackage() + "." + packagePath + ".*");
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath + ".*");
+
         searchDataNewFileGenerateTemplate.putReference("imports", importSet);
         searchDataNewFileGenerateTemplate.putReference("view", view);
         searchDataNewFileGenerateTemplate.mergeTemplate();

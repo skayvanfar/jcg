@@ -20,6 +20,7 @@ public class Tag extends Component {
 
     public Tag() {
         super.name = "Tag";
+        this.text = "id";
     }
 
     public String getText() {

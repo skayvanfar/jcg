@@ -7,6 +7,7 @@
  import ir.sk.jcg.lib.jcglibspringmvchandler.web.securityFilter.StringTrimConverter;
 
  import org.hibernate.SessionFactory;
+ import org.springframework.format.FormatterRegistry;
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.context.annotation.Bean;
  import org.springframework.context.annotation.ComponentScan;

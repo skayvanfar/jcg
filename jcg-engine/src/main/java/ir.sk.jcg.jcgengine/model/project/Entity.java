@@ -143,6 +143,10 @@ public class Entity extends SchemaItem implements Serializable {
         return views.stream().filter(view -> view instanceof DisplayView).collect(Collectors.toSet());
     }
 
+    public Set<View> getEditViews() {
+        return views.stream().filter(view -> view instanceof CreateEditView).collect(Collectors.toSet());
+    }
+
     // A convenience method simplifies relationship management
     public void addView(View view) {
         if (view == null)
