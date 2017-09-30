@@ -3,6 +3,7 @@ package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.View;
 
 import java.util.List;
 
@@ -32,4 +33,6 @@ public abstract class MappingType {
     abstract EntityClass createEntityClass(HibernateHandler hibernateHandler, Entity entity, String packagePath);
 
     abstract List<DomainImplElement> createDao(HibernateHandler hibernateHandler, Entity entity, String packagePath);
+
+    public abstract void addViewService(HibernateHandler hibernateHandler, View view, String packagePath);
 }

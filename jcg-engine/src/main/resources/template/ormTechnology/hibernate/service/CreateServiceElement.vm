@@ -1,0 +1,8 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/29/2107.
+ *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+
+User save${entityName}(${dataPackage}.${view.viewFileName}Data ${lowerCaseViewFileName}Data) throws PersistenceException;

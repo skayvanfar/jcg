@@ -4,7 +4,7 @@ package ir.sk.jcg.lib.jcglibhibernatehandler.persistence.jpa.hibernateImpl;
 
 import ir.sk.jcg.jcglibcommon.persistence.GenericDAO;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
-import ir.sk.jcg.jcglibcommon.web.DisplayData;
+import ir.sk.jcg.jcglibcommon.web.Data;
 import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import ir.sk.jcg.jcglibcommon.web.SearchData;
 import ir.sk.jcg.jcglibcommon.web.SuggestionData;
@@ -560,16 +560,16 @@ public class HibernateGenericDAO<T, PK extends Serializable> extends Persistence
     }
 
     @Override
-    public DisplayData getByOutputClass(String idName, PK idValue, DisplayData displayData) {
-        Set<String> propertyNames = displayData.getDisplayParamNames();
+    public Data getByOutputClass(String idName, PK idValue, Data data) {
+        Set<String> propertyNames = data.getDisplayParamNames();
         ProjectionList projectionList = Projections.projectionList();
         propertyNames.stream().forEach(s -> projectionList.add(Projections.property(s), s));
         Criteria criteria = getSession().createCriteria(persistentClass)
-                .setProjection(projectionList).setResultTransformer(Transformers.aliasToBean(displayData.getClass()));
+                .setProjection(projectionList).setResultTransformer(Transformers.aliasToBean(data.getClass()));
 
         criteria.add(Restrictions.eq(idName, idValue));
 
-        return (DisplayData) criteria.uniqueResult();
+        return (Data) criteria.uniqueResult();
     }
 
     @Override

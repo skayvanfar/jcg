@@ -1,0 +1,22 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/29/2107.
+ *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+
+@Override
+public User save${entityName}(${dataPackage}.${view.viewFileName}Data ${lowerCaseViewFileName}Data) throws PersistenceException {
+    final ${entityName} ${lowerCaseEntityName} = ${lowerCaseViewFileName}Data.getId() == null ? new ${entityName}() : ${lowerCaseEntityName}DAO.get(${lowerCaseViewFileName}Data.getId());
+
+    ${lowerCaseViewFileName}Data.fill(${lowerCaseEntityName});
+
+    #foreach(${component} in ${view.components})
+        #if(${component.targetEntityElement.class.simpleName} == "Relationship")
+            #set($upperCaseEntityElementName = ${component.targetEntityElement.name.substring(0, 1).toUpperCase()}+${component.targetEntityElement.name.substring(1)})   ## toUpperCase of property name
+            sync${entityName}${upperCaseEntityElementName}(${lowerCaseEntityName}, ${lowerCaseViewFileName}Data.get${upperCaseEntityElementName}Id().getValue());
+        #end
+    #end
+
+    return ${lowerCaseEntityName}DAO.save(${lowerCaseEntityName});
+}

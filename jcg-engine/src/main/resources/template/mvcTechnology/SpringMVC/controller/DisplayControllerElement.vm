@@ -5,7 +5,7 @@
 #set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
 #set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
 @RequestMapping("/${lowerCaseViewFileName}")
-public String ${view.viewFileName}ById(Model model, @RequestParam("id") Long ${lowerCaseEntityName}Id) throws PersistenceException {
-    model.addAttribute("displayData", ${lowerCaseEntityName}Service.getByOutputClass("${lowerCaseEntityName}Id", ${lowerCaseEntityName}Id, new ${dataPackage}.${view.viewFileName}DisplayData())); ## todo "displayData" better be dynamic like userDisplayData as SearchView
+public String ${lowerCaseViewFileName}ById(Model model, @RequestParam("id") Long ${lowerCaseEntityName}Id) throws PersistenceException {
+    model.addAttribute("data", ${lowerCaseEntityName}Service.getByOutputClass("${lowerCaseEntityName}Id", ${lowerCaseEntityName}Id, new ${dataPackage}.${view.viewFileName}Data())); ## todo "Data" better be dynamic like userData as SearchView
     return "${lowerCaseEntityName}/${lowerCaseViewFileName}";
 }

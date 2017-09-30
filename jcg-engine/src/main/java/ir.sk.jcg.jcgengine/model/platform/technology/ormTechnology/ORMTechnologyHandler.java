@@ -1,5 +1,6 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology;
 
+
 import ir.sk.jcg.jcgcommon.PropertyView.annotation.Prop;
 import ir.sk.jcg.jcgcommon.enums.EnumBase;
 import ir.sk.jcg.jcgengine.ApplicationContext;
@@ -9,6 +10,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.Hib
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.View;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -24,6 +26,8 @@ public abstract class ORMTechnologyHandler extends TechnologyHandler {
     public abstract EntityClass createEntityClass(Entity entity, String packagePath);
 
     public abstract List<DomainImplElement> createDao(Entity entity, String packagePath); // TODO: 5/8/2016 List<EntityElement>
+
+    public abstract void addViewService(View view, String packagePath);
 
     public enum ORMTechnologyHandlerType implements EnumBase, TechnologyHandlerEnumBase {
 

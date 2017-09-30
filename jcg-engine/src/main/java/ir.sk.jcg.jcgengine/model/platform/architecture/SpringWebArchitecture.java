@@ -13,10 +13,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.MVCTechnology
 import ir.sk.jcg.jcgengine.model.platform.technology.mvcTechnology.SpringMVC.element.ViewElement;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnologyHandler;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
-import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
-import ir.sk.jcg.jcgengine.model.project.Entity;
-import ir.sk.jcg.jcgengine.model.project.Project;
-import ir.sk.jcg.jcgengine.model.project.View;
+import ir.sk.jcg.jcgengine.model.project.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
@@ -150,7 +147,13 @@ public class SpringWebArchitecture extends Architecture {
     @Override
     public void createView(View view, String packagePath) {
         List<DomainImplElement> domainImplElements = new ArrayList<>();
+        ORMTechnologyHandler ormTechnologyHandler = (ORMTechnologyHandler) getTechnologyByType(TechnologyHandlerType.ORM_TECHNOLOGY);
         MVCTechnologyHandler mvcTechnologyHandler = (MVCTechnologyHandler) getTechnologyByType(TechnologyHandlerType.MVC_TECHNOLOGY);
+
+        // TODO: 9/30/2017 for search must added
+        if (view instanceof CreateEditView)
+            ormTechnologyHandler.addViewService(view, packagePath);
+
         ViewElement viewElement = mvcTechnologyHandler.createView(view, packagePath);
         if (viewElement != null)
             domainImplElements.add(viewElement);

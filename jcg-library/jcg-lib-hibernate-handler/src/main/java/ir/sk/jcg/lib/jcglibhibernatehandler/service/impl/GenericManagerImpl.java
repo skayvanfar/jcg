@@ -1,7 +1,7 @@
 package ir.sk.jcg.lib.jcglibhibernatehandler.service.impl;
 
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
-import ir.sk.jcg.jcglibcommon.web.DisplayData;
+import ir.sk.jcg.jcglibcommon.web.Data;
 import ir.sk.jcg.jcglibcommon.web.PagingDataList;
 import ir.sk.jcg.jcglibcommon.web.SearchData;
 import ir.sk.jcg.jcglibcommon.persistence.GenericDAO;
@@ -432,8 +432,8 @@ public class GenericManagerImpl<T, PK extends Serializable> implements GenericMa
     }
 
     @Override
-    public DisplayData getByOutputClass(String idName, PK id, DisplayData displayData) {
-        return dao.getByOutputClass(idName, id, displayData);
+    public Data getByOutputClass(String idName, PK id, Data data) {
+        return dao.getByOutputClass(idName, id, data);
     }
 
     @Override

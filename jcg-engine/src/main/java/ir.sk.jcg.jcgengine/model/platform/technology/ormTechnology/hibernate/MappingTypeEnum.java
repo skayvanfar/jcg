@@ -21,6 +21,15 @@ enum MappingTypeEnum implements EnumBase {
         this.desc = desc;
     }
 
+    public static MappingTypeEnum valueOf(Integer type) {
+        for (MappingTypeEnum code : MappingTypeEnum.values()) {
+            if (Objects.equals(type, code.getValue())) {
+                return code;
+            }
+        }
+        return null;
+    }
+
     @Override
     public Integer getValue() {
         return value;
@@ -29,15 +38,6 @@ enum MappingTypeEnum implements EnumBase {
     @Override
     public String getDescription() {
         return desc;
-    }
-
-    public static MappingTypeEnum valueOf(Integer type) {
-        for (MappingTypeEnum code : MappingTypeEnum.values()) {
-            if (Objects.equals(type, code.getValue())) {
-                return code;
-            }
-        }
-        return null;
     }
 
     @Override

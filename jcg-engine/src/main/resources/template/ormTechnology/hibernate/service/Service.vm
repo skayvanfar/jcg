@@ -6,6 +6,8 @@
 import ir.sk.jcg.jcglibcommon.persistence.GenericManager;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 
+import java.util.*;
+
 #parse("vmComponents/import.vm")
 
 #set($capitalizeType = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## capitalize entity.id.type
@@ -13,5 +15,9 @@ import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a>
  */
 public interface ${entity.name}Service extends GenericManager<${entity.name}, ${capitalizeType}> {
+
+    /* GENERATED CODE SECTION TYPE(Service) ENABLED START */
+
+    /* GENERATED CODE END */
 
 }

@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ir.sk.jcg.lib.jcglibhibernatehandler.service.impl.GenericManagerImpl;
 import ir.sk.jcg.jcglibcommon.persistence.PersistenceException;
 
+import java.util.*;
+
 #parse("vmComponents/import.vm")
 
 #set($capitalizeType = ${entity.id.type.substring(0, 1).toUpperCase()}+${entity.id.type.substring(1)})   ## capitalize entity.id.type
@@ -23,10 +25,53 @@ public class ${entity.name}ServiceImpl extends GenericManagerImpl<${entity.name}
 
     private ${entity.name}DAO ${lowercaseName}DAO;
 
+    #foreach(${relationship} in ${entity.relationships})
+        #set($upperCaseTargetEntityName = ${relationship.targetEntity.name.substring(0, 1).toUpperCase()}+${relationship.targetEntity.name.substring(1)})   ## toUpperCase of property name
+        #set($lowerCaseEntityName = ${relationship.targetEntity.name.substring(0, 1).toLowerCase()}+${relationship.targetEntity.name.substring(1)})   ## lowerCase of entity name
+        @Autowired
+        private ${upperCaseTargetEntityName}DAO ${lowerCaseEntityName}DAO;
+    #end
+
     @Autowired
     public ${entity.name}ServiceImpl(${entity.name}DAO ${lowercaseName}DAO) {
         super(${lowercaseName}DAO);
         this.${lowercaseName}DAO = ${lowercaseName}DAO;
     }
 
+    #foreach(${relationship} in ${entity.relationships})
+        #set($entityName = ${entity.name}) ## name
+        #set($upperCaseTargetEntityName = ${relationship.targetEntity.name.substring(0, 1).toUpperCase()}+${relationship.targetEntity.name.substring(1)})   ## toUpperCase of property name
+        #set($lowerCaseEntityName = ${relationship.targetEntity.name.substring(0, 1).toLowerCase()}+${relationship.targetEntity.name.substring(1)})   ## lowerCase of entity name
+
+        // OneToMany
+        private void sync${entityName}${upperCaseTargetEntityName}s(${entityName} ${lowercaseName}, Long... ids) {
+            final List<${upperCaseTargetEntityName}> current = ${lowercaseName}.get${upperCaseTargetEntityName}s();
+            final List<${upperCaseTargetEntityName}> toRemove = new ArrayList<>();
+            for (${upperCaseTargetEntityName} t : current) {
+                boolean found = false;
+                for (Long id : ids)
+                    found = found || t.getId() == id;
+                if (!found)
+                    toRemove.add(t);
+            }
+            for (${upperCaseTargetEntityName} t : toRemove) {
+                current.remove(t);
+                //	bookDAO.remove(t);
+            }
+            for (Long id : ids) {
+                boolean found = false;
+                for (${upperCaseTargetEntityName} t : current)
+                    found = found || t.getId() == id;
+                if (!found) {
+                    final ${upperCaseTargetEntityName} ${lowerCaseEntityName} = ${lowerCaseEntityName}DAO.get(id);
+                    if (${lowerCaseEntityName} != null)
+                        current.add(${lowerCaseEntityName});
+                }
+            }
+        }
+    #end
+
+    /* GENERATED CODE SECTION TYPE(ServiceImpl) ENABLED START */
+
+    /* GENERATED CODE END */
 }

@@ -33,12 +33,15 @@ public class CreateComponentNodeAction extends CreateNodeAction {
         if (modelElement instanceof SearchView) {
             view = (View) modelElement;
             componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), true);
-        } if (modelElement instanceof DisplayView) {
+        } else if (modelElement instanceof DisplayView) {
             viewOrDataGrid = false;
             view = (View) modelElement;
             componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), false);
-        }
-        else if (modelElement instanceof DataGrid) {
+        } else if (modelElement instanceof CreateEditView) {
+            view = (View) modelElement;
+            componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), true);
+
+        } else if (modelElement instanceof DataGrid) {
             viewOrDataGrid = false;
             view = (View) jcgProjectComponent.parentSelectedNodeUserObject();
             componentPanel = new ComponentPanel(view.getTargetEntity().getAllEntityElements(), false);

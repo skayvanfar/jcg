@@ -10,6 +10,7 @@ import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.ORMTechnology
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
 import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
 import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.View;
 import ir.sk.jcg.jcgengine.velocity.GenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.NewFileGenerateGenerateTemplate;
 
@@ -90,6 +91,11 @@ public class HibernateHandler extends ORMTechnologyHandler {
     @Override
     public List<DomainImplElement> createDao(Entity entity, String packagePath) {
         return mappingType.createDao(this, entity, packagePath);
+    }
+
+    @Override
+    public void addViewService(View view, String packagePath) {
+        mappingType.addViewService(this, view, packagePath);
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class SearchData<T> {
 
-    protected T id;
+    protected T id; // TODO: 9/29/2017 must Change to HashedLong
 
     private int page;
     private int pageSize;

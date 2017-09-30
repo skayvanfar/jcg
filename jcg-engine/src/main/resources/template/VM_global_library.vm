@@ -72,13 +72,17 @@
 
 #########################################################
 #macro(relationshipName $relationship)
-    private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name};
+    private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name} = new #relationshipcollectionTypeImpl($relationship.collectionType)<>();
 #end
 
 ## Define relationships setters and getters
 #macro(relationshipsGetterAndSetterEntity $relationships)
     #foreach(${relationship} in ${entity.relationships})
-        #relationshipCardinalityTypeHibernate($relationship.cardinalityType)#if((!${relationship.head} && ${relationship.cardinalityType} != "* ... 1") || (${relationship.directionalityType} == "Bidirectional") && ${relationship.cardinalityType} == "1 ... *")(mappedBy = "${relationship.otherSideRelationship.name}")#end
+        #relationshipCardinalityTypeHibernate($relationship.cardinalityType)
+        #if((!${relationship.head} && ${relationship.cardinalityType} != "* ... 1") || (${relationship.directionalityType} == "Bidirectional") && ${relationship.cardinalityType} == "1 ... *")(mappedBy = "${relationship.otherSideRelationship.name}")#end
+        #if(${relationship.directionalityType} == "Unidirectional" && (${relationship.cardinalityType} != "1 ... 1" || ${relationship.cardinalityType} != "1 ... *"))
+            @JoinColumn(name = "${entity.name}_id")
+        #end
         #relationshipGetterAndSetter($relationship)
     #end
 #end
@@ -93,6 +97,17 @@
     public void set${capitalizeName}(#if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end${relationship.targetEntity.name}#if($relationship.collectionType != "Nothing")>#end ${relationship.name}) {
         this.${relationship.name} = ${relationship.name};
     }
+#end
+
+## Define  collectionTypeImpl for collectionType
+#macro(relationshipcollectionTypeImpl $collectionType)
+    #if(${collectionType} == "List")
+    ArrayList
+    #elseif(${collectionType} == "Set")
+    HashSet
+    #elseif(${collectionType} == "Collection")
+    ArrayList
+    #end
 #end
 
 ## Define relationship cardinalityType for hibernate
@@ -241,7 +256,7 @@
 
 ##############################################################
 #macro(suggestionDataRelationshipName $relationships)
-    private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end#[[HashedLongSuggestionData]]##if($relationship.collectionType != "Nothing")>#end ${relationship.name};
+    private #if(${relationship.collectionType} != "Nothing")${relationship.collectionType}<#end#[[HashedLongSuggestionData]]##if($relationship.collectionType != "Nothing")>#end ${relationship.name} = new #relationshipcollectionTypeImpl($relationship.collectionType)<>();
 #end
 
 ## Define Data properties setters and getters

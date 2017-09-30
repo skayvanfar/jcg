@@ -17,14 +17,25 @@ public enum GeneratedCodeType implements EnumBase {
             result = result.replaceAll("\\s?;", "\\\\s*;");
             return result;
         }
-    },
-    GETTER_SETTER(1, "GetterSetter", "GetterSetter", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
+    }, GETTER_SETTER(1, "GetterSetter", "GetterSetter", "", RegExType.JAVA_REG_EX_TYPE) { // TODO: 9/15/2017
         @Override
         public String getFreeFormRegexp(String code) {
             String result = "(?s)" + code;
             result = result.replaceAll("\\s+", "\\\\s+");
             result = result.replaceAll("\\s?;", "\\\\s*");
             return result;
+        }
+    },
+    CREATE_EDIT_SERVICE(3, "Create Edit Service", "Service", "ormTechnology/hibernate/service/CreateServiceElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+        @Override
+        public String getFreeFormRegexp(String code) {
+            return null; // TODO: 9/23/2017
+        }
+    },
+    CREATE_EDIT_SERVICE_IMPL(3, "Create Edit Service Impl", "ServiceImpl", "ormTechnology/hibernate/service/CreateServiceImplElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+        @Override
+        public String getFreeFormRegexp(String code) {
+            return null; // TODO: 9/23/2017
         }
     },
     SEARCH_CONTROL(2, "Search Controller", "Controller", "mvcTechnology/SpringMVC/controller/SearchControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
@@ -46,7 +57,7 @@ public enum GeneratedCodeType implements EnumBase {
             return null; // TODO: 9/23/2017
         }
     },
-    CREATE_CONTROL(4, "Search Controller", "Controller", "mvcTechnology/SpringMVC/controller/CreateControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
+    CREATE_EDIT_CONTROL(4, "Create Edit Controller", "Controller", "mvcTechnology/SpringMVC/controller/CreateControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
             return null; // TODO: 9/23/2017
@@ -62,7 +73,7 @@ public enum GeneratedCodeType implements EnumBase {
     TAG_CONTROL(4, "Tag", "Controller", "mvcTechnology/SpringMVC/controller/component/TagControllerElement.vm", RegExType.JAVA_REG_EX_TYPE) {
         @Override
         public String getFreeFormRegexp(String code) {
-            return null; // TODO: 9/23/2017
+            return "ffefgfdgrgrgrg";
         }
     }; // TODO: 9/15/2017
 

@@ -43,7 +43,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         String dataName = "";
         if (view instanceof DisplayView) { // TODO: 9/23/2017 Refactor by replace Type code
             vmPath = "mvcTechnology/SpringMVC/view/DisplayView.vm";
-            dataName = "DisplayData";
+            dataName = "Data";
             generatedCodeType = GeneratedCodeType.DISPLAY_CONTROL;
         } else if (view instanceof SearchView) {
             vmPath = "mvcTechnology/SpringMVC/view/SearchView.vm";
@@ -51,13 +51,17 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
             generatedCodeType = GeneratedCodeType.SEARCH_CONTROL;
         } else if (view instanceof CreateEditView) {
             vmPath = "mvcTechnology/SpringMVC/view/CreateEditView.vm";
-            dataName = "CreateData";
-            generatedCodeType = GeneratedCodeType.CREATE_CONTROL;
+            dataName = "Data";
+            generatedCodeType = GeneratedCodeType.CREATE_EDIT_CONTROL;
         }
 
         GenerateTemplate searchDataNewFileGenerateTemplate = new NewFileGenerateGenerateTemplate(dataName, ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
                 + File.separator + "dto" + File.separator + packagePath + File.separator + view.getViewFileName() + dataName + ".java", "mvcTechnology/SpringMVC/controller/" + dataName + ".vm");
         searchDataNewFileGenerateTemplate.putReference("packageName", ApplicationContext.getInstance().getPackagePrefix() + ".dto" + "." + packagePath);
+        searchDataNewFileGenerateTemplate.putReference("entityPackageName", ApplicationContext.getInstance().getPackagePrefix() + ".model" + "." + packagePath);
+        Set<String> importSet = new HashSet<>();
+        importSet.add(ApplicationContext.getInstance().getPackagePrefix() + "." + ApplicationContext.getInstance().getOrmTechnologyHandler().getModelPackage() + "." + packagePath + "." + view.getTargetEntity().getName());
+        searchDataNewFileGenerateTemplate.putReference("imports", importSet);
         searchDataNewFileGenerateTemplate.putReference("view", view);
         searchDataNewFileGenerateTemplate.mergeTemplate();
 
@@ -74,7 +78,7 @@ public class SpringMVCHandler extends MVCTechnologyHandler {
         viewNewFileGenerateGenerateTemplate.mergeTemplate();
         viewElement.setName(view.getName() + ".java");
 
-        // add controller method to controller class
+        ////////////////////////////////////////// add controller method to controller class
         String filePath = ApplicationContext.getInstance().getJavaWithPackagePrefixPath() + File.separator + controllerDir
                 + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getTargetEntity().getName() + "Controller.java";
 

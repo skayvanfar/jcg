@@ -1,0 +1,81 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 09/23/2107.
+ *#
+
+#parse("vmComponents/packageName.vm")
+
+import ir.sk.jcg.jcglibcommon.web.Data;
+import ir.sk.jcg.jcglibcommon.web.SearchParam;
+
+import ir.sk.jcg.lib.jcglibspringmvchandler.web.component.HashedLongSuggestionData;
+import ir.sk.jcg.lib.jcglibspringmvchandler.web.securityFilter.impl.HashedLong;
+
+import javax.validation.Valid;
+import java.util.*
+
+
+#parse("vmComponents/import.vm")
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+public class ${view.viewFileName}Data extends Data {
+
+    private HashedLong id;
+
+    #set($components = ${view.components})
+    #dataPropertiesName($components)
+
+    public ${view.viewFileName}Data() {
+    }
+
+    public HashedLong getId() {
+        return id;
+    }
+
+    public void setId(HashedLong id) {
+        this.id = id;
+    }
+
+    #dataPropertiesGetterAndSetter($components)
+
+    #set($entityName = ${view.targetEntity.name}) ## name
+    #set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+
+    public ${entityName} fill(${entityName} ${lowerCaseEntityName}) {
+        if (${lowerCaseEntityName} == null)
+        ${lowerCaseEntityName} = new ${entityName}();
+
+        #foreach(${component} in ${view.components})
+            #if(${component.targetEntityElement.class.simpleName} == "Property")
+                #set($upperCasePropertyName = ${component.targetEntityElement.name.substring(0, 1).toUpperCase()}+${component.targetEntityElement.name.substring(1)})   ## toUpperCase of property name
+                ${lowerCaseEntityName}.set${upperCasePropertyName}(${component.targetEntityElement.name});
+            #end
+        #end
+
+        return ${lowerCaseEntityName};
+    }
+
+    public ${view.viewFileName}Data sync(${entityName} ${lowerCaseEntityName}) {
+        if (${lowerCaseEntityName} == null)
+            return this;
+
+        this.id = new HashedLong(${lowerCaseEntityName}.getId());
+
+        #foreach(${component} in ${view.components})
+            #set($entityElementName = ${component.targetEntityElement.name})
+            #set($upperCaseEntityElementName = ${component.targetEntityElement.name.substring(0, 1).toUpperCase()}+${component.targetEntityElement.name.substring(1)})   ## toUpperCase of targetEntityElement name
+            #set($capitalizeTextName = ${component.text.substring(0, 1).toUpperCase()}+${component.text.substring(1)}) ## component is tag
+            #if(${component.targetEntityElement.class.simpleName} == "Property")
+            this.${entityElementName} = ${lowerCaseEntityName}.get${upperCaseEntityElementName}();
+            #elseif(${component.targetEntityElement.class.simpleName} == "Relationship")
+                #set($entityElementType = ${component.targetEntityElement.targetEntity.name})
+            this.${entityElementName}.clear();
+            for (${entityElementType} t : ${lowerCaseEntityName}.get${upperCaseEntityElementName}())
+                ${entityElementName}.add(new HashedLongSuggestionData(t.get${capitalizeTextName}(), t.getId()));
+
+            #end
+
+        #end
+
+        return this;
+    }
+}

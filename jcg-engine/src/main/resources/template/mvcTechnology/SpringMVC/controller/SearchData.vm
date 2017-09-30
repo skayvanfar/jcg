@@ -32,4 +32,61 @@ public class ${view.viewFileName}SearchData extends SearchData<${view.targetEnti
     #idGetterAndSetter($view.targetEntity.id)
 
     #dataPropertiesGetterAndSetter($components)
+
+
+    #set($entityName = ${view.targetEntity.name}) ## name
+    #set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+
+   #* #foreach(${component} in ${view.components})
+        #if(${component.targetEntityElement.class.simpleName} == "Relationship")
+            #set($entityElementName = ${component.targetEntityElement.name})
+            #set($upperCaseEntityElementName = ${component.targetEntityElement.name.substring(0, 1).toUpperCase()}+${component.targetEntityElement.name.substring(1)})   ## toUpperCase of targetEntityElement name
+            public Long[] get${upperCaseEntityElementName}Id() {
+                final List<Long> l = new ArrayList<>();
+                if (${entityElementName} != null)
+                    for (HashedLongSuggestionData t : ${entityElementName})
+                        if (t != null && t.getId() != null)
+                            l.add(t.getId());
+                return l.toArray(new Long[l.size()]);
+            }
+        #end
+    #end*#
+
+    public ${entityName} fill(${entityName} ${lowerCaseEntityName}) {
+        if (${lowerCaseEntityName} == null)
+            ${lowerCaseEntityName} = new ${entityName}();
+
+        #foreach(${component} in ${view.components})
+            #if(${component.targetEntityElement.class.simpleName} == "Property")
+                #set($upperCasePropertyName = ${component.targetEntityElement.name.substring(0, 1).toUpperCase()}+${component.targetEntityElement.name.substring(1)})   ## toUpperCase of property name
+                ${lowerCaseEntityName}.set${upperCasePropertyName}(${component.targetEntityElement.name});
+            #end
+        #end
+
+        return ${lowerCaseEntityName};
+    }
+
+    public ${view.viewFileName}SearchData sync(${entityName} ${lowerCaseEntityName}) {
+    if (${lowerCaseEntityName} == null)
+        return this;
+
+        #foreach(${component} in ${view.components})
+            #set($entityElementName = ${component.targetEntityElement.name})
+            #set($upperCaseEntityElementName = ${component.targetEntityElement.name.substring(0, 1).toUpperCase()}+${component.targetEntityElement.name.substring(1)})   ## toUpperCase of targetEntityElement name
+            #set($capitalizeTextName = ${component.text.substring(0, 1).toUpperCase()}+${component.text.substring(1)}) ## component is tag
+            #if(${component.targetEntityElement.class.simpleName} == "Property")
+                this.${entityElementName} = ${lowerCaseEntityName}.get${upperCaseEntityElementName}();
+            #elseif(${component.targetEntityElement.class.simpleName} == "Relationship")
+                #set($entityElementType = ${component.targetEntityElement.targetEntity.name})
+                this.${entityElementName}.clear();
+                for (${entityElementType} t : ${lowerCaseEntityName}.get${upperCaseEntityElementName}())
+                    ${entityElementName}.add(new HashedLongSuggestionData(t.get${capitalizeTextName}(), t.getId()));
+
+            #end
+
+        #end
+
+        return this;
+    }
+
 }

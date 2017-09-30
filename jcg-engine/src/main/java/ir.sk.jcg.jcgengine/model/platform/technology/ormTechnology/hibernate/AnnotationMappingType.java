@@ -1,10 +1,10 @@
 package ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate;
 
-import ir.sk.jcg.jcgcommon.util.FileUtils;
 import ir.sk.jcg.jcgengine.ApplicationContext;
 import ir.sk.jcg.jcgengine.model.platform.technology.ormTechnology.hibernate.element.EntityClass;
-import ir.sk.jcg.jcgengine.model.project.DomainImplElement;
-import ir.sk.jcg.jcgengine.model.project.Entity;
+import ir.sk.jcg.jcgengine.model.project.*;
+import ir.sk.jcg.jcgengine.regexp.GeneratedCodeType;
+import ir.sk.jcg.jcgengine.velocity.AddElementToSectionGenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.GenerateTemplate;
 import ir.sk.jcg.jcgengine.velocity.NewFileGenerateGenerateTemplate;
 
@@ -135,5 +135,48 @@ public class AnnotationMappingType extends MappingType {
         domainImplElements.add(serviceImplClass);
 
         return domainImplElements; // TODO: 5/8/2016
+    }
+
+    @Override
+    public void addViewService(HibernateHandler hibernateHandler, View view, String packagePath) {
+        String vmPath = "";
+        GeneratedCodeType generatedCodeType = null;
+        GeneratedCodeType generatedCodeTypeImpl = null;
+        String dataName = "";
+        if (view instanceof DisplayView) { // TODO: 9/23/2017 Refactor by replace Type code
+            vmPath = "mvcTechnology/SpringMVC/view/DisplayView.vm";
+            dataName = "Data";
+            generatedCodeType = GeneratedCodeType.DISPLAY_CONTROL;
+        } else if (view instanceof SearchView) {
+            vmPath = "mvcTechnology/SpringMVC/view/SearchView.vm";
+            dataName = "SearchData";
+            generatedCodeType = GeneratedCodeType.SEARCH_CONTROL;
+        } else if (view instanceof CreateEditView) {
+            vmPath = "mvcTechnology/SpringMVC/view/CreateEditView.vm";
+            dataName = "Data";
+            generatedCodeType = GeneratedCodeType.CREATE_EDIT_SERVICE;
+            generatedCodeTypeImpl = GeneratedCodeType.CREATE_EDIT_SERVICE_IMPL;
+        }
+        ////////////////////////////////////////// add service method
+        String filePath = ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + hibernateHandler.getServicePackage() + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getTargetEntity().getName() + "Service.java";
+
+        GenerateTemplate addServiceMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add Service Method", filePath, generatedCodeType);
+        addServiceMethodGenerateTemplate.putReference("view", view);
+        addServiceMethodGenerateTemplate.putReference("dataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
+
+        addServiceMethodGenerateTemplate.mergeTemplate();
+
+        ////////////////////////////////////////// add service Impl method
+        filePath = ApplicationContext.getInstance().getJavaWithPackagePrefixPath()
+                + File.separator + hibernateHandler.getImplServicePackage().replace('.', File.separatorChar) + File.separator + packagePath.replace('.', File.separatorChar) + File.separator + view.getTargetEntity().getName() + "ServiceImpl.java";
+
+        GenerateTemplate addServiceImplMethodGenerateTemplate = new AddElementToSectionGenerateTemplate("Add Service Impl Method", filePath, generatedCodeTypeImpl);
+        addServiceImplMethodGenerateTemplate.putReference("view", view);
+        addServiceImplMethodGenerateTemplate.putReference("dataPackage", ApplicationContext.getInstance().getPackagePrefix() + ".dto." + packagePath);
+
+        addServiceImplMethodGenerateTemplate.mergeTemplate();
+
+
     }
 }

@@ -7,7 +7,7 @@ import java.util.Set;
 /**
  * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/23/2017.
  */
-public class DisplayData {
+public class Data {
 
     public Set<String> getDisplayParamNames() {
         Set<String> fieldNames = new HashSet<>();

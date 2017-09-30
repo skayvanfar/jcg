@@ -1,0 +1,40 @@
+#**
+ * @author <a href="kayvanfar.sj@gmail.com">Saeed Kayvanfar</a> on 9/29/2107.
+ *#
+#set($entityName = ${view.targetEntity.name}) ## name
+#set($lowerCaseEntityName = ${entityName.substring(0, 1).toLowerCase()}+${entityName.substring(1)})   ## lowerCase of entity name
+#set($lowerCaseViewFileName = ${view.viewFileName.substring(0, 1).toLowerCase()}+${view.viewFileName.substring(1)})   ## lowerCase of view file name
+@RequestMapping(value = "/${lowerCaseViewFileName}/new", method = RequestMethod.GET)
+public String ${lowerCaseViewFileName}Add(Map<String, Object> model) throws PersistenceException {
+    model.put("${lowerCaseViewFileName}Data", new ${dataPackage}.${view.viewFileName}Data());
+    return "${lowerCaseEntityName}/${lowerCaseViewFileName}";
+}
+
+@RequestMapping(value = "/${lowerCaseViewFileName}/edit", method = RequestMethod.GET)
+public String ${lowerCaseViewFileName}Add(@RequestParam HashedLong id, Map<String, Object> model) throws PersistenceException {
+    final ${entityName} ${lowerCaseEntityName} = ${lowerCaseEntityName}Service.get(id.getValue());
+    if (${lowerCaseEntityName} == null)
+        return "redirect:///${lowerCaseEntityName}/${lowerCaseViewFileName}/new";
+
+
+
+
+    model.put("${lowerCaseEntityName}", ${lowerCaseEntityName});
+    return "${lowerCaseEntityName}/${lowerCaseViewFileName}";
+}
+
+@RequestMapping(value = "/${lowerCaseViewFileName}/save", method = RequestMethod.POST)
+public String ${lowerCaseViewFileName}Add(@Valid @ModelAttribute ${dataPackage}.${view.viewFileName}Data ${lowerCaseViewFileName}Data, BindingResult bindingResult, Map<String, Object> model) throws PersistenceException {
+    final ${entityName} ${lowerCaseEntityName} = ${lowerCaseEntityName}Service.save${entityName}(${lowerCaseViewFileName}Data);
+
+    if (${lowerCaseEntityName} == null) {
+        model.put("${lowerCaseViewFileName}Data", ${lowerCaseViewFileName}Data);
+        return "${lowerCaseEntityName}/${lowerCaseViewFileName}";
+    }
+
+    ${lowerCaseViewFileName}Data.sync(${lowerCaseEntityName});
+
+    model.put("${lowerCaseEntityName}", ${lowerCaseEntityName});
+
+    return "${lowerCaseEntityName}/${lowerCaseViewFileName}";
+}
