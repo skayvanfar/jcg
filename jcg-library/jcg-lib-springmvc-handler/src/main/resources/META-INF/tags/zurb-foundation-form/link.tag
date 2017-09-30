@@ -35,26 +35,9 @@
 <c:if test="${not empty label}">
     <c:set var="c" value="${c} labeled"/>
 </c:if>
-<div class="${c}">
-    <c:if test="${not empty label}">
-        <label class="radius primary label" for="${id}">${label}</label>
-    </c:if>
-    <c:if test="${not empty errors}">
-    <div data-tooltip aria-haspopup="true" class="errors has-tip tip-right radius" title='${errors}'></c:if>
-        <a href="<filter:hashLongUrl url="${url}" name="id" value="${idQuery}" />"
-                      class="primary round button">
-            ${name}
-        </a>
-        <c:if test="${not empty iconRight}">
-            <i class="addon addon-right">
-                <i class="${iconRight}"></i>
-            </i>
-        </c:if>
-        <c:if test="${not empty iconLeft}">
-            <i class="addon addon-left">
-                <i class="${iconLeft}"></i>
-            </i>
-        </c:if>
-        <c:if test="${not empty errors}"></div>
-    </c:if>
+<div>
+    <a href="<filter:hashLongUrl url="${url}" name="id" value="${idQuery}" />"
+                  class="primary round button ${cssClass}">
+        ${name}
+    </a>
 </div>

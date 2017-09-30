@@ -34,7 +34,7 @@ pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
             </div>
 
             <div class="my-panel">
-                <table style="width:100%">
+                <table style="width:100%" border="1" id="cssTable" class="TFtable">
                     #dataGridHeaders($view.dataGrid)
                     #dataGridContents($view)
                 </table>

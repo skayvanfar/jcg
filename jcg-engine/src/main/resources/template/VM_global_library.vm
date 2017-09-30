@@ -200,7 +200,7 @@
         #set($idQuery = ${component.targetEntityElement.name})
     #end
 
-<form:link name="${component.targetView.name}" url="${url}" idQuery="${${idQuery}.id}"/>
+<form:link name="${component.targetView.name}" url="${url}" idQuery="${${idQuery}.id}" cssClass="button-vertical-align"/>
 #end
 
 ## DataGrid headers
@@ -228,15 +228,12 @@
         #end
 
         <td>
-            <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button round dropdown">عملیات</button><br>
-            <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-                <li>
-                    <a href="<filter:hashLongUrl url="/manage/artist" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />"
-                    class="alert round button">
-                    حذف
-                    </a>
-                </li>
-            </ul>
+            <div>
+                <a href="<filter:hashLongUrl url="/manage/artist" name="id" value="${${lowerCaseEntityName}.${lowerCaseEntityName}Id}" />"
+                class="alert round button button-vertical-align">
+                حذف
+                </a>
+            </div>
         </td>
     </tr>
 </c:forEach>

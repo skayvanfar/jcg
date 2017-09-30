@@ -15,12 +15,12 @@
 <%@ attribute name="iconRight" required="false" type="java.lang.String" rtexprvalue="true" deferredValue="false" %>
 <%@ attribute name="content" required="true" type="java.lang.String" rtexprvalue="true" deferredValue="false" %>
 
-<c:set var="errors">
+<%--<c:set var="errors">
     <sf:errors path="${path}" delimiter="<br/>"/>
-</c:set>
+</c:set>--%>
 
-<c:set var="c" value="input"/>
-<c:if test="${not empty iconRight}">
+<%--<c:set var="c" value="input"/>--%>
+<%--<c:if test="${not empty iconRight}">
     <c:set var="c" value="${c} addon-right"/>
 </c:if>
 <c:if test="${not empty iconLeft}">
@@ -31,15 +31,16 @@
 </c:if>
 <c:if test="${not empty label}">
     <c:set var="c" value="${c} labeled"/>
-</c:if>
-<div class="${c}">
-    <c:if test="${not empty label}">
+</c:if>--%>
+<div>
+   <%-- <c:if test="${not empty label}">
         <label class="radius primary label" for="${id}">${label}</label>
     </c:if>
     <c:if test="${not empty errors}">
     <div data-tooltip aria-haspopup="true" class="errors has-tip tip-right radius" title='${errors}'></c:if>
-        ${content}
-        <c:if test="${not empty iconRight}">
+--%>
+       <b>${content}</b>
+        <%--<c:if test="${not empty iconRight}">
             <i class="addon addon-right">
                 <i class="${iconRight}"></i>
             </i>
@@ -50,5 +51,5 @@
             </i>
         </c:if>
         <c:if test="${not empty errors}"></div>
-    </c:if>
+    </c:if>--%>
 </div>

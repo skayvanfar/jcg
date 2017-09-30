@@ -31,6 +31,9 @@
 <c:if test="${not empty errors}">
     <c:set var="c" value="${c} has-error"/>
 </c:if>
+<c:if test="${not empty label}">
+    <c:set var="c" value="${c} labeled"/>
+</c:if>
 <s:bind path="${path}">
     <c:set var="init" value="${utils:json(status.actualValue)}"/>
 </s:bind>

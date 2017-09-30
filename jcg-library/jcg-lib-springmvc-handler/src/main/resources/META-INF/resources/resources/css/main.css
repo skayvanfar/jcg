@@ -3,22 +3,22 @@
     font-family: 'Droid Arabic Naskh';
     font-style: normal;
     font-weight: 400;
-    src: url(../../fonts/foundation/DroidNaskh-Regular.eot);
-    src: url(../../fonts/foundation/DroidNaskh-Regular.eot?#iefix) format('embedded-opentype'),
-    url(../../fonts/foundation/DroidNaskh-Regular.woff2) format('woff2'),
-    url(../../fonts/foundation/DroidNaskh-Regular.woff) format('woff'),
-    url(../../fonts/foundation/DroidNaskh-Regular.ttf) format('truetype');
+    src: url(../fonts/foundation/DroidNaskh-Regular.eot);
+    src: url(../fonts/foundation/DroidNaskh-Regular.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/foundation/DroidNaskh-Regular.woff2) format('woff2'),
+    url(../fonts/foundation/DroidNaskh-Regular.woff) format('woff'),
+    url(../fonts/foundation/DroidNaskh-Regular.ttf) format('truetype');
 }
 
 @font-face {
     font-family: 'Droid Arabic Naskh';
     font-style: normal;
     font-weight: 700;
-    src: url(../../fonts/foundation/DroidNaskh-Bold.eot);
-    src: url(../../fonts/foundation/DroidNaskh-Bold.eot?#iefix) format('embedded-opentype'),
-    url(../../fonts/foundation/DroidNaskh-Bold.woff2) format('woff2'),
-    url(../../fonts/foundation/DroidNaskh-Bold.woff) format('woff'),
-    url(../../fonts/foundation/DroidNaskh-Bold.ttf) format('truetype');
+    src: url(../fonts/foundation/DroidNaskh-Bold.eot);
+    src: url(../fonts/foundation/DroidNaskh-Bold.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/foundation/DroidNaskh-Bold.woff2) format('woff2'),
+    url(../fonts/foundation/DroidNaskh-Bold.woff) format('woff'),
+    url(../fonts/foundation/DroidNaskh-Bold.ttf) format('truetype');
 }
 
 html, body {
@@ -566,3 +566,46 @@ section.page-section h1 span {
     color: #83CADE;
 }
 /**/
+
+/* table center*/
+td
+{
+    height: 50px;
+    width:50px;
+}
+
+#cssTable th
+{
+    text-align:center;
+    vertical-align:middle;
+}
+#cssTable td {
+    text-align:center;
+    vertical-align:middle;
+}
+
+/*Table Alternating Rows*/
+.TFtable{
+    width:100%;
+    border-collapse:collapse;
+}
+.TFtable td{
+    padding:7px;
+    /*border:#4e95f4 1px solid;*/
+}
+/* provide some minimal visual accomodation for IE8 and below */
+.TFtable tr{
+    background: #b8d1f3;
+}
+/*  Define the background color for all the ODD background rows  */
+.TFtable tr:nth-child(odd){
+    background: #b8d1f3;
+}
+/*  Define the background color for all the EVEN background rows  */
+.TFtable tr:nth-child(even){
+    background: #dae5f4;
+}
+
+.button-vertical-align {
+    margin-bottom: 0 !important;
+}
